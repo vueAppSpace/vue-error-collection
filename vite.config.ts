@@ -5,12 +5,16 @@ import { resolve } from "path";
 import legacy from "@vitejs/plugin-legacy";
 import viteCompression from "vite-plugin-compression";
 import checkEnv from "./version";
-import { getTicket } from "./get-ticket";
+import { getTicket, getIPAddress } from "./get-ticket";
 
 export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
   const env: Partial<ImportMetaEnv> = loadEnv(mode, process.cwd());
   const lkProject = checkEnv(env);
   const ticket = await getTicket();
+  const ipAddress = getIPAddress();
+
+  printProjectURL(ticket, ipAddress);
+
   return {
     plugins: [
       createVuePlugin({
@@ -94,3 +98,11 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
     }
   };
 };
+
+function printProjectURL(ticket, ipAddress) {
+  console.log("\n==================== icome 项目链接 start ====================");
+  console.log(`本地开发: http://localhost:9080/report/health?ticket=${ticket}`);
+  console.log(`本地远程: http://${ipAddress}:9080/report/health?ticket=${ticket}`);
+  console.log(`qa环境: https://c-qa.op.laikang.com/report/health?ticket=${ticket}`);
+  console.log("==================== icome 项目链接 end ====================\n");
+}
