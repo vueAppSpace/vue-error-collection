@@ -7,7 +7,7 @@ let platform = process.env.VITE_APP_API_URL;
 const DEFAULT_ENV_KEY = "__APP_ENV__";
 
 // 第三方接入链接
-if (environment.includes(["emallpro", "icomepro"])) {
+if (["emallpro", "icomepro"].includes(environment)) {
   // 生产环境
   window[DEFAULT_ENV_KEY] = "product";
   var hUrl = "https://c.op.laikang.com/platform/";
@@ -38,7 +38,7 @@ if (environment.includes(["emallpro", "icomepro"])) {
   var kuaikuaiWeachtId = "gh_720b7a957143";
   //生产环境-加载vconsole不显示
   loadVconsole();
-} else if (environment.includes(["icomeqa", "emallqa"])) {
+} else if (["icomeqa", "emallqa"].includes(environment)) {
   // 测试环境相关地址
   window[DEFAULT_ENV_KEY] = "pre";
   var hUrl = "https://c-qa.op.laikang.com/platform/";
