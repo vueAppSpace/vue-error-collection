@@ -156,7 +156,7 @@
   import FullLoading from "@/components/Loading";
 
   import Tips from "@/components/Tips";
-  import eventBus from "@/utils/eventBus.js";
+  import { mapState, useNavStore } from "@/pinia";
   export default {
     name: "publish",
     data() {
@@ -214,6 +214,9 @@
         },
         queryObj: {}
       };
+    },
+    computed: {
+      ...mapState(useNavStore, ["onback"])
     },
     components: {
       UploadAuth,
@@ -536,8 +539,7 @@
         });
       }
       // 监听返回事件
-      eventBus.$on("onback", closeFn => {
-        // closeFn() 关闭当前页
+      this.onback(() => {
         this.$router.replace({
           path: "/themeActivityHome"
         });

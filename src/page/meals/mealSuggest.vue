@@ -220,7 +220,6 @@
   </div>
 </template>
 <script>
-  import eventBus from "@/utils/eventBus.js";
   import FullLoading from "@/components/Loading";
   import { getDishesInfo, getMealsProposeAndNutrients } from "@/service/api";
 
@@ -247,6 +246,8 @@
   import { Toast } from "vant";
 
   import { adminLogin } from "@/service/ranking";
+
+  import { mapState, useNavStore } from "@/pinia";
 
   // 注册必须的组件
   echarts.use([
@@ -304,7 +305,9 @@
         dietRemark: []
       };
     },
-    computed: {},
+    computed: {
+      ...mapState(useNavStore, ["onback"])
+    },
     methods: {
       dancanExplain(name) {
         if (
@@ -579,7 +582,7 @@
             console.log("getDishesInfo", message);
           }
         });
-      },
+      }
 
       //   handleLoginBtn() {
       //     const params = {
@@ -602,64 +605,59 @@
       //       });
       //   }
       // },
-      watch: {},
-      mounted() {
-        // this.handleLoginBtn();
-        this.zgStatistics("健康新奥-进入页面", { 来源: "推送", 页面名称: "膳食建议", 所属功能模块: "健康" });
-        if (this.$route.query.date) {
-          // 从消息页面进入
-          this.time = this.$route.query.date;
-        } else {
-          // 从我的页面进入
-          this.time = dayjs().format("YYYY-MM-DD");
-        }
-        if (this.$route.query.type) {
-        } else {
-          this.$route.query.type = "wucan";
-        }
-
-        this.getDishesInfoFn();
-
-        this.getMealsProposeAndNutrientsFn();
-
-        // this.progressArr.push( this.sumFn(0, this.valueArr) );
-        // this.progressArr.push( this.sumFn(1, this.valueArr) );
-        // this.progressArr.push( this.sumFn(2, this.valueArr) );
-
-        // 监听返回事件
-        eventBus.$on("onback", closeFn => {
-          // closeFn() 关闭当前页
-          if (this.$route.query.date) {
-            this.$router.replace("/health");
-          } else {
-            this.$router.replace("/mine");
-          }
-        });
-
-        let year = Number(dayjs(this.time).year());
-        let month = Number(dayjs(this.time).month());
-        let day = Number(dayjs(this.time).date());
-        // console.log('year', year, 'month', month, 'day', day)
-        this.defaultDate = new Date(year, month, day);
-        // this.defaultDate = new Date(2022, 8, 26);
-        // console.log('this.defaultDate', this.defaultDate);
-        // console.log('this.minDate', this.minDate);
-
-        // 本次就餐摄入$碳水不足、蛋白质不足、脂肪较多$，长期可导致情绪焦虑
-
-        // var str = "aaabbbfff";
-        var str = "本次就餐摄入$碳水不足、蛋白质不足、脂肪较多$，长期可导致情绪焦虑";
-        // console.log('strxxxx', str.indexOf('$'));
-
-        // console.log('string.substring(start,stop)', str.substring( str.lastIndexOf('$') + 1, str.length ))
-        // console.log('stryyyy', str.lastIndexOf('$') );
-        // str.lastIndexOf(
-        // console.log('xxxafadf', this.subStringMulti(str))
-      },
-      beforeDestroy() {
-        // 卸载事件监听 防止多次出发内存泄漏
-        eventBus.$off("onback");
+      // watch: {},
+    },
+    mounted() {
+      // this.handleLoginBtn();
+      this.zgStatistics("健康新奥-进入页面", { 来源: "推送", 页面名称: "膳食建议", 所属功能模块: "健康" });
+      if (this.$route.query.date) {
+        // 从消息页面进入
+        this.time = this.$route.query.date;
+      } else {
+        // 从我的页面进入
+        this.time = dayjs().format("YYYY-MM-DD");
       }
+      if (this.$route.query.type) {
+      } else {
+        this.$route.query.type = "wucan";
+      }
+
+      this.getDishesInfoFn();
+
+      this.getMealsProposeAndNutrientsFn();
+
+      // this.progressArr.push( this.sumFn(0, this.valueArr) );
+      // this.progressArr.push( this.sumFn(1, this.valueArr) );
+      // this.progressArr.push( this.sumFn(2, this.valueArr) );
+
+      // 监听返回事件
+      this.onback(() => {
+        if (this.$route.query.date) {
+          this.$router.replace("/health");
+        } else {
+          this.$router.replace("/service");
+        }
+      });
+
+      let year = Number(dayjs(this.time).year());
+      let month = Number(dayjs(this.time).month());
+      let day = Number(dayjs(this.time).date());
+      // console.log('year', year, 'month', month, 'day', day)
+      this.defaultDate = new Date(year, month, day);
+      // this.defaultDate = new Date(2022, 8, 26);
+      // console.log('this.defaultDate', this.defaultDate);
+      // console.log('this.minDate', this.minDate);
+
+      // 本次就餐摄入$碳水不足、蛋白质不足、脂肪较多$，长期可导致情绪焦虑
+
+      // var str = "aaabbbfff";
+      // var str = "本次就餐摄入$碳水不足、蛋白质不足、脂肪较多$，长期可导致情绪焦虑";
+      // console.log('strxxxx', str.indexOf('$'));
+
+      // console.log('string.substring(start,stop)', str.substring( str.lastIndexOf('$') + 1, str.length ))
+      // console.log('stryyyy', str.lastIndexOf('$') );
+      // str.lastIndexOf(
+      // console.log('xxxafadf', this.subStringMulti(str))
     }
   };
 </script>

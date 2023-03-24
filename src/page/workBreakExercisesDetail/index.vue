@@ -303,7 +303,7 @@
   import { uploadPic } from "@/service/activity";
   import { videoRecordStart, videoRecordEnd, reportAllVideoDuration } from "@/hooks/useVideo";
 
-  import eventBus from "@/utils/eventBus.js";
+  import { mapState, useNavStore } from "@/pinia";
 
   import { jsBridge } from "@/utils/native/jsBridge";
 
@@ -499,6 +499,9 @@
 
         loading: true
       };
+    },
+    computed: {
+      ...mapState(useNavStore, ["onback"])
     },
     methods: {
       closeDynamicBox() {
@@ -1035,8 +1038,7 @@
       }
 
       // 监听返回事件
-      eventBus.$on("onback", closeFn => {
-        // closeFn() 关闭当前页
+      this.onback(() => {
         if (this.$route.query.workBreakExercisesId) {
           this.$router.replace("/health");
         } else {
@@ -1048,8 +1050,6 @@
     },
     beforeDestroy() {
       reportAllVideoDuration(this.zgStatistics);
-      // 卸载事件监听 防止多次出发内存泄漏
-      eventBus.$off("onback");
     }
   };
 </script>

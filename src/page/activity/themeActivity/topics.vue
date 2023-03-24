@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="container">
-      <div @click="handleSelectTopic(item)" v-for="(item, index) in items" class="item">
+      <div @click="handleSelectTopic(item)" v-for="(item, index) in items" class="item" :key="index">
         <div class="left-part">
           <span :class="computeIndex(index)">{{ index | filterIndex }}</span>
           <span class="title">@{{ item.title }}</span>
@@ -13,7 +13,7 @@
 </template>
 <script>
   import { getTopics } from "@/service/activity";
-  import eventBus from "@/utils/eventBus.js";
+  import { mapState, useNavStore } from "@/pinia";
   export default {
     name: "topic",
     data() {
@@ -44,7 +44,8 @@
             return "grey-index";
           }
         };
-      }
+      },
+      ...mapState(useNavStore, ["onback"])
     },
     methods: {
       getList() {
@@ -72,8 +73,7 @@
     },
     mounted() {
       // 监听返回事件
-      eventBus.$on("onback", closeFn => {
-        // closeFn() 关闭当前页
+      this.onback(() => {
         this.$router.replace({
           path: "/publish",
           query: {

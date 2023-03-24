@@ -2,96 +2,81 @@
  * @Description: 导航栏
  * @Author: IFLS
  * @Date: 2022-08-09 09:58:53
- * @LastEditTime: 2023-03-23 17:32:25
+ * @LastEditTime: 2023-03-24 17:53:55
 -->
 <script>
+  import { defineComponent, reactive, toRefs, onMounted, watch } from "@vue/composition-api";
   import { isMobile } from "@/utils/native/deviceEnv";
-  import { jsBridge } from "@/utils/native/jsBridge";
-  import eventBus from "@/utils/eventBus.js";
-  import { mapState, useNavStore } from "@/pinia";
+  import { useNavStore, storeToRefs } from "@/pinia";
+  import { useRoute } from "@/hooks/useRouter";
 
-  export default {
-    data() {
-      return {
-        oneLevelPage: ["/health", "/guide", "/service", "/union", "/mine", "/themeActivityHome"],
+  export default defineComponent({
+    setup() {
+      const state = reactive({
         isPc: false,
         isShow: true,
         navTitle: ""
-      };
-    },
-    computed: {
-      ...mapState(useNavStore, ["title"])
-    },
-    created() {
-      const isPc = !isMobile;
-      this.isPc = isPc;
-    },
-    watch: {
-      title(val) {
-        this.navTitle = val;
-      },
-      $route(to) {
+      });
+      const route = useRoute();
+
+      const { title: piniaTitle, onbackFn } = storeToRefs(useNavStore());
+      const { navGoback, oneLevelPage, onback } = useNavStore();
+
+      // 监听pinia中title变化
+      watch(
+        () => piniaTitle.value,
+        val => {
+          console.log("val", val);
+          state.navTitle = val;
+        }
+      );
+
+      // 监听路由变化
+      watch(route, to => {
         const {
-          meta: { title, showNavBar },
+          meta: { title: metaTitle, showNavBar },
           query: { navTitle },
           path
         } = to;
 
         // meta title > url navTitle > pinia title
-        this.navTitle = title ? title : navTitle ? navTitle : this.title;
+        state.navTitle = metaTitle ? metaTitle : navTitle ? navTitle : piniaTitle;
 
         // 路由meta若传参showNavBar 比重最大 控制显示与否
         if (showNavBar !== undefined) {
-          this.isShow = showNavBar;
+          state.isShow = showNavBar;
           return;
         }
 
         // pc的一级页面 隐藏navbar
-        if (this.oneLevelPage.includes(path) && this.isPc) {
-          this.isShow = false;
+        if (oneLevelPage.includes(path) && state.isPc) {
+          state.isShow = false;
         } else {
-          this.isShow = true;
+          state.isShow = true;
         }
-      }
-    },
-    methods: {
-      goback() {
-        const {
-          meta: { controlBack },
-          query: { backHome, nologin }
-        } = this.$route;
-        console.warn(`[当前页面路径]: ${location.href}`);
+      });
 
-        // meta传参: 页面自行控制回退
-        if (controlBack) {
-          this.emitBack();
-          // url传参: 回到首页
-        } else if (backHome) {
-          this.$router.replace("/health");
-          // url传参: 不登录情况
-        } else if (nologin) {
-          jsBridge.invoke("closeWebView");
+      const goback = () => {
+        // 自定义返回事件
+        if (onbackFn.value) {
+          onbackFn.value();
+          // 调用完成后清空页面注册的事件
+          onback(null);
         } else {
-          const { path } = this.$route;
-          // 非pc的一级页面 点击关闭
-          if (this.oneLevelPage.includes(path) && !this.isPc) {
-            jsBridge.invoke("closeWebView");
-          } else {
-            // 下级页面存在history正常回退 注意: 此处不准确 可能多次跳转后 才到达当前页
-            if (window.history.length > 1) {
-              this.$router.go(-1);
-            } else {
-              // 下级页面不存在history时 为推送的特定页面 返回到首页
-              this.$router.replace("/health");
-            }
-          }
+          navGoback();
         }
-      },
-      emitBack() {
-        eventBus.$emit("onback", () => jsBridge.invoke("closeWebView"));
-      }
+      };
+
+      onMounted(() => {
+        state.isPc = !isMobile;
+      });
+
+      return {
+        ...toRefs(state),
+        goback
+      };
     }
-  };
+  });
 </script>
 
 <template>

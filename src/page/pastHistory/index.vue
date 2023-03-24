@@ -2,12 +2,12 @@
  * @Description: 既往史
  * @Author: IFLS
  * @Date: 2022-06-17 22:09:45
- * @LastEditTime: 2023-03-23 17:41:22
+ * @LastEditTime: 2023-03-24 17:51:15
 -->
 <script>
-  import { defineComponent, reactive, onMounted, toRefs, onBeforeUnmount } from "@vue/composition-api";
+  import { defineComponent, reactive, onMounted, toRefs } from "@vue/composition-api";
   import { Toast, Dialog } from "vant";
-  import eventBus from "@/utils/eventBus.js";
+  import { useNavStore } from "@/pinia";
   import useToastGoback from "@/hooks/useToastGoback";
   import FullLoading from "@/components/Loading";
   import { unFlatArr } from "@/utils/commonFun";
@@ -26,6 +26,8 @@
         loading: false,
         isClick: false
       });
+
+      const { onback } = useNavStore();
 
       const { toastAndGoback } = useToastGoback(router);
 
@@ -144,11 +146,7 @@
 
       onMounted(() => {
         queryList();
-        eventBus.$on("onback", onBack);
-      });
-
-      onBeforeUnmount(() => {
-        eventBus.$off("onback");
+        onback(onBack);
       });
 
       return {

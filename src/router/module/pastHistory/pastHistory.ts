@@ -2,7 +2,7 @@
  * @Description: 既往史 权限3
  * @Author: IFLS
  * @Date: 2022-08-12 14:45:06
- * @LastEditTime: 2023-03-22 11:07:21
+ * @LastEditTime: 2023-03-24 17:56:50
  */
 
 export default [
@@ -12,8 +12,7 @@ export default [
     name: "pastHistory",
     component: () => import("@/page/pastHistory/index.vue"),
     meta: {
-      title: "既往史",
-      controlBack: true
+      title: "既往史"
     }
   }
   // {

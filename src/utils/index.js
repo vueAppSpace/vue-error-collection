@@ -1,6 +1,5 @@
 export * from "./commonFun";
 export * from "./native/ddTools";
-export { default as eventBus } from "./eventBus";
 export * from "./filter";
 export * from "./isIosX";
 export { default as jumpToDanao } from "./jumpToDanao";
