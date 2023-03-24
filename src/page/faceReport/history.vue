@@ -153,7 +153,7 @@
       toDetailSelf(item) {
         this.zgStatistics("健康新奥-体检报告-进入体检报告内容", {
           异常项数量: 0,
-          报告时间: this.formatDate(new Date(item.archivesDate.replace(/-/g, "/")).getTime())
+          报告时间: item ?? this.formatDate(new Date(item.archivesDate.replace(/-/g, "/")).getTime())
         });
         if (item) {
           sessionStorage.setItem("reportDetailCache", JSON.stringify(item));
