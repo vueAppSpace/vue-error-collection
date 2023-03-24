@@ -245,7 +245,7 @@
               // dingtalk://dingtalkclient/page/link?url=https%3A%2F%2Ficome-dingtalk-h5.uat.ennew.com%2Ftransit%3Fredirect_uri%3Dhttps%253A%252F%252Fimeal-h5.uat.ennew.com%252FmealDetail%253Fticket%253Dticket%2526dishId%253D4425%2526canteenId%253D4%2526dd_full_screen%253Dtrue%2526date%253D2022-09-01&web_wnd=general&width=960&height=640
 
               if (isIcomeMobile) {
-                jsBridge.invoke("openWebView", { url });
+                jsBridge.invoke("openWebView", { targetUrl: url });
               } else if (isIcomePC) {
                 console.log("url2", url2);
                 window.location.href = url2;

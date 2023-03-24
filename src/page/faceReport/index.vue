@@ -191,9 +191,12 @@
   import loading from "../../components/Loading";
   // import pdf from '../../components/vuePdf'
   // import moment from 'moment'
-  import { isIcomeIOS, isIcomeAndroid } from "@/utils/native/deviceEnv";
+  import { isUniApp, isIcomeIOS, isIcomeAndroid } from "@/utils/native/deviceEnv";
   import { jsBridge } from "@/utils/native/jsBridge";
   import { mapState, useUserStore } from "@/pinia";
+  import { eServicePdfPreview } from "@/config/env";
+  import scriptUrl from "@/utils/url";
+  import { loadBase64 } from "@/utils/commonFun";
 
   export default {
     directives: {},
@@ -268,7 +271,15 @@
         if (isIcomeIOS) {
           jsBridge.invoke("previewFile", { serverUrl: reportUrl, ext: { fileName: filename + ".pdf" } });
         } else if (isIcomeAndroid) {
-          jsBridge.invoke("openWebView", { url: reportUrl });
+          jsBridge.invoke("openWebView", { targetUrl: reportUrl });
+        } else if (isUniApp) {
+          console.log("downloadHandle ============>");
+
+          loadBase64(scriptUrl.base64).then(() => {
+            jsBridge.invoke("openWebView", {
+              targetUrl: `${eServicePdfPreview}?url=${encodeURIComponent(Base64.encode(reportUrl))}`
+            });
+          });
         } else {
           jsBridge.invoke("previewFile", { serverUrl: reportUrl, ext: { fileName: filename + ".pdf" } });
         }
@@ -477,6 +488,8 @@
 
       // this.headUrl = localStorage.getItem("headUrl");
       this.headUrl = this.userInfo.icomeHeadPhoto;
+
+      loadBase64(scriptUrl.base64);
     }
   };
 </script>

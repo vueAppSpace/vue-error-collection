@@ -36,6 +36,8 @@ if (["emallpro", "icomepro"].includes(environment)) {
   var sportsCours = "https://m.laikang.com/pro/sportsCours/#";
   //快快小程序-正式版id
   var kuaikuaiWeachtId = "gh_720b7a957143";
+  //e商服pdf预览
+  var eServicePdfPreview = "https://iseal.enn.cn:8015/onlinePreview";
   //生产环境-加载vconsole不显示
   loadVconsole();
 } else if (["icomeqa", "emallqa"].includes(environment)) {
@@ -68,6 +70,8 @@ if (["emallpro", "icomepro"].includes(environment)) {
   var sportsCours = "https://m.laikang.com/qa/sportsCours/#";
   //快快小程序-测试版id
   var kuaikuaiWeachtId = "gh_ea6b88abd3b4";
+  //e商服pdf预览
+  var eServicePdfPreview = "https://draw.enn.cn/onlinePreview";
   //测试环境-加载并立即显示vconsole
   showVconsole();
 } else {
@@ -101,6 +105,8 @@ if (["emallpro", "icomepro"].includes(environment)) {
   var sportsCours = "https://m.laikang.com/qa/sportsCours/#";
   //快快小程序-测试版id
   var kuaikuaiWeachtId = "gh_ea6b88abd3b4";
+  //e商服pdf预览
+  var eServicePdfPreview = "https://draw.enn.cn/onlinePreview";
 }
 
 // 后台地址环境
@@ -142,5 +148,6 @@ export {
   exerciseCourseDetail,
   eMall,
   sportsCours,
-  kuaikuaiWeachtId
+  kuaikuaiWeachtId,
+  eServicePdfPreview
 };
