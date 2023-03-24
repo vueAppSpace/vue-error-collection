@@ -2,7 +2,7 @@
  * @Description: tabbar component
  * @Author: IFLS
  * @Date: 2022-04-22 14:56:59
- * @LastEditTime: 2023-03-23 17:31:46
+ * @LastEditTime: 2023-03-24 15:28:38
 -->
 <script>
   import { defineComponent, onMounted, ref } from "@vue/composition-api";
@@ -10,6 +10,7 @@
   import jumpToDanao from "@/utils/jumpToDanao";
   import checkPermissions, { isEntropy } from "@/utils/permissions";
   import { cleaerRedditCache } from "@/service/user";
+  import { useNavStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     props: {
@@ -21,6 +22,7 @@
     setup() {
       const active = ref(0);
       const permission = checkPermissions();
+      const { isTabShow } = storeToRefs(useNavStore());
 
       const onTab = name => {
         // 3级权限用户 评估跳转大脑页面
@@ -41,6 +43,7 @@
 
       return {
         active,
+        isTabShow,
         data,
         onTab
       };
@@ -49,26 +52,28 @@
 </script>
 
 <template>
-  <van-tabbar v-model="active" route :class="fixPadding ? 'pd0' : 'pd50'" style="z-index: 100">
-    <van-tabbar-item
-      v-for="(item, index) in data"
-      :key="index"
-      :to="item.to"
-      replace
-      :id="`tab${index}`"
-      @click="onTab(item.name)"
-      v-track="{
-        type: 'click',
-        name: '健康新奥-点击下方功能菜单',
-        data: `{&quot;菜单名称&quot;: &quot;${item.name}&quot;}`
-      }"
-    >
-      <span>{{ item.name }}</span>
-      <template #icon="props">
-        <img :src="props.active ? item.active : item.inactive" />
-      </template>
-    </van-tabbar-item>
-  </van-tabbar>
+  <transition name="slide-fade">
+    <van-tabbar v-show="isTabShow" v-model="active" route :class="fixPadding ? 'pd0' : 'pd50'" style="z-index: 100">
+      <van-tabbar-item
+        v-for="(item, index) in data"
+        :key="index"
+        :to="item.to"
+        replace
+        :id="`tab${index}`"
+        @click="onTab(item.name)"
+        v-track="{
+          type: 'click',
+          name: '健康新奥-点击下方功能菜单',
+          data: `{&quot;菜单名称&quot;: &quot;${item.name}&quot;}`
+        }"
+      >
+        <span>{{ item.name }}</span>
+        <template #icon="props">
+          <img :src="props.active ? item.active : item.inactive" />
+        </template>
+      </van-tabbar-item>
+    </van-tabbar>
+  </transition>
 </template>
 
 <style scoped>
@@ -77,5 +82,16 @@
   }
   .pd50 {
     padding-bottom: 50px !important;
+  }
+  .slide-fade-enter-active {
+    transition: all 0.3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+  .slide-fade-enter,
+  .slide-fade-leave-to {
+    transform: translateY(10px);
+    opacity: 0;
   }
 </style>
