@@ -2,12 +2,27 @@
  * @Description: 用户鉴权函数
  * @Author: IFLS
  * @Date: 2022-08-12 09:39:33
- * @LastEditTime: 2023-03-24 09:43:26
+ * @LastEditTime: 2023-03-24 12:43:28
  */
 import { Toast } from "vant";
 
+function throwError(userStore) {
+  if (userStore) {
+    console.log({ userStore });
+  }
+  Toast("服务即将开启，敬请期待~");
+  throw new Error("用户权限异常");
+}
+
+// 生命熵测试用户
+function isEntropy() {
+  const isTestUser = JSON.parse(localStorage.getItem("isTestUser"));
+  return isTestUser === 2;
+}
+
 export default function () {
   const userStore = JSON.parse(sessionStorage.getItem("userStore"));
+  if (!userStore) return throwError(userStore);
   const isTestUser = userStore.userInfo.isTestUser;
   const isLangfang = userStore.userInfo.isLangfang;
 
@@ -22,17 +37,9 @@ export default function () {
     user = 3; // 廊坊测试用户
   } else {
     user = -1;
-    Toast("服务即将开启，敬请期待~");
-    console.log({ isLangfang, isTestUser });
-    throw new Error("用户权限异常");
+    throwError(userStore);
   }
   return user;
-}
-
-// 生命熵测试用户
-function isEntropy() {
-  const isTestUser = JSON.parse(localStorage.getItem("isTestUser"));
-  return isTestUser === 2;
 }
 
 export { isEntropy };
