@@ -1,0 +1,139 @@
+.box {
+  padding: 20px;
+  min-height: 100%;
+  background-color: #f0f2f7;
+  .btn {
+    position: fixed;
+    bottom: 88px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 686px;
+  }
+  .pc-style {
+    position: absolute;
+    bottom: auto;
+  }
+  ::v-deep.van-uploader__upload,
+  ::v-deep.van-uploader__preview-image {
+    border-radius: 50% !important;
+    margin: 0;
+  }
+  ::v-deep.van-uploader__input {
+    left: -120px;
+    width: 300%;
+  }
+  .van-cell-group {
+    background-color: transparent;
+    .van-cell__title {
+      text-align: left;
+      font-size: 28px;
+      font-weight: 400;
+      color: #565961;
+    }
+    .van-cell__value {
+      font-size: 28px;
+      font-weight: 400;
+      color: #1c1c1e;
+    }
+    .holder {
+      .van-cell__value {
+        color: #c8c9cc;
+      }
+    }
+    .van-cell__right-icon {
+      margin-left: 0;
+      margin-right: -10px;
+    }
+    .van-cell {
+      padding: 24px 32px;
+      margin-bottom: 20px;
+      border-radius: 16px;
+      align-items: center;
+      background-color: #fff;
+      ::v-deep.van-field {
+        width: 50%;
+        margin-bottom: 0;
+        padding: 0;
+        .van-field__control {
+          text-align: right;
+          font-size: 28px;
+        }
+      }
+    }
+    .past {
+      ::v-deep.van-cell__value {
+        width: 150px;
+        // height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    .van-cell--clickable:active {
+      background-color: #f2f3f5 !important;
+    }
+    ::v-deep.van-field__error-message {
+      text-align: right;
+    }
+  }
+  .van-popup {
+    padding-top: 34px;
+    .title {
+      font-size: 30px;
+      font-family: Source Han Sans CN;
+      color: #666;
+    }
+    .icon-box {
+      display: flex;
+      justify-content: space-around;
+      .van-radio {
+        height: 380px;
+      }
+      .img-icon {
+        width: 152px;
+        height: 152px;
+      }
+      .sex {
+        margin-top: 20px;
+        font-size: 26px;
+        color: #999;
+      }
+      .sexActvie {
+        color: #4b7aff;
+      }
+    }
+  }
+  .date-popup,
+  .sex-popup {
+    height: 800px;
+  }
+  .body-popup {
+    height: 800px;
+    overflow: hidden;
+    .title {
+      margin-bottom: 60px;
+      margin-left: 30px;
+      font-size: 36px;
+      font-weight: 600;
+      color: #111111;
+      text-align: left;
+    }
+    .subtitle {
+      margin-bottom: 120px;
+      font-size: 64px;
+      font-family: DIN;
+      font-weight: 700;
+      color: #4b7aff;
+      span {
+        font-size: 38px;
+        font-weight: 400;
+      }
+    }
+    ::v-deep.scroll-ruler {
+      padding-bottom: 30%;
+    }
+  }
+}
+.mt20 {
+  margin-top: 20px;
+}

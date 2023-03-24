@@ -1,0 +1,25 @@
+.card {
+  padding: 24px;
+  margin-bottom: 32px;
+  background: #fff;
+  border-radius: 12px;
+
+  .subtitle {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      color: #999;
+    }
+  }
+
+  h6 {
+    text-align: left;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+  }
+}

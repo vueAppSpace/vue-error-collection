@@ -1,0 +1,23 @@
+.common-btn {
+  width: 606px;
+  height: 90px;
+  background: linear-gradient(90deg, #5ba4ff 0%, #467ffc 100%);
+  border: none;
+  border-radius: 50px;
+  font-size: 32px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 44px;
+}
+
+.common-btn:active {
+  background: linear-gradient(90deg, #3b8ff5 0%, #2265f6 100%);
+}
+
+.fix-btn {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translate(-50%);
+}

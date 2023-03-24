@@ -1,0 +1,231 @@
+.containter {
+  height: 100%;
+  .page-box {
+    .bg-box {
+      // padding: 30px;
+      padding: 20px 0 20px 20px;
+      background-image: url("https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/mine/mine_bg.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      .user-box {
+        display: flex;
+        justify-content: flex-start;
+        padding: 18px 30px 18px 0;
+        .avator-box {
+          width: 164px;
+          height: 152px;
+          position: relative;
+
+          img {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+
+          .avatarImg {
+            z-index: 1;
+            width: 164px;
+            height: 152px;
+          }
+
+          .userHead {
+            z-index: 0;
+            width: 130px;
+            height: 130px;
+            border-radius: 130px / 2;
+          }
+        }
+        .user-flex-box {
+          position: relative;
+          padding-top: 13px;
+          padding-left: 12px;
+          flex: 1;
+          .setting-img {
+            position: absolute;
+            top: 18px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+          }
+          .setting-img:active {
+            filter: brightness(0.5);
+            transition: 0.2s;
+          }
+          .username {
+            display: flex;
+            align-items: center;
+            font-size: 40px;
+            text-align: left;
+            font-weight: 500;
+            color: #fff;
+            img {
+              width: 40px;
+              height: 40px;
+
+              &.badge {
+                width: 48px;
+                height: 48px;
+                margin-left: 4px;
+              }
+
+              &.qRCode {
+                margin-left: 16px;
+
+                &:active {
+                  filter: brightness(0.8);
+                  transition: 0.2s;
+                }
+              }
+            }
+          }
+          .integral-box {
+            display: flex;
+            padding-top: 10px;
+            .integral {
+              display: flex;
+              align-items: center;
+              height: 48px;
+              padding: 0 22px;
+              line-height: 48px;
+              background: #3e71cc;
+              border-radius: 24px;
+              font-size: 24px;
+              font-weight: 400;
+              color: #fff;
+              img {
+                width: 28px;
+                height: 28px;
+                margin-right: 10px;
+                margin-top: -3px;
+              }
+              div {
+                opacity: 0.39;
+              }
+            }
+            .integral:active {
+              background: #1652ba;
+              transition: 0.25s;
+            }
+            .exchange-btn {
+              width: 108px;
+              height: 48px;
+              margin-left: 24px;
+              line-height: 48px;
+              background: #fff;
+              box-shadow: 2px 6px 22px -6px rgba(81, 146, 253, 0.61);
+              border-radius: 30px;
+              font-size: 26px;
+              color: #467ffc;
+            }
+            .exchange-btn:active {
+              background: rgb(222, 222, 222);
+              transition: 0.25s;
+            }
+          }
+        }
+      }
+      // .rank-box {
+      //     position: relative;
+      //     margin-bottom: 30px;
+      //     .rank-title {
+      //         position: relative;
+      //         padding-top: 24px;
+      //         font-size: 30px;
+      //         color: #1e201e;
+      //         .rank-title-bg {
+      //             position: absolute;
+      //             bottom: 0;
+      //             left: 50%;
+      //             transform: translateX(-50%);
+      //             width: 210px;
+      //             height: 12px;
+      //             background: linear-gradient(270deg, rgba(74, 135, 252, 0.03) 0%, rgba(81, 146, 253, 0.3) 100%);
+      //         }
+      //     }
+
+      //     .rank-content {
+      //         display: flex;
+      //         justify-content: space-around;
+      //         align-items: center;
+      //         padding: 36px 15px;
+      //         .rank-content-box {
+      //             width: 30%;
+      //             .num {
+      //                 font-size: 48px;
+      //                 font-weight: 700;
+      //             }
+      //             .rank-content-title {
+      //                 margin-top: 8px;
+      //                 font-size: 26px;
+      //                 color: rgba(30, 32, 30, 0.37);
+      //             }
+      //             img {
+      //                 width: 36px;
+      //                 height: 36px;
+      //             }
+      //         }
+      //         hr {
+      //             width: 2px;
+      //             height: 56px;
+      //             background: #f1f1f1;
+      //             border: none;
+      //         }
+      //     }
+      //     .notice-bar-icon {
+      //         width: 48px;
+      //         height: 36px;
+      //         margin-right: 16px;
+      //     }
+      //     .record {
+      //         position: absolute;
+      //         top: 28px;
+      //         right: 26px;
+      //         font-size: 24px;
+      //         font-weight: 400;
+      //         color: #666;
+      //     }
+      //     .record:active {
+      //         color: #999;
+      //         transition: 0.25s;
+      //     }
+      // }
+
+      .title {
+        margin: 20px 0;
+        height: 50px;
+        font-size: 36px;
+        font-weight: 500;
+        text-align: left;
+        color: #1e201e;
+      }
+
+      .card-list {
+        ::v-deep.time-line {
+          margin-top: 0;
+          padding: 0;
+          .van-step__circle-container,
+          .van-step__line {
+            display: none;
+          }
+          .van-steps--vertical {
+            border-radius: 16px;
+            margin-bottom: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.tips-pd {
+  padding: 0 20px;
+}
+
+.common-btn {
+  width: 400px;
+  background: linear-gradient(90deg, #fe7315 0%, #e55c00 100%);
+}
+
+.common-btn:active {
+  background: linear-gradient(90deg, #d96213 0%, #c14e02 100%);
+}

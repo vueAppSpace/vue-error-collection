@@ -1,0 +1,32 @@
+.report-box {
+  min-height: 100%;
+  padding-bottom: 190px;
+  background-color: #f0f2f7;
+  .tips {
+    padding: 24px 32px;
+    background: #e7f1ff;
+    font-size: 28px;
+    font-weight: 400;
+    text-align: left;
+    color: #4b7aff;
+    line-height: 40px;
+  }
+  .card {
+    padding: 32px;
+    margin-top: 20px;
+    background-color: #fff;
+    text-align: left;
+    .title {
+      font-size: 32px;
+      font-weight: 400;
+      text-align: left;
+      color: #1c1c1e;
+    }
+    .subtitle {
+      padding: 24px 0 28px 0;
+      font-size: 28px;
+      font-weight: 400;
+      color: #9195a1;
+    }
+  }
+}

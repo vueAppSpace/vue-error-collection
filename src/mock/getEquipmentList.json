@@ -1,0 +1,41 @@
+{
+  "isOk": true,
+  "data": [
+    {
+      "all": "3",
+      "title": "椭圆机",
+      "free": "3",
+      "sportName": "椭圆机运动",
+      "using": "0",
+      "description": "身份识别，健身记录，蓝牙音响听歌，自动加油，18档可调速"
+    },
+    {
+      "all": "7",
+      "title": "跑步机",
+      "free": "6",
+      "sportName": "跑步",
+      "using": "1",
+      "description": "身份识别，健身记录，蓝牙音响听歌，自动加油，18档可调速"
+    },
+    {
+      "all": "2",
+      "title": "自行车",
+      "free": "2",
+      "sportName": "骑行",
+      "using": "0",
+      "description": "身份识别，健身记录，蓝牙音响听歌，自动加油，18档可调速"
+    },
+    {
+      "all": "0",
+      "title": "体测仪",
+      "free": "0",
+      "sportName": "体测仪",
+      "using": "0",
+      "description": "360°真实3D模型，脊柱功能评估，足部电极恒温14项核心身体成分分析，9项毫米级体围自动测量10项专业级体态评估，4象限重心平衡检测6项颈部功能评估，4项肩部功能评估"
+    }
+  ],
+  "code": 0,
+  "message": null,
+  "page": null,
+  "version": 2
+}

@@ -1,0 +1,36 @@
+.page-box {
+  height: 100%;
+  background-color: #fff;
+  -webkit-overflow-scrolling: touch;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 38px 30px;
+    font-size: 28px;
+    line-height: 40px;
+    background-color: #fff;
+    img {
+      vertical-align: middle;
+    }
+    .location {
+      width: 26px;
+      height: 32px;
+    }
+    .arrow-right {
+      width: 12px;
+      height: 20px;
+    }
+    .header-right {
+      position: relative;
+      line-height: 40px;
+      .bg-bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        height: 12px;
+        background: linear-gradient(270deg, rgba(74, 135, 252, 0.03) 0%, rgba(81, 146, 253, 0.3) 100%);
+      }
+    }
+  }
+}

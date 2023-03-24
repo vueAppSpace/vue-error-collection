@@ -1,0 +1,273 @@
+{
+  "isOk": true,
+  "data": {
+    "gym": {
+      "id": 318,
+      "name": "总部智慧健身房1",
+      "address": "ddd",
+      "phone": "11223344",
+      "positionLon": 116.706722,
+      "positionLat": 39.523899
+    },
+    "classTable": {
+      "dateList": [
+        {
+          "token": null,
+          "userEmpNo": null,
+          "date": 1675872000000,
+          "dateName": "今",
+          "weekName": "周四",
+          "subCount": 0,
+          "classList": []
+        },
+        {
+          "token": null,
+          "userEmpNo": null,
+          "date": 1675958400000,
+          "dateName": "明",
+          "weekName": "周五",
+          "subCount": 0,
+          "classList": []
+        },
+        {
+          "token": null,
+          "userEmpNo": null,
+          "date": 1676044800000,
+          "dateName": "11",
+          "weekName": "周六",
+          "subCount": 0,
+          "classList": []
+        },
+        {
+          "token": null,
+          "userEmpNo": null,
+          "date": 1676131200000,
+          "dateName": "12",
+          "weekName": "周日",
+          "subCount": 0,
+          "classList": [
+            {
+              "token": null,
+              "userEmpNo": null,
+              "id": 8468,
+              "subjectId": 3,
+              "courseCode": "SXTB.1.0.1.1",
+              "startDate": 1676156400000,
+              "endDate": 1676160000000,
+              "maxNumber": 16,
+              "subNumber": 0,
+              "companyId": 107,
+              "provinceId": 130000,
+              "cityId": 131000,
+              "countyId": 131003,
+              "gymId": 318,
+              "subjectName": "秀·秀腿",
+              "courseName": "秀·秀腿-直直的铅笔腿",
+              "startDateText": "07:00",
+              "endDateText": "08:00",
+              "optStatus": 0,
+              "optAdjStatus": 0,
+              "userSubject": {
+                "token": null,
+                "userEmpNo": null,
+                "id": 125970,
+                "subjectId": 106,
+                "subjectName": "企业课",
+                "subjectTimes": 10000,
+                "useTimes": 0
+              }
+            },
+            {
+              "token": null,
+              "userEmpNo": null,
+              "id": 8469,
+              "subjectId": 3,
+              "courseCode": "SXTB.1.0.1.2",
+              "startDate": 1676160060000,
+              "endDate": 1676163660000,
+              "maxNumber": 16,
+              "subNumber": 1,
+              "companyId": 107,
+              "provinceId": 130000,
+              "cityId": 131000,
+              "countyId": 131003,
+              "gymId": 318,
+              "subjectName": "秀·秀腿",
+              "courseName": "秀·秀腿-我的美直白",
+              "startDateText": "08:01",
+              "endDateText": "09:01",
+              "optStatus": 0,
+              "optAdjStatus": 0,
+              "userSubject": {
+                "token": null,
+                "userEmpNo": null,
+                "id": 125970,
+                "subjectId": 106,
+                "subjectName": "企业课",
+                "subjectTimes": 10000,
+                "useTimes": 0
+              }
+            },
+            {
+              "token": null,
+              "userEmpNo": null,
+              "id": 8470,
+              "subjectId": 3,
+              "courseCode": "SXTB.1.0.1.2",
+              "startDate": 1676181600000,
+              "endDate": 1676185200000,
+              "maxNumber": 16,
+              "subNumber": 0,
+              "companyId": 107,
+              "provinceId": 130000,
+              "cityId": 131000,
+              "countyId": 131003,
+              "gymId": 318,
+              "subjectName": "秀·秀腿",
+              "courseName": "秀·秀腿-我的美直白",
+              "startDateText": "14:00",
+              "endDateText": "15:00",
+              "optStatus": 0,
+              "optAdjStatus": 0,
+              "userSubject": {
+                "token": null,
+                "userEmpNo": null,
+                "id": 125970,
+                "subjectId": 106,
+                "subjectName": "企业课",
+                "subjectTimes": 10000,
+                "useTimes": 0
+              }
+            }
+          ]
+        },
+        {
+          "token": null,
+          "userEmpNo": null,
+          "date": 1676217600000,
+          "dateName": "13",
+          "weekName": "周一",
+          "subCount": 0,
+          "classList": [
+            {
+              "token": null,
+              "userEmpNo": null,
+              "id": 8714,
+              "subjectId": 2,
+              "courseCode": "SXFB.1.0.1.2",
+              "startDate": 1676242800000,
+              "endDate": 1676246400000,
+              "maxNumber": 16,
+              "subNumber": 0,
+              "companyId": 107,
+              "provinceId": 130000,
+              "cityId": 131000,
+              "countyId": 131003,
+              "gymId": 318,
+              "subjectName": "秀·炫腹",
+              "courseName": "秀·炫腹-马甲线下的比基尼桥",
+              "startDateText": "07:00",
+              "endDateText": "08:00",
+              "optStatus": 0,
+              "optAdjStatus": 0,
+              "userSubject": {
+                "token": null,
+                "userEmpNo": null,
+                "id": 125970,
+                "subjectId": 106,
+                "subjectName": "企业课",
+                "subjectTimes": 10000,
+                "useTimes": 0
+              }
+            },
+            {
+              "token": null,
+              "userEmpNo": null,
+              "id": 8715,
+              "subjectId": 1,
+              "courseCode": "JZX3.0.1.1",
+              "startDate": 1676282400000,
+              "endDate": 1676286000000,
+              "maxNumber": 16,
+              "subNumber": 0,
+              "companyId": 107,
+              "provinceId": 130000,
+              "cityId": 131000,
+              "countyId": 131003,
+              "gymId": 318,
+              "subjectName": "燃3·极效燃脂",
+              "courseName": "燃3·极效燃脂-有形有样",
+              "startDateText": "18:00",
+              "endDateText": "19:00",
+              "optStatus": 0,
+              "optAdjStatus": 0,
+              "userSubject": {
+                "token": null,
+                "userEmpNo": null,
+                "id": 125970,
+                "subjectId": 106,
+                "subjectName": "企业课",
+                "subjectTimes": 10000,
+                "useTimes": 0
+              }
+            }
+          ]
+        },
+        {
+          "token": null,
+          "userEmpNo": null,
+          "date": 1676304000000,
+          "dateName": "14",
+          "weekName": "周二",
+          "subCount": 0,
+          "classList": [
+            {
+              "token": null,
+              "userEmpNo": null,
+              "id": 8716,
+              "subjectId": 2,
+              "courseCode": "SXFB.1.0.1.1",
+              "startDate": 1676329200000,
+              "endDate": 1676332800000,
+              "maxNumber": 16,
+              "subNumber": 0,
+              "companyId": 107,
+              "provinceId": 130000,
+              "cityId": 131000,
+              "countyId": 131003,
+              "gymId": 318,
+              "subjectName": "秀·炫腹",
+              "courseName": "秀·炫腹-摩女马甲蜂腰",
+              "startDateText": "07:00",
+              "endDateText": "08:00",
+              "optStatus": 0,
+              "optAdjStatus": 0,
+              "userSubject": {
+                "token": null,
+                "userEmpNo": null,
+                "id": 125970,
+                "subjectId": 106,
+                "subjectName": "企业课",
+                "subjectTimes": 10000,
+                "useTimes": 0
+              }
+            }
+          ]
+        },
+        {
+          "token": null,
+          "userEmpNo": null,
+          "date": 1676390400000,
+          "dateName": "15",
+          "weekName": "周三",
+          "subCount": 0,
+          "classList": []
+        }
+      ]
+    }
+  },
+  "code": 0,
+  "message": null,
+  "page": null,
+  "version": 2
+}

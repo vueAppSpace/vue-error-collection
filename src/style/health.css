@@ -1,0 +1,23 @@
+/* .vjs-custom-skin{
+    border-radius: 16px;
+}
+
+.video-player .video-player .vjs-custom-skin{
+    width: 100%!important;
+    border-radius: 16px!important;
+  }
+  .video-js {
+    width: 100%!important;
+    border-radius: 16px!important;
+  } */
+  .vjs-poster{
+    border-radius: 0.16rem!important;
+  }
+  .vjs-tech {
+    border-radius: 0.16rem!important;
+  }
+  .video-js{
+    border-radius: 0.16rem!important;
+  }
+
+  

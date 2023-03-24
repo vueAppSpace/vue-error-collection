@@ -1,0 +1,49 @@
+/*
+ * @Author: yanghaifengb yanghaifengb@enn.cn
+ * @Date: 2022-07-04 15:48:31
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-03-23 17:34:35
+ * @FilePath: \workBreakExercises\src\page\activity\themeActivity\methods\methods.js
+ * @Description: 这是公用的方法，包括：点赞、取消点赞
+ */
+import { likeInsert, realDelete } from "@/service/activity";
+export default function ({ props, state, $nextTick, $el, context, likeInsertCallBack, realDeleteCallBack }) {
+  // 点赞
+  const likeInsertFn = e => {
+    let params = {
+      likeType: state.likeType, //点赞
+      likeId: e.id,
+      memberCode: localStorage.getItem("memberCode"),
+      likeMemberCode: e.memberCode
+    };
+    likeInsert(params).then(({ code, data, message }) => {
+      if (code === 0) {
+        console.log(context);
+        likeInsertCallBack && likeInsertCallBack();
+      } else {
+        Toast(message);
+      }
+    });
+  };
+
+  // 取消点赞
+  const realDeleteFn = e => {
+    let params = {
+      likeType: state.likeType, //
+      likeId: e.id,
+      memberCode: localStorage.getItem("memberCode")
+    };
+    realDelete(params).then(({ code, data, message }) => {
+      if (code === 0) {
+        realDeleteCallBack && realDeleteCallBack();
+      } else {
+        Toast(message);
+      }
+    });
+  };
+
+  return {
+    likeInsertFn,
+    realDeleteFn
+  };
+}

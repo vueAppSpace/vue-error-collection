@@ -1,0 +1,18 @@
+{
+  "code": 0,
+  "data": {
+    "bindList": [
+      {
+        "classId": "8468",
+        "createTime": 1675929201000,
+        "deviceNo": "16061202",
+        "deviceType": 1,
+        "id": "14533",
+        "userId": "532656"
+      }
+    ],
+    "classType": 0,
+    "liveClassStatus": 0
+  },
+  "message": "成功"
+}

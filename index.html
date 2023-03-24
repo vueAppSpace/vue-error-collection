@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover" />
+
+    <title>健康新奥-工间操</title>
+    <link rel="icon" href="data:image/ico;base64,aWNv" />
+    <link
+      rel="stylesheet"
+      href="https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/vant/vant.min.2.12.49.css"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript" src="https://oss-statics.icomecloud.com/jsbridge/1.5.9/x-bridge.umd.js"></script>
+    <script src="https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/jssdk/dayjs.min.1.8.21.js"></script>
+    <script>
+      (function () {
+        if (window.zhuge) return;
+        window.zhuge = [];
+        window.zhuge.methods =
+          "_init identify track trackRevenue getDid getSid getKey setSuperProperty setUserProperties setWxProperties setPlatform".split(
+            " "
+          );
+        window.zhuge.factory = function (b) {
+          return function () {
+            var a = Array.prototype.slice.call(arguments);
+            a.unshift(b);
+            window.zhuge.push(a);
+            return window.zhuge;
+          };
+        };
+        for (var i = 0; i < window.zhuge.methods.length; i++) {
+          var key = window.zhuge.methods[i];
+          window.zhuge[key] = window.zhuge.factory(key);
+        }
+        window.zhuge.load = function (b, x) {
+          if (!document.getElementById("zhuge-js")) {
+            var a = document.createElement("script");
+            var verDate = new Date();
+            var verStr =
+              verDate.getFullYear().toString() + verDate.getMonth().toString() + verDate.getDate().toString();
+            a.type = "text/javascript";
+            a.id = "zhuge-js";
+            a.async = !0;
+            a.src = "https://sjsc.ennew.com/zhuge.js?v=" + verStr;
+            a.onerror = function () {
+              window.zhuge.identify = window.zhuge.track = function (ename, props, callback) {
+                if (callback && Object.prototype.toString.call(callback) === "[object Function]") {
+                  callback();
+                } else if (Object.prototype.toString.call(props) === "[object Function]") {
+                  props();
+                }
+              };
+            };
+            var c = document.getElementsByTagName("script")[0];
+            c.parentNode.insertBefore(a, c);
+            window.zhuge._init(b, x);
+          }
+        };
+        var appKey = "f18695ad248e41ad9e1d494c7889c137"; // 测试key
+        var debug = true;
+        var host = window.location.href;
+        // TODO: 需要替换或增加e商服域名
+        if (~host.indexOf("c.op.laikang.com/report")) {
+          appKey = "3577008d5b854267b18b650f0c375417"; // 生产key
+          debug = false;
+        }
+        var env = "PC";
+        if (window.ic) {
+          if (window.ic.isIOS || window.ic.isAndroid) {
+            env = "H5";
+          } else {
+            env = "PC";
+          }
+        }
+        window.zhuge.load(appKey, {
+          // 配置应用的AppKey
+          superProperty: {
+            // 全局的事件属性
+            当前页面名称: document.title,
+            来源页面名称: document.title,
+            产品名称: "健康新奥",
+            租户ID: 200,
+            租户名称: "来康生命",
+            JS环境: "新icome",
+            "PC-H5": env
+          },
+          duration: true, // 「页面停留时长」访问采集
+          debug, // 测试，开发环境开启，正式环境需关闭
+          autoTrack: true, // 启用全埋点采集
+          singlePage: true // 是否是单页面应用（SPA），启用autoTrack后生效
+        });
+      })();
+    </script>
+    <style>
+      /*
+        隐藏vconsole 
+      */
+      #__vconsole {
+        width: 0;
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      #__vconsole .vc-switch {
+        width: 0;
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      #__vconsole .vc-switch.active {
+        width: auto;
+        height: auto;
+        padding: 8px 10px;
+        overflow: hidden;
+        visibility: visible;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+  <script type="application/javascript">
+    // 解决ios端:active伪类不生效问题
+    document.addEventListener("touchstart", function () {}, false);
+  </script>
+</html>

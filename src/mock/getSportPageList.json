@@ -1,0 +1,42 @@
+{
+  "code": 0,
+  "data": {
+    "data": {
+      "list": [
+        {
+          "courseName": "搏·塑形防暴搏击-射手的混击",
+          "createTime": 1647603112000,
+          "duration": 41,
+          "healthScore": 58.2,
+          "reportStatus": 0,
+          "reportUuid": "7d13e7652b60494ba02a2e1f0f4c62ed",
+          "score": 39241,
+          "star": 1,
+          "startDate": 1647600600000,
+          "trainCalorie": 255,
+          "url": "https://kifs-test.kuaikuaikeji.com/kifs-web/report/move/f_move.html?uuid=7d13e7652b60494ba02a2e1f0f4c62ed"
+        },
+        {
+          "courseName": "舞·湛芭拉-生命力量",
+          "createTime": 1647421765000,
+          "duration": 69,
+          "healthScore": 60.7,
+          "reportStatus": 1,
+          "reportUuid": "a4f465b880b04a35871eb7007ac7f455",
+          "score": 63096,
+          "star": 3,
+          "startDate": 1647417000000,
+          "trainCalorie": 313,
+          "exceptionMsg": "由于您本节课设备断开时间过长，严重影响最终报告分析，因此不能正常查看。下次请正确佩戴设备！",
+          "url": "https://kifs-test.kuaikuaikeji.com/kifs-web/report/move/f_move.html?uuid=a4f465b880b04a35871eb7007ac7f455"
+        }
+      ]
+    },
+    "page": {
+      "pageLimit": 10,
+      "pageOffset": 0,
+      "recordCount": 2
+    }
+  },
+  "message": "成功"
+}

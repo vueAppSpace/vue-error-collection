@@ -1,0 +1,49 @@
+.video-player .video-player .vjs-custom-skin{
+  width: 100%!important;
+}
+.video-js {
+  width: 100%!important;
+}
+.video-js .vjs-big-play-button {
+  visibility: hidden;
+}
+/* .vjs-icon-placeholder{
+  display: none
+} */
+.video-js.vjs-paused .vjs-big-play-button{
+ display: none;
+ /* background-image: url(../images/collectBtn.png)!important;
+ background-size: contain;
+ background-repeat: no-repeat;
+ background-position: center; */
+}
+.video-js .vjs-loading-spinner{
+  display: none;
+}
+/* .video-js.vjs-ended .vjs-big-play-button{
+  display: none;
+} */
+/* .video-js.vjs-ended .vjs-icon-placeholder{
+  display: none;
+} */
+.video-js:hover .vjs-big-play-button{
+  background-color: rgba(0,0,0,0.45)
+}
+.vjs-custom-skin > .video-js .vjs-big-play-button{
+  line-height: 62px!important;
+}
+.vjs-custom-skin > .video-js .vjs-big-play-button{
+    left: 52%;
+}
+.van-swipe{
+  width: 100%;
+}
+.van-swipe__indicator{
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transition: opacity .2s,background-color .2s;
+  transition: opacity .2s,background-color .2s;
+ }

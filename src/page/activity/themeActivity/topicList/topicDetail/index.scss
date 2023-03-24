@@ -1,0 +1,482 @@
+.containter {
+  height: 100%;
+  background: #ffffff;
+  padding: 16px;
+
+  .photo-btn {
+    width: 112px;
+    height: 112px;
+    background: #4b7aff;
+    box-shadow: 0px 16px 24px 0px rgba(86, 89, 97, 0.32);
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 32px;
+    bottom: 312px;
+
+    img {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  .topic_detail {
+    position: relative;
+    height: 138px;
+    border-radius: 16px;
+    margin-top: 26px;
+    padding: 0 24px 24px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background: url(https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/active/topic_detail_bg.png)
+      no-repeat;
+    background-size: 100% 100%;
+    font-size: 24px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #737782;
+
+    .topic_ranking {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 8px 0px 8px 10px;
+      width: 246px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      background: url(https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/active/topic_detail_yellow_bg.png)
+        no-repeat;
+      background-size: 100% 100%;
+      font-size: 24px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .topic_content {
+      img {
+        width: 24px;
+        height: 24px;
+      }
+
+      span {
+        font-size: 30px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #333333;
+      }
+    }
+
+    .comment_zan {
+      display: flex;
+      align-items: center;
+
+      .comment {
+        margin-right: 100px;
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .entrance_box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    font-size: 30px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #1e201e;
+    margin-top: 24px;
+
+    .publish_dynamic,
+    .my_dynamic {
+      width: 332px;
+      height: 112px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 56px;
+        height: 56px;
+        margin-right: 16px;
+      }
+    }
+
+    .publish_dynamic {
+      background-color: #edf1ff;
+    }
+
+    .my_dynamic {
+      background-color: #fff5e5;
+    }
+  }
+
+  .text-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    .title {
+      font-size: 36px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #1e201e;
+      margin-left: 10px;
+    }
+
+    .view-all {
+      font-size: 24px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: rgba(30, 32, 30, 0.8);
+      margin-right: 7px;
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 12px;
+        height: 22px;
+        margin-left: 14px;
+      }
+    }
+  }
+
+  // 热门活动
+  .rotation-chart {
+    .text-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+
+      .title {
+        font-size: 36px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #1e201e;
+        margin-left: 10px;
+      }
+
+      .view-all {
+        font-size: 24px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: rgba(30, 32, 30, 0.8);
+        margin-right: 7px;
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 12px;
+          height: 22px;
+          margin-left: 14px;
+        }
+      }
+    }
+
+    .pic {
+      max-height: 310px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 310px;
+        object-fit: cover;
+        border-radius: 32px;
+      }
+    }
+  }
+
+  // 热门话题
+  .hot_topic {
+    margin: 30px 0 40px 0;
+
+    .hopic_content {
+      height: 248px;
+      padding: 32px;
+      background: url(https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/active/topic_bg.png)
+        no-repeat;
+      background-size: 100% 100%;
+      font-size: 28px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #333333;
+      text-align: left;
+
+      .item_hopic {
+        margin-bottom: 32px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .serial_no {
+          margin-right: 14px;
+        }
+      }
+
+      .item_hopic:nth-child(1) {
+        .serial_no {
+          color: #ed6066;
+        }
+      }
+
+      .item_hopic:nth-child(2) {
+        .serial_no {
+          color: #ff9500;
+        }
+      }
+
+      .item_hopic:nth-child(3) {
+        .serial_no {
+          color: #4b7aff;
+        }
+      }
+    }
+  }
+
+  // 动态
+  .dynamic {
+    .sort-btn-box {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      margin: 32px 0 16px 0;
+      align-items: center;
+      position: relative;
+
+      .title {
+        height: 50px;
+        font-size: 36px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #1e201e;
+        position: absolute;
+        left: 0;
+      }
+
+      .sort-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+        width: 160px;
+        height: 68px;
+        background: #f0f2f7;
+        box-shadow: 0px 2px 4px 0px rgba(84, 91, 101, 0.1);
+        border-radius: 32px;
+        border: 2px solid #f0f2f7;
+        font-size: 24px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #9195a1;
+        position: relative;
+
+        span:nth-child(1) {
+          padding-left: 16px;
+        }
+
+        span:nth-child(2) {
+          padding-right: 16px;
+        }
+
+        .active {
+          padding: 16px 16px 14px 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #ffffff;
+          border-radius: 32px;
+          font-size: 24px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #3d3e42;
+          line-height: 34px;
+        }
+      }
+    }
+
+    // 动态内容
+    .dynamic-box {
+      &::after {
+        content: "";
+        display: block;
+        border: 2px solid #f0f2f7;
+        margin-bottom: 30px;
+      }
+
+      .personal-info {
+        display: flex;
+        justify-content: space-between;
+
+        .portrait-name {
+          display: flex;
+          align-items: center;
+
+          img {
+            width: 88px;
+            height: 88px;
+            border-radius: 100%;
+            margin-right: 16px;
+          }
+
+          span {
+            font-size: 32px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: #1c1c1e;
+            line-height: 44px;
+          }
+        }
+
+        .dtdk {
+          display: flex;
+          align-items: center;
+          font-size: 24px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: rgba(145, 149, 161, 1);
+          line-height: 36px;
+
+          span:nth-child(1) {
+            color: rgba(75, 122, 255, 1);
+          }
+
+          img {
+            width: 12px;
+            height: 22px;
+            margin-left: 8px;
+          }
+        }
+      }
+
+      .word-text {
+        margin-top: 24px;
+        margin-bottom: 24px;
+        font-size: 30px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #1c1c1e;
+        line-height: 40px;
+
+        span {
+          color: rgba(75, 122, 255, 1);
+        }
+      }
+
+      .img-box {
+        display: grid;
+        grid-template-columns: repeat(3, 224px);
+        grid-template-rows: repeat(3, 224px);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        justify-content: center;
+      }
+
+      .img-box-1 {
+        width: 470px;
+        height: 348px;
+      }
+
+      .img-box-4 {
+        display: grid;
+        grid-template-columns: repeat(2, 222px);
+        grid-template-rows: repeat(2, 222px);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+      }
+
+      .img-box,
+      .img-box-1,
+      .img-box-4 {
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 16px;
+        }
+      }
+
+      .video-box {
+        width: 470px;
+        height: 348px;
+        display: block;
+
+        video {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      // 互动信息
+      .interaction-info {
+        margin-bottom: 16px;
+        margin-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .time {
+          font-size: 26px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #9195a1;
+          line-height: 36px;
+        }
+
+        .zan-comment {
+          display: flex;
+          align-items: center;
+          font-size: 26px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #737782;
+          line-height: 38px;
+
+          img {
+            width: 40px;
+            height: 40px;
+            margin-right: 8px;
+          }
+
+          .zan {
+            margin-right: 48px;
+          }
+
+          .zan,
+          .comment {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+
+      // 评论
+      .comment-text {
+        width: 100%;
+        height: 64px;
+        margin: 16px 0 32px;
+        line-height: 64px;
+        background: #f0f2f7;
+        border-radius: 16px;
+        padding: 0 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 24px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #3d3e42;
+        text-align: left;
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "code": 0,
+  "data": {
+    "data": {
+      "list": [
+        {
+          "age": 23,
+          "bmi": 23.5,
+          "bmiGrade": "优秀",
+          "bmr": 1800,
+          "bmrGrade": "达标",
+          "bodyfat": 8.3,
+          "bodyfatGrade": "良好",
+          "bodyfatPercentage": 18.0,
+          "bone": 4.8,
+          "boneGrade": "优秀",
+          "createTime": 1647249045000,
+          "muscle": 33.4,
+          "muscleGrade": "不足",
+          "proteinGrade": "标准",
+          "proteinPercentage": 17.9,
+          "reportUuid": "4fb49823f1b84f0698563287b0b4ed4f",
+          "scene": 1,
+          "url": "https://kifs-test.kuaikuaikeji.com/kifs-web/report/tc/f_tc.html?uuid=4fb49823f1b84f0698563287b0b4ed4f",
+          "vfal": 4,
+          "vfalGrade": "标准",
+          "waterGrade": "不足",
+          "waterPercentage": 45.0,
+          "weight": 75.2
+        },
+        {
+          "age": 23,
+          "bmi": 23.5,
+          "bmiGrade": "优秀",
+          "bmr": 1800,
+          "bmrGrade": "达标",
+          "bodyfat": 8.3,
+          "bodyfatGrade": "良好",
+          "bodyfatPercentage": 18.0,
+          "bone": 4.8,
+          "boneGrade": "优秀",
+          "createTime": 1647249045000,
+          "muscle": 33.4,
+          "muscleGrade": "不足",
+          "proteinGrade": "标准",
+          "proteinPercentage": 17.9,
+          "reportUuid": "4fb49823f1b84f0698563287b0b4ed4f",
+          "scene": 2,
+          "url": "https://kifs-test.kuaikuaikeji.com/kifs-web/report/tc/f_tc.html?uuid=4fb49823f1b84f0698563287b0b4ed4f",
+          "vfal": 4,
+          "vfalGrade": "标准",
+          "waterGrade": "不足",
+          "waterPercentage": 45.0,
+          "weight": 75.2
+        },
+        {
+          "age": 23,
+          "bmi": 23.5,
+          "bmiGrade": "优秀",
+          "bmr": 1800,
+          "bmrGrade": "达标",
+          "bodyfat": 8.3,
+          "bodyfatGrade": "良好",
+          "bodyfatPercentage": 18.0,
+          "bone": 4.8,
+          "boneGrade": "优秀",
+          "createTime": 1647249045000,
+          "muscle": 33.4,
+          "muscleGrade": "不足",
+          "proteinGrade": "标准",
+          "proteinPercentage": 17.9,
+          "reportUuid": "4fb49823f1b84f0698563287b0b4ed4f",
+          "scene": 1,
+          "url": "https://kifs-test.kuaikuaikeji.com/kifs-web/report/tc/f_tc.html?uuid=4fb49823f1b84f0698563287b0b4ed4f",
+          "vfal": 4,
+          "vfalGrade": "标准",
+          "waterGrade": "不足",
+          "waterPercentage": 45.0,
+          "weight": 75.2
+        }
+      ]
+    },
+    "page": {
+      "pageLimit": 10,
+      "pageOffset": 0,
+      "recordCount": 1
+    }
+  },
+  "message": "成功"
+}
