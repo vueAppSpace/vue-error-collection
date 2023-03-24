@@ -2,7 +2,7 @@
  * @Description: 获取token
  * @Author: IFLS
  * @Date: 2022-04-24 14:09:14
- * @LastEditTime: 2023-03-24 09:52:51
+ * @LastEditTime: 2023-03-24 12:47:28
  */
 import { getToken as queryToken } from "@/service/api";
 import { Toast } from "vant";
@@ -51,7 +51,8 @@ const getToken = async () => {
   } else if (params === NO_LOGIN) {
     return await Promise.resolve({ code: -99, data: null, message: null });
   } else {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("accessToken"); // 清除旧版本用户登录信息
+    sessionStorage.removeItem("userStore"); // 清除登录信息
     return await queryToken(params);
   }
 };
