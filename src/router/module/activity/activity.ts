@@ -2,7 +2,7 @@
  * @Description: 活动 无权限要求
  * @Author: IFLS
  * @Date: 2022-08-12 14:28:33
- * @LastEditTime: 2023-03-23 17:43:05
+ * @LastEditTime: 2023-03-24 17:56:35
  */
 
 export default [
@@ -63,8 +63,7 @@ export default [
       title: "选择话题",
       keepAlive: false,
       showTab: false,
-      showFeedBack: false,
-      controlBack: true
+      showFeedBack: false
     }
   },
   {
@@ -120,8 +119,7 @@ export default [
     component: () => import("@/page/activity/themeActivity/topics.vue"),
     meta: {
       title: "选择活动",
-      showFeedBack: false,
-      controlBack: true
+      showFeedBack: false
     }
   },
   {
@@ -142,8 +140,7 @@ export default [
     meta: {
       title: "发动态",
       keepAlive: true,
-      showFeedBack: false,
-      controlBack: true
+      showFeedBack: false
     }
   }
 ];

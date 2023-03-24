@@ -2,7 +2,7 @@
  * @Description: 新版首页 权限3
  * @Author: IFLS
  * @Date: 2022-08-12 15:27:06
- * @LastEditTime: 2023-03-23 17:43:51
+ * @LastEditTime: 2023-03-24 17:33:41
  */
 
 export default [
@@ -76,9 +76,7 @@ export default [
     name: "mealSuggest",
     component: () => import("@/page/meals/mealSuggest.vue"),
     meta: {
-      title: "膳食建议",
-      // 页面控制navbar返回功能
-      controlBack: true
+      title: "膳食建议"
     }
   },
   {

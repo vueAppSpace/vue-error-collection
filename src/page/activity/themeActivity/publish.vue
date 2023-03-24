@@ -155,7 +155,7 @@
   import FullLoading from "@/components/Loading";
 
   import Tips from "@/components/Tips";
-  import eventBus from "@/utils/eventBus.js";
+  import { mapState, useNavStore } from "@/pinia";
 
   import { Toast } from "vant";
 
@@ -215,6 +215,9 @@
         topicId: "",
         topicTitle: ""
       };
+    },
+    computed: {
+      ...mapState(useNavStore, ["onback"])
     },
     components: {
       UploadAuth,
@@ -492,8 +495,7 @@
     },
     activated() {
       // 监听返回事件
-      eventBus.$on("onback", closeFn => {
-        // closeFn() 关闭当前页
+      this.onback(() => {
         this.$router.replace({
           path: "/themeActivityHome"
         });

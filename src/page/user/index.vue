@@ -2,20 +2,20 @@
  * @Description: 选择用户版面
  * @Author: IFLS
  * @Date: 2022-12-05 14:57:09
- * @LastEditTime: 2023-03-23 17:42:37
+ * @LastEditTime: 2023-03-24 17:49:40
 -->
 <script>
-  import { defineComponent, onBeforeUnmount, onMounted, reactive, toRefs } from "@vue/composition-api";
+  import { defineComponent, onMounted, reactive, toRefs } from "@vue/composition-api";
   import { Toast } from "vant";
-  import eventBus from "@/utils/eventBus.js";
   import { queryUserRole } from "@/service/user";
   import { getCoachToken } from "@/service/service";
   import { useNavStore } from "@/pinia";
+  import { jsBridge } from "@/utils/native/jsBridge";
 
   export default defineComponent({
     setup(_, context) {
       const { $router: router } = context.root;
-      const { setTitle } = useNavStore();
+      const { setTitle, onback } = useNavStore();
 
       const state = reactive({
         active: 0,
@@ -81,14 +81,10 @@
       onMounted(() => {
         querUser();
         // 监听返回
-        eventBus.$on("onback", closeFn => {
-          closeFn(); // 关闭当前页
+        onback(() => {
+          // 关闭当前页
+          jsBridge.invoke("closeWebView");
         });
-      });
-
-      onBeforeUnmount(() => {
-        // 卸载监听
-        eventBus.$off("onback");
       });
 
       return {

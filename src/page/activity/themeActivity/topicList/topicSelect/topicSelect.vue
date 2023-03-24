@@ -1,7 +1,7 @@
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
   import { getListByHot } from "@/service/activity";
-  import eventBus from "@/utils/eventBus.js";
+  import { useNavStore } from "@/pinia";
   export default defineComponent({
     components: {},
     setup(_, context) {
@@ -14,6 +14,8 @@
         loading: false,
         finished: false
       });
+
+      const { onback } = useNavStore();
 
       // 话题列表
       const getListByHotFn = () => {
@@ -72,8 +74,7 @@
       onMounted(() => {
         init();
         // 监听返回事件
-        eventBus.$on("onback", closeFn => {
-          // closeFn() 关闭当前页
+        onback(() => {
           this.$router.replace({
             path: "/topicSelect",
             query: {
