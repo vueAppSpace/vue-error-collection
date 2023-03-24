@@ -1,0 +1,71 @@
+{
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "numso.prettier-standard-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // "editor.fontSize": 16, // 编译器字体大小
+  "diffEditor.ignoreTrimWhitespace": false,
+  // prettier配置: 若格式化不生效 请安装prettier 右键选择格式化文档的方式为 Prettier - Code formatter
+  // "prettier.semi": true, // 设置分号
+  // "prettier.singleQuote": false, // 双引号变成单引号
+  // "prettier.trailingComma": "all", // 代码结尾分号
+  // "prettier.tabWidth": 2, // tab宽度
+  // "prettier.arrowParens": "avoid", // 箭头函数的括号
+  // "prettier.printWidth": 120, // 换行宽度
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.eslint": false // 保存时修复eslint
+  // },
+  "editor.formatOnSave": true, // 保存时格式化
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 默认格式化工具
+  "npm.packageManager": "pnpm",
+  "search.exclude": {
+    "**/dist": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "numso.prettier-standard-vscode"
+  },
+  //配置新建文件注释和方法注释
+  "fileheader.configObj": {
+    "createFileTime": true, // 设置为true则为文件新建时候作为date，否则注释生成时间为date
+    "autoAdd": false, // 自动生成注释
+    "annotationStr": {
+      "head": "/*",
+      "middle": " * @",
+      "end": " */",
+      "use": true // 设置自定义注释可用
+    },
+    "headInsertLine": {
+      "php": 2
+    }
+  },
+  "fileheader.cursorMode": {
+    "description": "",
+    "param ": "",
+    "return": ""
+  },
+  "fileheader.customMade": {
+    "Description": "", // 文件内容描述
+    "Author": "IFLS", // 编辑人
+    "Date": "Do not edit", //时间
+    "LastEditTime": "Do not edit"
+    // "LastEditors": " ",
+  }
+}
