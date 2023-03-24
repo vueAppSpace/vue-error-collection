@@ -111,7 +111,7 @@ const healthUrlRecommend = platform + "/api/health";
 const xinao = platform + "/xinaohealth";
 
 // companyId
-const companyId = 240;
+// const companyId = 240;
 
 export const user = {
   // qa环境 测试账号
@@ -124,7 +124,7 @@ export {
   users,
   userUrl,
   platform,
-  companyId,
+  // companyId,
   configUrl,
   healthUrlRecommend,
   xinao,

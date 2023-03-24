@@ -1,5 +1,6 @@
 import { ConfigEnv, loadEnv, UserConfig } from "vite";
 import { createVuePlugin } from "vite-plugin-vue2";
+// 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> pnpm i @types/node -D
 import { resolve } from "path";
 import legacy from "@vitejs/plugin-legacy";
 import viteCompression from "vite-plugin-compression";

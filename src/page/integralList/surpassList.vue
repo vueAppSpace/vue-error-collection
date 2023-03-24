@@ -93,7 +93,7 @@
 </template>
 <script>
   import { rankingPerson, surpassplanPage, integralNum } from "@/service/ranking";
-  import { companyId } from "@/config/env";
+  // import { companyId } from "@/config/env";
   export default {
     directives: {},
     components: {},
@@ -111,8 +111,8 @@
     methods: {
       rankingPersonFn() {
         let data = {
-          companyId,
-          companyPid: 10,
+          // companyId,
+          // companyPid: 10,
           memberCode: localStorage.getItem("memberCode")
         };
         rankingPerson(data)

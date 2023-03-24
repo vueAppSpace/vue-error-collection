@@ -198,7 +198,7 @@
   import Tips from "@/components/Tips";
 
   import { Toast } from "vant";
-  import { companyId } from "@/config/env";
+  // import { companyId } from "@/config/env";
 
   const zgStr = "健康新奥-健康积分-点击超越按钮";
   export default {
@@ -324,8 +324,8 @@
       },
       rankingPersonFn() {
         let data = {
-          companyId,
-          companyPid: 10,
+          // companyId,
+          // companyPid: 10,
           memberCode: localStorage.getItem("memberCode")
         };
         rankingPerson(data)

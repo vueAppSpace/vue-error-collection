@@ -2,19 +2,19 @@
  * @Description: 我的页面api接口
  * @Author: IFLS
  * @Date: 2022-05-18 13:47:58
- * @LastEditTime: 2023-03-23 17:45:21
+ * @LastEditTime: 2023-03-24 14:21:54
  */
 
 import axios from "@/config/axios";
-import { xinao, companyId } from "@/config/env";
+import { xinao } from "@/config/env";
 
 // 获取单人排行榜榜单
 export const queryMineRankList = memberCode => {
   return axios(
     `${xinao}/healthpoints/findLeaderboard`,
     {
-      companyPid: 10,
-      companyId,
+      // companyPid: 10,
+      // companyId,
       memberCode
     },
     "post"
