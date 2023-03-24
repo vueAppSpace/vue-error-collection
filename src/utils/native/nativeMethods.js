@@ -19,7 +19,7 @@ export default {
   },
   openWXMiniProgram(payload) {
     if (isUniApp) {
-      // callPlusMethod("", payload);
+      callPlusMethod("openWXMiniProgram", payload);
     } else {
       ddTools.ddOpenWXMiniProgram(payload);
     }
@@ -95,14 +95,14 @@ export default {
   },
   previewFile(payload) {
     if (isUniApp) {
-      // callPlusMethod("", payload);
+      callPlusMethod("previewFile", payload);
     } else {
       ddTools.previewFile(payload);
     }
   },
   audioDownload(payload) {
     if (isUniApp) {
-      // callPlusMethod("", payload);
+      callPlusMethod("audioDownload", payload);
     } else {
       ddTools.audioDownload(payload);
     }

@@ -1,11 +1,12 @@
 /*
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-03-21 11:24:48
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:45:59
+ * @LastEditors: YanivWang
+ * @LastEditTime: 2023-03-24 14:28:31
  * @FilePath: \lk-xinaohealth-h5\src\utils\native\plusTools.js
  * @Description: ****
  */
+import { isIOS } from "@/utils/native/deviceEnv";
 
 /**
  * 关闭当前 webview
@@ -17,11 +18,48 @@ export function closeWebView() {
 }
 
 /**
- * 打开一个新得webview
+ * 打开一个新的webview
  */
 export function openWebView({ params }) {
-  const { targetUrl, refreshTicket = false, extraParame = "" } = params;
-  plus.webview.open(targetUrl);
+  console.log("打开新webview>>>>>>>>>>");
+
+  const { targetUrl, title = "", refreshTicket = false, extraParame = "" } = params;
+  let webview = plus.webview.create("", "custom-webview", {
+    "uni-app": "none",
+    titleNView: {
+      backgroundColor: "#ffffff",
+      titleText: title,
+      titleColor: "#1989fa",
+      autoBackButton: true,
+      "padding-left": "12px",
+      backButton: {
+        title: "返回",
+        titleSize: "14px",
+        fontSize: "19px"
+      }
+    },
+    top: isIOS ? 0 : -plus.navigator.getStatusbarHeight(),
+    bottom: 0
+  });
+  webview.loadURL(targetUrl);
+
+  plus.key.addEventListener(
+    "backbutton",
+    function () {
+      webview.canBack(function (e) {
+        if (e.canBack) {
+          webview.back();
+        } else {
+          webview.close();
+        }
+      });
+    },
+    false
+  );
+
+  //新打开得webview，添加到当前webview
+  var currentWebview = plus.webview.currentWebview();
+  currentWebview.append(webview);
 }
 
 /**
@@ -46,6 +84,7 @@ export function scanQRCode({ params, successCB, errorCB }) {
   document.body.appendChild(scanNode);
 
   //创建扫码实例并开启扫码
+  const statusbarHeight = plus.navigator.getStatusbarHeight();
   const scanInstance = new plus.barcode.Barcode("__qrCodeUUID", [plus.barcode.QR], true);
   scanInstance.onmarked = (type, reslut) => {
     console.log("scanCode finish>>>>>>>>>>");
@@ -72,13 +111,21 @@ export function scanQRCode({ params, successCB, errorCB }) {
     function () {
       console.log("bmp1.png load success!");
 
+      const viewRealTop = statusbarHeight + 25;
+      console.log("viewRealTop", viewRealTop);
+
       //创建原生容器控件
-      view1 = new plus.nativeObj.View("view1", { top: "66px", left: "0px", height: "100px", width: "100%" });
+      view1 = new plus.nativeObj.View("view1", {
+        top: viewRealTop + "px",
+        left: "0px",
+        height: "100px",
+        width: "100%"
+      });
       // 绘制图片
       view1.drawBitmap(
         bitmap1,
         { top: "0px", left: "0px", width: "100%", height: "100%" },
-        { top: "0px", left: "30px", width: "14px", height: "auto" }
+        { top: "0px", left: "30px", width: "12px", height: "auto" }
       );
       //绘制文本
       view1.drawText(
@@ -114,9 +161,41 @@ export function scanQRCode({ params, successCB, errorCB }) {
 }
 
 /**
+ * 打开微信小程序
+ */
+export const openWXMiniProgram = ({ params }) => {
+  console.log("打开微信小程序>>>>");
+  const { appletId, path } = params;
+
+  // ic.run({
+  //     action: "icome.wxsdk",
+  //     params: {
+  //         type: "2",
+  //         sdkNeedParams: { appletId, path },
+  //     },
+  // });
+};
+
+/**
+ * 预览文件
+ */
+export const previewFile = ({ params, successCB, errorCB }) => {
+  console.log("预览文件>>>");
+  const { serverUrl, fileName } = params || {};
+
+  const path =
+    "https://entropy-tmp.oss-cn-beijing.aliyuncs.com/202206030014.pdf?Expires=3550557681&OSSAccessKeyId=LTAI5tNBUuD5RLXz1h85PPn3&Signature=KbnqFVa6UM4eGrKD08P0CLqyWSc%3D";
+  params = {
+    targetUrl: path
+  };
+  openWebView({ params });
+};
+
+/**
  * 获取当前地理位置
  */
 export function queryLocation({ successCB, errorCB }) {
+  console.log("start获取地理位置>>>>>>");
   plus.geolocation.getCurrentPosition(
     p => {
       console.log("获取地理位置成功>>>", p);
@@ -125,25 +204,75 @@ export function queryLocation({ successCB, errorCB }) {
       successCB({ country, province, city, district, street, postalCode, cityCode });
     },
     err => {
+      console.log("获取地理位置失败,", err);
       errorCB("获取地理位置失败：", err);
     },
     {
       enableHighAccuracy: true,
       timeout: 10000,
-      provider: "amap",
+      provider: "amap", //system
       geocode: true
     }
   );
 }
 
 /**
- * 文件系统操作
- */
-
-/**
  * 音频播放
  */
-export function audioPlay({ path, successCB, errorCB }) {
-  const audioPlayer = plus.audio.createPlayer(path);
-  audioPlayer.play(successCB, errorCB);
+export function audioPlay({ params, successCB, errorCB }) {
+  //path = "https://lk-webfont.oss-cn-beijing.aliyuncs.com/web/xinao-health/audio/correct_sound.mp3";
+
+  const { localAudioId } = params;
+  console.log("音频播放>>>", localAudioId);
+  const audioPlayer = plus.audio.createPlayer(localAudioId);
+  audioPlayer.play(
+    ret => {
+      console.log("play audio success", ret);
+    },
+    err => {
+      console.log("play audio err", err);
+    }
+  );
+}
+
+/**
+ *下载音频
+ */
+export function audioDownload({ params, successCB, errorCB }) {
+  console.log("audioDownload>>>>", params);
+
+  downLoadFile({
+    params: {
+      path: params.mediaId
+    },
+    successCB: localAudioId => {
+      console.log("localAudioId>>>", localAudioId);
+      successCB({ localAudioId });
+    },
+    errorCB: () => {}
+  });
+}
+
+/**
+ * 文件下载
+ */
+export function downLoadFile({ params, successCB, errorCB }) {
+  const { path } = params;
+  console.log("下载文件网络地址>>>>", path);
+  var dtask = plus.downloader.createDownload(
+    path,
+    {},
+    function (d, status) {
+      if (status == 200) {
+        console.log("downLoadFile success file path >>>: " + d.filename);
+        successCB(d.filename);
+      } else {
+        console.log("Download failed: " + status);
+      }
+    },
+    err => {
+      console.log("Download failed: " + err);
+    }
+  );
+  dtask.start();
 }
