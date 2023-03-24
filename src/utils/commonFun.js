@@ -144,3 +144,10 @@ export const loadScript = url => {
     };
   });
 };
+
+export const loadBase64 = url => {
+  if (!window.Base64) {
+    return loadScript(url);
+  }
+  return Promise.resolve();
+};

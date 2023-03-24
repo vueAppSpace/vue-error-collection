@@ -104,21 +104,21 @@ async function getToken(loginName) {
   return token;
 }
 
-// function getIPAddress() {
-//   const interfaces = os.networkInterfaces();
-//   let IPAddress = "";
-//   for (const devName in interfaces) {
-//     const iface = interfaces[devName];
-//     for (let i = 0; i < iface.length; i++) {
-//       const alias = iface[i];
-//       if (alias.family === "IPv4" && alias.address !== "127.0.0.1" && !alias.internal) {
-//         IPAddress = alias.address;
-//         break;
-//       }
-//     }
-//   }
-//   return IPAddress;
-// }
+export function getIPAddress() {
+  const interfaces = os.networkInterfaces();
+  let IPAddress = "";
+  for (const devName in interfaces) {
+    const iface = interfaces[devName];
+    for (let i = 0; i < iface.length; i++) {
+      const alias = iface[i];
+      if (alias.family === "IPv4" && alias.address !== "127.0.0.1" && !alias.internal) {
+        IPAddress = alias.address;
+        break;
+      }
+    }
+  }
+  return IPAddress;
+}
 
 async function pasteTicketToClipboard() {
   const [, , loginName = defaultLoginName] = process.argv;

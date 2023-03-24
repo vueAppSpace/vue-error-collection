@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "start": "vite --host --mode emall.qa",
     "dev": "vite --host --mode icome.qa",
     "dev:icome": "vite --host --mode icome.qa",
+    "dev:icomepro": "vite --host --mode icome.pro",
     "dev:emall": "vite --host --mode emall.qa",
+    "dev:emallpro": "vite --host --mode emall.pro",
     "build": "vue-tsc && vite build --mode icome.pro",
     "build:icometest": "vue-tsc && vite build --mode icome.qa",
     "build:icomepro": "vue-tsc && vite build --mode icome.pro",
