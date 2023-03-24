@@ -4,9 +4,12 @@ import { resolve } from "path";
 import legacy from "@vitejs/plugin-legacy";
 import viteCompression from "vite-plugin-compression";
 import checkEnv from "./version";
-export default ({ command, mode }: ConfigEnv): UserConfig => {
+import { getTicket } from "./get-ticket";
+
+export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
   const env: Partial<ImportMetaEnv> = loadEnv(mode, process.cwd());
   const lkProject = checkEnv(env);
+  const ticket = await getTicket();
   return {
     plugins: [
       createVuePlugin({
@@ -55,7 +58,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     base: "/report/", // 设置打包路径
     server: {
       port: 9080, // 端口号
-      open: true, // 是否自动打开浏览器
+      // open: true, // 是否自动打开浏览器
+      open: `health?ticket=${ticket}`,
       cors: true // 允许跨域
       // 代理
       // proxy: {
