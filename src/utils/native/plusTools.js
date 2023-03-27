@@ -2,11 +2,14 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-03-21 11:24:48
  * @LastEditors: YanivWang
- * @LastEditTime: 2023-03-24 14:28:31
+ * @LastEditTime: 2023-03-24 18:03:25
  * @FilePath: \lk-xinaohealth-h5\src\utils\native\plusTools.js
  * @Description: ****
  */
 import { isIOS } from "@/utils/native/deviceEnv";
+import scriptUrl from "@/utils/url";
+import { loadBase64 } from "@/utils/commonFun";
+import { eServicePdfPreview } from "@/config/env";
 
 /**
  * 关闭当前 webview
@@ -166,29 +169,22 @@ export function scanQRCode({ params, successCB, errorCB }) {
 export const openWXMiniProgram = ({ params }) => {
   console.log("打开微信小程序>>>>");
   const { appletId, path } = params;
-
-  // ic.run({
-  //     action: "icome.wxsdk",
-  //     params: {
-  //         type: "2",
-  //         sdkNeedParams: { appletId, path },
-  //     },
-  // });
+  //to do
 };
 
 /**
  * 预览文件
  */
 export const previewFile = ({ params, successCB, errorCB }) => {
-  console.log("预览文件>>>");
-  const { serverUrl, fileName } = params || {};
+  console.log("预览文件>>>>");
 
-  const path =
-    "https://entropy-tmp.oss-cn-beijing.aliyuncs.com/202206030014.pdf?Expires=3550557681&OSSAccessKeyId=LTAI5tNBUuD5RLXz1h85PPn3&Signature=KbnqFVa6UM4eGrKD08P0CLqyWSc%3D";
+  const { serverUrl, fileName } = params || {};
   params = {
-    targetUrl: path
+    targetUrl: `${eServicePdfPreview}?url=${encodeURIComponent(Base64.encode(serverUrl))}`
   };
-  openWebView({ params });
+  loadBase64(scriptUrl.base64).then(() => {
+    openWebView({ params });
+  });
 };
 
 /**
