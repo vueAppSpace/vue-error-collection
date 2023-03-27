@@ -635,7 +635,7 @@
         if (this.$route.query.date) {
           this.$router.replace("/health");
         } else {
-          this.$router.replace("/service");
+          this.$router.replace("/mine");
         }
       });
 
