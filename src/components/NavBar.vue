@@ -2,59 +2,62 @@
  * @Description: 导航栏
  * @Author: IFLS
  * @Date: 2022-08-09 09:58:53
- * @LastEditTime: 2023-03-24 17:53:55
+ * @LastEditTime: 2023-03-27 10:02:02
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, watch } from "@vue/composition-api";
   import { isMobile } from "@/utils/native/deviceEnv";
   import { useNavStore, storeToRefs } from "@/pinia";
-  import { useRoute } from "@/hooks/useRouter";
+  import { jsBridge } from "@/utils/native/jsBridge";
 
   export default defineComponent({
-    setup() {
+    setup(_, context) {
+      const { $router: router, $route: route } = context.root;
+
       const state = reactive({
         isPc: false,
         isShow: true,
         navTitle: ""
       });
-      const route = useRoute();
 
       const { title: piniaTitle, onbackFn } = storeToRefs(useNavStore());
-      const { navGoback, oneLevelPage, onback } = useNavStore();
+      const { oneLevelPage, onback } = useNavStore();
 
       // 监听pinia中title变化
       watch(
         () => piniaTitle.value,
         val => {
-          console.log("val", val);
           state.navTitle = val;
         }
       );
 
-      // 监听路由变化
-      watch(route, to => {
+      const navGoback = () => {
         const {
-          meta: { title: metaTitle, showNavBar },
-          query: { navTitle },
-          path
-        } = to;
+          query: { backHome, nologin }
+        } = route;
 
-        // meta title > url navTitle > pinia title
-        state.navTitle = metaTitle ? metaTitle : navTitle ? navTitle : piniaTitle;
-
-        // 路由meta若传参showNavBar 比重最大 控制显示与否
-        if (showNavBar !== undefined) {
-          state.isShow = showNavBar;
-          return;
-        }
-
-        // pc的一级页面 隐藏navbar
-        if (oneLevelPage.includes(path) && state.isPc) {
-          state.isShow = false;
+        // url传参: 回到首页
+        if (backHome) {
+          router.replace("/health");
+          // url传参: 不登录情况
+        } else if (nologin) {
+          jsBridge.invoke("closeWebView");
         } else {
-          state.isShow = true;
+          const { path } = route;
+          // 非pc的一级页面 点击关闭
+          if (oneLevelPage.includes(path) && !state.isPc) {
+            jsBridge.invoke("closeWebView");
+          } else {
+            // 下级页面存在history正常回退 注意: 此处不准确 可能多次跳转后 才到达当前页
+            if (window.history.length > 1) {
+              router.go(-1);
+            } else {
+              // 下级页面不存在history时 为推送的特定页面 返回到首页
+              router.replace("/health");
+            }
+          }
         }
-      });
+      };
 
       const goback = () => {
         // 自定义返回事件
@@ -73,8 +76,36 @@
 
       return {
         ...toRefs(state),
+        piniaTitle,
+        oneLevelPage,
         goback
       };
+    },
+    watch: {
+      // 监听路由变化
+      $route: function (to, from) {
+        const {
+          meta: { title: metaTitle, showNavBar },
+          query: { navTitle },
+          path
+        } = to;
+
+        // meta title > url navTitle > pinia title
+        this.navTitle = metaTitle ? metaTitle : navTitle ? navTitle : this.piniaTitle;
+
+        // 路由meta若传参showNavBar 比重最大 控制显示与否
+        if (showNavBar !== undefined) {
+          this.isShow = showNavBar;
+          return;
+        }
+
+        // pc的一级页面 隐藏navbar
+        if (this.oneLevelPage.includes(path) && this.isPc) {
+          this.isShow = false;
+        } else {
+          this.isShow = true;
+        }
+      }
     }
   });
 </script>
