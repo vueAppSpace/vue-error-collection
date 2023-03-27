@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-02-14 09:50:52
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:41:27
+ * @LastEditTime: 2023-03-27 10:44:49
  * @FilePath: \lk-xinaohealth-h5\src\page\physicalTestRecords\index.vue
  * @Description: 体测记录
 -->
@@ -103,14 +103,14 @@
         @click="onClick(item)"
       >
         <div :style="{ backgroundImage: item.picture }"></div>
-        <van-badge :content="quickTime && navTitle === '体测记录' ? 'NEW' : ''" color="#ED6066">
-          <div :class="['titleArea', navTitle === '预约记录' ? 'mt40' : '']">
-            <div class="title">{{ item.name }}</div>
-            <img
-              src="http://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/classReservations/arrowRight.png"
-            />
-          </div>
-        </van-badge>
+        <!-- <van-badge :content="quickTime && navTitle === '体测记录' ? 'NEW' : ''" color="#ED6066"> -->
+        <div :class="['titleArea', navTitle === '预约记录' ? 'mt40' : '']">
+          <div class="title">{{ item.name }}</div>
+          <img
+            src="http://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/classReservations/arrowRight.png"
+          />
+        </div>
+        <!-- </van-badge> -->
         <div class="time" v-if="quickTime && item.name === '快快体脂秤'">
           {{ quickTime }}
         </div>
