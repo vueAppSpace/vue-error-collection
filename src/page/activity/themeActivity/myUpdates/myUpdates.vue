@@ -2,7 +2,7 @@
  * @Author: yanghaifengb yanghaifengb@enn.cn
  * @Date: 2022-06-29 09:41:05
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:34:38
+ * @LastEditTime: 2023-03-28 09:50:55
  * @FilePath: \workBreakExercises\src\page\activity\themeActivity\myUpdates\myUpdates.vue
  * @Description: 我的动态
 -->
@@ -16,6 +16,7 @@
   import Tips from "@/components/Tips";
   import myDynamicList from "../components/myDynamicList.vue";
   import { getPersonCount } from "@/service/activity";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
   export default defineComponent({
@@ -25,7 +26,9 @@
       // UserInfo
     },
     setup(_, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         // introVisible: true,

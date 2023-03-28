@@ -2,15 +2,17 @@
  * @Description: 工间操卡片列表
  * @Author: IFLS
  * @Date: 2022-07-22 16:04:50
- * @LastEditTime: 2023-03-23 17:36:09
+ * @LastEditTime: 2023-03-28 09:52:29
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
   import { queryExerciseWorkJobList } from "@/service/health/index";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const state = reactive({
         exerciseWorkList: []

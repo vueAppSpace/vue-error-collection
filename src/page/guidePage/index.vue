@@ -2,13 +2,14 @@
  * @Description: 引导页
  * @Author: IFLS
  * @Date: 2022-05-30 16:40:42
- * @LastEditTime: 2023-03-23 17:36:06
+ * @LastEditTime: 2023-03-28 10:14:47
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, onBeforeUnmount } from "@vue/composition-api";
   import { queryGuidePageList } from "@/service/guidePage";
   import { getURLParameters, getFullURLFromParameters } from "@/utils/commonFun";
   import { jsBridge } from "@/utils/native/jsBridge";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
 
   export default defineComponent({
     beforeRouteEnter(to, from, next) {
@@ -19,7 +20,9 @@
       next();
     },
     setup(_, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         imageData: {},
@@ -28,7 +31,7 @@
       });
 
       const routerPush = () => {
-        let path = decodeURIComponent(route.fullPath.split("url=")[1]);
+        let path = decodeURIComponent(route.value.fullPath.split("url=")[1]);
         const paramsArr = path.split("&source=icome");
         // 来源为icome-我的时 剔除source参数 避免路由卡死
         if (paramsArr.length > 1) {

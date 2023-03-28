@@ -2,16 +2,18 @@
  * @Description: 动态 体检报告入口
  * @Author: IFLS
  * @Date: 2022-07-08 10:54:05
- * @LastEditTime: 2023-03-23 17:41:03
+ * @LastEditTime: 2023-03-28 10:02:36
 -->
 <script>
   import { defineComponent } from "@vue/composition-api";
   import { jumpToDanaoPretreat } from "@/utils/lifeEntropyMethod";
   import jumpToDanao from "@/utils/jumpToDanao";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const jumpTo = (url, param) =>
         param ? router.push({ path: url, query: { type: param, navTitle: "健康综合报告" } }) : router.push(url);

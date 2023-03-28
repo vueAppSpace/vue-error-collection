@@ -2,19 +2,20 @@
  * @Description: 体检报告
  * @Author: IFLS
  * @Date: 2022-05-26 14:24:19
- * @LastEditTime: 2023-03-23 17:41:14
+ * @LastEditTime: 2023-03-28 10:03:32
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
-  import { Toast } from "vant";
   import { queryLastHealthInfo } from "@/service/mine/index";
   import Tips from "@/components/Tips";
   import { formatTime } from "@/utils/commonFun";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: { Tips },
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const state = reactive({
         memberCode: localStorage.getItem("memberCode"),

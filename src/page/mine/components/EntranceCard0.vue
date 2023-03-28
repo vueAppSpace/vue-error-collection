@@ -2,14 +2,16 @@
  * @Description: 动态 体检报告入口
  * @Author: IFLS
  * @Date: 2022-07-08 10:54:05
- * @LastEditTime: 2023-03-23 17:41:05
+ * @LastEditTime: 2023-03-28 10:02:50
 -->
 <script>
   import { defineComponent } from "@vue/composition-api";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const jumpTo = url => router.push(url);
 

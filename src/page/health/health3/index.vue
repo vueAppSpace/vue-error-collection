@@ -27,6 +27,7 @@
   import { isProduction, isTesting } from "@/utils/projectEnv";
   import { printVersion } from "@/utils/versionUtil";
   import { jsBridge } from "@/utils/native/jsBridge";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {
@@ -48,7 +49,9 @@
     },
 
     setup(_, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const store = useLocationStore();
       const { setCityCode } = store;
@@ -209,7 +212,7 @@
 
       // 发送埋点信息
       const sendZhugeData = () => {
-        const { source } = route.query;
+        const { source } = route.value.query;
         source &&
           zgStatistics("健康新奥-进入页面", {
             来源: checkSource(source),
@@ -282,7 +285,7 @@
         isScroll && (state.isScroll = true);
         removeSession();
 
-        const scrollTop = route.meta.scrollTop;
+        const scrollTop = route.value.meta.scrollTop;
         const pageBox = document.querySelector(".page-box");
         if (scrollTop && pageBox) {
           pageBox.scrollTop = scrollTop;

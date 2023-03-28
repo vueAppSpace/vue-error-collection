@@ -2,7 +2,7 @@
  * @Author: yanghaifengb yanghaifengb@enn.cn
  * @Date: 2022-06-28 10:18:03
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:34:09
+ * @LastEditTime: 2023-03-28 10:09:21
  * @FilePath: \workBreakExercises\src\page\activity\themeActivity\activityList.vue
  * @Description: 活动列表
 -->
@@ -16,6 +16,7 @@
   import Tips from "@/components/Tips";
   import { activityinfo, selectListByType } from "@/service/activity";
   import { stampToTime } from "@/utils/filter";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
   export default defineComponent({
@@ -24,7 +25,9 @@
       // UserInfo
     },
     setup(_, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         // introVisible: true,
@@ -92,10 +95,10 @@
       };
       // 去详情页面
       const toDetail = ({ id }) => {
-        console.log(route.query);
+        console.log(route.value.query);
         router.push({
           path: "/activityDetail",
-          query: Object.assign(route.query, { id })
+          query: Object.assign(route.value.query, { id })
         });
       };
 

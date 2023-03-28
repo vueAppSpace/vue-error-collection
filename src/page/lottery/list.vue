@@ -2,13 +2,14 @@
  * @Description: 我的奖品列表
  * @Author: IFLS
  * @Date: 2023-02-03 15:53:34
- * @LastEditTime: 2023-03-23 17:37:25
+ * @LastEditTime: 2023-03-28 09:57:11
 -->
 <script>
   import { defineComponent, toRefs, reactive, onMounted, onBeforeUnmount } from "@vue/composition-api";
   import LotteryButton from "./compontents/LotteryButton";
   import FullLoading from "@/components/Loading";
   import { mineWinnerRecord } from "@/service/lottery";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {
@@ -16,7 +17,9 @@
       LotteryButton
     },
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
+
       const state = reactive({
         loading: false,
         list: [],

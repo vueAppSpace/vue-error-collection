@@ -4,11 +4,13 @@
   import PanelTips from "@/components/PanelTips";
   import PanelList from "@/components/PanelList";
   import jumpToDanao from "@/utils/jumpToDanao";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: { PanelList, PanelTips },
     setup(_, ctx) {
-      const { $router: router } = ctx.root;
+      const { $router } = ctx.root;
+      const router = useRouter($router);
 
       const state = reactive({
         services

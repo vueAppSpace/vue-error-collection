@@ -2,17 +2,20 @@
  * @Description: 导航栏
  * @Author: IFLS
  * @Date: 2022-08-09 09:58:53
- * @LastEditTime: 2023-03-27 10:02:02
+ * @LastEditTime: 2023-03-28 10:18:41
 -->
 <script>
-  import { defineComponent, reactive, toRefs, onMounted, watch } from "@vue/composition-api";
+  import { defineComponent, reactive, toRefs, onMounted, watch, shallowRef } from "@vue/composition-api";
   import { isMobile } from "@/utils/native/deviceEnv";
   import { useNavStore, storeToRefs } from "@/pinia";
   import { jsBridge } from "@/utils/native/jsBridge";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
 
   export default defineComponent({
     setup(_, context) {
-      const { $router: router, $route: route } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         isPc: false,
@@ -31,10 +34,34 @@
         }
       );
 
+      watch(route, to => {
+        const {
+          meta: { title: metaTitle, showNavBar },
+          query: { navTitle },
+          path
+        } = to;
+
+        // meta title > url navTitle > pinia title
+        state.navTitle = metaTitle ? metaTitle : navTitle ? navTitle : piniaTitle;
+
+        // 路由meta若传参showNavBar 比重最大 控制显示与否
+        if (showNavBar !== undefined) {
+          state.isShow = showNavBar;
+          return;
+        }
+
+        // pc的一级页面 隐藏navbar
+        if (oneLevelPage.includes(path) && state.isPc) {
+          state.isShow = false;
+        } else {
+          state.isShow = true;
+        }
+      });
+
       const navGoback = () => {
         const {
           query: { backHome, nologin }
-        } = route;
+        } = route.value;
 
         // url传参: 回到首页
         if (backHome) {
@@ -43,7 +70,7 @@
         } else if (nologin) {
           jsBridge.invoke("closeWebView");
         } else {
-          const { path } = route;
+          const { path } = route.value;
           // 非pc的一级页面 点击关闭
           if (oneLevelPage.includes(path) && !state.isPc) {
             jsBridge.invoke("closeWebView");
@@ -80,32 +107,6 @@
         oneLevelPage,
         goback
       };
-    },
-    watch: {
-      // 监听路由变化
-      $route: function (to, from) {
-        const {
-          meta: { title: metaTitle, showNavBar },
-          query: { navTitle },
-          path
-        } = to;
-
-        // meta title > url navTitle > pinia title
-        this.navTitle = metaTitle ? metaTitle : navTitle ? navTitle : this.piniaTitle;
-
-        // 路由meta若传参showNavBar 比重最大 控制显示与否
-        if (showNavBar !== undefined) {
-          this.isShow = showNavBar;
-          return;
-        }
-
-        // pc的一级页面 隐藏navbar
-        if (this.oneLevelPage.includes(path) && this.isPc) {
-          this.isShow = false;
-        } else {
-          this.isShow = true;
-        }
-      }
     }
   });
 </script>

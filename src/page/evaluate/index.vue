@@ -2,7 +2,7 @@
  * @Description: 健康评测
  * @Author: IFLS
  * @Date: 2022-06-10 14:27:24
- * @LastEditTime: 2023-03-23 17:35:53
+ * @LastEditTime: 2023-03-28 10:14:32
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, onBeforeUnmount } from "@vue/composition-api";
@@ -13,6 +13,7 @@
   import { formatTimeForBirth } from "@/utils/commonFun";
   import useFontSize from "@/hooks/useFontSize";
   import { evaluatePageMethodForLifeEntropy } from "@/utils/lifeEntropyMethod";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {
@@ -20,7 +21,9 @@
       FullLoading
     },
     setup(_, { refs, root }) {
-      const { $router: router, $route: route, zgStatistics } = root;
+      const { $router, zgStatistics } = root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         phrId: localStorage.getItem("phrId"),
@@ -101,7 +104,7 @@
       //答题完成, 返回上一页(“跳过”按钮 1.0.15 版本被干掉了)
       const skip = () => {
         //生命熵逻辑
-        const { forEntropy } = route.query;
+        const { forEntropy } = route.value.query;
         forEntropy && evaluatePageMethodForLifeEntropy();
 
         setSession();
@@ -178,7 +181,7 @@
       const getIndex = index => (state.index = index);
 
       onMounted(() => {
-        const { seqNo, inquiryNo } = route.query;
+        const { seqNo, inquiryNo } = route.value.query;
         const req = {
           phrId: state.phrId,
           questionCode: "",

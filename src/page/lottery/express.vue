@@ -2,7 +2,7 @@
  * @Description: 奖品物流
  * @Author: IFLS
  * @Date: 2023-02-03 15:59:18
- * @LastEditTime: 2023-03-23 17:37:20
+ * @LastEditTime: 2023-03-28 10:15:37
 -->
 <script>
   import { defineComponent, toRefs, reactive, onMounted } from "@vue/composition-api";
@@ -13,6 +13,7 @@
   import Card from "./compontents/Card";
   import { titleInfoFn } from "./compontents/data";
   import { updateStatus, queryDetail } from "./compontents/ajaxFn";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {
@@ -22,7 +23,9 @@
       Card
     },
     setup(_, context) {
-      const { $router: router, $route: route } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         loading: false,
@@ -34,7 +37,7 @@
 
       const { toastAndGoback } = useToastGoback(router);
 
-      const { id, status, type } = route.query;
+      const { id, status, type } = route.value.query;
 
       const jumpTo = url => router.push(url);
 

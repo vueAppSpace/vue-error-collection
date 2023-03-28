@@ -29,6 +29,7 @@ specifiers:
   video.js: ^8.0.4
   vite: ^4.2.1
   vite-plugin-compression: ^0.5.1
+  vite-plugin-conditional-compiler: ^0.1.1
   vite-plugin-vue2: ^2.0.3
   vue: 2.6.14
   vue-router: ^2.6.0
@@ -73,6 +74,7 @@ devDependencies:
   typescript: registry.npmmirror.com/typescript/4.9.5
   vite: registry.npmmirror.com/vite/4.2.1_xy7k62dh2yv2a2gey6mmkcgrnu
   vite-plugin-compression: registry.npmmirror.com/vite-plugin-compression/0.5.1_vite@4.2.1
+  vite-plugin-conditional-compiler: registry.npmmirror.com/vite-plugin-conditional-compiler/0.1.1
   vite-plugin-vue2: registry.npmmirror.com/vite-plugin-vue2/2.0.3_kcmzjgt5rrgr7pkmxic4ylomjm
   vue-template-compiler: registry.npmmirror.com/vue-template-compiler/2.6.14
   vue-tsc: registry.npmmirror.com/vue-tsc/1.2.0_typescript@4.9.5
@@ -4955,6 +4957,14 @@ packages:
       vite: registry.npmmirror.com/vite/4.2.1_xy7k62dh2yv2a2gey6mmkcgrnu
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  registry.npmmirror.com/vite-plugin-conditional-compiler/0.1.1:
+    resolution: {integrity: sha512-1QKTJ9/kWuqwWxtIEhtxENUQlfRfgjDyeAtic91ArQFjzI71necB7Sp9F5IGR/L1zIQXkkXBvidLLJkTJcp/OQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-conditional-compiler/-/vite-plugin-conditional-compiler-0.1.1.tgz}
+    name: vite-plugin-conditional-compiler
+    version: 0.1.1
+    dependencies:
+      magic-string: registry.npmmirror.com/magic-string/0.30.0
     dev: true
 
   registry.npmmirror.com/vite-plugin-vue2/2.0.3_kcmzjgt5rrgr7pkmxic4ylomjm:

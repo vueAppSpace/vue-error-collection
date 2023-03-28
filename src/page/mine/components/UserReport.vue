@@ -2,17 +2,19 @@
  * @Description: 用户自上传的体检报告
  * @Author: IFLS
  * @Date: 2022-06-28 11:13:35
- * @LastEditTime: 2023-03-23 17:41:17
+ * @LastEditTime: 2023-03-28 10:03:45
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, computed } from "@vue/composition-api";
   import { Toast } from "vant";
   import { formatTime } from "@/utils/commonFun";
   import { queryReport } from "@/service/uploadReport";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const state = reactive({
         memberCode: localStorage.getItem("memberCode"),

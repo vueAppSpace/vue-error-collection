@@ -2,7 +2,7 @@
  * @Author: yanghaifengb yanghaifengb@enn.cn
  * @Date: 2022-06-28 14:01:49
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 14:09:58
+ * @LastEditTime: 2023-03-28 10:11:23
  * @FilePath: \lk-xinaohealth-h5\src\page\activity\themeActivity\components\dynamicList.vue
  * @Description: 活动列表组件
 -->
@@ -34,6 +34,7 @@
     commentInsert,
     activityDetail
   } from "@/service/activity";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
 
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
@@ -78,7 +79,9 @@
     },
     emits: ["refresh"],
     setup(props, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const fieldInput = ref(null);
       const refs = context.refs;
@@ -366,9 +369,9 @@
 
         router.push({
           name: "dynamicDetail",
-          query: Object.assign(route.query, {
+          query: Object.assign(route.value.query, {
             id: data.id,
-            source: route.name,
+            source: route.value.name,
             memberCode: data.memberCode
           })
         });
@@ -412,24 +415,24 @@
       };
       const goPublish = () => {
         zgStatistics("健康新奥-健康活动-活动动态-点击发布按钮", {
-          来源: checkSource(route.name)
+          来源: checkSource(route.value.name)
         });
         let queryObj = {};
-        if (route.name !== "themeActivityHome" && route.name !== "myUpdates") {
+        if (route.value.name !== "themeActivityHome" && route.value.name !== "myUpdates") {
           queryObj = Object.assign(
             {
               name: encodeURIComponent(props.title),
-              from: route.name
+              from: route.value.name
             },
-            route.query
+            route.value.query
           );
         } else {
           queryObj = Object.assign(
             {
-              from: route.name
+              from: route.value.name
             },
             {
-              ticket: route.query.ticket
+              ticket: route.value.query.ticket
             }
           );
         }
@@ -451,7 +454,7 @@
       };
       const handleGoActiveDetail = async item => {
         // 如果在活动或者话题详情页面不跳转，防止来回跳转
-        if (route.name == "activityDetail" || route.name == "topicDetail") {
+        if (route.value.name == "activityDetail" || route.value.name == "topicDetail") {
           return;
         }
         let status = await getDyanamicsFn(item.activityId);
@@ -460,7 +463,7 @@
             name: "activityDetail",
             query: {
               id: item.activityId,
-              source: route.name
+              source: route.value.name
             }
           });
         } else if (status == 2) {
@@ -471,14 +474,14 @@
       };
       const handleGoTopicDetail = item => {
         // 如果在活动或者话题详情页面不跳转，防止来回跳转
-        if (route.name == "activityDetail" || route.name == "topicDetail") {
+        if (route.value.name == "activityDetail" || route.value.name == "topicDetail") {
           return;
         }
         router.push({
           name: "topicDetail",
           query: {
             topicId: item.id,
-            source: route.name
+            source: route.value.name
           }
         });
       };
@@ -527,7 +530,7 @@
       const goActiveHome = () => {
         router.push({
           name: "themeActivityHome",
-          query: route.query
+          query: route.value.query
         });
       };
       watch(

@@ -2,18 +2,21 @@
  * @Description: 预约挂号
  * @Author: IFLS
  * @Date: 2022-11-22 16:44:54
- * @LastEditTime: 2023-03-23 17:41:49
+ * @LastEditTime: 2023-03-28 10:06:07
 -->
 <script>
   import { defineComponent, toRefs, reactive } from "@vue/composition-api";
   import Tips from "@/components/Tips";
   import { jsBridge } from "@/utils/native/jsBridge";
+  import { useRouter } from "@/hooks/useRouter";
+
   export default defineComponent({
     components: {
       Tips
     },
     setup(_, context) {
-      const { $router: router, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
 
       const state = reactive({
         phone: "18031683669", // 爱德堡预约电话

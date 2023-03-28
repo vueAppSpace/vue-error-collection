@@ -1,18 +1,21 @@
 <!--
  * @Date: 2023-02-27 11:29:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:36:36
+ * @LastEditTime: 2023-03-28 09:54:32
  * @FilePath: \lk-xinaohealth-h5\src\page\healthEducation\searchPage.vue
 -->
 <script>
   import { Toast } from "vant";
   import { defineComponent, reactive, toRefs, onMounted, watch } from "@vue/composition-api";
   import { queryHealthMission } from "@/service/healthEducation/index";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {},
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
+
       const state = reactive({
         listDatas: [],
         //控制加载list

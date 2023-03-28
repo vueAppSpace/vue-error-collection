@@ -2,7 +2,7 @@
  * @Author: yanghaifengb yanghaifengb@enn.cn
  * @Date: 2022-06-28 10:18:03
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:34:05
+ * @LastEditTime: 2023-03-28 10:08:47
  * @FilePath: \workBreakExercises\src\page\activity\themeActivity\activityList.vue
  * @Description: 活动列表
 -->
@@ -17,6 +17,7 @@
   import DynamicList from "../components/dynamicList.vue";
   import { activityDetail, activityinfo, likeInsert, realDelete, activityLikePage } from "@/service/activity";
   import useMethods from "../methods/methods";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
   export default defineComponent({
@@ -26,7 +27,9 @@
       // UserInfo
     },
     setup(props, context) {
-      const { $router: router, $route: route, zgStatistics, $nextTick, $el } = context.root;
+      const { $router, zgStatistics, $nextTick, $el } = context.root;
+      // const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         // introVisible: true,
@@ -37,7 +40,7 @@
         },
         sortActive: "new",
         openDetail: false,
-        id: parseInt(route.query.id),
+        id: parseInt(route.value.query.id),
         activityDetailData: {},
         likeType: 0,
         likeStatus: false
@@ -123,7 +126,7 @@
         activityLikePageFn();
         zgStatistics("健康新奥-健康活动-进入活动详情", {
           活动名称: state.activityDetailData.title,
-          来源: checkSource(route.query.source)
+          来源: checkSource(route.value.query.source)
         });
       };
 

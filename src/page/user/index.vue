@@ -2,7 +2,7 @@
  * @Description: 选择用户版面
  * @Author: IFLS
  * @Date: 2022-12-05 14:57:09
- * @LastEditTime: 2023-03-24 17:49:40
+ * @LastEditTime: 2023-03-28 10:07:55
 -->
 <script>
   import { defineComponent, onMounted, reactive, toRefs } from "@vue/composition-api";
@@ -11,10 +11,13 @@
   import { getCoachToken } from "@/service/service";
   import { useNavStore } from "@/pinia";
   import { jsBridge } from "@/utils/native/jsBridge";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
+
       const { setTitle, onback } = useNavStore();
 
       const state = reactive({

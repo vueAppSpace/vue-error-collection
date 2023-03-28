@@ -2,7 +2,7 @@
  * @Author: haifeng.yang haifeng.yang@amocorp.cn
  * @Date: 2022-06-27 11:25:58
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:34:45
+ * @LastEditTime: 2023-03-28 10:14:17
  * @FilePath: \lk-xinaohealth-h5\src\page\activity\themeActivity\topicList\topicDetail\index.vue
  * @Description: 活动首页
 -->
@@ -25,6 +25,7 @@
   import DynamicList from "../../components/dynamicList.vue";
   import FullLoading from "@/components/Loading";
   import throttle from "lodash.throttle";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
   export default defineComponent({
@@ -35,7 +36,10 @@
       // UserInfo
     },
     setup(props, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
+
       const dynamicListDom = ref(null);
       const state = reactive({
         // introVisible: true,
@@ -165,7 +169,7 @@
       // 点赞
       const likeInsertFn = throttle(function (e, index) {
         zgStatistics("健康新奥-健康活动-活动动态-互动情况-点击互动按钮", {
-          来源: checkSource(route.name),
+          来源: checkSource(route.value.name),
           按钮名称: "点赞",
           互动目标ID: e.memberCode,
           活动名称: e.activityTitle
@@ -190,7 +194,7 @@
       // 取消点赞
       const realDeleteFn = throttle(function (e, index) {
         zgStatistics("健康新奥-健康活动-活动动态-互动情况-点击互动按钮", {
-          来源: checkSource(route.name),
+          来源: checkSource(route.value.name),
           按钮名称: "取消点赞",
           互动目标ID: e.memberCode,
           活动名称: e.activityTitle
@@ -255,24 +259,24 @@
       // 发布动态
       const goPublish = () => {
         zgStatistics("健康新奥-健康活动-活动动态-点击发布按钮", {
-          来源: checkSource(route.name)
+          来源: checkSource(route.value.name)
         });
         let queryObj = {};
-        if (route.name !== "themeActivityHome" && route.name !== "myUpdates") {
+        if (route.value.name !== "themeActivityHome" && route.value.name !== "myUpdates") {
           queryObj = Object.assign(
             {
               name: encodeURIComponent(props.title),
-              from: route.name
+              from: route.value.name
             },
-            route.query
+            route.value.query
           );
         } else {
           queryObj = Object.assign(
             {
-              from: route.name
+              from: route.value.name
             },
             {
-              ticket: route.query.ticket
+              ticket: route.value.query.ticket
             }
           );
         }
@@ -298,9 +302,9 @@
         // 轮播图
         console.log("zhixing");
         state.loaded = false;
-        state.topicId = route.query.topicId;
-        state.source = route.query.source;
-        state.ranking = Number(route.query.ranking);
+        state.topicId = route.value.query.topicId;
+        state.source = route.value.query.source;
+        state.ranking = Number(route.value.query.ranking);
         activitytopicinfoDetailFn();
       };
 

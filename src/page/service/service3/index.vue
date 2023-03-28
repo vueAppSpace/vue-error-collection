@@ -11,6 +11,7 @@
   import Banner from "../../meals/components/Banner.vue";
   import { isEntropy } from "@/utils/permissions";
   import jumpToDanao from "@/utils/jumpToDanao";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {
@@ -18,7 +19,8 @@
       Banner
     },
     setup(_, ctx) {
-      const { $router: router, zgStatistics } = ctx.root;
+      const { $router, zgStatistics } = ctx.root;
+      const router = useRouter($router);
 
       const state = reactive({
         userId: localStorage.getItem("phrId"),

@@ -4,6 +4,7 @@ import { createVuePlugin } from "vite-plugin-vue2";
 import { resolve } from "path";
 import legacy from "@vitejs/plugin-legacy";
 import viteCompression from "vite-plugin-compression";
+import ConditionalCompile from "vite-plugin-conditional-compiler";
 import checkEnv from "./version";
 import { getTicket, getIPAddress } from "./get-ticket";
 
@@ -39,7 +40,9 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
         disable: command === "serve", // serve本机启动时禁用
         ext: ".gz", // 生成的压缩包后缀
         deleteOriginFile: false // 删除原文件
-      })
+      }),
+      // vite条件编译
+      ConditionalCompile()
     ],
     css: {
       // 预处理器配置项

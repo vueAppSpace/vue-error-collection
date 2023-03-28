@@ -1,5 +1,6 @@
 <script>
   import { defineComponent, reactive, toRefs, onMounted, onBeforeUnmount } from "@vue/composition-api";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
   const imagesArr = ["https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/guide/home1.jpg"];
   export default defineComponent({
     // beforeRouteEnter (to, from, next) {
@@ -12,7 +13,9 @@
     //     next()
     // },
     setup(_, context) {
-      const { $router: router, $route: route } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         images: [],
@@ -26,7 +29,7 @@
         router.push({
           path: url,
           query: query || {
-            source: route.query.source
+            source: route.value.query.source
           }
         });
       };

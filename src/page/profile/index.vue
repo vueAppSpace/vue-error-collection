@@ -2,7 +2,7 @@
  * @Description: 用户资料
  * @Author: IFLS
  * @Date: 2022-06-15 17:10:47
- * @LastEditTime: 2023-03-23 17:41:41
+ * @LastEditTime: 2023-03-28 10:05:55
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, onUnmounted } from "@vue/composition-api";
@@ -14,6 +14,7 @@
   import { queryUserPortrait, updateUserPortrait } from "@/service/profile";
   import validMap from "@/utils/validator";
   import { formatTimeForBirth } from "@/utils/commonFun";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
   const sexIcon = {
     female: "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/profile/female.png",
     activeFemale: "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/profile/female_pressed.png",
@@ -34,7 +35,9 @@
       next(vm => vm.queryInfo(isFromHistory));
     },
     setup(_, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         phrId: localStorage.getItem("phrId"),

@@ -2,15 +2,17 @@
  * @Description: icon区
  * @Author: IFLS
  * @Date: 2022-05-14 16:02:40
- * @LastEditTime: 2023-03-23 17:41:07
+ * @LastEditTime: 2023-03-28 10:03:00
 -->
 <script>
   import { defineComponent, reactive } from "@vue/composition-api";
   import { Toast } from "vant";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const iconData = reactive([
         {

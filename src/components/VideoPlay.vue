@@ -2,7 +2,7 @@
  * @Description: 健康计划视频播放控件
  * @Author: IFLS
  * @Date: 2022-06-24 09:54:10
- * @LastEditTime: 2023-03-23 17:32:38
+ * @LastEditTime: 2023-03-28 09:58:56
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
@@ -27,8 +27,6 @@
       }
     },
     setup(_, context) {
-      // const { $router: router } = context.root
-
       const refs = context.refs;
 
       const state = reactive({

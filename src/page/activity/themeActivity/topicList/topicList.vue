@@ -1,10 +1,12 @@
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
   import { getListByHot } from "@/service/activity";
+  import { useRouter } from "@/hooks/useRouter";
   export default defineComponent({
     components: {},
     setup(_, context) {
-      const { $router: router, $route: route } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const state = reactive({
         topicList: [],

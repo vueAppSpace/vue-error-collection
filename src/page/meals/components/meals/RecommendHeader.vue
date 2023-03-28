@@ -10,6 +10,7 @@
     ref
   } from "@vue/composition-api";
   import { useLocationStore, storeToRefs } from "@/pinia";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     props: {
@@ -38,7 +39,8 @@
     },
     components: {},
     setup(props, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
 
       const { emit } = context;
 

@@ -2,7 +2,7 @@
  * @Author: yanghaifengb yanghaifengb@enn.cn
  * @Date: 2022-06-28 14:01:49
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:34:18
+ * @LastEditTime: 2023-03-28 10:12:43
  * @FilePath: \workBreakExercises\src\page\activity\themeActivity\components\dynamicList.vue
  * @Description: 活动列表组件
 -->
@@ -33,6 +33,7 @@
     commentInsert,
     activityDetail
   } from "@/service/activity";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
 
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
@@ -72,7 +73,9 @@
     },
     emits: ["refresh"],
     setup(props, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const fieldInput = ref(null);
       const refs = context.refs;
@@ -124,7 +127,7 @@
       // 点赞
       const likeInsertFn = (e, index) => {
         zgStatistics("健康新奥-健康活动-活动动态-互动情况-点击互动按钮", {
-          来源: checkSource(route.name),
+          来源: checkSource(route.value.name),
           按钮名称: "点赞",
           互动目标ID: e.memberCode,
           活动名称: e.activityTitle
@@ -153,7 +156,7 @@
       const realDeleteFn = (e, index) => {
         state.likeData = e;
         zgStatistics("健康新奥-健康活动-活动动态-互动情况-点击互动按钮", {
-          来源: checkSource(route.name),
+          来源: checkSource(route.value.name),
           按钮名称: "取消点赞",
           互动目标ID: e.memberCode,
           活动名称: e.activityTitle
@@ -317,23 +320,23 @@
       const goDetail = (data, type) => {
         if (type == "btn") {
           zgStatistics("健康新奥-健康活动-活动动态-互动情况-点击互动按钮", {
-            来源: checkSource(route.name),
+            来源: checkSource(route.value.name),
             按钮名称: "评论",
             互动目标ID: data.memberCode,
             活动名称: data.activityTitle
           });
         } else {
           zgStatistics("健康新奥-健康活动-活动动态-点击最新动态", {
-            来源: checkSource(route.name),
+            来源: checkSource(route.value.name),
             活动名称: data.activityTitle
           });
         }
 
         router.push({
           name: "dynamicDetail",
-          query: Object.assign(route.query, {
+          query: Object.assign(route.value.query, {
             id: data.id,
-            source: route.name
+            source: route.value.name
           })
         });
       };
@@ -376,24 +379,24 @@
       };
       const goPublish = () => {
         zgStatistics("健康新奥-健康活动-活动动态-点击发布按钮", {
-          来源: checkSource(route.name)
+          来源: checkSource(route.value.name)
         });
         let queryObj = {};
-        if (route.name !== "themeActivityHome" && route.name !== "myUpdates") {
+        if (route.value.name !== "themeActivityHome" && route.value.name !== "myUpdates") {
           queryObj = Object.assign(
             {
               name: encodeURIComponent(props.title),
-              from: route.name
+              from: route.value.name
             },
-            route.query
+            route.value.query
           );
         } else {
           queryObj = Object.assign(
             {
-              from: route.name
+              from: route.value.name
             },
             {
-              ticket: route.query.ticket
+              ticket: route.value.query.ticket
             }
           );
         }
@@ -420,7 +423,7 @@
             name: "activityDetail",
             query: {
               id: item.activityId,
-              source: route.name
+              source: route.value.name
             }
           });
         } else if (status == 2) {
@@ -481,7 +484,7 @@
       const goActiveHome = () => {
         router.push({
           name: "themeActivityHome",
-          query: route.query
+          query: route.value.query
         });
       };
       watch(

@@ -2,18 +2,20 @@
  * @Description: 设置页面
  * @Author: IFLS
  * @Date: 2022-06-17 21:32:41
- * @LastEditTime: 2023-03-23 17:42:13
+ * @LastEditTime: 2023-03-28 10:07:24
 -->
 <script>
   import { defineComponent } from "@vue/composition-api";
   import SubscribeSwitch from "@/page/mine/components/SubscribeSwitch";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {
       SubscribeSwitch
     },
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const jumpTo = url => router.push(url);
 

@@ -2,10 +2,14 @@
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
   import { getListByHot } from "@/service/activity";
   import { useNavStore } from "@/pinia";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
+
   export default defineComponent({
     components: {},
     setup(_, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         topicList: [],
@@ -51,7 +55,7 @@
 
         router.replace({
           name: "publish",
-          query: Object.assign(route.query, {
+          query: Object.assign(route.value.query, {
             topicTitle: encodeURI(item.content),
             goTopic: true,
             from: "topicSelect",

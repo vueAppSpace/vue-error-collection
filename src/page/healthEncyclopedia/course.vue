@@ -2,13 +2,13 @@
  * @Description: 健康百科
  * @Author: WANGCHENGAE
  * @Date: 2022-1-5 11:00:30
- * @LastEditTime: 2023-03-23 17:36:39
+ * @LastEditTime: 2023-03-28 09:54:54
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, toRef } from "@vue/composition-api";
   import { Toast } from "vant";
   import { queryCategoryArticlesPage } from "@/service/healthEncyclopedia/index";
-
+  import { useRouter } from "@/hooks/useRouter";
   import ArticleCard from "@/components/ArticleCard.vue";
 
   export default defineComponent({
@@ -41,7 +41,9 @@
     setup(props, context) {
       console.log("healthEncyclopedia course...");
 
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
+
       const idRef = toRef(props, "id");
       const state = reactive({
         articlesList: [],

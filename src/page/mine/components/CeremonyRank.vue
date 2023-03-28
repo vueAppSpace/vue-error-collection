@@ -2,15 +2,18 @@
  * @Description: 司庆排行榜卡片
  * @Author: IFLS
  * @Date: 2022-07-06 15:29:15
- * @LastEditTime: 2023-03-23 17:41:01
+ * @LastEditTime: 2023-03-28 10:02:23
 -->
 <script>
   import { defineComponent, reactive, onMounted, toRefs } from "@vue/composition-api";
-  import { Toast } from "vant";
   import { mineInfo } from "@/service/ranking";
+  import { useRouter } from "@/hooks/useRouter";
+
   export default defineComponent({
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
+
       const state = reactive({
         rankLoading: true,
         userInfo: {}

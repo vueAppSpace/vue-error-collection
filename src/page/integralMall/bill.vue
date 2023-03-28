@@ -2,7 +2,7 @@
  * @Description: 积分账单
  * @Author: IFLS
  * @Date: 2022-11-16 09:53:14
- * @LastEditTime: 2023-03-23 17:37:04
+ * @LastEditTime: 2023-03-28 09:56:01
 -->
 <script>
   import { defineComponent, toRefs, reactive, onMounted, onBeforeUnmount } from "@vue/composition-api";
@@ -13,7 +13,6 @@
 
   export default defineComponent({
     setup(_, context) {
-      const { $router: router } = context.root;
       const state = reactive({
         userInfo: {},
         list: [],

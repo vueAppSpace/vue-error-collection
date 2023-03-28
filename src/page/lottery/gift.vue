@@ -2,7 +2,7 @@
  * @Description: 领取奖品
  * @Author: IFLS
  * @Date: 2023-02-03 15:58:52
- * @LastEditTime: 2023-03-23 17:37:21
+ * @LastEditTime: 2023-03-28 10:15:45
 -->
 <script>
   import { defineComponent, toRefs, reactive, onMounted } from "@vue/composition-api";
@@ -12,6 +12,8 @@
   import validator from "@/utils/validator";
   import { Toast } from "vant";
   import { updateStatus, queryDetail } from "./compontents/ajaxFn";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
+
   export default defineComponent({
     components: {
       LotteryButton,
@@ -26,7 +28,9 @@
       next();
     },
     setup(_, context) {
-      const { $router: router, $route: route } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         active: 0,
@@ -43,7 +47,7 @@
       });
 
       // type: 商品类型(1-实物 2-虚拟) status: 商品状态
-      const { id, status, type } = route.query;
+      const { id, status, type } = route.value.query;
 
       const jumpTo = url => router.push(url);
 

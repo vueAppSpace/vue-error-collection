@@ -2,19 +2,21 @@
  * @Description: 健康计划/健康档案
  * @Author: IFLS
  * @Date: 2022-11-15 14:28:07
- * @LastEditTime: 2023-03-23 17:41:00
+ * @LastEditTime: 2023-03-28 10:04:01
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
   import iconData from "./iconData";
   import jumpToDanao from "@/utils/jumpToDanao";
   import { jumpToDanaoPretreat } from "@/utils/lifeEntropyMethod";
-  import { jumpToSportGym } from "@/utils/jumpToSportGym";
+  // import { jumpToSportGym } from "@/utils/jumpToSportGym";
   import { queryEmployeeList } from "@/service/mine";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const state = reactive({
         active: 0,

@@ -2,7 +2,7 @@
  * @Description: 我的
  * @Author: IFLS
  * @Date: 2022-05-12 15:09:29
- * @LastEditTime: 2023-03-23 16:01:28
+ * @LastEditTime: 2023-03-28 10:05:03
 -->
 <script>
   import { defineComponent, reactive, onMounted, toRefs, onActivated } from "@vue/composition-api";
@@ -24,7 +24,7 @@
   // import UserReport from './components/UserReport'
   import EntranceCard from "../components/EntranceCard";
   import qrcodeDialog from "@/components/QRCodeDialog";
-
+  import { useRouter } from "@/hooks/useRouter";
   import { judgeNeedToJumpToDanao, resetJumpReportData } from "@/utils/lifeEntropyMethod";
 
   export default defineComponent({
@@ -55,7 +55,8 @@
       }
     },
     setup(_, context) {
-      const { $router: router, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
 
       const state = reactive({
         memberCode: localStorage.getItem("memberCode"),

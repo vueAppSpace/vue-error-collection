@@ -2,7 +2,7 @@
  * @Description: 既往史
  * @Author: IFLS
  * @Date: 2022-06-17 22:09:45
- * @LastEditTime: 2023-03-24 17:51:15
+ * @LastEditTime: 2023-03-28 10:05:36
 -->
 <script>
   import { defineComponent, reactive, onMounted, toRefs } from "@vue/composition-api";
@@ -12,13 +12,15 @@
   import FullLoading from "@/components/Loading";
   import { unFlatArr } from "@/utils/commonFun";
   import { queryDiseaseProfile, queryUserPortrait, updateUserPortrait } from "@/service/profile";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {
       FullLoading
     },
     setup(_, context) {
-      const { $router: router } = context.root;
+      const { $router } = context.root;
+      const router = useRouter($router);
 
       const state = reactive({
         phrId: localStorage.getItem("phrId"),

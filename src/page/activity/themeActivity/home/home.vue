@@ -2,7 +2,7 @@
  * @Author: haifeng.yang haifeng.yang@amocorp.cn
  * @Date: 2022-06-27 11:25:58
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:34:30
+ * @LastEditTime: 2023-03-28 10:13:11
  * @FilePath: \lk-xinaohealth-h5\src\page\activity\themeActivity\home\home.vue
  * @Description: 活动首页
 -->
@@ -16,6 +16,7 @@
   import Tips from "@/components/Tips";
   import DynamicList from "../components/dynamicList.vue";
   import FullLoading from "@/components/Loading";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
   export default defineComponent({
@@ -26,7 +27,10 @@
       // UserInfo
     },
     setup(props, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
+
       const dynamicListDom = ref(null);
       const state = reactive({
         // introVisible: true,
@@ -211,24 +215,24 @@
       // 发布动态
       const goPublish = () => {
         zgStatistics("健康新奥-健康活动-活动动态-点击发布按钮", {
-          来源: checkSource(route.name)
+          来源: checkSource(route.value.name)
         });
         let queryObj = {};
-        if (route.name !== "themeActivityHome" && route.name !== "myUpdates") {
+        if (route.value.name !== "themeActivityHome" && route.value.name !== "myUpdates") {
           queryObj = Object.assign(
             {
               name: encodeURIComponent(props.title),
-              from: route.name
+              from: route.value.name
             },
-            route.query
+            route.value.query
           );
         } else {
           queryObj = Object.assign(
             {
-              from: route.name
+              from: route.value.name
             },
             {
-              ticket: route.query.ticket
+              ticket: route.value.query.ticket
             }
           );
         }

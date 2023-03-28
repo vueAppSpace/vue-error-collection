@@ -2,7 +2,7 @@
  * @Description: 既往史详情 1.0.11版本后 此页面弃用
  * @Author: IFLS
  * @Date: 2022-06-17 22:28:10
- * @LastEditTime: 2023-03-23 17:41:20
+ * @LastEditTime: 2023-03-28 10:05:22
 -->
 <script>
   import { defineComponent, reactive, toRefs } from "@vue/composition-api";
@@ -10,10 +10,12 @@
   import { Toast } from "vant";
   import { unFlatArr } from "@/utils/commonFun";
   import { updateUserPortrait } from "@/service/profile";
+  import { useRouter } from "@/hooks/useRouter";
 
   export default defineComponent({
     setup(_, { refs, root }) {
-      const { $router: router, $route: route, zgStatistics } = root;
+      const { $router, zgStatistics } = root;
+      const router = useRouter($router);
 
       let historyData = JSON.parse(sessionStorage.getItem("pastHistoryDetail"));
 

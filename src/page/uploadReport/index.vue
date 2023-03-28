@@ -2,7 +2,7 @@
  * @Description: 上传报告
  * @Author: IFLS
  * @Date: 2022-06-15 17:10:47
- * @LastEditTime: 2023-03-23 17:42:34
+ * @LastEditTime: 2023-03-28 10:16:20
 -->
 <script>
   /**
@@ -20,6 +20,7 @@
   import UploaderPic from "@/components/Uploader/UploaderPic";
   import UploaderFile from "@/components/Uploader/UploaderFile";
   import { addReport, updateReport, queryReport } from "@/service/uploadReport";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {
@@ -27,7 +28,9 @@
       UploaderFile
     },
     setup(_, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const router = useRouter($router);
+      const route = useRoute($router);
 
       const state = reactive({
         memberCode: localStorage.getItem("memberCode"),
@@ -60,7 +63,7 @@
       };
 
       const removeData = () => {
-        const { cache } = route.query;
+        const { cache } = route.value.query;
         cache && sessionStorage.removeItem("reportDetailCache");
       };
 
@@ -122,7 +125,7 @@
         const T = [addReport, updateReport];
         // 有id时 调用修改接口 无id时 调用新增
         const idx = id ? 1 : 0;
-        const { status } = route.query;
+        const { status } = route.value.query;
         // 上传时间
         const archivesDate = dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss");
         const req = { memberCode, memberId, empNo, picUrl, archivesDate, files: { data: files } };
@@ -133,7 +136,7 @@
           if (code === 0) {
             toastAndGoback().then(() => {
               // 从user进入时 保存成功后自动返回
-              const { autoback, from } = route.query;
+              const { autoback, from } = route.value.query;
               zgStatistics("健康新奥-点击保存", {
                 页面种类: from === "intro" ? "引导页" : "个人设置页",
                 页面名称: "上传报告"
@@ -147,7 +150,7 @@
       };
 
       onMounted(() => {
-        const { disabled, add, cache } = route.query;
+        const { disabled, add, cache } = route.value.query;
 
         if (disabled) {
           state.disabled = true;

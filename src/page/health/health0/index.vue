@@ -2,7 +2,7 @@
   * @Description: 首页
   * @Author: IFLS
   * @Date: 2022-04-22 10:06:45
- * @LastEditTime: 2023-03-23 17:36:15
+ * @LastEditTime: 2023-03-28 10:14:55
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
@@ -10,6 +10,7 @@
   import CardList from "../components/CardList";
   import Tips from "@/components/Tips";
   import intro from "@/utils/intro";
+  import { useRoute } from "@/hooks/useRouter";
 
   export default defineComponent({
     components: {
@@ -17,7 +18,8 @@
       Tips
     },
     setup(_, context) {
-      const { $router: router, $route: route, zgStatistics } = context.root;
+      const { $router, zgStatistics } = context.root;
+      const route = useRoute($router);
 
       const state = reactive({
         introVisible: false,
@@ -77,7 +79,7 @@
 
       // 发送埋点信息
       const sendZhugeData = () => {
-        const { source } = route.query;
+        const { source } = route.value.query;
         source &&
           zgStatistics("健康新奥-进入页面", { 来源: checkSource(source), 所属功能模块: "健康", 页面名称: "健康" });
       };
