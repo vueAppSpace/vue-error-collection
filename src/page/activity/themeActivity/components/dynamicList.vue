@@ -1,8 +1,8 @@
 <!--
  * @Author: yanghaifengb yanghaifengb@enn.cn
  * @Date: 2022-06-28 14:01:49
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-28 10:11:23
+ * @LastEditors: YanivWang
+ * @LastEditTime: 2023-03-28 11:00:25
  * @FilePath: \lk-xinaohealth-h5\src\page\activity\themeActivity\components\dynamicList.vue
  * @Description: 活动列表组件
 -->
@@ -127,7 +127,7 @@
       // 点赞
       const likeInsertFn = throttle(function (e, index) {
         zgStatistics("健康新奥-健康活动-活动动态-互动情况-点击互动按钮", {
-          来源: checkSource(route.name),
+          来源: checkSource(route.value.name),
           按钮名称: "点赞",
           互动目标ID: e.memberCode,
           活动名称: e.activityTitle
@@ -155,7 +155,7 @@
       const realDeleteFn = throttle(function (e, index) {
         state.likeData = e;
         zgStatistics("健康新奥-健康活动-活动动态-互动情况-点击互动按钮", {
-          来源: checkSource(route.name),
+          来源: checkSource(route.value.name),
           按钮名称: "取消点赞",
           互动目标ID: e.memberCode,
           活动名称: e.activityTitle
@@ -212,7 +212,7 @@
         } else {
           params.isEventClocking = 1;
         }
-        if (route.name == "activityDetail" || route.name == "topicDetail") {
+        if (route.value.name == "activityDetail" || route.value.name == "topicDetail") {
           delete params.isEventClocking;
         }
         if (props.userFlag == 1) {
@@ -222,8 +222,8 @@
         }
         props.from == "activityDetail" ? (params.activityId = props.activityId) : "";
         state.actionLoading = true;
-        if (route.query.topicId) {
-          params.topicId = route.query.topicId;
+        if (route.value.query.topicId) {
+          params.topicId = route.value.query.topicId;
         }
         getDynamicList(params)
           .then(({ code, data, message, page }) => {
@@ -355,14 +355,14 @@
       const goDetail = (data, type) => {
         if (type == "btn") {
           zgStatistics("健康新奥-健康活动-活动动态-互动情况-点击互动按钮", {
-            来源: checkSource(route.name),
+            来源: checkSource(route.value.name),
             按钮名称: "评论",
             互动目标ID: data.memberCode,
             活动名称: data.activityTitle
           });
         } else {
           zgStatistics("健康新奥-健康活动-活动动态-点击最新动态", {
-            来源: checkSource(route.name),
+            来源: checkSource(route.value.name),
             活动名称: data.activityTitle
           });
         }

@@ -2,7 +2,7 @@
  * @Description: 用户资料
  * @Author: IFLS
  * @Date: 2022-06-15 17:10:47
- * @LastEditTime: 2023-03-28 10:05:55
+ * @LastEditTime: 2023-03-28 10:50:40
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, onUnmounted } from "@vue/composition-api";
@@ -164,7 +164,7 @@
           state.loading = false;
           if (code === 0) {
             toastAndGoback().then(() => {
-              const { autoback, from } = route.query;
+              const { autoback, from } = route.value.query;
               zgStatistics("健康新奥-点击保存", {
                 页面种类: from === "intro" ? "引导页" : "个人设置页",
                 页面名称: "完善健康信息"
