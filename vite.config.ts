@@ -4,12 +4,15 @@ import { createVuePlugin } from "vite-plugin-vue2";
 import { resolve } from "path";
 import legacy from "@vitejs/plugin-legacy";
 import viteCompression from "vite-plugin-compression";
-import ConditionalCompile from "vite-plugin-conditional-compiler";
+import vitePluginConditionalCompile from "vite-plugin-conditional-compile";
 import checkEnv from "./version";
 import { getTicket, getIPAddress } from "./get-ticket";
+const pluginConditionalCompile = (vitePluginConditionalCompile as any).default;
 
 export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
   const env: Partial<ImportMetaEnv> = loadEnv(mode, process.cwd());
+  const isICOME = env.VITE_ENV.includes("icome");
+  const isEMALL = env.VITE_ENV.includes("emall");
   const lkProject = checkEnv(env);
   const ticket = await getTicket();
   const ipAddress = getIPAddress();
@@ -20,6 +23,15 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
     plugins: [
       createVuePlugin({
         vueTemplateOptions: {}
+      }),
+      // vite条件编译
+      // /* IFTRUE_isICOME */
+      // /* FITRUE_isICOME */
+      pluginConditionalCompile({
+        expand: {
+          isICOME, // icome环境
+          isEMALL // emall环境
+        }
       }),
       // 兼容性配置
       legacy({
@@ -40,9 +52,7 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
         disable: command === "serve", // serve本机启动时禁用
         ext: ".gz", // 生成的压缩包后缀
         deleteOriginFile: false // 删除原文件
-      }),
-      // vite条件编译
-      ConditionalCompile()
+      })
     ],
     css: {
       // 预处理器配置项
