@@ -11,8 +11,8 @@ const pluginConditionalCompile = (vitePluginConditionalCompile as any).default;
 
 export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
   const env: Partial<ImportMetaEnv> = loadEnv(mode, process.cwd());
-  const isICOME = env.VITE_ENV.includes("icome");
-  const isEMALL = env.VITE_ENV.includes("emall");
+  const ICOME = env.VITE_ENV.includes("icome");
+  const EMALL = env.VITE_ENV.includes("emall");
   const lkProject = checkEnv(env);
   const ticket = await getTicket();
   const ipAddress = getIPAddress();
@@ -25,12 +25,12 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
         vueTemplateOptions: {}
       }),
       // vite条件编译
-      // /* IFTRUE_isICOME */
-      // /* FITRUE_isICOME */
+      // /* IFTRUE_ICOME */
+      // /* FITRUE_ICOME */
       pluginConditionalCompile({
         expand: {
-          isICOME, // icome环境
-          isEMALL // emall环境
+          ICOME, // icome环境
+          EMALL // emall环境
         }
       }),
       // 兼容性配置

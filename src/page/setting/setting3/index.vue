@@ -2,7 +2,7 @@
  * @Description: 设置页面
  * @Author: IFLS
  * @Date: 2022-06-17 21:32:41
- * @LastEditTime: 2023-03-28 10:07:33
+ * @LastEditTime: 2023-03-28 12:46:27
 -->
 <script>
   import { defineComponent } from "@vue/composition-api";
@@ -36,8 +36,9 @@
       <subscribe-switch />
 
       <van-cell title="隐私协议" is-link @click="jumpTo('/agreement')" />
-
+      <!-- /* IFTRUE_ICOME */ -->
       <van-cell title="意见反馈" is-link @click="jumpTo('/feedBack')" />
+      <!-- /* FITRUE_ICOME */ -->
     </van-cell-group>
   </div>
 </template>

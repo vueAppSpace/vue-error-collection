@@ -2,7 +2,7 @@
  * @Description: 积分商城卡片
  * @Author: IFLS
  * @Date: 2022-11-15 10:06:47
- * @LastEditTime: 2023-03-23 17:41:09
+ * @LastEditTime: 2023-03-28 12:50:23
 -->
 <script>
   import { defineComponent, reactive, toRefs, onActivated, onMounted, watch } from "@vue/composition-api";
@@ -161,7 +161,7 @@
             </div>
         </li> -->
 
-    <!-- @click="jumpTo('/integral-mall')" -->
+    <!-- /* IFTRUE_ICOME */ -->
     <li
       @click="jumpToMall"
       v-track="{
@@ -181,6 +181,7 @@
         <div class="content-bottom pt16 c-black">剩余积分：{{ userInfo.healthPoints }}</div>
       </div>
     </li>
+    <!-- /* FITRUE_ICOME */ -->
 
     <li
       @click="jumpTo('/rank')"
