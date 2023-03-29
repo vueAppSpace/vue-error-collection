@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-03-21 11:24:48
  * @LastEditors: YanivWang
- * @LastEditTime: 2023-03-27 10:19:43
+ * @LastEditTime: 2023-03-29 16:12:43
  * @FilePath: \lk-xinaohealth-h5\src\utils\native\plusTools.js
  * @Description: ****
  */
@@ -86,8 +86,17 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
 
   //创建扫码实例并开启扫码
   const statusbarHeight = plus.navigator.getStatusbarHeight();
-  const scanInstance = new plus.barcode.Barcode("__qrCodeUUID", [plus.barcode.QR], true);
-  scanInstance.onmarked = (type, reslut) => {
+  const barcodeInstance = new plus.barcode.Barcode(
+    "__qrCodeUUID",
+    [plus.barcode.QR],
+    {
+      frameColor: "#f6eeee",
+      scanbarColor: "#f6eeee",
+      background: "rgba(0, 0, 0, 1)"
+    },
+    true
+  );
+  barcodeInstance.onmarked = (type, reslut) => {
     console.log("scanCode finish>>>>>>>>>>");
     console.log("scaned type", type);
     console.log("scaned reslut", reslut);
@@ -103,7 +112,10 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
       errorCB && errorCB("不是合法二维码!");
     }
   };
-  scanInstance.start();
+  barcodeInstance.start({
+    vibrate: true,
+    sound: "default"
+  });
 
   //为扫码控件添加导航栏
   let view1;
@@ -113,7 +125,7 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
     () => {
       console.log("bmp1.png load success!");
 
-      const viewRealTop = statusbarHeight + 25;
+      const viewRealTop = statusbarHeight + 20;
       console.log("viewRealTop", viewRealTop);
 
       //创建原生容器控件
@@ -127,13 +139,13 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
       view1.drawBitmap(
         bitmap1,
         { top: "0px", left: "0px", width: "100%", height: "100%" },
-        { top: "0px", left: "30px", width: "12px", height: "auto" }
+        { top: "5px", left: "30px", width: "12px", height: "auto" }
       );
       //绘制文本
       view1.drawText(
         "扫码",
-        { top: "0px", left: "10px", width: "100%", height: "wrap_content" },
-        { size: "24px", color: "#f6eeee", align: "center" }
+        { top: "0px", left: "0px", width: "100%", height: "wrap_content" },
+        { top: "0px", size: "24px", color: "#f6eeee", align: "center" }
       );
       view1.show();
 
@@ -157,7 +169,7 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
   const close = () => {
     bitmap1.clear();
     view1.close();
-    scanInstance.close();
+    barcodeInstance.close();
     scanNode.remove();
   };
 };
