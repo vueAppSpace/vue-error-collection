@@ -1,8 +1,8 @@
 <!--
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-02-08 17:03:37
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:35:32
+ * @LastEditors: YanivWang
+ * @LastEditTime: 2023-03-29 17:23:53
  * @FilePath: \lk-xinaohealth-h5\src\page\classReservations\Report.vue
  * @Description: 动感团操 - 运动报告
 -->
@@ -52,6 +52,7 @@
         summary: null,
         reportList: [],
         pageParams: {
+          pageIndex: 1,
           pageOffset: 0,
           pageLimit: 10
         },
@@ -66,9 +67,16 @@
       function resetPageData() {
         state.summary = null;
         state.reportList = [];
+        state.pageParams.pageIndex = 1;
         state.pageParams.pageOffset = 0;
         state.loading = false;
         state.finished = false;
+      }
+
+      //递增分页
+      function incrementPageIndex() {
+        state.pageParams.pageIndex++;
+        state.pageParams.pageOffset = state.pageParams.pageLimit * (state.pageParams.pageIndex - 1);
       }
 
       async function queryPageListFn(type) {
@@ -77,13 +85,17 @@
           if (type === "refresh") {
             resetPageData();
           } else {
-            state.pageParams.pageOffset++;
+            incrementPageIndex();
           }
 
           // const { code, message, data } = await import(
           //   "@/mock/getSportPageList.json"
           // );
-          const { code, message, data } = await getSportPageList(state.pageParams);
+          const params = {
+            pageOffset: state.pageParams.pageOffset,
+            pageLimit: state.pageParams.pageLimit
+          };
+          const { code, message, data } = await getSportPageList(params);
           state.loading = false;
 
           const reportList = _get(data, "data.list") || [];

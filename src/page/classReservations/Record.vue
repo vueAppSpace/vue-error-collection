@@ -1,8 +1,8 @@
 <!--
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-02-08 17:03:37
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:35:29
+ * @LastEditors: YanivWang
+ * @LastEditTime: 2023-03-29 17:22:46
  * @FilePath: \lk-xinaohealth-h5\src\page\classReservations\Record.vue
  * @Description: 动感团操 - 约课记录
 -->
@@ -61,8 +61,9 @@
         userSubClassList: [],
         userPastSubClassList: [],
         pageParams: {
+          pageIndex: 1,
           pageOffset: 0,
-          pageLimit: 5
+          pageLimit: 10
         },
 
         //控制加载list
@@ -77,6 +78,7 @@
         state.activeTabIndex = 0;
         state.userSubClassList = [];
         state.userPastSubClassList = [];
+        state.pageParams.pageIndex = 1;
         state.pageParams.pageOffset = 0;
         state.loading = false;
         state.finished = false;
@@ -85,9 +87,16 @@
       //重置分页所需数据
       function resetListData() {
         state.userPastSubClassList = [];
+        state.pageParams.pageIndex = 1;
         state.pageParams.pageOffset = 0;
         state.loading = false;
         state.finished = false;
+      }
+
+      //递增分页
+      function incrementPageIndex() {
+        state.pageParams.pageIndex++;
+        state.pageParams.pageOffset = state.pageParams.pageLimit * (state.pageParams.pageIndex - 1);
       }
 
       //1.获取页面初始化所需全部数据
@@ -124,13 +133,17 @@
           if (type == "refresh") {
             resetListData();
           } else {
-            state.pageParams.pageOffset++;
+            incrementPageIndex();
           }
 
           // const { code, message, data } = await import(
           //   "@/mock/getUserSubClassPastList.json"
           // );
-          const { code, message, data } = await getUserSubClassPastList(state.pageParams);
+          const params = {
+            pageOffset: state.pageParams.pageOffset,
+            pageLimit: state.pageParams.pageLimit
+          };
+          const { code, message, data } = await getUserSubClassPastList(params);
           state.loading = false;
 
           const userPastSubClassList = _get(data, "data.userSubClassList") || [];
