@@ -2,17 +2,11 @@
  * @Description: 获取token
  * @Author: IFLS
  * @Date: 2022-04-24 14:09:14
- * @LastEditTime: 2023-03-24 12:47:28
+ * @LastEditTime: 2023-03-30 16:12:00
  */
 import { getToken as queryToken } from "@/service/api";
+import { getURLParameters } from "@/utils/commonFun";
 import { Toast } from "vant";
-
-// 获取url参数
-const getURLParameters = url =>
-  (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
-    (a, v) => ((a[v.slice(0, v.indexOf("="))] = v.slice(v.indexOf("=") + 1)), a),
-    {}
-  );
 
 const errorTips = message => {
   Toast({
@@ -28,19 +22,35 @@ const NO_LOGIN = "nologin";
 
 const getParams = () => {
   const val = getURLParameters(window.location.href);
+  const err = () => errorTips("获取关键信息失败,请重试!");
+  /* 通用参数 */
   // 不登录情况
   if (val[NO_LOGIN]) {
     return NO_LOGIN;
-  }
-  // 无ticket情况
-  if (!val.ticket) {
-    return errorTips("获取关键信息失败,请重试!");
   }
   // 传递noticket情况
   if (val.ticket === NO_TICKET) {
     return val.ticket;
   }
+
+  /* IFTRUE_ICOME */
+  /* icome参数 */
+  // 无ticket情况
+  if (!val.ticket) {
+    return err();
+  }
   localStorage.setItem("ticket", val.ticket);
+  /* FITRUE_ICOME */
+
+  /* IFTRUE_EMALL */
+  /* emall参数 */
+  // 无grantCode或accountId情况
+  if (!val.grantCode || !val.accountId) {
+    return err();
+  }
+  const userInfo = { code: val.grantCode, id: val.accountId };
+  localStorage.setItem("ticket", JSON.stringify(userInfo));
+  /* FITRUE_EMALl */
   return val;
 };
 

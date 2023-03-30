@@ -30,9 +30,18 @@ export const watchingVideo = data => axios(xinao + "/exerciseworklog/watchingVid
 // 正在播放工间操用户信息
 export const getWatchingVideoUsers = data => axios(xinao + "/exerciseworklog/getWatchingVideoUsers", data, "post");
 
-// 使用ICOME ticket 登录平台
-// /xh/loginByIcomeTicket
-export const getToken = data => axios(xinao + "/xh/loginByIcomeTicket", data, "post");
+// 新奥健康登录接口
+export const getToken = data => {
+  let loginUrl = "";
+  /* IFTRUE_ICOME */
+  loginUrl = "/xh/loginByIcomeTicket";
+  /* FITRUE_ICOME */
+
+  /* IFTRUE_EMALL */
+  loginUrl = "/eservice/loginByGrantCode";
+  /* FITRUE_EMALl */
+  return axios(xinao + loginUrl, data, "post");
+};
 
 // 工间操场景绑定工间操
 export const relatedExerciseworkjoblink = data => axios(xinao + "/exerciseworkjoblink/page", data, "post");
