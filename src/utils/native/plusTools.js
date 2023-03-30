@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-03-21 11:24:48
  * @LastEditors: YanivWang
- * @LastEditTime: 2023-03-30 10:09:39
+ * @LastEditTime: 2023-03-30 10:46:25
  * @FilePath: \lk-xinaohealth-h5\src\utils\native\plusTools.js
  * @Description: ****
  */
@@ -67,7 +67,13 @@ export const openWebView = ({ params }) => {
  * 打电话
  */
 export const callPhone = ({ params }) => {
-  plus.device.dial(params.tel, true);
+  //原生方式:
+  // plus.device.dial(params.tel, true);
+
+  //纯H5方式:
+  const a = document.createElement("a");
+  a.href = `tel:${params.tel}`;
+  a.click();
 };
 
 /**
