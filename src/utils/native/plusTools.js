@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-03-21 11:24:48
  * @LastEditors: YanivWang
- * @LastEditTime: 2023-03-29 16:12:43
+ * @LastEditTime: 2023-03-30 10:09:39
  * @FilePath: \lk-xinaohealth-h5\src\utils\native\plusTools.js
  * @Description: ****
  */
@@ -217,7 +217,7 @@ export const queryLocation = ({ successCB, errorCB }) => {
     {
       enableHighAccuracy: true,
       timeout: 10000,
-      provider: "amap", //system amap
+      //provider: "system", //amap>baidu>system
       geocode: true
     }
   );
