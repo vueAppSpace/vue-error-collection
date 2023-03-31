@@ -60,20 +60,25 @@ service.interceptors.request.use(
         "Content-Type": "application/json; charset=UTF-8"
       });
     }
-    // TODO: e商服此处需改造
+    // #v-ifdef VITE_IFDEF=ICOME
     config.headers.AppId = "1562734232";
     config.headers.PlaceCompanyId = 240;
     config.headers.PlaceCompanyPid = 10;
     config.headers.CompanyId = 240;
     config.headers.CompanyPid = 10;
     config.headers.appCode = 9000042;
+    // #v-endif
     const userStore = JSON.parse(sessionStorage.getItem("userStore"));
     if (userStore) {
       try {
+        // #v-ifdef VITE_IFDEF=EMALL
+        const { appId, appCode, companyId, companyPid } = userStore.userInfo;
+        config.headers = Object.assign(config.headers, { appId, appCode, companyId, companyPid });
+        // #v-endif
         const accessToken = userStore.userInfo.memberBasicDTO.ztUcApiGetToken.uaaTokenInfo.accessToken;
         config.headers.Authorization = "Bearer " + accessToken;
       } catch (err) {
-        console.log("accessToken", err);
+        console.log("userInfoErr", err);
       }
     }
 

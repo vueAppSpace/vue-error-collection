@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2023-03-23 14:33:05
- * @LastEditTime: 2023-03-24 13:48:15
+ * @LastEditTime: 2023-03-31 11:18:57
  */
 import https from "https";
 import os from "os";
@@ -14,7 +14,7 @@ const defaultLoginName = 10057859; //夏高飞 icome 工号
 // hostname = "icome-dingtalk-h5.ennew.com";
 // path = "/icome/usercenter/getTicket";
 
-async function getTicket(loginName = defaultLoginName) {
+async function getTicket(loginName: string | number = defaultLoginName) {
   const token = await getToken(loginName);
 
   const options = {

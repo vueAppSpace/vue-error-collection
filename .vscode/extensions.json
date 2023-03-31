@@ -3,6 +3,7 @@
     "esbenp.prettier-vscode",
     "Vue.volar",
     "Vue.vscode-typescript-vue-plugin",
-    "OBKoro1.korofileheader"
+    "OBKoro1.korofileheader",
+    "aaron-bond.better-comments"
   ]
 }

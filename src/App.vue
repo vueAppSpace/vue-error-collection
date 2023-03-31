@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-09-09 10:38:03
- * @LastEditTime: 2023-03-31 14:09:30
- * @LastEditors: yanghaifengb yanghaifengb@enn.cn
+ * @LastEditTime: 2023-03-31 14:14:55
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lk-xinaohealth-h5\src\App.vue
 -->

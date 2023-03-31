@@ -31,13 +31,13 @@ const router = new Router({
 
 // // 权限校验
 router.beforeEach((to, from, next) => {
-  /* IFTRUE_ICOME */
+  // #v-ifdef VITE_IFDEF=ICOME
   // 若未查看过导航页 跳转去导航 或者从icome页进入 跳转导航
   if (localStorage.getItem("guideShow") !== "1" || to.query.source === "icome") {
     localStorage.setItem("guideShow", "1");
     return next(`/guide?url=${encodeURIComponent(to.fullPath)}`);
   }
-  /* FITRUE_ICOME */
+  // #v-endif
 
   if (from.meta.keepAlive) {
     const pageBox = document.querySelector(".page-box");

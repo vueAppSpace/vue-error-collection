@@ -73,7 +73,7 @@ if (["emallpro", "icomepro"].includes(environment)) {
   //e商服pdf预览
   var eServicePdfPreview = "https://draw.enn.cn/onlinePreview";
   //测试环境-加载并立即显示vconsole
-  showVconsole();
+  !window.location?.href.includes("localhost") && showVconsole();
 } else {
   // 开发环境相关地址
   window[DEFAULT_ENV_KEY] = "pre";
