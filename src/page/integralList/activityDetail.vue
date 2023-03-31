@@ -3,15 +3,6 @@
   import { useRouter, useRoute } from "@/hooks/useRouter";
   const imagesArr = ["https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/guide/home1.jpg"];
   export default defineComponent({
-    // beforeRouteEnter (to, from, next) {
-    //     // 从其他页返回引导页时 直接关闭webview
-    //     if (to.path === '/guide' && from.path !== '/') {
-    //         return ic && ic.run({
-    //             action: 'webview.close'
-    //         })
-    //     }
-    //     next()
-    // },
     setup(_, context) {
       const { $router } = context.root;
       const router = useRouter($router);

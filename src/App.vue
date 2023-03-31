@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-09-09 10:38:03
- * @LastEditTime: 2023-03-31 14:14:55
+ * @LastEditTime: 2023-03-31 16:23:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lk-xinaohealth-h5\src\App.vue
@@ -131,7 +131,7 @@
   body {
     font-family: Helvetica, "Microsoft YaHei";
     user-select: none;
-    background: #f9f9f9;
+    // background: #f9f9f9;
   }
   img {
     font-size: 20px;

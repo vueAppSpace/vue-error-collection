@@ -28,6 +28,7 @@
   import { printVersion } from "@/utils/versionUtil";
   import { jsBridge } from "@/utils/native/jsBridge";
   import { useRouter, useRoute } from "@/hooks/useRouter";
+  import { isIOS } from "@/utils/native/deviceEnv";
 
   export default defineComponent({
     components: {
@@ -300,7 +301,7 @@
       watch(
         () => state.introVisible,
         newVal => {
-          if (ic.isIOS) {
+          if (isIOS) {
             if (newVal) {
               document.querySelector(".page-box").style["-webkit-overflow-scrolling"] = "auto";
             } else {

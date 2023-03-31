@@ -24,19 +24,8 @@
           `${dianCanUrl}?ticket=ticket&dishId=${dishId}&canteenId=${canteenId}&dd_full_screen=true&date=${date}`
         );
 
-      // console.log('urlxxx', url)
       this.iframeUrl = url;
     }
-    // methods: {
-    //     setTitle(title) {
-    //         if (window.ic) {
-    //             ic.run({
-    //                 action: "webview.setTitle",
-    //                 params: { title },
-    //             });
-    //         }
-    //     },
-    // },
   };
 </script>
 

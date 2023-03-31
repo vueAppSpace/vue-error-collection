@@ -14,6 +14,7 @@
 
 <script>
   import { danaoQuestionUrl, danaoComprehensiveUrl, danaoConsulationUrl } from "@/config/env";
+  import { isIOS } from "@/utils/native/deviceEnv";
   export default {
     data() {
       return {
@@ -24,7 +25,7 @@
     },
     mounted() {
       // 修复ios11设备iframe高度100%不生效问题
-      if (window.ic.isIOS) {
+      if (isIOS) {
         const userAgent = navigator.userAgent.toLowerCase();
         let version = userAgent.match(/cpu iphone os (.*?) like mac os/);
         version = parseInt(version[1], 10);
@@ -52,21 +53,8 @@
       }
 
       this.iframeUrl = url;
-
-      // if (!ic.isIOS && !ic.isAndroid) {
-      //     this.isPc = true;
-      // }
     },
-    methods: {
-      // setTitle(title) {
-      //     if (window.ic) {
-      //         ic.run({
-      //             action: "webview.setTitle",
-      //             params: { title },
-      //         });
-      //     }
-      // },
-    }
+    methods: {}
   };
 </script>
 

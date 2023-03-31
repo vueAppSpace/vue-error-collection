@@ -2,7 +2,7 @@
  * @Author: yanghaifengb yanghaifengb@enn.cn
  * @Date: 2022-06-29 09:41:05
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-28 09:50:55
+ * @LastEditTime: 2023-03-31 16:08:03
  * @FilePath: \workBreakExercises\src\page\activity\themeActivity\myUpdates\myUpdates.vue
  * @Description: 我的动态
 -->
@@ -43,26 +43,6 @@
         noData: false
       });
 
-      // 改变消息标题
-      // const changTitle = () => {
-      //   if (window.ic) {
-      //     ic.run({
-      //       action: "navigation.setLeft",
-      //       params: {
-      //         // 钉钉消息文本
-      //         text: "我的动态",
-      //       },
-      //     });
-
-      //     if (!ic.isIOS && !ic.isAndroid) {
-      //       ic.run({
-      //         action: "webview.setTitle",
-      //         params: { title: "" },
-      //       });
-      //     }
-      //   }
-      // };
-
       // 我的动态
       const getPersonCountFn = () => {
         let params = {
@@ -84,19 +64,7 @@
       };
 
       const init = () => {
-        // changTitle();
         getPersonCountFn();
-        // if (window.ic) {
-        //   // 隐藏右上角菜单按钮
-        //   ic.run({ action: "webview.hideOptionMenu" });
-        //   // 禁用ios左滑返回
-        //   ic.run({
-        //     action: "webview.interactivePopDisabled",
-        //     params: {
-        //       disabled: "1",
-        //     },
-        //   });
-        // }
       };
 
       onMounted(init);

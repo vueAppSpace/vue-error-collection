@@ -2,7 +2,7 @@
  * @Description: 用户资料
  * @Author: IFLS
  * @Date: 2022-06-15 17:10:47
- * @LastEditTime: 2023-03-28 10:50:40
+ * @LastEditTime: 2023-03-31 15:52:38
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, onUnmounted } from "@vue/composition-api";
@@ -15,6 +15,8 @@
   import validMap from "@/utils/validator";
   import { formatTimeForBirth } from "@/utils/commonFun";
   import { useRouter, useRoute } from "@/hooks/useRouter";
+  import { isMobile, isIcomeAndroid } from "@/utils/native/deviceEnv";
+
   const sexIcon = {
     female: "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/profile/female.png",
     activeFemale: "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/profile/female_pressed.png",
@@ -65,9 +67,9 @@
         saveBtnShow: true
       });
 
-      const isPc = window.ic && !ic.isIOS && !ic.isAndroid;
+      const isPc = !isMobile;
 
-      const isAndroid = window.ic && ic.isAndroid;
+      const isAndroid = isIcomeAndroid;
 
       const { formateTime, formatBirth, formatHigh, formatWeight } = useComputed(state);
 

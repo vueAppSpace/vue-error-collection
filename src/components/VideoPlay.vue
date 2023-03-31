@@ -2,7 +2,7 @@
  * @Description: 健康计划视频播放控件
  * @Author: IFLS
  * @Date: 2022-06-24 09:54:10
- * @LastEditTime: 2023-03-28 09:58:56
+ * @LastEditTime: 2023-03-31 16:06:34
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
@@ -10,6 +10,9 @@
   import playerOptions from "@/utils/playerOptions";
   import { queryHealthPlan } from "@/service/mine";
   import { formatVideoTime } from "@/utils/commonFun";
+  import { isIcomePC } from "@/utils/native/deviceEnv";
+  import { jsBridge } from "@/utils/native/jsBridge";
+
   export default defineComponent({
     props: {
       // 只展示视频
@@ -69,7 +72,7 @@
       };
 
       const onPlayerTimeupdate = player => {
-        if (!ic.isIOS && !ic.isAndroid) {
+        if (isIcomePC) {
           // isFullscreen_: 未点击undefined 点击全屏true 关闭全屏false
           if (player.player_.isFullscreen_ === state.isFullscreen) return;
           // 避免函数多次调用
@@ -78,13 +81,7 @@
           if (player.player_.isFullscreen_ === true) {
             // 静音
             document.getElementsByTagName("video")[0].muted = true;
-            ic.run({
-              action: "util.openModal",
-              params: {
-                title: "视频详情",
-                url: state.playerOptions.sources[0].src
-              }
-            });
+            jsBridge.invoke("openModal", { url: state.playerOptions.sources[0].src });
             // 关闭全屏
           } else if (player.player_.isFullscreen_ === false) {
             // 恢复声音

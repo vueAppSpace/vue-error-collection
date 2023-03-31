@@ -306,6 +306,7 @@
   import { mapState, useNavStore } from "@/pinia";
 
   import { jsBridge } from "@/utils/native/jsBridge";
+  import { isIcomePC, isIOS, isAndroid } from "@/utils/native/deviceEnv";
 
   export default {
     directives: {},
@@ -875,7 +876,7 @@
       onPlayerTimeupdate(player) {
         this.playTime = player.cache_.currentTime;
 
-        if (!ic.isIOS && !ic.isAndroid) {
+        if (isIcomePC) {
           // isFullscreen_: 未点击undefined 点击全屏true 关闭全屏false
           if (player.player_.isFullscreen_ === this.isFullscreen) return;
           // 避免函数多次调用
@@ -887,13 +888,7 @@
             // 拼接钉钉url
             // const url = `dingtalk://dingtalkclient/page/link?url=${encodeURIComponent(this.playerOptions.sources[0].src + '?ddtab=true')}`
             // window.location.href = url
-            ic.run({
-              action: "util.openModal",
-              params: {
-                title: "视频详情",
-                url: this.playerOptions.sources[0].src
-              }
-            });
+            jsBridge.invoke("openModal", { url: this.playerOptions.sources[0].src });
             // 关闭全屏
           } else if (player.player_.isFullscreen_ === false) {
             // 恢复声音
@@ -966,7 +961,7 @@
         // this.zgStatistics('播放完成')
 
         // 处于全屏状态 且 是pc端
-        if (player.player_.isFullscreen_ && !ic.isIOS && !ic.isAndroid) {
+        if (player.player_.isFullscreen_ && isIcomePC) {
           const dom = document.getElementsByTagName("video")[0];
           // 退出全屏状态(浏览器不同内核兼容写法)
           if (dom.exitFullscreen) {
@@ -1030,10 +1025,10 @@
       this.localAudioIdIndex = this.randomNum(0, 25);
       this.getAudio(this.localAudioIdIndex);
 
-      if (ic && ic.isIOS) {
+      if (isIOS) {
         this.isIOS = true;
       }
-      if (ic && ic.isAndroid) {
+      if (isAndroid) {
         this.isAndroid = true;
       }
 

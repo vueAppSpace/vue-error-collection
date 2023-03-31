@@ -1,8 +1,8 @@
 <!--
  * @Author: yanghaifengb yanghaifengb@enn.cn
  * @Date: 2022-06-28 14:01:49
- * @LastEditors: YanivWang
- * @LastEditTime: 2023-03-28 11:00:25
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-03-31 16:07:20
  * @FilePath: \lk-xinaohealth-h5\src\page\activity\themeActivity\components\dynamicList.vue
  * @Description: 活动列表组件
 -->
@@ -35,6 +35,8 @@
     activityDetail
   } from "@/service/activity";
   import { useRouter, useRoute } from "@/hooks/useRouter";
+  import { isIcomePC } from "@/utils/native/deviceEnv";
+  import { jsBridge } from "@/utils/native/jsBridge";
 
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
@@ -498,7 +500,7 @@
       };
       // 视频
       const onPlayerTimeupdate = player => {
-        if (!ic.isIOS && !ic.isAndroid) {
+        if (isIcomePC) {
           // isFullscreen_: 未点击undefined 点击全屏true 关闭全屏false
           if (player.player_.isFullscreen_ === state.isFullscreen) return;
           // 避免函数多次调用
@@ -507,13 +509,7 @@
           if (player.player_.isFullscreen_ === true) {
             // 静音
             document.getElementsByTagName("video")[0].muted = true;
-            ic.run({
-              action: "util.openModal",
-              params: {
-                title: "视频详情",
-                url: state.playerOptions.sources[0].src
-              }
-            });
+            jsBridge.invoke("openModal", { url: state.playerOptions.sources[0].src });
             // 关闭全屏
           } else if (player.player_.isFullscreen_ === false) {
             // 恢复声音

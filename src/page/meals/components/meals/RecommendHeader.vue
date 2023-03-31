@@ -11,6 +11,7 @@
   } from "@vue/composition-api";
   import { useLocationStore, storeToRefs } from "@/pinia";
   import { useRouter } from "@/hooks/useRouter";
+  import { isIOS } from "@/utils/native/deviceEnv";
 
   export default defineComponent({
     props: {
@@ -113,8 +114,8 @@
         // },
         () => state.show,
         newVal => {
-          if (ic.isIOS) {
-            if (newValue) {
+          if (isIOS) {
+            if (newVal) {
               document.querySelector(".page-box").style["-webkit-overflow-scrolling"] = "auto";
             } else {
               document.querySelector(".page-box").style["-webkit-overflow-scrolling"] = "touch";

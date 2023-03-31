@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-03-02 15:25:26
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:35:23
+ * @LastEditTime: 2023-03-31 15:51:52
  * @FilePath: \lk-xinaohealth-h5\src\page\classReservations\BindDevices.vue
  * @Description: 设备绑定
 -->
@@ -31,6 +31,7 @@
 
   import { useScanQRcodeStore, storeToRefs } from "@/pinia";
   import { QucikQucikDeviceType, Status_msg_map, initDeivceList, NOT_IDENTIFY_QRCODE_TIP } from "./util/constant";
+  import { isMobile } from "@/utils/native/deviceEnv";
 
   export default defineComponent({
     components: {
@@ -42,7 +43,7 @@
       console.log("classReservations bindDevices...");
 
       const { zgStatistics, $router: router, $route: route } = context.root;
-      const isPc = window.ic && !ic.isIOS && !ic.isAndroid;
+      const isPc = !isMobile;
 
       const store = useScanQRcodeStore();
       const { tiZhiChenBindSuccessFlag } = storeToRefs(store);
