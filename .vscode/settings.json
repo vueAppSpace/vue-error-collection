@@ -67,5 +67,16 @@
     "Date": "Do not edit", //时间
     "LastEditTime": "Do not edit"
     // "LastEditors": " ",
-  }
+  },
+  "better-comments.tags": [
+    {
+      "tag": "#v",
+      "color": "#fff",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "#3b80fa",
+      "bold": true,
+      "italic": false
+    }
+  ]
 }

@@ -2,7 +2,7 @@
  * @Description: 获取token
  * @Author: IFLS
  * @Date: 2022-04-24 14:09:14
- * @LastEditTime: 2023-03-30 16:12:00
+ * @LastEditTime: 2023-03-31 14:14:10
  */
 import { getToken as queryToken } from "@/service/api";
 import { getURLParameters } from "@/utils/commonFun";
@@ -33,16 +33,16 @@ const getParams = () => {
     return val.ticket;
   }
 
-  /* IFTRUE_ICOME */
+  // #v-ifdef VITE_IFDEF=ICOME
   /* icome参数 */
   // 无ticket情况
   if (!val.ticket) {
     return err();
   }
   localStorage.setItem("ticket", val.ticket);
-  /* FITRUE_ICOME */
+  // #v-endif
 
-  /* IFTRUE_EMALL */
+  // #v-ifdef VITE_IFDEF=EMALL
   /* emall参数 */
   // 无grantCode或accountId情况
   if (!val.grantCode || !val.accountId) {
@@ -50,7 +50,7 @@ const getParams = () => {
   }
   const userInfo = { code: val.grantCode, id: val.accountId };
   localStorage.setItem("ticket", JSON.stringify(userInfo));
-  /* FITRUE_EMALl */
+  // #v-endif
   return val;
 };
 

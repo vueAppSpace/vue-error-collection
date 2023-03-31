@@ -12,6 +12,8 @@ declare module "vue-video-player";
 
 declare module "version";
 
+declare module "@ungap/has-own";
+
 declare module "@vitejs/plugin-legacy";
 
 interface ImportMetaEnv {

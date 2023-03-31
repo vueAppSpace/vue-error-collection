@@ -1,18 +1,15 @@
+import "@ungap/has-own"; // 添加nodejs Object.hasOwn的polyfill 兼容14版本node
 import { ConfigEnv, loadEnv, UserConfig } from "vite";
 import { createVuePlugin } from "vite-plugin-vue2";
-// 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> pnpm i @types/node -D
-import { resolve } from "path";
+import { resolve } from "path"; // 若编辑器提示path模块找不到 => pnpm i @types/node -D
 import legacy from "@vitejs/plugin-legacy";
 import viteCompression from "vite-plugin-compression";
-import vitePluginConditionalCompile from "vite-plugin-conditional-compile";
+import conditionalCompile from "vite-plugin-conditional-compiler";
 import checkEnv from "./version";
 import { getTicket, getIPAddress } from "./get-ticket";
-const pluginConditionalCompile = (vitePluginConditionalCompile as any).default;
 
 export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
   const env: Partial<ImportMetaEnv> = loadEnv(mode, process.cwd());
-  const ICOME = env.VITE_ENV.includes("icome");
-  const EMALL = env.VITE_ENV.includes("emall");
   const lkProject = checkEnv(env);
   const ticket = await getTicket();
   const ipAddress = getIPAddress();
@@ -24,15 +21,7 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
       createVuePlugin({
         vueTemplateOptions: {}
       }),
-      // vite条件编译
-      // /* IFTRUE_ICOME */
-      // /* FITRUE_ICOME */
-      pluginConditionalCompile({
-        expand: {
-          ICOME, // icome环境
-          EMALL // emall环境
-        }
-      }),
+
       // 兼容性配置
       legacy({
         targets: ["> 0.5%", "last 2 versions", "not ie <= 8", "not dead"],
@@ -52,7 +41,9 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
         disable: command === "serve", // serve本机启动时禁用
         ext: ".gz", // 生成的压缩包后缀
         deleteOriginFile: false // 删除原文件
-      })
+      }),
+      // vite条件编译
+      conditionalCompile({})
     ],
     css: {
       // 预处理器配置项
@@ -112,7 +103,7 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
   };
 };
 
-function printProjectURL(ticket, ipAddress) {
+function printProjectURL(ticket: string, ipAddress: string) {
   console.log("\n==================== icome 项目链接 start ====================");
   console.log(`本地开发: http://localhost:9080/report/health?ticket=${ticket}`);
   console.log(`本地远程: http://${ipAddress}:9080/report/health?ticket=${ticket}`);

@@ -33,13 +33,13 @@ export const getWatchingVideoUsers = data => axios(xinao + "/exerciseworklog/get
 // 新奥健康登录接口
 export const getToken = data => {
   let loginUrl = "";
-  /* IFTRUE_ICOME */
-  loginUrl = "/xh/loginByIcomeTicket";
-  /* FITRUE_ICOME */
-
-  /* IFTRUE_EMALL */
+  // #v-ifdef VITE_IFDEF=EMALL
   loginUrl = "/eservice/loginByGrantCode";
-  /* FITRUE_EMALl */
+  // #v-endif
+
+  // #v-ifdef VITE_IFDEF=ICOME
+  loginUrl = "/xh/loginByIcomeTicket";
+  // #v-endif
   return axios(xinao + loginUrl, data, "post");
 };
 
