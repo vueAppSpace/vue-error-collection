@@ -5,7 +5,7 @@
 
   export default defineComponent({
     setup() {
-      const pageData = { pageIndex: 1, pageSize: 10 };
+      const pageData = { pageIndex: 1, pageSize: 10, status: 1 };
       const loading = ref(false);
       const finished = ref(false);
       const list = ref([]);

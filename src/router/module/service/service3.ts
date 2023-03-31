@@ -26,5 +26,14 @@ export default [
     meta: {
       title: "预约挂号"
     }
+  },
+  {
+    // 服务
+    path: "/appointment",
+    name: "appointment",
+    component: () => import("@/page/service/appointment"),
+    meta: {
+      title: "预约挂号"
+    }
   }
 ];
