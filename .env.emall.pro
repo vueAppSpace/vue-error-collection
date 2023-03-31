@@ -2,7 +2,7 @@
  # @Description: e商服 生产环境配置
  # @Author: IFLS
  # @Date: 2023-03-17 11:28:32
- # @LastEditTime: 2023-03-31 13:48:01
+ # @LastEditTime: 2023-03-31 14:27:56
 ### 
 # 在运行pnpm run build:emallpro时被载入
 
@@ -16,7 +16,6 @@ VITE_ENV = emallpro
 VITE_IFDEF = EMALL
 
 # API
-# TODO: 需改为e商服api 生产环境地址
 VITE_APP_API_URL = 'https://cloud-pro.op.laikang.com/v1'
 
 # 是否在打包时生成 sourcemap
