@@ -2,11 +2,11 @@
  * @Description: 滚动尺
  * @Author: IFLS
  * @Date: 2022-08-25 13:17:30
- * @LastEditTime: 2023-03-31 14:34:25
+ * @LastEditTime: 2023-03-31 15:31:36
 -->
 <script>
   import { defineComponent, onMounted } from "@vue/composition-api";
-  import { ddIsMobile } from "@/utils/ddTools";
+  import { isMobile } from "@/utils/native/deviceEnv";
 
   export default defineComponent({
     props: {
@@ -220,7 +220,7 @@
               callback && callback(value);
             }
           };
-          const isPC = !ddIsMobile();
+          const isPC = !isMobile;
           if (isPC) {
             // pc
             let flag = true;
