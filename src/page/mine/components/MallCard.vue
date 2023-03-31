@@ -2,106 +2,102 @@
  * @Description: 积分商城卡片
  * @Author: IFLS
  * @Date: 2022-11-15 10:06:47
-<<<<<<< HEAD
- * @LastEditTime: 2023-03-31 14:27:03
-=======
- * @LastEditTime: 2023-03-31 14:07:52
->>>>>>> e37053ea48865aae60bf5a8fade5976b13fb1196
+ * @LastEditTime: 2023-03-31 15:23:45
 -->
 <script>
-import { defineComponent, reactive, toRefs, onActivated, onMounted, watch } from "@vue/composition-api";
-import { queryTodayData } from "@/service/integralMall";
-import { eMall } from "@/config/env";
-import { jsBridge } from "@/utils/native/jsBridge";
-import { queryUserTopAchievement } from "@/service/achievement/index";
-export default defineComponent({
-  props: {
-    userInfo: {
-      type: Object,
-      default: {}
-    }
-  },
-  setup(props, context) {
-    const {
-      root: { $router: router },
-      parent
-    } = context;
+  import { defineComponent, reactive, toRefs, onActivated, onMounted, watch } from "@vue/composition-api";
+  import { queryTodayData } from "@/service/integralMall";
+  import { eMall } from "@/config/env";
+  import { jsBridge } from "@/utils/native/jsBridge";
+  import { queryUserTopAchievement } from "@/service/achievement/index";
+  export default defineComponent({
+    props: {
+      userInfo: {
+        type: Object,
+        default: {}
+      }
+    },
+    setup(props, context) {
+      const {
+        root: { $router: router },
+        parent
+      } = context;
 
-    const state = reactive({
-      taskInfo: {},
-      percent: 0, // 任务完成百分比
-      topAchievement: {}
-    });
+      const state = reactive({
+        taskInfo: {},
+        percent: 0, // 任务完成百分比
+        topAchievement: {}
+      });
 
-    watch(
-      () => props.userInfo.totalHealthPoints,
-      newValue => {
-        if (!newValue) return;
-        queryUserTopAchievement({ points: newValue }).then(({ code, data, message }) => {
-          if (code === 0 && data) {
-            state.topAchievement = data || {};
+      watch(
+        () => props.userInfo.totalHealthPoints,
+        newValue => {
+          if (!newValue) return;
+          queryUserTopAchievement({ points: newValue }).then(({ code, data, message }) => {
+            if (code === 0 && data) {
+              state.topAchievement = data || {};
+            } else {
+              console.log("queryTopAchievement", message);
+            }
+          });
+        }
+      );
+
+      // 查询任务完成进度
+      const queryData = () => {
+        queryTodayData().then(({ code, data, message }) => {
+          if (code === 0) {
+            const totalTask = data.sumPerTotalTaskByToday;
+            const completeTask = data.sumPerCompleteTaskByToday;
+            const percent = totalTask === 0 ? totalTask : (completeTask / totalTask) * 100;
+            state.percent = percent;
+            state.taskInfo = data;
           } else {
-            console.log("queryTopAchievement", message);
+            console.log("queryTodayData", message);
           }
         });
-      }
-    );
+      };
 
-    // 查询任务完成进度
-    const queryData = () => {
-      queryTodayData().then(({ code, data, message }) => {
-        if (code === 0) {
-          const totalTask = data.sumPerTotalTaskByToday;
-          const completeTask = data.sumPerCompleteTaskByToday;
-          const percent = totalTask === 0 ? totalTask : (completeTask / totalTask) * 100;
-          state.percent = percent;
-          state.taskInfo = data;
+      const jumpTo = url => {
+        if (url.includes("http")) {
+          window.location.href = url;
         } else {
-          console.log("queryTodayData", message);
+          router.push(url);
         }
+      };
+
+      const jumpToLottery = () => {
+        router.push({
+          name: "lotteryHome",
+          params: { points: props.userInfo.healthPoints }
+        });
+      };
+
+      const jumpToMall = () => {
+        jsBridge.invoke("openWebView", {
+          targetUrl: eMall,
+          refreshTicket: true,
+          extraParame: "&dd_full_screen=true"
+        });
+      };
+
+      onActivated(queryData);
+
+      onMounted(() => {
+        document.addEventListener("resume", () => {
+          parent.queryMineData();
+          console.log("resume:页面刷新了");
+        });
       });
-    };
 
-    const jumpTo = url => {
-      if (url.includes("http")) {
-        window.location.href = url;
-      } else {
-        router.push(url);
-      }
-    };
-
-    const jumpToLottery = () => {
-      router.push({
-        name: "lotteryHome",
-        params: { points: props.userInfo.healthPoints }
-      });
-    };
-
-    const jumpToMall = () => {
-      jsBridge.invoke("openWebView", {
-        targetUrl: eMall,
-        refreshTicket: true,
-        extraParame: "&dd_full_screen=true"
-      });
-    };
-
-    onActivated(queryData);
-
-    onMounted(() => {
-      document.addEventListener("resume", () => {
-        parent.queryMineData();
-        console.log("resume:页面刷新了");
-      });
-    });
-
-    return {
-      ...toRefs(state),
-      jumpTo,
-      jumpToMall,
-      jumpToLottery
-    };
-  }
-});
+      return {
+        ...toRefs(state),
+        jumpTo,
+        jumpToMall,
+        jumpToLottery
+      };
+    }
+  });
 </script>
 
 <template>
@@ -210,107 +206,107 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-.rank-card::-webkit-scrollbar {
-  display: none;
-}
-.rank-card {
-  padding-top: 30px;
-  padding-right: 20px;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-  justify-content: flex-start;
-
-  li {
+  .rank-card::-webkit-scrollbar {
+    display: none;
+  }
+  .rank-card {
+    padding-top: 30px;
+    padding-right: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 224px;
-    height: 238px;
-    margin-right: 12px;
-    background: #fff;
-    border-radius: 16px;
-    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    justify-content: flex-start;
 
-    &:last-child {
-      margin-right: 0;
-    }
-
-    .title {
-      width: 160px;
-      height: 56px;
-      margin: 0;
-      background: #fff5e6;
-      border-radius: 0px 0px 26px 26px;
-      font-size: 28px;
-      font-weight: 500;
-      color: #f86e11;
-      text-align: center;
-      line-height: 56px;
-    }
-    .content {
+    li {
       display: flex;
       flex-direction: column;
-      .van-progress {
-        width: 176px;
+      align-items: center;
+      width: 224px;
+      height: 238px;
+      margin-right: 12px;
+      background: #fff;
+      border-radius: 16px;
+      flex: 0 0 auto;
+
+      &:last-child {
+        margin-right: 0;
       }
-      .content-top {
-        display: flex;
-        justify-content: center;
-        padding: 34px 0;
-        img {
-          width: 32px;
-          height: 32px;
-        }
-        .mall-img {
-          width: 80px;
-          height: 80px;
-        }
-        i {
-          font-size: 28px;
-          font-style: normal;
-          color: #1c1c1e;
-        }
+
+      .title {
+        width: 160px;
+        height: 56px;
+        margin: 0;
+        background: #fff5e6;
+        border-radius: 0px 0px 26px 26px;
+        font-size: 28px;
+        font-weight: 500;
+        color: #f86e11;
+        text-align: center;
+        line-height: 56px;
       }
-      .content-bottom {
-        padding-top: 10px;
-        font-size: 26px;
-        color: #9195a1;
-      }
-      .pd {
-        padding: 10px;
-      }
-      .pt16 {
-        padding-top: 15px;
-      }
-      .c-black {
-        color: #000;
-      }
-    }
-    .health-point {
-      width: 100%;
-      flex-direction: row;
-      justify-content: space-around;
-      .content-top,
-      .content-bottom {
+      .content {
         display: flex;
         flex-direction: column;
-        padding-top: 20px;
-        padding-bottom: 0;
-        margin-top: 20px;
-        color: #ed6066;
-        font-size: 36px;
-        :last-child {
-          padding-top: 34px;
+        .van-progress {
+          width: 176px;
+        }
+        .content-top {
+          display: flex;
+          justify-content: center;
+          padding: 34px 0;
+          img {
+            width: 32px;
+            height: 32px;
+          }
+          .mall-img {
+            width: 80px;
+            height: 80px;
+          }
+          i {
+            font-size: 28px;
+            font-style: normal;
+            color: #1c1c1e;
+          }
+        }
+        .content-bottom {
+          padding-top: 10px;
           font-size: 26px;
           color: #9195a1;
         }
+        .pd {
+          padding: 10px;
+        }
+        .pt16 {
+          padding-top: 15px;
+        }
+        .c-black {
+          color: #000;
+        }
+      }
+      .health-point {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        .content-top,
+        .content-bottom {
+          display: flex;
+          flex-direction: column;
+          padding-top: 20px;
+          padding-bottom: 0;
+          margin-top: 20px;
+          color: #ed6066;
+          font-size: 36px;
+          :last-child {
+            padding-top: 34px;
+            font-size: 26px;
+            color: #9195a1;
+          }
+        }
       }
     }
+    li:active {
+      filter: brightness(0.5);
+      transition: 0.2s;
+    }
   }
-  li:active {
-    filter: brightness(0.5);
-    transition: 0.2s;
-  }
-}
 </style>

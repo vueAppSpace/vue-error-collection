@@ -88,11 +88,16 @@
             {{ new Date(reportInfo.occurrenceTime).getFullYear() + "年" + reportInfo.name + "报告" }}
           </div>
           <div class="title" v-else>健康体检</div>
-          <span v-track="{
+          <span
+            v-track="{
               type: 'click',
               name: '健康新奥-体检报告-进入体检报告内容',
-              data: `{&quot;页面类别&quot;: &quot;健康体检报告&quot;}`,
-            }" @click="seeMore" v-if="!reportEmpty">更多报告<van-icon name="play" /></span>
+              data: `{&quot;页面类别&quot;: &quot;健康体检报告&quot;}`
+            }"
+            @click="seeMore"
+            v-if="!reportEmpty"
+            >更多报告<van-icon name="play"
+          /></span>
         </div>
 
         <div class="box-header-bottom">

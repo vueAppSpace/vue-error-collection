@@ -2,7 +2,7 @@
  * @Description: 用户自上传的体检报告
  * @Author: IFLS
  * @Date: 2022-06-28 11:13:35
- * @LastEditTime: 2023-03-31 14:07:12
+ * @LastEditTime: 2023-03-31 15:27:12
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, computed } from "@vue/composition-api";
@@ -87,11 +87,15 @@
             <div class="title">
               {{ formatTime(new Date(reportData.archivesDate.replace(/-/g, "/")).getTime()) + "上传" }}
             </div>
-            <span v-track="{
+            <span
+              v-track="{
                 type: 'click',
                 name: '健康新奥-体检报告-进入体检报告内容',
-                data: `{&quot;页面类别&quot;: &quot;自传健康体检报告&quot;}`,
-              }" @click="jumpTo('/history?self=true')">更多报告<van-icon name="play" /></span>
+                data: `{&quot;页面类别&quot;: &quot;自传健康体检报告&quot;}`
+              }"
+              @click="jumpTo('/history?self=true')"
+              >更多报告<van-icon name="play"
+            /></span>
           </div>
 
           <div class="box-header-bottom">
