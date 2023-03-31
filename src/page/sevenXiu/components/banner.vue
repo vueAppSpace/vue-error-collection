@@ -44,7 +44,7 @@
         const prefixUrl = "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/meal/";
 
         const resultArr = await Promise.all([healtheverydaystudyListFn(params), healthcareListFn(params)]);
-        if (resultArr[0]) {
+        if (resultArr[0] && resultArr[0].length) {
           const data = resultArr[0][0];
           const infoData = resultArr[1].find(item => item.type === "1");
           swiperData.push({

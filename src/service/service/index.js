@@ -14,3 +14,14 @@ export const getUrlLink = () => axios(`${xinao}/lkThird/getUrlLink`, {}, "post")
 export const getCounselor = () => axios(`${xinao}/consultant/random`, {}, "post");
 // 记录咨询数据
 export const insertRecord = data => axios(`${xinao}/consultationrecord/insert`, data, "post");
+
+// 查询 banner
+export const getHealthShufflingFigure = data => axios(`${xinao}/healthshufflingfigure/page`, data, "post");
+// 查询我的服务
+export const getHealthService = data => axios(`${xinao}/healthservice/page`, data, "post");
+// 添加我的服务
+export const healthServiceInsert = data => axios(`${xinao}/healthservice/insert`, data, "post");
+// 修改我的服务
+export const healthServiceUpdate = data => axios(`${xinao}/healthservice/update`, data, "post");
+// banner 图片点击量
+export const bannerAddClick = data => axios(`${xinao}/healthshufflingfigureimg/addClick`, data, "post");
