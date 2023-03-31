@@ -2,7 +2,7 @@
  * @Description: 服务 权限3
  * @Author: IFLS
  * @Date: 2022-08-12 14:21:44
- * @LastEditTime: 2023-03-22 11:30:07
+ * @LastEditTime: 2023-03-31 15:10:36
  */
 
 export default [
@@ -23,15 +23,6 @@ export default [
     path: "/appointment",
     name: "appointment",
     component: () => import("@/page/service/appointment/index.vue"),
-    meta: {
-      title: "预约挂号"
-    }
-  },
-  {
-    // 服务
-    path: "/appointment",
-    name: "appointment",
-    component: () => import("@/page/service/appointment"),
     meta: {
       title: "预约挂号"
     }

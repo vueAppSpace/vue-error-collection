@@ -25,8 +25,8 @@ class JsBridge {
         }
       };
 
+      const nativeMethod = this.nativeMethods[name];
       if (isUniApp || isIcome) {
-        const nativeMethod = this.nativeMethods[name];
         if (nativeMethod) {
           console.log(`调用 ${name} 原生方法`);
           nativeMethod(payload);
@@ -34,7 +34,13 @@ class JsBridge {
           reject(`未找到 ${name} 原生方法`);
         }
       } else {
-        reject(`不在 app 中，原生方法 ${name} 不可用`);
+        // h5环境
+        if (nativeMethod) {
+          console.log(`调用 ${name} h5方法`);
+          nativeMethod(payload);
+        } else {
+          reject(`不在 app 中，原生方法 ${name} 不可用`);
+        }
       }
     });
     return promise;

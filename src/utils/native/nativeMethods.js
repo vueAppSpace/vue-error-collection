@@ -1,5 +1,6 @@
 import * as ddTools from "@/utils/native/ddTools";
 import * as plusTools from "@/utils/native/plusTools";
+import * as webTools from "@/utils/native/webTools";
 import { isUniApp } from "@/utils/native/deviceEnv";
 
 export default {
@@ -120,6 +121,9 @@ export default {
     } else {
       ddTools.openModal(payload);
     }
+  },
+  openIcome(payload) {
+    webTools.webOpenIcome(payload);
   }
 };
 
