@@ -2,7 +2,7 @@
  * @Description: 健康百科
  * @Author: WANGCHENGAE
  * @Date: 2022-1-5 11:00:30
- * @LastEditTime: 2023-03-28 09:55:23
+ * @LastEditTime: 2023-03-31 14:04:00
 -->
 <script>
   import { defineComponent, reactive, toRefs } from "@vue/composition-api";
@@ -33,7 +33,7 @@
     setup(_, context) {
       console.log("healthEncyclopedia index...");
 
-      const { $router } = context.root;
+      const { zgStatistics,$router } = context.root;
       const router = useRouter($router);
 
       const state = reactive({

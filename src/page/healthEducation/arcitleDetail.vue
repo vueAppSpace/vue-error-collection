@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-02-28 15:30:14
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:36:32
+ * @LastEditors: yanghaifengb yanghaifengb@enn.cn
+ * @LastEditTime: 2023-03-31 13:59:04
  * @FilePath: \lk-xinaohealth-h5\src\page\healthEducation\arcitleDetail.vue
 -->
 <template>
@@ -38,6 +38,11 @@
       if (educationAnswer) {
         educationAnswer = educationAnswer.replace(regex, '<img style="max-width: 100%; height: auto"');
         this.educationAnswer = educationAnswer;
+        this.zgStatistics("健康新奥-进入页面", {
+        所属功能模块: "服务",
+        来源: "健康宣教",
+        页面名称: "文章详情",
+      });
       }
     }
   };

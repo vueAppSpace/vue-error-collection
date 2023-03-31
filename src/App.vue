@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2020-09-09 10:38:03
- * @LastEditTime: 2023-03-24 09:54:29
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-03-31 14:09:30
+ * @LastEditors: yanghaifengb yanghaifengb@enn.cn
  * @Description: In User Settings Edit
- * @FilePath: \c-mall-h5\src\App.vue
+ * @FilePath: \lk-xinaohealth-h5\src\App.vue
 -->
 <template>
   <div v-if="fixTopArea" id="app" :class="{ role3: role == 3 }" :style="`height: calc(100vh - ${safeAreaInsetTop})`">
@@ -131,6 +131,7 @@
   body {
     font-family: Helvetica, "Microsoft YaHei";
     user-select: none;
+    background: #f9f9f9;
   }
   img {
     font-size: 20px;
@@ -146,7 +147,7 @@
 
   .page-box {
     height: 100%;
-    background: #f9f9f9;
+    // background: #f9f9f9;
     overflow: scroll;
     padding-bottom: 232px !important;
     -webkit-overflow-scrolling: touch;
