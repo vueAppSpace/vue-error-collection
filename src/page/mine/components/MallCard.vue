@@ -2,102 +2,106 @@
  * @Description: 积分商城卡片
  * @Author: IFLS
  * @Date: 2022-11-15 10:06:47
+<<<<<<< HEAD
+ * @LastEditTime: 2023-03-31 14:27:03
+=======
  * @LastEditTime: 2023-03-31 14:07:52
+>>>>>>> e37053ea48865aae60bf5a8fade5976b13fb1196
 -->
 <script>
-  import { defineComponent, reactive, toRefs, onActivated, onMounted, watch } from "@vue/composition-api";
-  import { queryTodayData } from "@/service/integralMall";
-  import { eMall } from "@/config/env";
-  import { jsBridge } from "@/utils/native/jsBridge";
-  import { queryUserTopAchievement } from "@/service/achievement/index";
-  export default defineComponent({
-    props: {
-      userInfo: {
-        type: Object,
-        default: {}
-      }
-    },
-    setup(props, context) {
-      const {
-        root: { $router: router },
-        parent
-      } = context;
+import { defineComponent, reactive, toRefs, onActivated, onMounted, watch } from "@vue/composition-api";
+import { queryTodayData } from "@/service/integralMall";
+import { eMall } from "@/config/env";
+import { jsBridge } from "@/utils/native/jsBridge";
+import { queryUserTopAchievement } from "@/service/achievement/index";
+export default defineComponent({
+  props: {
+    userInfo: {
+      type: Object,
+      default: {}
+    }
+  },
+  setup(props, context) {
+    const {
+      root: { $router: router },
+      parent
+    } = context;
 
-      const state = reactive({
-        taskInfo: {},
-        percent: 0, // 任务完成百分比
-        topAchievement: {}
-      });
+    const state = reactive({
+      taskInfo: {},
+      percent: 0, // 任务完成百分比
+      topAchievement: {}
+    });
 
-      watch(
-        () => props.userInfo.totalHealthPoints,
-        newValue => {
-          if (!newValue) return;
-          queryUserTopAchievement({ points: newValue }).then(({ code, data, message }) => {
-            if (code === 0 && data) {
-              state.topAchievement = data || {};
-            } else {
-              console.log("queryTopAchievement", message);
-            }
-          });
-        }
-      );
-
-      // 查询任务完成进度
-      const queryData = () => {
-        queryTodayData().then(({ code, data, message }) => {
-          if (code === 0) {
-            const totalTask = data.sumPerTotalTaskByToday;
-            const completeTask = data.sumPerCompleteTaskByToday;
-            const percent = totalTask === 0 ? totalTask : (completeTask / totalTask) * 100;
-            state.percent = percent;
-            state.taskInfo = data;
+    watch(
+      () => props.userInfo.totalHealthPoints,
+      newValue => {
+        if (!newValue) return;
+        queryUserTopAchievement({ points: newValue }).then(({ code, data, message }) => {
+          if (code === 0 && data) {
+            state.topAchievement = data || {};
           } else {
-            console.log("queryTodayData", message);
+            console.log("queryTopAchievement", message);
           }
         });
-      };
+      }
+    );
 
-      const jumpTo = url => {
-        if (url.includes("http")) {
-          window.location.href = url;
+    // 查询任务完成进度
+    const queryData = () => {
+      queryTodayData().then(({ code, data, message }) => {
+        if (code === 0) {
+          const totalTask = data.sumPerTotalTaskByToday;
+          const completeTask = data.sumPerCompleteTaskByToday;
+          const percent = totalTask === 0 ? totalTask : (completeTask / totalTask) * 100;
+          state.percent = percent;
+          state.taskInfo = data;
         } else {
-          router.push(url);
+          console.log("queryTodayData", message);
         }
-      };
-
-      const jumpToLottery = () => {
-        router.push({
-          name: "lotteryHome",
-          params: { points: props.userInfo.healthPoints }
-        });
-      };
-
-      const jumpToMall = () => {
-        jsBridge.invoke("openWebView", {
-          targetUrl: eMall,
-          refreshTicket: true,
-          extraParame: "&dd_full_screen=true"
-        });
-      };
-
-      onActivated(queryData);
-
-      onMounted(() => {
-        document.addEventListener("resume", () => {
-          parent.queryMineData();
-          console.log("resume:页面刷新了");
-        });
       });
+    };
 
-      return {
-        ...toRefs(state),
-        jumpTo,
-        jumpToMall,
-        jumpToLottery
-      };
-    }
-  });
+    const jumpTo = url => {
+      if (url.includes("http")) {
+        window.location.href = url;
+      } else {
+        router.push(url);
+      }
+    };
+
+    const jumpToLottery = () => {
+      router.push({
+        name: "lotteryHome",
+        params: { points: props.userInfo.healthPoints }
+      });
+    };
+
+    const jumpToMall = () => {
+      jsBridge.invoke("openWebView", {
+        targetUrl: eMall,
+        refreshTicket: true,
+        extraParame: "&dd_full_screen=true"
+      });
+    };
+
+    onActivated(queryData);
+
+    onMounted(() => {
+      document.addEventListener("resume", () => {
+        parent.queryMineData();
+        console.log("resume:页面刷新了");
+      });
+    });
+
+    return {
+      ...toRefs(state),
+      jumpTo,
+      jumpToMall,
+      jumpToLottery
+    };
+  }
+});
 </script>
 
 <template>
@@ -141,25 +145,25 @@
       </div>
     </li>
 
-    <!-- <li
-            @click="jumpToLottery"
-            v-track="{
-                name: '健康新奥-我的-点击卡片',
-                data: `{&quot;按钮名称&quot;: &quot;积分抽奖&quot;, &quot;位置&quot;: &quot;上方卡片&quot;, &quot;类型&quot;: &quot;顶部卡片&quot;}`
-            }"
-        >
-            <div class="title">积分抽奖</div>
-            <div class="content">
-                <div class="content-top pd">
-                    <img
-                        class="mall-img"
-                        src="data:image/png;base64,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"
-                        alt=""
-                    />
-                </div>
-                <div class="content-bottom pt16 c-black">剩余积分：{{ userInfo.healthPoints }}</div>
-            </div>
-        </li> -->
+    <li
+      @click="jumpToLottery"
+      v-track="{
+        name: '健康新奥-我的-点击卡片',
+        data: `{&quot;按钮名称&quot;: &quot;积分抽奖&quot;, &quot;位置&quot;: &quot;上方卡片&quot;, &quot;类型&quot;: &quot;顶部卡片&quot;}`
+      }"
+    >
+      <div class="title">积分抽奖</div>
+      <div class="content">
+        <div class="content-top pd">
+          <img
+            class="mall-img"
+            src="data:image/png;base64,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"
+            alt=""
+          />
+        </div>
+        <div class="content-bottom pt16 c-black">剩余积分：{{ userInfo.healthPoints }}</div>
+      </div>
+    </li>
 
     <!-- // #v-ifdef VITE_IFDEF=ICOME -->
     <li
@@ -206,107 +210,107 @@
 </template>
 
 <style lang="scss" scoped>
-  .rank-card::-webkit-scrollbar {
-    display: none;
-  }
-  .rank-card {
-    padding-top: 30px;
-    padding-right: 20px;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    justify-content: flex-start;
+.rank-card::-webkit-scrollbar {
+  display: none;
+}
+.rank-card {
+  padding-top: 30px;
+  padding-right: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  justify-content: flex-start;
 
-    li {
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 224px;
+    height: 238px;
+    margin-right: 12px;
+    background: #fff;
+    border-radius: 16px;
+    flex: 0 0 auto;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    .title {
+      width: 160px;
+      height: 56px;
+      margin: 0;
+      background: #fff5e6;
+      border-radius: 0px 0px 26px 26px;
+      font-size: 28px;
+      font-weight: 500;
+      color: #f86e11;
+      text-align: center;
+      line-height: 56px;
+    }
+    .content {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      width: 224px;
-      height: 238px;
-      margin-right: 12px;
-      background: #fff;
-      border-radius: 16px;
-      flex: 0 0 auto;
-
-      &:last-child {
-        margin-right: 0;
+      .van-progress {
+        width: 176px;
       }
-
-      .title {
-        width: 160px;
-        height: 56px;
-        margin: 0;
-        background: #fff5e6;
-        border-radius: 0px 0px 26px 26px;
-        font-size: 28px;
-        font-weight: 500;
-        color: #f86e11;
-        text-align: center;
-        line-height: 56px;
+      .content-top {
+        display: flex;
+        justify-content: center;
+        padding: 34px 0;
+        img {
+          width: 32px;
+          height: 32px;
+        }
+        .mall-img {
+          width: 80px;
+          height: 80px;
+        }
+        i {
+          font-size: 28px;
+          font-style: normal;
+          color: #1c1c1e;
+        }
       }
-      .content {
+      .content-bottom {
+        padding-top: 10px;
+        font-size: 26px;
+        color: #9195a1;
+      }
+      .pd {
+        padding: 10px;
+      }
+      .pt16 {
+        padding-top: 15px;
+      }
+      .c-black {
+        color: #000;
+      }
+    }
+    .health-point {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-around;
+      .content-top,
+      .content-bottom {
         display: flex;
         flex-direction: column;
-        .van-progress {
-          width: 176px;
-        }
-        .content-top {
-          display: flex;
-          justify-content: center;
-          padding: 34px 0;
-          img {
-            width: 32px;
-            height: 32px;
-          }
-          .mall-img {
-            width: 80px;
-            height: 80px;
-          }
-          i {
-            font-size: 28px;
-            font-style: normal;
-            color: #1c1c1e;
-          }
-        }
-        .content-bottom {
-          padding-top: 10px;
+        padding-top: 20px;
+        padding-bottom: 0;
+        margin-top: 20px;
+        color: #ed6066;
+        font-size: 36px;
+        :last-child {
+          padding-top: 34px;
           font-size: 26px;
           color: #9195a1;
         }
-        .pd {
-          padding: 10px;
-        }
-        .pt16 {
-          padding-top: 15px;
-        }
-        .c-black {
-          color: #000;
-        }
       }
-      .health-point {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-        .content-top,
-        .content-bottom {
-          display: flex;
-          flex-direction: column;
-          padding-top: 20px;
-          padding-bottom: 0;
-          margin-top: 20px;
-          color: #ed6066;
-          font-size: 36px;
-          :last-child {
-            padding-top: 34px;
-            font-size: 26px;
-            color: #9195a1;
-          }
-        }
-      }
-    }
-    li:active {
-      filter: brightness(0.5);
-      transition: 0.2s;
     }
   }
+  li:active {
+    filter: brightness(0.5);
+    transition: 0.2s;
+  }
+}
 </style>

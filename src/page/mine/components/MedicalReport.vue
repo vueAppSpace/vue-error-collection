@@ -2,7 +2,7 @@
  * @Description: 体检报告
  * @Author: IFLS
  * @Date: 2022-05-26 14:24:19
- * @LastEditTime: 2023-03-28 10:03:32
+ * @LastEditTime: 2023-03-31 14:06:17
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
@@ -88,7 +88,11 @@
             {{ new Date(reportInfo.occurrenceTime).getFullYear() + "年" + reportInfo.name + "报告" }}
           </div>
           <div class="title" v-else>健康体检</div>
-          <span @click="seeMore" v-if="!reportEmpty">更多报告<van-icon name="play" /></span>
+          <span v-track="{
+              type: 'click',
+              name: '健康新奥-体检报告-进入体检报告内容',
+              data: `{&quot;页面类别&quot;: &quot;健康体检报告&quot;}`,
+            }" @click="seeMore" v-if="!reportEmpty">更多报告<van-icon name="play" /></span>
         </div>
 
         <div class="box-header-bottom">
