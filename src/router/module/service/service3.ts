@@ -19,6 +19,15 @@ export default [
     }
   },
   {
+    // 服务编辑
+    path: "/service-edit",
+    name: "serviceEdit",
+    component: () => import("@/page/service/service3/edit.vue"),
+    meta: {
+      title: "健康服务"
+    }
+  },
+  {
     // 预约挂号
     path: "/appointment",
     name: "appointment",
