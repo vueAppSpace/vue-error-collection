@@ -16,6 +16,11 @@ declare module "@ungap/has-own";
 
 declare module "@vitejs/plugin-legacy";
 
+declare interface Window {
+  plus: Record<string, any>;
+  [props: string]: any;
+}
+
 interface ImportMetaEnv {
   // readonly VITE_APP_TITLE: string;
   readonly VITE_BASE_URL: string;

@@ -84,8 +84,8 @@ export const ddOpenWebView = ({ params }) => {
 
 /**
  * @description: 通过icome打开微信小程序
- * @param {string} appletId - 小程序username
- * @param {string} path - 小程序路径
+ * @param {object}
+ * {appletId: string 小程序username, path : string 小程序路径}
  * @return void
  */
 export const ddOpenWXMiniProgram = ({ params }) => {
@@ -105,7 +105,8 @@ export const ddOpenWXMiniProgram = ({ params }) => {
 
 /**
  * @description: 唤起icome内私聊 pc端手机端均支持
- * @param {string} userId - icome账号
+ * @param {object}
+ * {userId: string icome账号}
  * @return void
  */
 export const ddOpenIcomeChat = ({ params, successCB }) => {
@@ -118,8 +119,8 @@ export const ddOpenIcomeChat = ({ params, successCB }) => {
 
 /**
  * @description: 拨打电话 仅支持手机端
- * @param {string} tel - 手机号
- * @param {boolean} showDingCall - 可选参数
+ * @param {object}
+ * {tel: string 手机号,showDingCall: boolean 可选参数}
  * @return void
  */
 export const ddCallPhone = ({ params }) => {
@@ -149,7 +150,6 @@ export const ddScanQRCode = ({ successCB }) => {
 /**
  *  @param {string} text - 钉钉消息文本
  */
-// TODO 不清楚干啥的
 export const setLeft = ({ params }) => {
   ic.run({
     action: "navigation.setLeft",
@@ -187,7 +187,8 @@ export const hideCloseBtn = () => {
 
 /**
  * @description: 禁用ios左滑返回
- * @param {string}  disabled - 可选
+ * @param {object}
+ * {disabled: string 可选}
  * @return void
  */
 export const interactivePopDisabled = ({ params }) => {
@@ -202,8 +203,8 @@ export const interactivePopDisabled = ({ params }) => {
 
 /**
  * @description: 预览文件
- * @param {string}  serverUrl
- * @param {string}  fileName
+ * @param {object}
+ * {serverUrl: string, fileName: string}
  * @return void
  */
 export const previewFile = ({ params, successCB, errorCB }) => {
@@ -249,7 +250,8 @@ export const openMap = ({ successCB }) => {
 
 /**
  * @description: 下载音频
- * @param {string}  mediaId
+ * @param {object}
+ * mediaId string
  * @return void
  */
 export const audioDownload = ({ params, successCB }) => {
@@ -262,7 +264,8 @@ export const audioDownload = ({ params, successCB }) => {
 
 /**
  * @description: 播放音频
- * @param {string}  localAudioId
+ * @param {object}
+ * localAudioId string
  * @return void
  */
 export const audioPlay = ({ params }) => {
@@ -274,8 +277,9 @@ export const audioPlay = ({ params }) => {
 
 /**
  * @description: pc 视频播放
- * @param {string} title - 视频标题
- * @param {string} url - 视频链接
+ * @param {object}
+ * {string} title - 视频标题
+ * {string} url - 视频链接
  * @return void
  */
 export const openModal = ({ params }) => {
