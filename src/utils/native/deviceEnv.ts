@@ -4,15 +4,15 @@ export const isUniApp = (function () {
   return /uni-app/.test(ua) || /Html5Plus/.test(ua);
 })();
 
-export const isIcome = (function () {
+export const isIcome: boolean = (function () {
   return window.ic && window.ic.isIcome;
 })();
 
-export const isIcomeIOS = (function () {
+export const isIcomeIOS: boolean = (function () {
   return window.ic && window.ic.isIOS;
 })();
 
-export const isIcomeAndroid = (function () {
+export const isIcomeAndroid: boolean = (function () {
   return window.ic && window.ic.isAndroid;
 })();
 
