@@ -25,24 +25,25 @@
 </script>
 
 <template>
-  <div class="content-box">
-    <div class="badge" v-for="item in list" :key="item.ornamentId" @click="onSelectOrnament(item)">
-      <img :src="item.ornamentImgUrl" alt="" />
-      <div class="name">
-        {{ item.ornamentName }}
-      </div>
-      <div
-        class="btn font-regular"
-        :class="{
-          used: item.wearState === 1,
-          useable: item.wearState === 0 && item.isHave === 1,
-          unavailable: item.isHave === 0
-        }"
-      >
-        {{ getBtnText(item) }}
+  <div>
+    <div class="content-box">
+      <div class="badge" v-for="item in list" :key="item.ornamentId" @click="onSelectOrnament(item)">
+        <img :src="item.ornamentImgUrl" alt="" />
+        <div class="name">
+          {{ item.ornamentName }}
+        </div>
+        <div
+          class="btn font-regular"
+          :class="{
+            used: item.wearState === 1,
+            useable: item.wearState === 0 && item.isHave === 1,
+            unavailable: item.isHave === 0
+          }"
+        >
+          {{ getBtnText(item) }}
+        </div>
       </div>
     </div>
-
     <tips :value.sync="showTips" title="" titleNum="" :exp="0">
       <template>
         <div class="tips-content">

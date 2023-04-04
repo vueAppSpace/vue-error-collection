@@ -25,24 +25,26 @@
 </script>
 
 <template>
-  <div class="content-box">
-    <div
-      class="head"
-      :class="`head-${index % 3}`"
-      v-for="(item, index) in list"
-      :key="item.ornamentId"
-      @click="onSelectOrnament(item)"
-    >
-      <img :src="item.ornamentImgUrl" alt="" />
+  <div>
+    <div class="content-box">
       <div
-        class="btn font-regular"
-        :class="{
-          used: item.wearState === 1,
-          useable: item.wearState === 0 && item.isHave === 1,
-          unavailable: item.isHave === 0
-        }"
+        class="head"
+        :class="`head-${index % 3}`"
+        v-for="(item, index) in list"
+        :key="item.ornamentId"
+        @click="onSelectOrnament(item)"
       >
-        {{ getBtnText(item) }}
+        <img :src="item.ornamentImgUrl" alt="" />
+        <div
+          class="btn font-regular"
+          :class="{
+            used: item.wearState === 1,
+            useable: item.wearState === 0 && item.isHave === 1,
+            unavailable: item.isHave === 0
+          }"
+        >
+          {{ getBtnText(item) }}
+        </div>
       </div>
     </div>
     <tips :value.sync="showTips" title="" titleNum="" :exp="0">
