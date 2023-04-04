@@ -11,6 +11,8 @@
   import Tips from "@/components/Tips";
   import intro from "@/utils/intro";
   import { useRoute } from "@/hooks/useRouter";
+  import { isIOS, isUniApp } from "@/utils/native/deviceEnv";
+
 
   export default defineComponent({
     components: {
@@ -32,6 +34,10 @@
         address: "河北省廊坊市",
         isScroll: false
       });
+
+      if (isUniApp) {
+        state.address = '天津市';
+      }
 
       // 查询天数
       const queryAccompanyDay = () => {
@@ -57,6 +63,7 @@
 
       // 获取当前位置
       const queryLocation = () => {
+        // #v-ifdef VITE_IFDEF=ICOME
         window.ic &&
           ic.run({
             action: "amap.location",
@@ -64,10 +71,12 @@
               state.address = data.city + data.district;
             }
           });
+        // #v-endif    
       };
 
       // 点击地图
       const openMap = () => {
+        // #v-ifdef VITE_IFDEF=ICOME
         window.ic &&
           ic.run({
             action: "amap.openMap",
@@ -75,6 +84,7 @@
               state.address = data.city + data.district;
             }
           });
+        // #v-endif  
       };
 
       // 发送埋点信息

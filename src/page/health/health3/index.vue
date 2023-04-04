@@ -28,7 +28,7 @@
   import { printVersion } from "@/utils/versionUtil";
   import { jsBridge } from "@/utils/native/jsBridge";
   import { useRouter, useRoute } from "@/hooks/useRouter";
-  import { isIOS } from "@/utils/native/deviceEnv";
+  import { isIOS, isUniApp } from "@/utils/native/deviceEnv";
 
   export default defineComponent({
     components: {
@@ -71,8 +71,13 @@
         accompanyDay: 0, // 陪伴天数
         address: "河北省廊坊市",
         isScroll: false,
-        showVConsoleCount: 0
+        showVConsoleCount: 0,
+        city: ''
       });
+
+      if (isUniApp) {
+        state.address = '天津市';
+      }
 
       const { queryQuestions } = useQuestions();
 
@@ -114,13 +119,25 @@
             console.log("初始化位置>>>>>>>>>>", data);
 
             if (data.city) {
-              state.address = data.city + data.district;
+              state.city = data.city;
+              if (isUniApp) {
+                state.address = data.city;
+              } else {
+                state.address = data.city + data.district;
+              }
+              // #v-ifdef VITE_IFDEF=ICOME
+              // state.address = data.city + data.district;// 初始化只有地址，没有cityCode
+              // #v-endif
+              // #v-ifdef VITE_IFDEF=EMALL
+              // #v-endif
               if (data.city == "北京市") {
                 setCityCode("010");
               } else if (data.city == "石家庄市") {
                 setCityCode("0311");
               } else if (data.city == "廊坊市") {
                 setCityCode("0316");
+              } else if (data.city == "天津市") {
+                setCityCode("022");
               } else {
                 setCityCode("0471");
               }
@@ -133,37 +150,21 @@
           .catch(err => {
             console.log("扫码异常:", err);
           });
-
-        // window.ic &&
-        //   ic.run({
-        //     action: "amap.location",
-        //     success: ({ data }) => {
-        //       console.log('初始化位置', data)
-        //       if (data.city) {
-        //         state.address = data.city + data.district;
-        //         if (data.city == '北京市') {
-        //             setCityCode('010');
-        //         } else if (data.city == '石家庄市') {
-        //             setCityCode('0311');
-        //         } else if (data.city == '廊坊市') {
-        //             setCityCode('0316');
-        //         } else {
-        //             setCityCode('0471');
-        //         }
-        //         // setTimeout(() => {
-        //         console.log('去除定时器');
-        //         getCanteenList();
-        //         // }, 500);
-        //       }
-
-        //     },
-        //   });
       };
 
       // 点击地图
       const openMap = () => {
-        // setCityCode('010');
-        window.ic &&
+        console.log('state.city', state.city)
+        if (isUniApp) {
+          router.push({
+            path: "/address",
+            query: {
+              city: state.city
+            }
+          });
+        } else {
+          // #v-ifdef VITE_IFDEF=ICOME
+          window.ic &&
           ic.run({
             action: "amap.openMap",
             success: ({ data }) => {
@@ -173,6 +174,8 @@
               getCanteenList();
             }
           });
+          // #v-endif
+        }
       };
 
       const getCanteenList = async () => {
@@ -291,6 +294,14 @@
         if (scrollTop && pageBox) {
           pageBox.scrollTop = scrollTop;
         }
+        if (route.value.query.city) {
+          setCityCode(route.value.query.cityCode);
+          state.city = route.value.query.city;
+          state.address = route.value.query.city;
+          getCanteenList();
+        }
+        console.log('route', route.value.query.city);
+
       });
 
       onDeactivated(() => {

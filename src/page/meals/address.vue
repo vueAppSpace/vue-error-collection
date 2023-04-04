@@ -5,37 +5,92 @@
     toRefs,
     onMounted,
     onActivated,
-    onDeActivated,
+    onDeactivated,
     watch,
     ref
   } from "@vue/composition-api";
+  import { jsBridge } from "@/utils/native/jsBridge";
+  import { useRouter, useRoute } from "@/hooks/useRouter";
   export default defineComponent({
     props: {},
     setup(props, context) {
+      const { $router } = context.root;
+      const router = useRouter($router);
+
+      const route = useRoute($router);
+
+      console.log('route', route);
+      
       const state = reactive({
-        locationCityName: "廊坊",
+        locationCityName: "天津",
         cityList: [
           {
-            name: "廊坊",
+            name: "廊坊市",
             cityCode: "0316"
           },
           {
-            name: "天津",
+            name: "天津市",
             cityCode: "022"
           },
           {
-            name: "石家庄",
+            name: "石家庄市",
             cityCode: "0311"
+          },
+          {
+            name: "北京市",
+            cityCode: "010"
           }
         ]
       });
 
+      state.locationCityName = route.value.query.city;
+
       const selectCityHandle = item => {
         console.log("item", item);
+        router.push({
+          path: '/health',
+          query: {
+            city: item.name,
+            cityCode: item.cityCode
+          }
+        })
       };
 
       const locationAgainFn = () => {
-        console.log("获取定位信息");
+        // router.push({
+        //   path: '/health',
+        //   query: {
+        //     city: '廊坊'
+        //   }
+        // })
+        jsBridge
+          .invoke("queryLocation")
+          .then(data => {
+            console.log("初始化位置>>>>>>>>>>", data);
+
+            
+            if (data.city) {
+              const cityArr = state.cityList.filter( item => {
+                console.log('item.name', item.name);
+                console.log('data.city', data.city)
+                return item.name == data.city;
+              } )
+
+              console.log('cityArr', cityArr)
+              // return false;
+              router.push({
+                path: '/health',
+                query: {
+                  city: data.city,
+                  cityCode: cityArr[0].cityCode
+                }
+              })
+            }
+            // 这一块如何获取cityCode
+          })
+          .catch(err => {
+            console.log("扫码异常:", err);
+          });
       };
       return {
         ...toRefs(state),

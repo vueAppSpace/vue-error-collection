@@ -158,6 +158,7 @@
     </div>
     <van-popup
       v-model="show"
+      get-container="body"
       position="bottom"
       round
       :style="{ height: '5.9rem', padding: '0.32rem 0.32rem 0.24rem', overflow: 'hidden' }"
