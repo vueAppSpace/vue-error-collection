@@ -199,28 +199,28 @@ export default async (url = "", data = {}, requesTtype = "GET", contentType = ""
   return response;
 };
 
-async function doRequest(error) {
-  try {
-    const data = await getNewToken(localStorage.getItem("refreshToken"));
+// async function doRequest(error) {
+//   try {
+//     const data = await getNewToken(localStorage.getItem("refreshToken"));
 
-    if (data.data.code == -1) {
-      if (invalidRefreshTokenTask) {
-        invalidRefreshTokenTask.postMessage(0);
-      }
-      return;
-    }
+//     if (data.data.code == -1) {
+//       if (invalidRefreshTokenTask) {
+//         invalidRefreshTokenTask.postMessage(0);
+//       }
+//       return;
+//     }
 
-    localStorage.setItem("accessToken", data.data.data.accessToken);
-    if (data.data.data.accessToken) {
-      // 告诉张魏,更新token操作
-      if (setTokenTask) {
-        setTokenTask.postMessage(data.data.data.accessToken);
-      }
-    }
-    const res = await service.request(error.config);
-    return res;
-  } catch (err) {}
-}
+//     localStorage.setItem("accessToken", data.data.data.accessToken);
+//     if (data.data.data.accessToken) {
+//       // 告诉张魏,更新token操作
+//       if (setTokenTask) {
+//         setTokenTask.postMessage(data.data.data.accessToken);
+//       }
+//     }
+//     const res = await service.request(error.config);
+//     return res;
+//   } catch (err) {}
+// }
 
 async function createToken() {
   return await axios({

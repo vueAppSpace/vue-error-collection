@@ -2,7 +2,7 @@
  * @Description: 获取token
  * @Author: IFLS
  * @Date: 2022-04-24 14:09:14
- * @LastEditTime: 2023-04-04 16:55:14
+ * @LastEditTime: 2023-04-04 18:52:14
  */
 import { getToken as queryToken } from "@/service/api";
 import { getURLParameters } from "@/utils/commonFun";
@@ -63,7 +63,7 @@ const getToken = async () => {
   } else if (params === NO_LOGIN) {
     return await Promise.resolve({ code: -99, data: null, message: null });
   } else {
-    localStorage.removeItem("accessToken"); // 清除旧版本用户登录信息
+    //localStorage.removeItem("accessToken"); // 清除旧版本用户登录信息
     sessionStorage.removeItem("userStore"); // 清除登录信息
     return await queryToken(params);
   }
