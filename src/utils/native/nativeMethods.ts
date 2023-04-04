@@ -2,13 +2,16 @@ import * as ddTools from "@/utils/native/ddTools";
 import * as plusTools from "@/utils/native/plusTools";
 import * as webTools from "@/utils/native/webTools";
 import { isUniApp } from "@/utils/native/deviceEnv";
+import { Payload } from "@/utils/native/jsBridge";
+
+export type NativeMethods = Record<string, (payload: Payload) => void>;
 
 export default {
   closeWebView(payload) {
     if (isUniApp) {
       callPlusMethod("closeWebView", payload);
     } else {
-      ddTools.ddCloseWebView(payload);
+      ddTools.ddCloseWebView();
     }
   },
   openWebView(payload) {
@@ -26,7 +29,7 @@ export default {
     }
   },
   openIcomeChat(payload) {
-    // TODO e商城 不支持
+    // e商城 不支持
     if (!isUniApp) {
       ddTools.ddOpenIcomeChat(payload);
     }
@@ -125,13 +128,14 @@ export default {
   openIcome(payload) {
     webTools.webOpenIcome(payload);
   }
-};
+} as NativeMethods;
 
-function callPlusMethod(name, payload) {
+function callPlusMethod<T extends Payload>(name: string, payload: T): void {
   console.log("plus method");
+  const plusMethod = (plusTools as Record<string, (params?: T) => void>)[name];
   if (window.plus) {
-    plusTools[name](payload);
+    plusMethod(payload);
   } else {
-    document.addEventListener("plusready", () => plusTools[name](payload), false);
+    document.addEventListener("plusready", () => plusMethod(payload), false);
   }
 }
