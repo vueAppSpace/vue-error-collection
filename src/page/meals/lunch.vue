@@ -75,6 +75,7 @@
 
     <van-popup
       v-model="show"
+      get-container="body"
       position="bottom"
       round
       :style="{ height: '5.7rem', padding: '0.32rem 0.32rem 0.24rem', overflow: 'hidden' }"
@@ -115,8 +116,8 @@
 
   const host = window.location.href;
 
-  import { isIcomeMobile, isIcomePC } from "@/utils/native/deviceEnv";
   import { jsBridge } from "@/utils/native/jsBridge";
+  import { isIOS, isUniApp, isIcomeMobile, isIcomePC } from "@/utils/native/deviceEnv";
 
   export default {
     directives: {},
@@ -153,7 +154,7 @@
       selectCanteen() {
         this.show = true;
         this.zgStatistics("健康新奥-餐食-点击切换食堂", {
-          默认食堂名称: this.canteenListData[0].canteenName
+          默认食堂名称: this.canteen.canteenName
         });
       },
       submit() {
@@ -216,7 +217,7 @@
       getBizFieldFn(nameArr) {
         let data = {
           recipes: nameArr,
-          canteenId: this.canteenListData[0].canteenId
+          canteenId: this.canteen.canteenId
         };
         getBizField(data)
           .then(res => {
@@ -231,26 +232,31 @@
               let url =
                 `${orderLunchUrl}` +
                 encodeURIComponent(
-                  `${dianCanUrl}?ticket=ticket&dishId=${dishId}&canteenId=${this.canteenListData[0].canteenId}&dd_full_screen=true&date=${date}`
+                  `${dianCanUrl}?ticket=ticket&dishId=${dishId}&canteenId=${this.canteen.canteenId}&dd_full_screen=true&date=${date}`
                 );
 
               // 点餐宝地址
               // var orderLunchUrl = 'https://icome-dingtalk-h5.uat.ennew.com/transit?redirect_uri='
               // var dianCanUrl = 'https://imeal-h5.uat.ennew.com/mealDetail'
-              let dianCanUrlPcParame = `${dianCanUrl}?ticket=ticket&dishId=${dishId}&canteenId=${this.canteenListData[0].canteenId}&dd_full_screen=true&date=${date}`;
+              let dianCanUrlPcParame = `${dianCanUrl}?ticket=ticket&dishId=${dishId}&canteenId=${this.canteen.canteenId}&dd_full_screen=true&date=${date}`;
               let url2 =
                 "dingtalk://dingtalkclient/page/link?url=" +
                 encodeURIComponent(orderLunchUrl + encodeURIComponent(dianCanUrlPcParame)) +
                 "&web_wnd=general&width=960&height=640";
               // dingtalk://dingtalkclient/page/link?url=https%3A%2F%2Ficome-dingtalk-h5.uat.ennew.com%2Ftransit%3Fredirect_uri%3Dhttps%253A%252F%252Fimeal-h5.uat.ennew.com%252FmealDetail%253Fticket%253Dticket%2526dishId%253D4425%2526canteenId%253D4%2526dd_full_screen%253Dtrue%2526date%253D2022-09-01&web_wnd=general&width=960&height=640
 
+              let userInfo = null;
+              if (isUniApp) {
+                userInfo = JSON.parse( localStorage.getItem('ticket') );
+              }
+              let emallUrl = encodeURIComponent(`${dianCanUrl}?authCode=${userInfo.grantCode}&authTenantId=${userInfo.accountId}&dishId=${dishId}&canteenId=${this.canteen.canteenId}&date=${date}`);
               if (isIcomeMobile) {
                 jsBridge.invoke("openWebView", { targetUrl: url });
               } else if (isIcomePC) {
                 console.log("url2", url2);
                 window.location.href = url2;
-              } else {
-                console.log("处理混合app");
+              } else if (isUniApp) {
+                jsBridge.invoke("openWebView", { targetUrl: emallUrl });
               }
             }
           })

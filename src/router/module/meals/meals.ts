@@ -87,5 +87,14 @@ export default [
     meta: {
       title: "食材推荐"
     }
+  },
+  {
+    // 选择地址
+    path: "/address",
+    name: "address",
+    component: () => import("@/page/meals/address.vue"),
+    meta: {
+      title: "选择地址"
+    }
   }
 ];
