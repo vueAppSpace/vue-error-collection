@@ -305,7 +305,7 @@
 
   import BiteItem from "./components/BiteItem";
 
-  import { hUrl } from "@/config/env";
+  // import { hUrl } from "@/config/env";
 
   import Tips from "@/components/Tips";
 

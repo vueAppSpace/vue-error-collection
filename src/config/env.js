@@ -10,7 +10,7 @@ const DEFAULT_ENV_KEY = "__APP_ENV__";
 if (["emallpro", "icomepro"].includes(environment)) {
   // 生产环境
   window[DEFAULT_ENV_KEY] = "product";
-  var hUrl = "https://c.op.laikang.com/platform/";
+  var icomeH5Url = "https://c.op.laikang.com/report";
   var healthBookingUrl = "https://mirror.laikang.com/lktoolsh5/icome-healthy/icome-healthy.html#/examine"; // 体检预约
   // 点餐宝地址
   var orderLunchUrl = "https://icome-dingtalk-h5.ennew.com/transit?redirect_uri=";
@@ -43,7 +43,7 @@ if (["emallpro", "icomepro"].includes(environment)) {
 } else if (["icomeqa", "emallqa"].includes(environment)) {
   // 测试环境相关地址
   window[DEFAULT_ENV_KEY] = "pre";
-  var hUrl = "https://c-qa.op.laikang.com/platform/";
+  var icomeH5Url = "https://c-qa.op.laikang.com/report";
   var healthBookingUrl = "https://mirror-test.v.laikang.com/lktoolsh5/icome-healthy/icome-healthy.html#/examine"; // 体检预约
   // 点餐宝地址
   var orderLunchUrl = "https://icome-dingtalk-h5.uat.ennew.com/transit?redirect_uri=";
@@ -78,7 +78,7 @@ if (["emallpro", "icomepro"].includes(environment)) {
   // 开发环境相关地址
   window[DEFAULT_ENV_KEY] = "pre";
   platform = "https://cloud-qa.op.laikang.com/v1";
-  var hUrl = "https://c-qa.op.laikang.com/platform/";
+  var icomeH5Url = "https://c-qa.op.laikang.com/report";
   var healthBookingUrl = "https://mirror-test.v.laikang.com/lktoolsh5/icome-healthy/icome-healthy.html#/examine"; // 体检预约
   // 点餐宝地址
   var orderLunchUrl = "https://icome-dingtalk-h5.uat.ennew.com/transit?redirect_uri=";
@@ -134,7 +134,7 @@ export {
   configUrl,
   healthUrlRecommend,
   xinao,
-  hUrl,
+  icomeH5Url,
   healthBookingUrl,
   orderLunchUrl,
   danaoQuestionUrl,

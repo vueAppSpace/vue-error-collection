@@ -2,11 +2,13 @@
  * @Description: 获取token
  * @Author: IFLS
  * @Date: 2022-04-24 14:09:14
- * @LastEditTime: 2023-04-03 14:07:55
+ * @LastEditTime: 2023-04-04 16:55:14
  */
 import { getToken as queryToken } from "@/service/api";
 import { getURLParameters } from "@/utils/commonFun";
-import { Toast } from "vant";
+import { Toast, Dialog } from "vant";
+import { jsBridge } from "@/utils/native/jsBridge";
+import { icomeH5Url } from "@/config/env";
 
 const errorTips = message => {
   Toast({
@@ -14,7 +16,7 @@ const errorTips = message => {
     duration: 3000,
     message
   });
-  throw Error(message);
+  throw new Error(message);
 };
 
 const NO_TICKET = "noticket";
@@ -67,8 +69,28 @@ const getToken = async () => {
   }
 };
 
+const interceptCompanyId = companyId => {
+  // #v-ifdef VITE_IFDEF=EMALL
+  if (companyId === 240) {
+    Dialog.alert({
+      title: "提示",
+      confirmButtonColor: "#4d87f9",
+      message: "检测到您的租户信息在ICOME下, 点击确认后跳转ICOME"
+    }).then(() => {
+      jsBridge.invoke("openIcome", {
+        targetUrl: `${icomeH5Url}/health`,
+        extraParame: "&dd_full_screen=true"
+      });
+    });
+    // 打断后续代码执行
+    throw new Error("waiting to jump icome...");
+  }
+  // #v-endif
+};
+
 const setToken = response => {
   if (response.code === 0) {
+    interceptCompanyId(response.data.memberBasicDTO.companyId);
     //  注意: 不应往此处添加登录信息 所有登录信息均已保存到pinia userStore中
     localStorage.setItem("memberCode", response.data.memberBasicDTO.memberCode);
     localStorage.setItem("memberId", response.data.memberBasicDTO.memberId);
