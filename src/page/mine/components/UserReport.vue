@@ -23,7 +23,7 @@
       const state = reactive({
         memberCode: localStorage.getItem("memberCode"),
         empNo: userInfo.value.empNo,
-        memberId: localStorage.getItem("memberId"),
+        memberId: userInfo.value.memberId,
         reportData: {},
         reportLoading: true
       });

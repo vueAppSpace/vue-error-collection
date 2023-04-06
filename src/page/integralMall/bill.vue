@@ -2,7 +2,7 @@
  * @Description: 积分账单
  * @Author: IFLS
  * @Date: 2022-11-16 09:53:14
- * @LastEditTime: 2023-03-28 09:56:01
+ * @LastEditTime: 2023-04-06 13:37:43
 -->
 <script>
   import { defineComponent, toRefs, reactive, onMounted, onBeforeUnmount } from "@vue/composition-api";
@@ -10,11 +10,15 @@
   import { queryMineRankList } from "@/service/mine/index";
   import { unFlatArr } from "@/utils/commonFun";
   import { translateName } from "./taskType";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     setup(_, context) {
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
-        userInfo: {},
+        userData: {},
         list: [],
         page: {
           pageIndex: 1,
@@ -30,7 +34,7 @@
       const queryMineData = () => {
         queryMineRankList(localStorage.getItem("memberCode")).then(({ code, data, message }) => {
           if (code === 0) {
-            state.userInfo = data || {};
+            state.userData = data || {};
           } else {
             console.log("queryMineData", message);
             // Toast(message);
@@ -40,7 +44,7 @@
 
       // 查询积分列表
       const queryList = () => {
-        const req = { memberId: localStorage.getItem("memberId"), ...state.page };
+        const req = { memberId: userInfo.value.memberId, ...state.page };
         queryPointList(req).then(({ code, data, message, page }) => {
           if (code === 0) {
             data = data.map(item => {
@@ -102,12 +106,12 @@
     <div class="top-box">
       <div class="top-box-left">
         <div class="title">累计积分</div>
-        <div class="num">{{ userInfo.totalHealthPoints }}</div>
+        <div class="num">{{ userData.totalHealthPoints }}</div>
       </div>
       <hr />
       <div class="top-box-right">
         <div class="title">剩余积分</div>
-        <div class="num">{{ userInfo.healthPoints }}</div>
+        <div class="num">{{ userData.healthPoints }}</div>
       </div>
     </div>
 
