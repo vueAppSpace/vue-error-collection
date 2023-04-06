@@ -9,7 +9,7 @@ import https from "https";
 import os from "os";
 import { exec } from "child_process";
 
-type LoginNameType = string | number;
+type LoginNameType = number | string;
 enum Ticket {
   icome = "ICOME",
   emall = "EMALL"
@@ -18,19 +18,19 @@ enum Ticket {
 const osEnv = os.type();
 const isWebpack = process.env.npm_package_version; // 是否为webpack打包环境
 const defaultLoginName = 10057859; //夏高飞 icome 工号
-const authTenantId = "1382587333843415042";
-const grantCode = "MTQ2NDYwNDYyNDQ5OTk0OTU3MCNBUFAjNTVmNWQ3YTRmZWYzMWE4ZGFiYzBhYjEzMmU1MDdiNzU";
+// e 商服登录：账号、密码
+// TODO
+// const userName = "17631807110";
+// const password = "Zhaoce@0206";
 
-// 正式环境 获取 ticket 接口
-// hostname = "icome-dingtalk-h5.ennew.com";
-// path = "/icome/usercenter/getTicket";
 async function getTicket(type: Ticket = Ticket.icome, loginName: LoginNameType = defaultLoginName): Promise<string> {
   let ticket: string;
 
-  if (type === Ticket.emall) {
-    ticket = `authTenantId=${authTenantId}&grantCode=${grantCode}`;
-    return ticket;
-  }
+  // if (type === Ticket.emall) {
+  //   ticket = `userName=${userName}&password=${password}`;
+  //   return ticket;
+  // }
+
   const token = await getToken(loginName);
 
   const options = {
