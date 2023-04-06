@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-02-27 11:29:45
- * @LastEditors: yanghaifengb yanghaifengb@enn.cn
- * @LastEditTime: 2023-03-31 14:01:23
+ * @LastEditors: YanivWang
+ * @LastEditTime: 2023-04-06 14:16:33
  * @FilePath: \lk-xinaohealth-h5\src\page\healthEducation\index.vue
 -->
 <script>
@@ -9,12 +9,16 @@
   import { defineComponent, reactive, toRefs, onMounted, nextTick, ref } from "@vue/composition-api";
   import { queryHealthMission, queryHealthMissionTagList } from "@/service/healthEducation/index";
   import { useRouter } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {},
     setup(_, context) {
       const { zgStatistics, $router } = context.root;
       const router = useRouter($router);
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
 
       const state = reactive({
         tagDatas: [],
@@ -74,7 +78,7 @@
           forbidClick: true
         });
         let params = {
-          phrId: localStorage.getItem("phrId"),
+          phrId: userInfo.value.phrId,
           tagList: state.activeTagItem.tagMetadataCodeList,
           max: 50
         };

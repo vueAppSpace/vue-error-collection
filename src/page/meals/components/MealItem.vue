@@ -37,7 +37,7 @@
   import SmartMeal from "./meals/SmartMeal.vue";
 
   import { useLocationStore, storeToRefs } from "@/pinia";
-  import { mapState, useUserStore } from "@/pinia";
+  import { useUserStore, mapState } from "@/pinia";
 
   export default {
     props: {
@@ -83,7 +83,7 @@
     methods: {
       // 获取自助餐推荐
       async getSelfRecommend() {
-        const phrId = window.localStorage.getItem("phrId");
+        const phrId = this.userInfo.phrId;
         const params = {
           eventCode: "wucan",
           canteenId: this.canteen.canteenId,

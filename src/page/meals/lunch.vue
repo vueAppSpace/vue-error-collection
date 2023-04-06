@@ -119,6 +119,7 @@
 
   import { jsBridge } from "@/utils/native/jsBridge";
   import { isIOS, isUniApp, isIcomeMobile, isIcomePC } from "@/utils/native/deviceEnv";
+  import { useUserStore, mapState } from "@/pinia";
 
   export default {
     directives: {},
@@ -297,7 +298,7 @@
         // let btd = dayjs().subtract(18, 'day').format("YYYY-MM-DD");
         getComponentList({
           eventCode: "wucan",
-          phrId: localStorage.getItem("phrId"),
+          phrId: this.userInfo.phrId,
           canteenId: this.canteen.canteenId, // 食堂id 调试时不填
           date: btd
         }).then(({ code, data, message }) => {

@@ -86,8 +86,6 @@
       return {
         isSelf: undefined,
         memberCode: localStorage.getItem("memberCode"),
-        //empNo: localStorage.getItem("empNo"),
-        //memberId: localStorage.getItem("memberId"),
         list: [],
         selfList: [],
         imgList: imagesArr,

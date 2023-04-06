@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-02-08 17:03:37
  * @LastEditors: YanivWang
- * @LastEditTime: 2023-02-15 18:30:49
+ * @LastEditTime: 2023-04-06 15:04:15
  * @FilePath: \lk-xinaohealth-h5\src\page\classReservations\fillInfo.vue
  * @Description: 动感团操 - 信息填写
 -->
@@ -23,6 +23,7 @@
   import SubmitButton from "@/components/SubmitButton";
 
   import { storeToRefs, useClassReservationsStore } from "@/pinia";
+  import { useUserStore } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -38,10 +39,13 @@
 
       const { zgStatistics, $router: router } = context.root;
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const BasePulseIndex = 50; //心率下限
       const DefaultPulseIndex = 70; //推荐心率
       const state = reactive({
-        phrId: localStorage.getItem("phrId"),
+        phrId: userInfo.value.phrId,
         loading: false,
         userInfo: {
           //1男，2女
@@ -104,7 +108,7 @@
       // 查询用户信息
       const queryInfoFn = () => {
         state.loading = true;
-        queryUserPortrait({ phrId: state.phrId })
+        queryUserPortrait({ phrId: userInfo.value.phrId })
           .then(({ code, data, message }) => {
             if (code === 0) {
               if (data) {

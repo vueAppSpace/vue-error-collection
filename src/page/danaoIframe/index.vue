@@ -15,6 +15,8 @@
 <script>
   import { danaoQuestionUrl, danaoComprehensiveUrl, danaoConsulationUrl } from "@/config/env";
   import { isIOS } from "@/utils/native/deviceEnv";
+  import { useUserStore, mapState } from "@/pinia";
+
   export default {
     data() {
       return {
@@ -22,6 +24,9 @@
         fixOldDevice: false
         // isPc: false,
       };
+    },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
     },
     mounted() {
       // 修复ios11设备iframe高度100%不生效问题
@@ -36,7 +41,7 @@
       }
 
       // ! appkey 大小写不一致
-      const phrId = window.localStorage.getItem("phrId");
+      const phrId = this.userInfo.phrId;
       const appKey = "6KRoN5rng";
       let url = "";
       if (this.$route.query.type == 1) {

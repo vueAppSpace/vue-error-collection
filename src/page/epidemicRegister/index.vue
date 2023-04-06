@@ -2,7 +2,7 @@
  * @Description: 疫情登记
  * @Author: WANGCHENGAE
  * @Date: 2022-11-17 18:00:30
- * @LastEditTime: 2023-03-23 17:35:40
+ * @LastEditTime: 2023-04-06 14:15:44
 -->
 <script>
   import { defineComponent, reactive, toRefs, computed, onMounted } from "@vue/composition-api";
@@ -102,7 +102,7 @@
       }
 
       async function queryUserInfo() {
-        const phrId = (localStorage.getItem("phrId") || "").trim();
+        const phrId = userInfo.value.phrId;
         if (phrId) {
           const { code, message, data } = await queryUserPortrait({ phrId });
           if (code === 0 && data && data.length) {

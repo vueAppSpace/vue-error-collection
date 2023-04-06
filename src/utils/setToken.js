@@ -2,7 +2,7 @@
  * @Description: 获取token
  * @Author: IFLS
  * @Date: 2022-04-24 14:09:14
- * @LastEditTime: 2023-04-06 10:51:30
+ * @LastEditTime: 2023-04-06 15:22:50
  */
 import { getToken as queryToken } from "@/service/api";
 import { getURLParameters } from "@/utils/commonFun";
@@ -93,8 +93,6 @@ const setToken = response => {
     interceptCompanyId(response.data.memberBasicDTO.companyId);
     //  注意: 不应往此处添加登录信息 所有登录信息均已保存到pinia userStore中
     localStorage.setItem("memberCode", response.data.memberBasicDTO.memberCode);
-    localStorage.setItem("memberId", response.data.memberBasicDTO.memberId);
-    localStorage.setItem("phrId", response.data.memberBasicDTO.phrId);
 
     const userInfo = response.data;
     userInfo.accompanyDay = userInfo.accompanyDay || 0;

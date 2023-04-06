@@ -2,7 +2,7 @@
  * @Description: 既往史详情 1.0.11版本后 此页面弃用
  * @Author: IFLS
  * @Date: 2022-06-17 22:28:10
- * @LastEditTime: 2023-03-28 10:05:22
+ * @LastEditTime: 2023-04-06 14:19:09
 -->
 <script>
   import { defineComponent, reactive, toRefs } from "@vue/composition-api";
@@ -11,11 +11,15 @@
   import { unFlatArr } from "@/utils/commonFun";
   import { updateUserPortrait } from "@/service/profile";
   import { useRouter } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs, mapState } from "@/pinia";
 
   export default defineComponent({
     setup(_, { refs, root }) {
       const { $router, zgStatistics } = root;
       const router = useRouter($router);
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
 
       let historyData = JSON.parse(sessionStorage.getItem("pastHistoryDetail"));
 
@@ -34,7 +38,6 @@
       });
 
       const state = reactive({
-        phrId: localStorage.getItem("phrId"),
         history,
         activeNames,
         result: [],
@@ -103,7 +106,7 @@
           }
         });
 
-        const req = { uid: state.phrId, quotaList };
+        const req = { uid: userInfo.value.phrId, quotaList };
         updateUserPortrait(req).then(({ code, message }) => {
           if (code === 0) {
             toastAndGoback();

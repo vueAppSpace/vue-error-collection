@@ -13,6 +13,7 @@
   import { unFlatArr } from "@/utils/commonFun";
   import { queryDiseaseProfile, queryUserPortrait, updateUserPortrait } from "@/service/profile";
   import { useRouter } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs, mapState } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -22,8 +23,10 @@
       const { $router } = context.root;
       const router = useRouter($router);
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
-        phrId: localStorage.getItem("phrId"),
         history: [],
         loading: false,
         isClick: false
@@ -42,7 +45,7 @@
             if (data) {
               try {
                 // 查询已保存既往史
-                const dt = await queryUserPortrait({ phrId: state.phrId });
+                const dt = await queryUserPortrait({ phrId: userInfo.value.phrId });
                 if (dt.code === 0) {
                   const pastHistoryActive =
                     dt.data &&
@@ -107,7 +110,7 @@
           }
         });
 
-        const req = { uid: state.phrId, quotaList };
+        const req = { uid: userInfo.value.phrId, quotaList };
         updateUserPortrait(req).then(({ code, message }) => {
           if (code === 0) {
             if (typeof cb === "function") {
