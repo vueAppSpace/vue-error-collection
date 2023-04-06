@@ -2,7 +2,7 @@
  * @Description: 健康成就
  * @Author: WANGCHENGAE
  * @Date: 2022-12-6 18:00:30
- * @LastEditTime: 2023-03-23 17:33:53
+ * @LastEditTime: 2023-04-06 10:46:07
 -->
 <script>
   import { defineComponent, reactive, toRefs, computed, onMounted } from "@vue/composition-api";
@@ -10,6 +10,7 @@
   import { ImgsMap } from "./constant";
   import { Toast } from "vant";
   import { queryUserAchievements } from "@/service/achievement/index";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     props: {
@@ -18,13 +19,17 @@
 
     setup({ points }, context) {
       const { zgStatistics, $router: router } = context.root;
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
         achievements: [],
         ImgsMap,
         badgeCount: 0
       });
 
-      const userEmpNo = localStorage.getItem("empNo") || "";
+      const userEmpNo = userInfo.value.empNo;
 
       onMounted(() => {
         getUserAchievements();

@@ -12,11 +12,15 @@
   // import { jumpToSportGym } from "@/utils/jumpToSportGym";
   import { queryEmployeeList } from "@/service/mine";
   import { useRouter } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     setup(_, context) {
       const { $router } = context.root;
       const router = useRouter($router);
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
 
       const state = reactive({
         active: 0,
@@ -42,7 +46,7 @@
         try {
           const req = {
             memberCode: localStorage.getItem("memberCode"),
-            userEmpNo: localStorage.getItem("empNo"),
+            userEmpNo: userInfo.value.empNo,
             status: 1
           };
           const { code, data, message } = await queryEmployeeList(req);

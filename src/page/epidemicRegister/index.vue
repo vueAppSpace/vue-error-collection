@@ -30,6 +30,7 @@
   import { getThirdUserToken } from "@/service/service";
   import { queryUserPortrait } from "@/service/profile";
   import UploaderPic from "@/components/Uploader/UploaderPic.vue";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -61,6 +62,10 @@
 
     setup({ type }, context) {
       const { zgStatistics, $router: router } = context.root;
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
         inputList: getInputList(),
         radioList: getRadioList(),
@@ -72,7 +77,7 @@
 
       const { setTitle } = useNavStore();
 
-      const userEmpNo = localStorage.getItem("empNo") || "";
+      const userEmpNo = userInfo.value.empNo;
 
       async function mountedHandle(fromPath) {
         if (ValidSourceTypeArray.includes(type) && SourcePageArray.includes(fromPath)) {

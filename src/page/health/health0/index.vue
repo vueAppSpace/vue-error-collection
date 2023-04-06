@@ -12,7 +12,7 @@
   import intro from "@/utils/intro";
   import { useRoute } from "@/hooks/useRouter";
   import { isIOS, isUniApp } from "@/utils/native/deviceEnv";
-  import { useUserStore } from "@/pinia";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {

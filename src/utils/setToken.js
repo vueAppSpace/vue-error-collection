@@ -2,7 +2,7 @@
  * @Description: 获取token
  * @Author: IFLS
  * @Date: 2022-04-24 14:09:14
- * @LastEditTime: 2023-04-06 10:10:16
+ * @LastEditTime: 2023-04-06 10:51:30
  */
 import { getToken as queryToken } from "@/service/api";
 import { getURLParameters } from "@/utils/commonFun";
@@ -95,10 +95,11 @@ const setToken = response => {
     localStorage.setItem("memberCode", response.data.memberBasicDTO.memberCode);
     localStorage.setItem("memberId", response.data.memberBasicDTO.memberId);
     localStorage.setItem("phrId", response.data.memberBasicDTO.phrId);
-    localStorage.setItem("empNo", response.data.empNo);
 
     const userInfo = response.data;
     userInfo.accompanyDay = userInfo.accompanyDay || 0;
+    userInfo.empNo = userInfo.empNo || "";
+
     sessionStorage.setItem("userStore", JSON.stringify({ userInfo })); // 构造pinia userStore数据
     window.zhuge && zhuge.identify(userInfo.xinaoAccount?.toLocaleLowerCase()); // 埋点用户识别
   } else if (response.code === -999) {

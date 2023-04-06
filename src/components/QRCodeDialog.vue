@@ -9,6 +9,7 @@
   import { defineComponent, reactive, toRefs, watch } from "@vue/composition-api";
   import Tips from "@/components/Tips";
   import { queryQRCode } from "@/service/mine";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -21,6 +22,9 @@
       }
     },
     setup(props, { emit }) {
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const seconds = 30;
       const state = reactive({
         visible: props.value,
@@ -39,7 +43,7 @@
         }
       );
 
-      const content = localStorage.getItem("empNo");
+      const content = userInfo.value.empNo;
       const req = { seconds, type: 1000, content };
       const showQRCode = () => {
         clearInterval(state.timer);

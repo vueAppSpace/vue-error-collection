@@ -183,7 +183,7 @@
       };
 
       const getCanteenList = async () => {
-        const employeeId = window.localStorage.getItem("empNo");
+        const employeeId = userInfo.value.empNo;
         getCanteenListByEmp({ employeeId, cityCode: cityCode.value })
           .then(res => {
             if (res.code === 0) {

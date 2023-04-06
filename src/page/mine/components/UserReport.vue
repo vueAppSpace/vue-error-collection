@@ -2,7 +2,7 @@
  * @Description: 用户自上传的体检报告
  * @Author: IFLS
  * @Date: 2022-06-28 11:13:35
- * @LastEditTime: 2023-03-31 15:27:12
+ * @LastEditTime: 2023-04-06 10:54:12
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, computed } from "@vue/composition-api";
@@ -10,15 +10,19 @@
   import { formatTime } from "@/utils/commonFun";
   import { queryReport } from "@/service/uploadReport";
   import { useRouter } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     setup(_, context) {
       const { $router } = context.root;
       const router = useRouter($router);
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
         memberCode: localStorage.getItem("memberCode"),
-        empNo: localStorage.getItem("empNo"),
+        empNo: userInfo.value.empNo,
         memberId: localStorage.getItem("memberId"),
         reportData: {},
         reportLoading: true

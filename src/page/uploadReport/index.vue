@@ -2,7 +2,7 @@
  * @Description: 上传报告
  * @Author: IFLS
  * @Date: 2022-06-15 17:10:47
- * @LastEditTime: 2023-03-28 10:16:20
+ * @LastEditTime: 2023-04-06 10:39:28
 -->
 <script>
   /**
@@ -21,6 +21,7 @@
   import UploaderFile from "@/components/Uploader/UploaderFile";
   import { addReport, updateReport, queryReport } from "@/service/uploadReport";
   import { useRouter, useRoute } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -32,9 +33,12 @@
       const router = useRouter($router);
       const route = useRoute($router);
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
         memberCode: localStorage.getItem("memberCode"),
-        empNo: localStorage.getItem("empNo"),
+        empNo: userInfo.value.empNo,
         memberId: localStorage.getItem("memberId"),
         disabled: false,
         fileListPic: [], // 图片

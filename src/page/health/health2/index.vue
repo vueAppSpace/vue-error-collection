@@ -2,7 +2,7 @@
   * @Description: 首页
   * @Author: IFLS
   * @Date: 2022-04-22 10:06:45
- * @LastEditTime: 2023-03-28 10:15:10
+ * @LastEditTime: 2023-04-06 10:43:48
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
@@ -12,7 +12,7 @@
   import intro from "@/utils/intro";
   import { useRoute } from "@/hooks/useRouter";
   import { isIOS, isUniApp } from "@/utils/native/deviceEnv";
-  import { useUserStore } from "@/pinia";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {
