@@ -21,11 +21,16 @@
   import { orderListByEmployeeId } from "@/service/api";
   import { getEatAdjust } from "@/service/health";
   import RecommendHeader from "./RecommendHeader.vue";
+  import { mapState, useUserStore } from "@/pinia";
+
   export default {
     components: {
       RecommendSnack,
       FoodCard,
       RecommendHeader
+    },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
     },
     data() {
       return {
@@ -41,7 +46,7 @@
       // 获取个人点餐列表是否有食堂名称信息
       orderListByEmployeeId({
         date: dayjs().format("YYYY-MM-DD"),
-        employeeId: localStorage.getItem("empNo") ? localStorage.getItem("empNo") : 10104970
+        employeeId: this.userInfo.empNo ? this.userInfo.empNo : 10104970
       })
         .then(({ code, data, message }) => {
           console.log("特色餐：", code, data, message);
