@@ -2,7 +2,7 @@
  * @Description: 获取token
  * @Author: IFLS
  * @Date: 2022-04-24 14:09:14
- * @LastEditTime: 2023-04-04 18:52:14
+ * @LastEditTime: 2023-04-06 10:10:16
  */
 import { getToken as queryToken } from "@/service/api";
 import { getURLParameters } from "@/utils/commonFun";
@@ -95,11 +95,12 @@ const setToken = response => {
     localStorage.setItem("memberCode", response.data.memberBasicDTO.memberCode);
     localStorage.setItem("memberId", response.data.memberBasicDTO.memberId);
     localStorage.setItem("phrId", response.data.memberBasicDTO.phrId);
-    localStorage.setItem("accompanyDay", response.data.accompanyDay || 0);
-    localStorage.setItem("loginHealthPoints", response.data.loginHealthPoints);
     localStorage.setItem("empNo", response.data.empNo);
-    sessionStorage.setItem("userStore", JSON.stringify({ userInfo: response.data })); // 构造pinia userStore数据
-    window.zhuge && zhuge.identify(response.data.xinaoAccount.toLocaleLowerCase()); // 埋点用户识别
+
+    const userInfo = response.data;
+    userInfo.accompanyDay = userInfo.accompanyDay || 0;
+    sessionStorage.setItem("userStore", JSON.stringify({ userInfo })); // 构造pinia userStore数据
+    window.zhuge && zhuge.identify(userInfo.xinaoAccount?.toLocaleLowerCase()); // 埋点用户识别
   } else if (response.code === -999) {
     console.warn(`warn: 监测到url传递参数${NO_TICKET}, 使用了上次登陆信息`);
   } else if (response.code === -99) {

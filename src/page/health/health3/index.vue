@@ -29,6 +29,7 @@
   import { jsBridge } from "@/utils/native/jsBridge";
   import { useRouter, useRoute } from "@/hooks/useRouter";
   import { isIOS, isUniApp } from "@/utils/native/deviceEnv";
+  import { useUserStore } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -61,6 +62,10 @@
 
       setCanteenList("");
 
+      //获取用户信息
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
         introVisible: false,
         tips: {
@@ -72,36 +77,35 @@
         address: "河北省廊坊市",
         isScroll: false,
         showVConsoleCount: 0,
-        city: ''
+        city: ""
       });
 
       if (isUniApp) {
-        state.address = '天津市';
+        state.address = "天津市";
       }
 
       const { queryQuestions } = useQuestions();
 
       // 查询天数
       const queryAccompanyDay = () => {
-        const day = JSON.parse(localStorage.getItem("accompanyDay"));
-        if (day > 0) {
-          state.accompanyDay = day;
+        if (userInfo.value.accompanyDay > 0) {
+          state.accompanyDay = userInfo.value.accompanyDay;
         }
       };
 
       // 查询欢迎提示
       const queryWelcomeTips = () => {
-        const point = JSON.parse(localStorage.getItem("loginHealthPoints"));
-        const day = JSON.parse(localStorage.getItem("accompanyDay"));
-        // 当天首次登陆
-        if (point !== 0) {
+        const point = userInfo.value.loginHealthPoints;
+        const day = userInfo.value.accompanyDay;
+
+        // 问俊宏: 第一次调登录接口 loginHealthPoints 返回实际数值
+        // 第二次调用，就返回 0，可通过接口控制是否显示
+        if (point) {
           state.tips = {
             visible: true,
             exp: point,
             isNewUser: day === 0
           };
-          // 重置加分字段 避免重复提示
-          localStorage.setItem("loginHealthPoints", 0);
         }
       };
 
@@ -154,7 +158,7 @@
 
       // 点击地图
       const openMap = () => {
-        console.log('state.city', state.city)
+        console.log("state.city", state.city);
         if (isUniApp) {
           router.push({
             path: "/address",
@@ -165,15 +169,15 @@
         } else {
           // #v-ifdef VITE_IFDEF=ICOME
           window.ic &&
-          ic.run({
-            action: "amap.openMap",
-            success: ({ data }) => {
-              console.log("地址data", data);
-              state.address = data.city + data.district;
-              setCityCode(data.citycode);
-              getCanteenList();
-            }
-          });
+            ic.run({
+              action: "amap.openMap",
+              success: ({ data }) => {
+                console.log("地址data", data);
+                state.address = data.city + data.district;
+                setCityCode(data.citycode);
+                getCanteenList();
+              }
+            });
           // #v-endif
         }
       };
@@ -300,8 +304,7 @@
           state.address = route.value.query.city;
           getCanteenList();
         }
-        console.log('route', route.value.query.city);
-
+        console.log("route", route.value.query.city);
       });
 
       onDeactivated(() => {
