@@ -1,8 +1,8 @@
 <!--
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-02-08 17:03:37
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-23 17:35:28
+ * @LastEditors: YanivWang
+ * @LastEditTime: 2023-04-06 17:58:34
  * @FilePath: \lk-xinaohealth-h5\src\page\classReservations\index.vue
  * @Description: 动感团操
 -->
@@ -24,6 +24,7 @@
   import { formatDate } from "@/utils/commonFun";
 
   import { useClassReservationsStore, storeToRefs } from "@/pinia";
+  import { getDefaultDateList } from "./util/commonFun";
 
   export default defineComponent({
     components: {
@@ -78,7 +79,7 @@
       const { resetSubmitUserInfoFlag } = store;
 
       function resetState(type) {
-        state.dateList = [];
+        state.dateList = getDefaultDateList();
         state.gym = null;
         state.classList = [];
         state.currenDateItem = null;
@@ -135,20 +136,20 @@
         const dateList = _get(data, "classTable.dateList") || [];
         const gym = _get(data, "gym") || null;
 
-        if (code === 0 && dateList.length && gym) {
-          state.dateList = dateList;
-          state.gym = gym;
+        dateList.length && (state.dateList = dateList);
+        gym && (state.gym = gym);
 
-          //延用上次得 activeDateIndex(本页面已经keep-alive)
-          state.currenDateItem = state.dateList[state.activeDateIndex];
-          state.classList = state.currenDateItem.classList || [];
+        //延用上次得 activeDateIndex(本页面已经keep-alive)
+        state.currenDateItem = state.dateList[state.activeDateIndex];
+        state.classList = state.currenDateItem.classList || [];
 
-          //用户已经提交了 约课用户信息
-          if (isSubmitUserInfoFlag.value) {
-            handleClassCardClick(state.activeClassIndex);
-          }
-        } else {
-          Toast(message || "获取课程表失败!");
+        //用户已经提交了 约课用户信息
+        if (gym && isSubmitUserInfoFlag.value) {
+          handleClassCardClick(state.activeClassIndex);
+        }
+
+        if (code !== 0) {
+          console("获取课程表失败," + message);
         }
       }
 
