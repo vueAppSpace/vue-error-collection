@@ -186,6 +186,7 @@
   import { Popup } from "vant";
   import secondComment from "./components/secondComment.vue";
   import throttle from "lodash.throttle";
+  import { mapState, useUserStore } from "@/pinia";
   export default {
     name: "dynamicDetails",
     data() {
@@ -249,6 +250,9 @@
         hasLikeSecond: false
       };
     },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
+    },
     components: { secondComment },
     filter: {
       getMoment
@@ -284,7 +288,7 @@
           dynamicId: this.dynamicId, //动态id
           commentId: this.replayObj.id, //一级评论id
           memberCode: localStorage.getItem("memberCode"), //用户memberCode
-          memberId: localStorage.getItem("memberId"), //用户memberId
+          memberId: this.userInfo.memberId, //用户memberId
           commMemberCode: this.commMemberCode, //动态发布人memberCode
           firstMemberCode: this.replayObj.memberCode //一级评论人memberCode
         };

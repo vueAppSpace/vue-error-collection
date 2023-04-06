@@ -87,7 +87,7 @@
         isSelf: undefined,
         memberCode: localStorage.getItem("memberCode"),
         //empNo: localStorage.getItem("empNo"),
-        memberId: localStorage.getItem("memberId"),
+        //memberId: localStorage.getItem("memberId"),
         list: [],
         selfList: [],
         imgList: imagesArr,
@@ -127,7 +127,8 @@
       },
       queryList() {
         debugger;
-        const { memberCode, memberId } = this;
+        const { memberCode } = this;
+        const { memberId } = this.userInfo;
         const { empNo } = this.userInfo;
         const req = { memberCode, memberId, empNo, pageSize: 999, pageNum: 1 };
         queryReport(req).then(({ code, data, message }) => {

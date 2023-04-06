@@ -124,6 +124,7 @@
   import { ImagePreview } from "vant";
   import { getMoment } from "@/utils/filter.js";
   import { Popup } from "vant";
+  import { mapState, useUserStore } from "@/pinia";
 
   export default {
     name: "dynamicDetails",
@@ -184,6 +185,9 @@
       commMemberCode: "",
       dynamicObj: {}
     },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
+    },
     created() {},
     methods: {
       // 查询二级评论接口
@@ -222,7 +226,7 @@
           dynamicId: this.dynamicId, //动态id
           commentId: this.replayObj.id, //一级评论id
           memberCode: localStorage.getItem("memberCode"), //用户memberCode
-          memberId: localStorage.getItem("memberId"), //用户memberId
+          memberId: this.userInfo.memberId, //用户memberId
           commMemberCode: this.commMemberCode, //动态发布人memberCode
           firstMemberCode: this.replayObj.memberCode //一级评论人memberCode
         };
