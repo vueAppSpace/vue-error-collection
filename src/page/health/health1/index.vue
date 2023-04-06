@@ -2,7 +2,7 @@
   * @Description: 首页
   * @Author: IFLS
   * @Date: 2022-04-22 10:06:45
- * @LastEditTime: 2023-03-28 10:15:01
+ * @LastEditTime: 2023-04-06 10:01:52
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
@@ -12,7 +12,7 @@
   import intro from "@/utils/intro";
   import { useRoute } from "@/hooks/useRouter";
   import { isIOS, isUniApp } from "@/utils/native/deviceEnv";
-
+  import { useUserStore } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -22,6 +22,10 @@
     setup(_, context) {
       const { $router, zgStatistics } = context.root;
       const route = useRoute($router);
+
+      //获取用户信息
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
 
       const state = reactive({
         introVisible: false,
@@ -36,23 +40,21 @@
       });
 
       if (isUniApp) {
-        state.address = '天津市';
+        state.address = "天津市";
       }
 
       // 查询天数
       const queryAccompanyDay = () => {
-        const day = JSON.parse(localStorage.getItem("accompanyDay"));
-        if (day > 0) {
+        if (userInfo.value.accompanyDay > 0) {
           state.accompanyDay = day;
         }
       };
 
       // 查询欢迎提示
       const queryWelcomeTips = () => {
-        const point = JSON.parse(localStorage.getItem("loginHealthPoints"));
-        const day = JSON.parse(localStorage.getItem("accompanyDay"));
-        // 当天首次登陆
-        if (point !== 0) {
+        const point = userInfo.value.loginHealthPoints;
+        const day = userInfo.value.accompanyDay;
+        if (point) {
           state.tips = {
             visible: true,
             exp: point,
@@ -71,7 +73,7 @@
               state.address = data.city + data.district;
             }
           });
-        // #v-endif  
+        // #v-endif
       };
 
       // 点击地图
@@ -84,7 +86,7 @@
               state.address = data.city + data.district;
             }
           });
-        // #v-endif  
+        // #v-endif
       };
 
       // 发送埋点信息
