@@ -2,7 +2,7 @@
  * @Description: 健康成就
  * @Author: WANGCHENGAE
  * @Date: 2022-12-6 18:00:30
- * @LastEditTime: 2023-03-23 17:33:53
+ * @LastEditTime: 2023-04-06 17:49:56
 -->
 <script>
   import { defineComponent, reactive, toRefs, computed, onMounted } from "@vue/composition-api";
@@ -141,6 +141,7 @@
       align-items: center;
       flex-wrap: wrap;
       margin-top: 40px;
+      overflow-x: hidden;
 
       .badge {
         flex-basis: calc(100% / 3);
