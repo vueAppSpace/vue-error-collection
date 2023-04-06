@@ -77,8 +77,7 @@
 <style lang="scss" scoped>
   .content-box {
     overflow-x: hidden;
-    min-height: 50vh;
-    background: linear-gradient(180deg, #f3f7ff 0%, #ffffff 100%);
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-rows: 364px;

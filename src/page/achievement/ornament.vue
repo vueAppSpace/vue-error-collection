@@ -83,3 +83,11 @@
     </van-tabs>
   </div>
 </template>
+
+<style lang="scss" scoped>
+  .content-box {
+    min-height: 100%;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f3f7ff 0%, #ffffff 100%);
+  }
+</style>

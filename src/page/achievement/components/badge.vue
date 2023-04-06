@@ -74,8 +74,7 @@
 <style lang="scss" scoped>
   .content-box {
     overflow-x: hidden;
-    min-height: 50vh;
-    background: linear-gradient(180deg, #f3f7ff 0%, #ffffff 100%);
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
     padding: 48px 0 68px;

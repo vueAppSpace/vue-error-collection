@@ -22,8 +22,6 @@
       const editType = ["reduce", "add"];
       const { id, isEmpty, myServiceData, allServiceData, initServiceData, editService } = useService();
 
-      initServiceData();
-
       function goEdit() {
         router.push("/service-edit");
       }
