@@ -65,6 +65,7 @@
   import { exerciseCourseDetail } from "@/config/env";
 
   import jumpToDanao from "@/utils/jumpToDanao";
+  import { useUserStore, mapState } from "@/pinia";
 
   export default {
     components: {
@@ -83,6 +84,9 @@
         default: null
       }
     },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
+    },
     data() {
       return {
         lockCheck: false,
@@ -96,7 +100,7 @@
     activated() {},
     methods: {
       toGongFaDetail() {
-        const phrId = window.localStorage.getItem("phrId");
+        const phrId = this.userInfo.phrId;
         const appKey = "6KRoN5rng";
         const url = `${exerciseCourseDetail}?userId=${phrId}&appKey=${appKey}&dd_full_screen=true&isNavBar=1`;
         console.log("url", url);

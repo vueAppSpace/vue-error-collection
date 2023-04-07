@@ -37,6 +37,7 @@
   import SmartMeal from "./meals/SmartMeal.vue";
 
   import { useLocationStore, storeToRefs } from "@/pinia";
+  import { useUserStore, mapState } from "@/pinia";
 
   export default {
     props: {
@@ -53,6 +54,9 @@
       commonRecommendData: {
         type: [Array, Object]
       }
+    },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
     },
     data() {
       return {
@@ -79,7 +83,7 @@
     methods: {
       // 获取自助餐推荐
       async getSelfRecommend() {
-        const phrId = window.localStorage.getItem("phrId");
+        const phrId = this.userInfo.phrId;
         const params = {
           eventCode: "wucan",
           canteenId: this.canteen.canteenId,
@@ -103,7 +107,7 @@
       // 获取餐厅列表
       async getCanteenList() {
         // alert(22)
-        const employeeId = window.localStorage.getItem("empNo");
+        const employeeId = this.userInfo.empNo;
         console.log("useLocationStore().cityCode", useLocationStore().cityCode);
         getCanteenListByEmp({ employeeId, cityCode: useLocationStore().cityCode })
           .then(res => {

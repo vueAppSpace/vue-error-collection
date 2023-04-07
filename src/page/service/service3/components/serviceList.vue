@@ -8,6 +8,7 @@
   import { getCounselor, insertRecord } from "@/service/service";
   import Tips from "@/components/Tips";
   import { Toast } from "vant";
+  import { useUserStore, storeToRefs, mapState } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -30,12 +31,16 @@
     },
     setup(props, ctx) {
       const { $router: router, zgStatistics } = ctx.root;
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const iconMap = {
         reduce: "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/service/service_reduce.png",
         add: "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/service/service_add.png"
       };
       const state = reactive({
-        userId: localStorage.getItem("phrId"),
+        userId: userInfo.value.phrId,
         appletName: "gh_8f2bf8571044", // 三疗小程序用户名
         phone: "400-7895158", // 咨询师电话
         tipsVisible: false // 健康咨询弹窗

@@ -96,8 +96,12 @@
 
 <script>
   import { getUserMeals, orderListByEmployeeId } from "@/service/api";
+  import { mapState, useUserStore } from "@/pinia";
 
   export default {
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
+    },
     data() {
       return {
         zaocanRecommend: [],
@@ -170,7 +174,7 @@
         orderListByEmployeeId({
           date: dayjs().format("YYYY-MM-DD"),
           // date: dayjs().subtract(9, 'day').format("YYYY-MM-DD"),
-          employeeId: localStorage.getItem("empNo") ? localStorage.getItem("empNo") : 10104970
+          employeeId: this.userInfo.empNo ? this.userInfo.empNo : 10104970
         }).then(({ code, data, message }) => {
           if (code === 0) {
             this.loading = false;

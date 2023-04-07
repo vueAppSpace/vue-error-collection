@@ -2,7 +2,7 @@
  * @Description: 上传报告
  * @Author: IFLS
  * @Date: 2022-06-15 17:10:47
- * @LastEditTime: 2023-03-28 10:16:20
+ * @LastEditTime: 2023-04-07 11:17:45
 -->
 <script>
   /**
@@ -21,6 +21,7 @@
   import UploaderFile from "@/components/Uploader/UploaderFile";
   import { addReport, updateReport, queryReport } from "@/service/uploadReport";
   import { useRouter, useRoute } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -32,10 +33,10 @@
       const router = useRouter($router);
       const route = useRoute($router);
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
-        memberCode: localStorage.getItem("memberCode"),
-        empNo: localStorage.getItem("empNo"),
-        memberId: localStorage.getItem("memberId"),
         disabled: false,
         fileListPic: [], // 图片
         fileListFile: [], // 文件
@@ -68,9 +69,13 @@
       };
 
       const queryData = () => {
-        const { memberCode, memberId, empNo } = state;
-
-        const req = { memberCode, memberId, empNo, pageSize: 1, pageNum: 1 };
+        const req = {
+          memberCode: userInfo.value.memberCode,
+          memberId: userInfo.value.memberId,
+          empNo: userInfo.value.empNo,
+          pageSize: 1,
+          pageNum: 1
+        };
         queryReport(req).then(({ code, data, message }) => {
           if (code === 0) {
             // 有数据 保存时调用修改接口
@@ -93,7 +98,7 @@
       };
 
       const onSave = () => {
-        const { fileListPic, fileListFile, memberCode, memberId, empNo, id } = state;
+        const { fileListPic, fileListFile, id } = state;
 
         if (fileListPic.length === 0 && fileListFile.length === 0) {
           return Toast("您未上传任何资料");
@@ -128,7 +133,14 @@
         const { status } = route.value.query;
         // 上传时间
         const archivesDate = dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss");
-        const req = { memberCode, memberId, empNo, picUrl, archivesDate, files: { data: files } };
+        const req = {
+          memberCode: userInfo.value.memberCode,
+          memberId: userInfo.value.memberId,
+          empNo: userInfo.value.empNo,
+          picUrl,
+          archivesDate,
+          files: { data: files }
+        };
         // 补充时 会传来status=1 保存时传0 告知接口状态变更
         status && (req.archivesStatus = 0);
         id && (req.id = id);

@@ -28,6 +28,8 @@
   import { useRouter, useRoute } from "@/hooks/useRouter";
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
+  import { useUserStore, storeToRefs } from "@/pinia";
+
   export default defineComponent({
     components: {
       Tips,
@@ -39,6 +41,9 @@
       const { $router, zgStatistics } = context.root;
       const router = useRouter($router);
       const route = useRoute($router);
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
 
       const dynamicListDom = ref(null);
       const state = reactive({
@@ -178,7 +183,7 @@
         let params = {
           likeType: state.likeType, //点赞
           likeId: e.id,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: userInfo.value.memberCode,
           likeMemberCode: e.publishMemberCode
         };
         likeInsert(params).then(({ code, data, message }) => {
@@ -203,7 +208,7 @@
         let params = {
           likeType: state.likeType, //
           likeId: e.id,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: userInfo.value.memberCode,
           likeMemberCode: e.publishMemberCode
         };
         realDelete(params).then(({ code, data, message }) => {

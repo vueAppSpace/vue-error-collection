@@ -59,6 +59,7 @@
   import { gongfaUrl } from "@/config/env";
 
   import jumpToDanao from "@/utils/jumpToDanao";
+  import { useUserStore, mapState } from "@/pinia";
 
   export default {
     components: {
@@ -77,6 +78,9 @@
         default: []
       }
     },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
+    },
     data() {
       return {
         lockCheck: false,
@@ -88,7 +92,7 @@
     },
     methods: {
       toGongFaDetail() {
-        const phrId = window.localStorage.getItem("phrId");
+        const phrId = this.userInfo.phrId;
         const appKey = "6KRoN5rng";
 
         const url = `${gongfaUrl}?title=${

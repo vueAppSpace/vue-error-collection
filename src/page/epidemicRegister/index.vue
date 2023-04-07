@@ -2,7 +2,7 @@
  * @Description: 疫情登记
  * @Author: WANGCHENGAE
  * @Date: 2022-11-17 18:00:30
- * @LastEditTime: 2023-03-23 17:35:40
+ * @LastEditTime: 2023-04-06 14:15:44
 -->
 <script>
   import { defineComponent, reactive, toRefs, computed, onMounted } from "@vue/composition-api";
@@ -30,6 +30,7 @@
   import { getThirdUserToken } from "@/service/service";
   import { queryUserPortrait } from "@/service/profile";
   import UploaderPic from "@/components/Uploader/UploaderPic.vue";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -61,6 +62,10 @@
 
     setup({ type }, context) {
       const { zgStatistics, $router: router } = context.root;
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
         inputList: getInputList(),
         radioList: getRadioList(),
@@ -72,7 +77,7 @@
 
       const { setTitle } = useNavStore();
 
-      const userEmpNo = localStorage.getItem("empNo") || "";
+      const userEmpNo = userInfo.value.empNo;
 
       async function mountedHandle(fromPath) {
         if (ValidSourceTypeArray.includes(type) && SourcePageArray.includes(fromPath)) {
@@ -97,7 +102,7 @@
       }
 
       async function queryUserInfo() {
-        const phrId = (localStorage.getItem("phrId") || "").trim();
+        const phrId = userInfo.value.phrId;
         if (phrId) {
           const { code, message, data } = await queryUserPortrait({ phrId });
           if (code === 0 && data && data.length) {

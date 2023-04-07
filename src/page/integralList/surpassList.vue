@@ -94,6 +94,8 @@
 <script>
   import { rankingPerson, surpassplanPage, integralNum } from "@/service/ranking";
   // import { companyId } from "@/config/env";
+  import { useUserStore, mapState } from "@/pinia";
+
   export default {
     directives: {},
     components: {},
@@ -108,12 +110,15 @@
         surpassplanPerson: null
       };
     },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
+    },
     methods: {
       rankingPersonFn() {
         let data = {
           // companyId,
           // companyPid: 10,
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         };
         rankingPerson(data)
           .then(res => {
@@ -136,7 +141,7 @@
       },
       integralNumFn() {
         let data = {
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           source: 4
         };
         integralNum(data)
@@ -149,7 +154,7 @@
       },
       surpassplanPageFn() {
         let data = {
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           pageSize: 100,
           pageNum: 1,
           status: 0
@@ -167,7 +172,7 @@
 
       surpassplanPageUnderwayFn() {
         let data = {
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           pageSize: 100,
           pageNum: 1,
           status: 1
@@ -184,7 +189,7 @@
       },
       surpassplanPageStatusFn() {
         let data = {
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           status: 0,
           planStatus: 1,
           pageSize: 100,

@@ -199,6 +199,7 @@
 
   import { Toast } from "vant";
   // import { companyId } from "@/config/env";
+  import { useUserStore, mapState } from "@/pinia";
 
   const zgStr = "健康新奥-健康积分-点击超越按钮";
   export default {
@@ -241,6 +242,9 @@
         TaskTypeMap,
         totalTaskPoints: 1
       };
+    },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
     },
     methods: {
       onRefresh() {
@@ -294,7 +298,7 @@
       queryPlanFn() {
         // queryPlan
         let data = {
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           status: 1,
           pageSize: 10,
           pageNum: 1
@@ -326,7 +330,7 @@
         let data = {
           // companyId,
           // companyPid: 10,
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         };
         rankingPerson(data)
           .then(res => {
@@ -484,7 +488,7 @@
       // 查询想要超越我的用户
       queryNoticeBar() {
         const req = {
-          surpassMemberCode: localStorage.getItem("memberCode"),
+          surpassMemberCode: this.userInfo.memberCode,
           pageSize: 10,
           pageNum: 1,
           status: 1
@@ -508,7 +512,7 @@
     },
     watch: {},
     mounted() {
-      this.memberCode = localStorage.getItem("memberCode");
+      this.memberCode = this.userInfo.memberCode;
       this.findLeaderboardByCountFn();
       this.queryPlanFn();
       this.queryNoticeBar();

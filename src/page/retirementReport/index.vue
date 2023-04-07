@@ -8,6 +8,7 @@
   import { defineComponent, onMounted } from "@vue/composition-api";
   import { jsBridge } from "@/utils/native/jsBridge";
   import jumpToDanao from "@/utils/jumpToDanao";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     beforeRouteEnter(to, from, next) {
@@ -36,8 +37,11 @@
       }
     },
     setup() {
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       onMounted(() => {
-        const memberId = window.localStorage.getItem("memberId");
+        const memberId = userInfo.value.memberId;
         jumpToDanao(2, "leavers", `&memberId=${memberId}`);
       });
 

@@ -1,7 +1,11 @@
+import { useUserStore, storeToRefs } from "@/pinia";
 import { getCurrentEntropy } from "@/service/health/index";
 
 export default async function (afterDate = "") {
-  const userId = localStorage.getItem("phrId");
+  const userStore = useUserStore();
+  const { userInfo } = storeToRefs(userStore);
+
+  const userId = userInfo.value.phrId;
   let [entropyData, isResponded, status] = [{}, false, -1];
 
   try {

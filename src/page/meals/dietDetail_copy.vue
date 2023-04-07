@@ -2,7 +2,7 @@
  * @Description: 食材/食谱详情
  * @Author: IFLS
  * @Date: 2021-12-23 15:59:44
- * @LastEditTime: 2023-03-23 17:40:23
+ * @LastEditTime: 2023-04-04 18:51:45
 -->
 <template>
   <div class="detail-box" v-if="allData.name">
@@ -153,9 +153,9 @@
       const { name, type, accessToken, source, star = 0 } = this.$route.query;
       Object.assign(this, { name, type, star });
       // 若从小程序跳转过来 手动缓存accessToken
-      if (source === "mp" && accessToken) {
-        localStorage.setItem("accessToken", accessToken);
-      }
+      // if (source === "mp" && accessToken) {
+      //   localStorage.setItem("accessToken", accessToken);
+      // }
       this.queryDetail(type, name);
     },
     methods: {

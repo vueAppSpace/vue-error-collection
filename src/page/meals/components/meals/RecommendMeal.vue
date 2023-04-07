@@ -13,6 +13,7 @@
     ref
   } from "@vue/composition-api";
   import { useLocationStore, storeToRefs } from "@/pinia";
+  import { useUserStore } from "@/pinia";
 
   import { selfRecommend } from "@/service/meal";
   // import { getCanteenListByEmp } from "@/service/health";
@@ -44,6 +45,9 @@
 
       const { setCanteenList } = store;
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
         name: props["canteenName"],
         canteenList: props["columns"],
@@ -55,7 +59,7 @@
       });
 
       const getSelfRecommend = async () => {
-        const phrId = window.localStorage.getItem("phrId");
+        const phrId = userInfo.value.phrId;
         const params = {
           eventCode: "wucan",
           canteenId: state.canteen.canteenId,

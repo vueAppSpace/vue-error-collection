@@ -502,7 +502,8 @@
       };
     },
     computed: {
-      ...mapState(useNavStore, ["onback"])
+      ...mapState(useNavStore, ["onback"]),
+      ...mapState(useUserStore, ["userInfo"])
     },
     methods: {
       closeDynamicBox() {
@@ -664,7 +665,7 @@
 
         // console.log('this.workBreakExercisesDetail', this.workBreakExercisesDetail)
         let data = {
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           exerciseWorkId: this.workBreakExercisesDetail.id,
           exerciseWorkJobId: this.$route.query.id
         };
@@ -687,7 +688,7 @@
       sendFeedback() {
         const data = {
           id: this.workBreakExercisesDetail.id,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           feedbackLevel: this.feedbackLevel
         };
         feedbackVideo(data)
@@ -978,7 +979,7 @@
         this.pointVisible = false;
         finishedVideo({
           exerciseWorkId: this.workBreakExercisesDetail.id,
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         })
           .then(res => {
             if (res.isOk == true) {

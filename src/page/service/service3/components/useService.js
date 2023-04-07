@@ -2,20 +2,27 @@ import { reactive, toRefs } from "@vue/composition-api";
 import serviceData from "../data.js";
 import { getHealthService } from "@/service/service";
 import { Toast } from "vant";
+import { useUserStore, storeToRefs } from "@/pinia";
 
 export function useService() {
+  const userStore = useUserStore();
+  const { userInfo } = storeToRefs(userStore);
+
   const state = reactive({
     myServiceData: [],
     allServiceData: [],
     isEmpty: true,
     id: ""
   });
-  const memberCode = localStorage.getItem("memberCode");
 
   /* 初始化，增加 已添加到我的服务的属性 added */
   async function initServiceData() {
     try {
-      const { code, data, message } = await getHealthService({ memberCode, pageSize: 1, pageIndex: 1 });
+      const { code, data, message } = await getHealthService({
+        memberCode: userInfo.value.memberCode,
+        pageSize: 1,
+        pageIndex: 1
+      });
       if (code === 0) {
         state.isEmpty = !data.length;
 

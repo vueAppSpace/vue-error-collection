@@ -2,8 +2,9 @@
  * @Description: 获取token
  * @Author: IFLS
  * @Date: 2022-04-24 14:09:14
- * @LastEditTime: 2023-04-04 16:55:14
+ * @LastEditTime: 2023-04-07 14:21:08
  */
+import _get from "lodash.get";
 import { getToken as queryToken } from "@/service/api";
 import { getURLParameters } from "@/utils/commonFun";
 import { Toast, Dialog } from "vant";
@@ -63,7 +64,7 @@ const getToken = async () => {
   } else if (params === NO_LOGIN) {
     return await Promise.resolve({ code: -99, data: null, message: null });
   } else {
-    localStorage.removeItem("accessToken"); // 清除旧版本用户登录信息
+    //localStorage.removeItem("accessToken"); // 清除旧版本用户登录信息
     sessionStorage.removeItem("userStore"); // 清除登录信息
     return await queryToken(params);
   }
@@ -90,16 +91,50 @@ const interceptCompanyId = companyId => {
 
 const setToken = response => {
   if (response.code === 0) {
-    interceptCompanyId(response.data.memberBasicDTO.companyId);
-    //  注意: 不应往此处添加登录信息 所有登录信息均已保存到pinia userStore中
-    localStorage.setItem("memberCode", response.data.memberBasicDTO.memberCode);
-    localStorage.setItem("memberId", response.data.memberBasicDTO.memberId);
-    localStorage.setItem("phrId", response.data.memberBasicDTO.phrId);
-    localStorage.setItem("accompanyDay", response.data.accompanyDay || 0);
-    localStorage.setItem("loginHealthPoints", response.data.loginHealthPoints);
-    localStorage.setItem("empNo", response.data.empNo);
-    sessionStorage.setItem("userStore", JSON.stringify({ userInfo: response.data })); // 构造pinia userStore数据
-    window.zhuge && zhuge.identify(response.data.xinaoAccount.toLocaleLowerCase()); // 埋点用户识别
+    //userInfo data prehandle
+    const {
+      //emall special
+      appId,
+      appCode,
+      companyId,
+      companyPid,
+
+      //common
+      accompanyDay = 0,
+      empNo = "",
+      healthPoints = 0,
+      icomeHeadPhoto = "",
+      isLangfang,
+      isTestUser,
+      loginHealthPoints = 0,
+      memberBasicDTO = {},
+      xinaoAccount = ""
+    } = response.data;
+
+    const { memberCode, memberId, phrId } = memberBasicDTO;
+    const accessToken = _get(memberBasicDTO, "ztUcApiGetToken.uaaTokenInfo.accessToken") || "";
+
+    const userInfo = {
+      accompanyDay,
+      empNo,
+      healthPoints,
+      headUrl: icomeHeadPhoto,
+      isLangfang,
+      isTestUser,
+      loginHealthPoints,
+      memberBasicDTO,
+      xinaoAccount,
+      companyId,
+      memberCode,
+      memberId,
+      phrId,
+      isLangfang,
+      isTestUser,
+      accessToken
+    };
+    sessionStorage.setItem("userStore", JSON.stringify({ userInfo })); // 构造pinia userStore数据
+    interceptCompanyId(memberBasicDTO.companyId);
+    window.zhuge && zhuge.identify(xinaoAccount.toLocaleLowerCase()); // 埋点用户识别
   } else if (response.code === -999) {
     console.warn(`warn: 监测到url传递参数${NO_TICKET}, 使用了上次登陆信息`);
   } else if (response.code === -99) {

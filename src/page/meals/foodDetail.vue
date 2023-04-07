@@ -228,9 +228,9 @@
       const { name, type, accessToken, source, star = 0 } = this.$route.query;
       Object.assign(this, { name, type, star });
       // 若从小程序跳转过来 手动缓存accessToken
-      if (source === "mp" && accessToken) {
-        localStorage.setItem("accessToken", accessToken);
-      }
+      // if (source === "mp" && accessToken) {
+      //   localStorage.setItem("accessToken", accessToken);
+      // }
       this.queryListFn();
     },
     methods: {

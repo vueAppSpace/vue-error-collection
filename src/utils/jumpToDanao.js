@@ -2,7 +2,7 @@
  * @Description: 跳转大脑函数
  * @Author: IFLS
  * @Date: 2022-10-12 15:49:14
- * @LastEditTime: 2023-03-23 17:46:20
+ * @LastEditTime: 2023-04-06 15:40:05
  */
 import {
   danaoQuestionUrl,
@@ -13,7 +13,9 @@ import {
 } from "@/config/env";
 
 export default function (type, code, extraParame = "") {
-  const phrId = window.localStorage.getItem("phrId");
+  const userStore = JSON.parse(sessionStorage.getItem("userStore"));
+  const phrId = userStore.userInfo.phrId;
+
   const appKey = "6KRoN5rng";
   let url = "";
   // 健康评估&慢病评估

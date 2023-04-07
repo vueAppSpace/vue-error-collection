@@ -2,7 +2,7 @@
  * @Description: 用户资料
  * @Author: IFLS
  * @Date: 2022-06-15 17:10:47
- * @LastEditTime: 2023-03-31 15:52:38
+ * @LastEditTime: 2023-04-06 14:14:08
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, onUnmounted } from "@vue/composition-api";
@@ -16,6 +16,7 @@
   import { formatTimeForBirth } from "@/utils/commonFun";
   import { useRouter, useRoute } from "@/hooks/useRouter";
   import { isMobile, isIcomeAndroid } from "@/utils/native/deviceEnv";
+  import { useUserStore, storeToRefs, mapState } from "@/pinia";
 
   const sexIcon = {
     female: "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/profile/female.png",
@@ -41,8 +42,10 @@
       const router = useRouter($router);
       const route = useRoute($router);
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
-        phrId: localStorage.getItem("phrId"),
         loading: false,
         icon: sexIcon,
         userInfo: {
@@ -78,7 +81,7 @@
       // 查询信息
       const queryInfo = isFromHistory => {
         state.loading = true;
-        queryUserPortrait({ phrId: state.phrId })
+        queryUserPortrait({ phrId: userInfo.value.phrId })
           .then(({ code, data, message }) => {
             if (code === 0) {
               if (data) {
@@ -161,7 +164,7 @@
           return total;
         }, []);
 
-        const req = { uid: state.phrId, quotaList };
+        const req = { uid: userInfo.value.phrId, quotaList };
         updateUserPortrait(req).then(({ code, message }) => {
           state.loading = false;
           if (code === 0) {

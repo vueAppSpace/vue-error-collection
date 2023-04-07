@@ -19,6 +19,8 @@
   import { useRouter, useRoute } from "@/hooks/useRouter";
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
+  import { useUserStore, storeToRefs } from "@/pinia";
+
   export default defineComponent({
     components: {
       Tips,
@@ -29,6 +31,9 @@
       const { $router, zgStatistics } = context.root;
       const router = useRouter($router);
       const route = useRoute($router);
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
 
       const state = reactive({
         // introVisible: true,
@@ -46,7 +51,7 @@
       // 我的动态
       const getPersonCountFn = () => {
         let params = {
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: userInfo.value.memberCode
         };
         getPersonCount(params).then(({ code, data, message }) => {
           if (code === 0) {

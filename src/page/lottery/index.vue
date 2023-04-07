@@ -2,7 +2,7 @@
  * @Description: 积分抽奖主页
  * @Author: IFLS
  * @Date: 2022-11-16 09:53:14
- * @LastEditTime: 2023-03-23 17:37:23
+ * @LastEditTime: 2023-04-07 14:26:07
 -->
 <script>
   import { defineComponent, toRefs, reactive, onMounted } from "@vue/composition-api";
@@ -18,6 +18,8 @@
     queryLotteryRecord,
     queryHealthPointByMemberCode
   } from "@/service/lottery";
+  import { useUserStore, storeToRefs } from "@/pinia";
+
   const imgUrl = "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/lottery/";
 
   export default defineComponent({
@@ -32,8 +34,10 @@
         root: { $router: router, $route: route }
       } = context;
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
-        memberCode: localStorage.getItem("memberCode"),
         loading: false,
         list: [],
         running: false, // 抽奖是否运行中
@@ -81,7 +85,7 @@
         if (points && !refresh) {
           state.healthPoint = points;
         } else {
-          const req = { memberCode: state.memberCode };
+          const req = { memberCode: userInfo.value.memberCode };
           queryHealthPointByMemberCode(req).then(({ code, data, message }) => {
             if (code === 0) {
               state.healthPoint = data.healthPoints || 0;

@@ -2,16 +2,20 @@
  * @Description: 查询问题
  * @Author: IFLS
  * @Date: 2022-07-04 16:48:34
- * @LastEditTime: 2023-03-23 17:33:03
+ * @LastEditTime: 2023-04-06 15:01:35
  */
 // import { Toast } from "vant";
+import { useUserStore, storeToRefs } from "@/pinia";
 import { queryAndSaveAnswer } from "@/service/evaluate";
 
 export default function (router) {
+  const userStore = useUserStore();
+  const { userInfo } = storeToRefs(userStore);
+
   const queryQuestions = () => {
     return new Promise((resolve, reject) => {
       const req = {
-        phrId: localStorage.getItem("phrId"),
+        phrId: userInfo.value.phrId,
         questionCode: "",
         optionsCode: [],
         optionNames: [],

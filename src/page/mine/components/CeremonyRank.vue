@@ -8,11 +8,15 @@
   import { defineComponent, reactive, onMounted, toRefs } from "@vue/composition-api";
   import { mineInfo } from "@/service/ranking";
   import { useRouter } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     setup(_, context) {
       const { $router } = context.root;
       const router = useRouter($router);
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
 
       const state = reactive({
         rankLoading: true,
@@ -20,7 +24,7 @@
       });
 
       const queryRankList = () => {
-        const req = { memberCode: localStorage.getItem("memberCode") };
+        const req = { memberCode: userInfo.value.memberCode };
         mineInfo(req)
           .then(({ code, data, message }) => {
             if (code === 0) {

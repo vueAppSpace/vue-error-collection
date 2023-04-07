@@ -109,6 +109,7 @@
   import { orderLunchUrl, dianCanUrl } from "@/config/env";
 
   import { useLocationStore, storeToRefs } from "@/pinia";
+  import { mapState, useUserStore } from "@/pinia";
 
   const cityCode = useLocationStore().cityCode;
 
@@ -118,6 +119,7 @@
 
   import { jsBridge } from "@/utils/native/jsBridge";
   import { isIOS, isUniApp, isIcomeMobile, isIcomePC } from "@/utils/native/deviceEnv";
+  import { useUserStore, mapState } from "@/pinia";
 
   export default {
     directives: {},
@@ -143,6 +145,7 @@
       };
     },
     computed: {
+      ...mapState(useUserStore, ["userInfo"]),
       text() {
         return this.currentRate.toFixed(0) + "%";
       },
@@ -247,9 +250,11 @@
 
               let userInfo = null;
               if (isUniApp) {
-                userInfo = JSON.parse( localStorage.getItem('ticket') );
+                userInfo = JSON.parse(localStorage.getItem("ticket"));
               }
-              let emallUrl = encodeURIComponent(`${dianCanUrl}?authCode=${userInfo.grantCode}&authTenantId=${userInfo.accountId}&dishId=${dishId}&canteenId=${this.canteen.canteenId}&date=${date}`);
+              let emallUrl = encodeURIComponent(
+                `${dianCanUrl}?authCode=${userInfo.grantCode}&authTenantId=${userInfo.accountId}&dishId=${dishId}&canteenId=${this.canteen.canteenId}&date=${date}`
+              );
               if (isIcomeMobile) {
                 jsBridge.invoke("openWebView", { targetUrl: url });
               } else if (isIcomePC) {
@@ -274,7 +279,7 @@
           .catch(ex => {});
       },
       canteenListFn() {
-        const employeeId = window.localStorage.getItem("empNo");
+        const employeeId = this.userInfo.empNo;
         canteenList({ cityCode: this.cityCode, employeeId }).then(({ code, data, message }) => {
           if (code === 0) {
             if (data) {
@@ -293,7 +298,7 @@
         // let btd = dayjs().subtract(18, 'day').format("YYYY-MM-DD");
         getComponentList({
           eventCode: "wucan",
-          phrId: localStorage.getItem("phrId"),
+          phrId: this.userInfo.phrId,
           canteenId: this.canteen.canteenId, // 食堂id 调试时不填
           date: btd
         }).then(({ code, data, message }) => {

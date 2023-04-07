@@ -2,7 +2,7 @@
  * @Description: 健康评测
  * @Author: IFLS
  * @Date: 2022-06-10 14:27:24
- * @LastEditTime: 2023-03-28 10:14:32
+ * @LastEditTime: 2023-04-06 14:16:04
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted, onBeforeUnmount } from "@vue/composition-api";
@@ -14,6 +14,7 @@
   import useFontSize from "@/hooks/useFontSize";
   import { evaluatePageMethodForLifeEntropy } from "@/utils/lifeEntropyMethod";
   import { useRouter, useRoute } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -25,8 +26,10 @@
       const router = useRouter($router);
       const route = useRoute($router);
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
-        phrId: localStorage.getItem("phrId"),
         loading: false,
         index: 0, // 当前问题索引
         cardList: [], // 卡片列表
@@ -153,7 +156,7 @@
           }
 
           const req = {
-            phrId: state.phrId,
+            phrId: userInfo.value.phrId,
             questionCode: item.code, // 问题Code
             seqNo: item.seqNo, // 初始化问卷获取的值
             inquiryNo: item.inquiryNo,
@@ -183,7 +186,7 @@
       onMounted(() => {
         const { seqNo, inquiryNo } = route.value.query;
         const req = {
-          phrId: state.phrId,
+          phrId: userInfo.value.phrId,
           questionCode: "",
           optionsCode: [],
           optionNames: [],

@@ -66,6 +66,7 @@
   import { list } from "@/service/healthRecord";
   // import moment from 'moment'
   import loading from "../../components/Loading";
+  import { mapState, useUserStore } from "@/pinia";
 
   const imagesArr = [
     "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/report/niandu-tag.png",
@@ -78,12 +79,12 @@
       loading,
       FeedBack
     },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
+    },
     data() {
       return {
         isSelf: undefined,
-        memberCode: localStorage.getItem("memberCode"),
-        empNo: localStorage.getItem("empNo"),
-        memberId: localStorage.getItem("memberId"),
         list: [],
         selfList: [],
         imgList: imagesArr,
@@ -107,7 +108,7 @@
       },
       listFn() {
         let data = {
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         };
         list(data)
           .then(res => {
@@ -122,7 +123,9 @@
           .catch(ex => {});
       },
       queryList() {
-        const { memberCode, memberId, empNo } = this;
+        const { memberCode } = this;
+        const { memberId } = this.userInfo;
+        const { empNo } = this.userInfo;
         const req = { memberCode, memberId, empNo, pageSize: 999, pageNum: 1 };
         queryReport(req).then(({ code, data, message }) => {
           if (code === 0) {

@@ -29,6 +29,8 @@
 </template>
 <script>
   import { queryClockInList, realDelete, activeDetail, activityLikePage, likeInsert } from "@/service/activity";
+  import { useUserStore, mapState } from "@/pinia";
+
   export default {
     name: "intervense",
     data() {
@@ -49,7 +51,7 @@
         let params = {
           likeId: this.activeId,
           likeType: "2",
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           clockInDays: days
         };
         queryClockInList(params).then(res => {
@@ -85,7 +87,7 @@
         let params = {
           likeType: 0,
           likeId: this.activeId,
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         };
         likeInsert(params).then(res => {
           if (res.code == 0) {
@@ -100,7 +102,7 @@
         let params = {
           likeType: 0,
           likeId: this.activeId,
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         };
         realDelete(params).then(res => {
           if (res) {
@@ -111,7 +113,7 @@
       },
       activityLikePage() {
         activityLikePage({
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           likeId: this.activeId,
           likeType: "0",
           pageIndex: 1,
@@ -125,6 +127,7 @@
       }
     },
     computed: {
+      ...mapState(useUserStore, ["userInfo"]),
       filterStatus() {
         return value => {
           if (value == 0) {

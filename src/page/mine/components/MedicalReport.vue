@@ -2,7 +2,7 @@
  * @Description: 体检报告
  * @Author: IFLS
  * @Date: 2022-05-26 14:24:19
- * @LastEditTime: 2023-03-31 14:06:17
+ * @LastEditTime: 2023-04-07 10:56:57
 -->
 <script>
   import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api";
@@ -10,6 +10,7 @@
   import Tips from "@/components/Tips";
   import { formatTime } from "@/utils/commonFun";
   import { useRouter } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: { Tips },
@@ -17,8 +18,10 @@
       const { $router } = context.root;
       const router = useRouter($router);
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
-        memberCode: localStorage.getItem("memberCode"),
         tips: {
           visible: false,
           title: "",
@@ -36,7 +39,7 @@
       });
 
       const queryReport = () => {
-        queryLastHealthInfo(state.memberCode).then(({ code, data, message }) => {
+        queryLastHealthInfo(userInfo.value.memberCode).then(({ code, data, message }) => {
           state.reportLoading = false;
           if (code === 0) {
             if (data) {

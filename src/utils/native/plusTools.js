@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-03-21 11:24:48
  * @LastEditors: YanivWang
- * @LastEditTime: 2023-03-30 10:46:25
+ * @LastEditTime: 2023-04-07 14:29:36
  * @FilePath: \lk-xinaohealth-h5\src\utils\native\plusTools.js
  * @Description: ****
  */
@@ -181,12 +181,11 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
 };
 
 /**
- * 打开微信小程序
+ * 打开微信小程序(注意: 暂未支持)
  */
 export const openWXMiniProgram = ({ params }) => {
   console.log("打开微信小程序>>>>");
   const { appletId, path } = params;
-  //to do
 };
 
 /**

@@ -186,6 +186,7 @@
   import { Popup } from "vant";
   import secondComment from "./components/secondComment.vue";
   import throttle from "lodash.throttle";
+  import { mapState, useUserStore } from "@/pinia";
   export default {
     name: "dynamicDetails",
     data() {
@@ -249,6 +250,9 @@
         hasLikeSecond: false
       };
     },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
+    },
     components: { secondComment },
     filter: {
       getMoment
@@ -283,8 +287,8 @@
           content: this.inputValue, //评论内容
           dynamicId: this.dynamicId, //动态id
           commentId: this.replayObj.id, //一级评论id
-          memberCode: localStorage.getItem("memberCode"), //用户memberCode
-          memberId: localStorage.getItem("memberId"), //用户memberId
+          memberCode: this.userInfo.memberCode, //用户memberCode
+          memberId: this.userInfo.memberId, //用户memberId
           commMemberCode: this.commMemberCode, //动态发布人memberCode
           firstMemberCode: this.replayObj.memberCode //一级评论人memberCode
         };
@@ -383,7 +387,7 @@
         let params = {
           content: this.inputValue,
           dynamicId: this.dynamicObj.id,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           commMemberCode: this.dynamicObj.memberCode
         };
         commentInsert(params)
@@ -424,7 +428,7 @@
       },
 
       getDyanamics(id) {
-        getDyanamics({ id, memberCode: localStorage.getItem("memberCode") })
+        getDyanamics({ id, memberCode: this.userInfo.memberCode })
           .then(res => {
             const { dynamicImgs, userHeadUrl, isLike } = res.data;
             this.dynamicObj = res.data;
@@ -486,7 +490,7 @@
         let params = {
           likeType: 1,
           likeId: this.dynamicObj.id,
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         };
         realDelete(params).then(res => {
           if (res) {
@@ -505,7 +509,7 @@
         let params = {
           likeType: 1,
           likeId: this.dynamicObj.id,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           likeMemberCode: this.dynamicObj.memberCode
         };
         likeInsert(params).then(res => {
@@ -521,7 +525,7 @@
         let params = {
           likeType: 3,
           likeId: e.id,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           likeMemberCode: e.memberCode
         };
         likeInsert(params).then(res => {
@@ -543,7 +547,7 @@
         let params = {
           likeType: 3,
           likeId: e.id,
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         };
         realDelete(params).then(res => {
           if (res.code == 0) {

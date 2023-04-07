@@ -20,6 +20,8 @@
   import { useRouter, useRoute } from "@/hooks/useRouter";
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
+  import { useUserStore, storeToRefs } from "@/pinia";
+
   export default defineComponent({
     components: {
       Tips,
@@ -30,6 +32,9 @@
       const { $router, zgStatistics, $nextTick, $el } = context.root;
       // const router = useRouter($router);
       const route = useRoute($router);
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
 
       const state = reactive({
         // introVisible: true,
@@ -93,7 +98,7 @@
       const activityLikePageFn = () => {
         let params = {
           likeId: state.id - 0,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: userInfo.value.memberCode,
           likeType: 0,
           pageIndex: 0,
           pageSize: 10
