@@ -314,7 +314,7 @@
   .tag-dis {
     @include common-tag();
     background: #d6dae8;
-    font-size: 26px;
+    // font-size: 26px;
     color: #737782;
   }
 
