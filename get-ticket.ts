@@ -8,9 +8,10 @@
 import https from "https";
 import os from "os";
 import { exec } from "child_process";
+import { getEmallInfo } from "./get-emall-info";
 
 type LoginNameType = number | string;
-enum Ticket {
+enum Env {
   icome = "ICOME",
   emall = "EMALL"
 }
@@ -18,19 +19,17 @@ enum Ticket {
 const osEnv = os.type();
 const isWebpack = process.env.npm_package_version; // 是否为webpack打包环境
 const defaultLoginName = 10057859; //夏高飞 icome 工号
-// e 商服登录：账号、密码
-// TODO
-// const userName = "17631807110";
-// const password = "Zhaoce@0206";
 
-async function getTicket(type: Ticket = Ticket.icome, loginName: LoginNameType = defaultLoginName): Promise<string> {
+export function getLoginQuery(env: Env): Promise<string> {
+  if (env === Env.emall) {
+    return getEmallInfo();
+  } else {
+    return getTicket();
+  }
+}
+
+async function getTicket(loginName: LoginNameType = defaultLoginName) {
   let ticket: string;
-
-  // if (type === Ticket.emall) {
-  //   ticket = `userName=${userName}&password=${password}`;
-  //   return ticket;
-  // }
-
   const token = await getToken(loginName);
 
   const options = {
@@ -137,7 +136,7 @@ export function getIPAddress() {
 
 async function pasteTicketToClipboard() {
   const [, , loginName = defaultLoginName] = process.argv;
-  const ticket = await getTicket(Ticket.icome, loginName);
+  const ticket = await getTicket(loginName);
   if (osEnv === "Darwin") {
     exec("pbcopy").stdin.end(ticket); // mac
   } else {
@@ -147,5 +146,3 @@ async function pasteTicketToClipboard() {
 }
 
 !isWebpack && pasteTicketToClipboard();
-
-export { getTicket };

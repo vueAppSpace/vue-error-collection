@@ -4,29 +4,28 @@ import axios from "axios";
 
 const publicKey =
   "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCidgwAP4UvGfZG2TAfS7ookIj/zltg0t3zwgq8qIws7veg8aN4kU8E4Xc+KKefeJ7zcFp5G9Y4s0V7uhgKaZCzotPbqwnNj24qoNQfLkUXfwZSIGEsRFEP1to5b8eFo5IQu8OEt8w4Tz4TgZaXyoLPoMLQYLoud07VlxewrfZdvQIDAQAB";
+// 默认用户名：17631807110  密码：Zhaoce@0206
+const userName = "17631807110";
+const password = "Zhaoce@0206";
 
-function encrypt(txt) {
+function encrypt(txt: any): string {
   const encryptor = new JSEncrypt();
   encryptor.setPublicKey(publicKey); // 设置公钥
   return encryptor.encrypt(txt); // 对需要加密的数据进行加密
 }
 
-export async function getEmailInfo() {
+export async function getEmallInfo(): Promise<string> {
   try {
     const grantCode = await getGrantCode();
     const authTenantId = await getTenantId(grantCode);
-    console.log(grantCode, authTenantId);
-    // window.location.replace(
-    //   `http://localhost:9080/report/localhost:9080/report/health?authTenantId=${authTenantId}&grantCode=${grantCode}`
-    // );
+
+    return `grantCode=${grantCode}&authTenantId=${authTenantId}`;
   } catch (err) {
     console.log(`获取 e商服登录信息 失败: ${err}`);
   }
 }
 
 function getGrantCode() {
-  const userName = "17631807110";
-  const password = "Zhaoce@0206";
   const time = Date.now();
   const passwordValue = encrypt(password);
   const md5Value = md5(password + time);
@@ -93,5 +92,3 @@ function post(reqConfig) {
       .catch(err => reject(err));
   });
 }
-
-getEmailInfo();
