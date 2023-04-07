@@ -9,7 +9,7 @@
         <div class="videoBox" v-if="workBreakExercisesDetail">
           <div class="play_box" v-if="showPlayBtn">
             <img
-              @click="handelPlay"
+              @click="handelPlay()"
               src="https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/health/video_2.png"
             />
           </div>
