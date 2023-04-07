@@ -2,7 +2,7 @@
  * @Description: 用户鉴权函数
  * @Author: IFLS
  * @Date: 2022-08-12 09:39:33
- * @LastEditTime: 2023-03-24 12:43:28
+ * @LastEditTime: 2023-04-07 13:52:30
  */
 import { Toast } from "vant";
 
@@ -16,7 +16,9 @@ function throwError(userStore) {
 
 // 生命熵测试用户
 function isEntropy() {
-  const isTestUser = JSON.parse(localStorage.getItem("isTestUser"));
+  const userStore = JSON.parse(sessionStorage.getItem("userStore"));
+  if (!userStore) return throwError(userStore);
+  const isTestUser = userStore.userInfo.isTestUser;
   return isTestUser === 2;
 }
 

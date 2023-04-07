@@ -1,8 +1,8 @@
 <!--
  * @Author: yanghaifengb yanghaifengb@enn.cn
  * @Date: 2022-06-28 14:01:49
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-03-31 16:07:20
+ * @LastEditors: YanivWang
+ * @LastEditTime: 2023-04-07 10:37:07
  * @FilePath: \lk-xinaohealth-h5\src\page\activity\themeActivity\components\dynamicList.vue
  * @Description: 活动列表组件
 -->
@@ -37,6 +37,8 @@
   import { useRouter, useRoute } from "@/hooks/useRouter";
   import { isIcomePC } from "@/utils/native/deviceEnv";
   import { jsBridge } from "@/utils/native/jsBridge";
+
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   // import UserInfo from './components/UserInfo'
   // import intro from '@/utils/intro'
@@ -84,6 +86,9 @@
       const { $router, zgStatistics } = context.root;
       const router = useRouter($router);
       const route = useRoute($router);
+
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
 
       const fieldInput = ref(null);
       const refs = context.refs;
@@ -139,7 +144,7 @@
         let params = {
           likeType: state.likeType, //点赞
           likeId: e.id,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: userInfo.value.memberCode,
           likeMemberCode: e.memberCode
         };
         likeInsert(params).then(({ code, data, message }) => {
@@ -164,9 +169,9 @@
         });
 
         let params = {
-          likeType: state.likeType, //
+          likeType: state.likeType,
           likeId: e.id,
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: userInfo.value.memberCode
         };
         realDelete(params).then(({ code, data, message }) => {
           if (code === 0) {
@@ -186,7 +191,7 @@
         let params = {
           content: state.inputText, //评论内容
           dynamicId: state.itemData.id,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: userInfo.value.memberCode,
           commMemberCode: state.itemData.memberCode
         };
         commentInsert(params).then(({ code, data, message }) => {
@@ -205,7 +210,7 @@
           pageSize: state.pageSize,
           status: 1,
           orderFlag: props.orderFlag,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: userInfo.value.memberCode,
           userFlag: props.userFlag
         };
         console.log(route, "route");
@@ -304,7 +309,7 @@
           pageSize: 5,
           status: 1,
           orderFlag: props.orderFlag,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: userInfo.value.memberCode,
           userFlag: props.userFlag,
           id: state.likeData.id
         };
@@ -491,7 +496,7 @@
         return new Promise((resolve, reject) => {
           activityDetail({
             id,
-            memberCode: localStorage.getItem("memberCode")
+            memberCode: userInfo.value.memberCode
           }).then(res => {
             const { status } = res.data;
             resolve(status);

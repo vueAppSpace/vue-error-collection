@@ -225,7 +225,7 @@
           content: this.inputValue, //评论内容
           dynamicId: this.dynamicId, //动态id
           commentId: this.replayObj.id, //一级评论id
-          memberCode: localStorage.getItem("memberCode"), //用户memberCode
+          memberCode: this.userInfo.memberCode, //用户memberCode
           memberId: this.userInfo.memberId, //用户memberId
           commMemberCode: this.commMemberCode, //动态发布人memberCode
           firstMemberCode: this.replayObj.memberCode //一级评论人memberCode
@@ -292,7 +292,7 @@
         let params = {
           likeType: 3,
           likeId: e.id,
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           likeMemberCode: e.memberCode
         };
         likeInsert(params).then(res => {
@@ -310,7 +310,7 @@
         let params = {
           likeType: 3,
           likeId: e.id,
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         };
         realDelete(params).then(res => {
           if (res.code == 0) {

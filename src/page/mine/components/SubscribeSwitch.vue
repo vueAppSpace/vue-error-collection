@@ -2,17 +2,20 @@
  * @Description: 订阅开关
  * @Author: IFLS
  * @Date: 2022-06-01 14:58:04
- * @LastEditTime: 2023-03-23 17:41:16
+ * @LastEditTime: 2023-04-07 10:57:11
 -->
 <script>
   import { defineComponent, reactive, onMounted, toRefs } from "@vue/composition-api";
   import { Toast } from "vant";
   import { querySubscribe, updateSubscribe } from "@/service/mine/index";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     setup() {
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
-        memberCode: localStorage.getItem("memberCode"),
         subscribeSwitch: true, // 订阅开关
         subscribeId: -1, // 订阅id
         switchLoading: false // 订阅开关loading
@@ -20,7 +23,7 @@
 
       // 查询订阅状态
       const querySubscribeState = () => {
-        querySubscribe(state.memberCode).then(({ code, data, message }) => {
+        querySubscribe(userInfo.value.memberCode).then(({ code, data, message }) => {
           if (code === 0) {
             const dt = data[0];
             state.subscribeSwitch = dt.isSubscribe === 1;

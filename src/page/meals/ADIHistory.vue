@@ -310,6 +310,7 @@
   import Tips from "@/components/Tips";
 
   import FullLoading from "@/components/Loading";
+  import { useUserStore, mapState } from "@/pinia";
 
   export default {
     directives: {},
@@ -368,6 +369,9 @@
         exp: 1,
         saveSuccess: false
       };
+    },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
     },
     methods: {
       toDetail(name, type) {
@@ -978,7 +982,6 @@
       }
       this.paramDate = formatTimeForBirth(new Date());
       this.tabClick(index);
-      this.memberCode = localStorage.getItem("memberCode");
       this.deviceWidth = document.documentElement.clientWidth;
 
       this.translateDate(new Date());

@@ -155,7 +155,7 @@
   import FullLoading from "@/components/Loading";
 
   import Tips from "@/components/Tips";
-  import { mapState, useNavStore } from "@/pinia";
+  import { mapState, useNavStore, useUserStore } from "@/pinia";
 
   import { Toast } from "vant";
 
@@ -217,7 +217,8 @@
       };
     },
     computed: {
-      ...mapState(useNavStore, ["onback"])
+      ...mapState(useNavStore, ["onback"]),
+      ...mapState(useUserStore, ["userInfo"])
     },
     components: {
       UploadAuth,
@@ -349,7 +350,7 @@
           dynamicImgs: this.dynamicImgs,
           activityId: this.activityTitle ? this.activeId : "",
           activityTitle: this.activityTitle ? this.activityTitle : "",
-          memberCode: localStorage.getItem("memberCode"),
+          memberCode: this.userInfo.memberCode,
           topicTitle: topicContent
         };
         let type = "文字";

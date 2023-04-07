@@ -75,7 +75,7 @@ service.interceptors.request.use(
         const { appId, appCode, companyId, companyPid } = userStore.userInfo;
         config.headers = Object.assign(config.headers, { appId, appCode, companyId, companyPid });
         // #v-endif
-        const accessToken = userStore.userInfo.memberBasicDTO.ztUcApiGetToken.uaaTokenInfo.accessToken;
+        const accessToken = userStore.userInfo.accessToken;
         config.headers.Authorization = "Bearer " + accessToken;
       } catch (err) {
         console.log("userInfoErr", err);

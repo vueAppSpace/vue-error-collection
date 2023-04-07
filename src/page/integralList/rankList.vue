@@ -80,6 +80,7 @@
 <script>
   import { mineInfo, myRankList } from "@/service/ranking";
   import dotsLoader from "../../components/dotsLoader";
+  import { useUserStore, mapState } from "@/pinia";
 
   // import { Toast } from 'vant'
 
@@ -106,6 +107,9 @@
         pageIndex: 1
       };
     },
+    computed: {
+      ...mapState(useUserStore, ["userInfo"])
+    },
     methods: {
       toActivityDetail() {
         this.$router.push("/activityDetail2");
@@ -117,7 +121,7 @@
 
       mineInfoFn() {
         let data = {
-          memberCode: this.memberCode
+          memberCode: this.userInfo.memberCode
         };
         mineInfo(data)
           .then(res => {
@@ -151,8 +155,6 @@
     },
     watch: {},
     mounted() {
-      this.memberCode = localStorage.getItem("memberCode");
-
       this.mineInfoFn();
 
       this.myRankListFn();

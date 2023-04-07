@@ -85,7 +85,6 @@
     data() {
       return {
         isSelf: undefined,
-        memberCode: localStorage.getItem("memberCode"),
         list: [],
         selfList: [],
         imgList: imagesArr,
@@ -109,7 +108,7 @@
       },
       listFn() {
         let data = {
-          memberCode: localStorage.getItem("memberCode")
+          memberCode: this.userInfo.memberCode
         };
         list(data)
           .then(res => {
@@ -124,7 +123,6 @@
           .catch(ex => {});
       },
       queryList() {
-        debugger;
         const { memberCode } = this;
         const { memberId } = this.userInfo;
         const { empNo } = this.userInfo;

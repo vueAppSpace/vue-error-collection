@@ -2,7 +2,7 @@
  * @Description: 我的
  * @Author: IFLS
  * @Date: 2022-05-12 15:09:29
- * @LastEditTime: 2023-03-28 10:04:49
+ * @LastEditTime: 2023-04-07 11:14:49
 -->
 <script>
   import { defineComponent, reactive, onMounted, toRefs } from "@vue/composition-api";
@@ -20,6 +20,7 @@
   // import qrcodeDialog from '@/components/QRCodeDialog'
   import { judgeNeedToJumpToDanao, resetJumpReportData } from "@/utils/lifeEntropyMethod";
   import { useRouter } from "@/hooks/useRouter";
+  import { useUserStore, storeToRefs } from "@/pinia";
 
   export default defineComponent({
     components: {
@@ -48,8 +49,10 @@
       const { $router, zgStatistics } = context.root;
       const router = useRouter($router);
 
+      const userStore = useUserStore();
+      const { userInfo } = storeToRefs(userStore);
+
       const state = reactive({
-        memberCode: localStorage.getItem("memberCode"),
         aimd: false, // 是否有超越目标
         aimdName: "", // 超越目标的姓名
         aimdId: "", // 超越目标的id
@@ -78,7 +81,7 @@
       // 查询用户排行信息
       const queryMineData = async () => {
         return new Promise((resolve, reject) => {
-          api.queryMineRankList(state.memberCode).then(({ code, data, message }) => {
+          api.queryMineRankList(userInfo.value.memberCode).then(({ code, data, message }) => {
             if (code === 0) {
               state.userInfo = data || {};
               resolve();
@@ -94,7 +97,7 @@
       // 查询是否有超越目标
       const queryTarget = () => {
         const req = {
-          memberCode: state.memberCode,
+          memberCode: userInfo.value.memberCode,
           pageSize: 1,
           pageNum: 1,
           status: 1
@@ -113,7 +116,7 @@
       // 查询我要超越的用户
       const queryAimd = () => {
         const req = {
-          memberCode: state.memberCode,
+          memberCode: userInfo.value.memberCode,
           pageSize: 1,
           pageNum: 1
         };
@@ -174,7 +177,7 @@
       // 查询想要超越我的用户
       // const queryNoticeBar = () => {
       //     const req = {
-      //         surpassMemberCode: state.memberCode,
+      //         surpassMemberCode: userInfo.value.memberCode,
       //         pageSize: 10,
       //         pageNum: 1,
       //         status: 1

@@ -32,7 +32,7 @@
 
       // 查询累积积分 剩余积分
       const queryMineData = () => {
-        queryMineRankList(localStorage.getItem("memberCode")).then(({ code, data, message }) => {
+        queryMineRankList(userInfo.value.memberCode).then(({ code, data, message }) => {
           if (code === 0) {
             state.userData = data || {};
           } else {

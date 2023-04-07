@@ -45,7 +45,7 @@
       const queryIsEmployee = async () => {
         try {
           const req = {
-            memberCode: localStorage.getItem("memberCode"),
+            memberCode: userInfo.value.memberCode,
             userEmpNo: userInfo.value.empNo,
             status: 1
           };
