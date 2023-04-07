@@ -6,15 +6,15 @@ import legacy from "@vitejs/plugin-legacy";
 import viteCompression from "vite-plugin-compression";
 import conditionalCompile from "vite-plugin-conditional-compiler";
 import checkEnv from "./version";
-import { getTicket, getIPAddress } from "./get-ticket";
+import { getLoginQuery, getIPAddress } from "./get-ticket";
 
 export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
   const env: Partial<ImportMetaEnv> = loadEnv(mode, process.cwd());
   const lkProject = checkEnv(env);
-  const ticket = await getTicket(env.VITE_IFDEF);
+  const loginQuery = await getLoginQuery(env.VITE_IFDEF);
   const ipAddress = getIPAddress();
 
-  printProjectURL(ticket, ipAddress, env.VITE_IFDEF);
+  printProjectURL(loginQuery, ipAddress, env.VITE_IFDEF);
 
   return {
     plugins: [
@@ -68,7 +68,7 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
     server: {
       port: 9080, // 端口号
       // open: true, // 是否自动打开浏览器
-      open: `health?${ticket}`,
+      open: `health?${loginQuery}`,
       cors: true // 允许跨域
       // 代理
       // proxy: {
@@ -103,10 +103,10 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
   };
 };
 
-function printProjectURL(ticket: string, ipAddress: string, envType: string) {
+function printProjectURL(loginQuery: string, ipAddress: string, envType: string) {
   console.log(`\n==================== ${envType} 项目链接 start ====================`);
-  console.log(`本地开发: http://localhost:9080/report/health?${ticket}`);
-  console.log(`本地远程: http://${ipAddress}:9080/report/health?${ticket}`);
-  console.log(`qa环境: https://c-qa.op.laikang.com/report/health?${ticket}`);
+  console.log(`本地开发: http://localhost:9080/report/health?${loginQuery}`);
+  console.log(`本地远程: http://${ipAddress}:9080/report/health?${loginQuery}`);
+  console.log(`qa环境: https://c-qa.op.laikang.com/report/health?${loginQuery}`);
   console.log(`==================== ${envType} 项目链接 end ====================\n`);
 }

@@ -8,9 +8,10 @@
 import https from "https";
 import os from "os";
 import { exec } from "child_process";
+import { getEmallInfo } from "./get-emall-info";
 
-type LoginNameType = string | number;
-enum Ticket {
+type LoginNameType = number | string;
+enum Env {
   icome = "ICOME",
   emall = "EMALL"
 }
@@ -18,19 +19,17 @@ enum Ticket {
 const osEnv = os.type();
 const isWebpack = process.env.npm_package_version; // 是否为webpack打包环境
 const defaultLoginName = 10057859; //夏高飞 icome 工号
-const authTenantId = "1382587333843415042";
-const grantCode = "MTQ2NDYwNDYyNDQ5OTk0OTU3MCNBUFAjNTVmNWQ3YTRmZWYzMWE4ZGFiYzBhYjEzMmU1MDdiNzU";
 
-// 正式环境 获取 ticket 接口
-// hostname = "icome-dingtalk-h5.ennew.com";
-// path = "/icome/usercenter/getTicket";
-async function getTicket(type: Ticket = Ticket.icome, loginName: LoginNameType = defaultLoginName): Promise<string> {
-  let ticket: string;
-
-  if (type === Ticket.emall) {
-    ticket = `authTenantId=${authTenantId}&grantCode=${grantCode}`;
-    return ticket;
+export function getLoginQuery(env: Env): Promise<string> {
+  if (env === Env.emall) {
+    return getEmallInfo();
+  } else {
+    return getTicket();
   }
+}
+
+async function getTicket(loginName: LoginNameType = defaultLoginName) {
+  let ticket: string;
   const token = await getToken(loginName);
 
   const options = {
@@ -137,7 +136,7 @@ export function getIPAddress() {
 
 async function pasteTicketToClipboard() {
   const [, , loginName = defaultLoginName] = process.argv;
-  const ticket = await getTicket(Ticket.icome, loginName);
+  const ticket = await getTicket(loginName);
   if (osEnv === "Darwin") {
     exec("pbcopy").stdin.end(ticket); // mac
   } else {
@@ -147,5 +146,3 @@ async function pasteTicketToClipboard() {
 }
 
 !isWebpack && pasteTicketToClipboard();
-
-export { getTicket };
