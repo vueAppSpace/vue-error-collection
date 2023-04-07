@@ -303,7 +303,7 @@
   import { uploadPic } from "@/service/activity";
   import { videoRecordStart, videoRecordEnd, reportAllVideoDuration } from "@/hooks/useVideo";
 
-  import { mapState, useNavStore } from "@/pinia";
+  import { mapState, useNavStore, useUserStore } from "@/pinia";
 
   import { jsBridge } from "@/utils/native/jsBridge";
   import { isIcomePC, isIOS, isAndroid } from "@/utils/native/deviceEnv";
