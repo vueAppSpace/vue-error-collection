@@ -2,11 +2,12 @@ import JSEncrypt from "node-jsencrypt";
 import md5 from "md5";
 import axios from "axios";
 
-const publicKey =
-  "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCidgwAP4UvGfZG2TAfS7ookIj/zltg0t3zwgq8qIws7veg8aN4kU8E4Xc+KKefeJ7zcFp5G9Y4s0V7uhgKaZCzotPbqwnNj24qoNQfLkUXfwZSIGEsRFEP1to5b8eFo5IQu8OEt8w4Tz4TgZaXyoLPoMLQYLoud07VlxewrfZdvQIDAQAB";
-// 默认用户名：17631807110  密码：Zhaoce@0206
+// 账号密码，需要手动修改
 const userName = "17631807110";
 const password = "Zhaoce@0206";
+
+const publicKey =
+  "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCidgwAP4UvGfZG2TAfS7ookIj/zltg0t3zwgq8qIws7veg8aN4kU8E4Xc+KKefeJ7zcFp5G9Y4s0V7uhgKaZCzotPbqwnNj24qoNQfLkUXfwZSIGEsRFEP1to5b8eFo5IQu8OEt8w4Tz4TgZaXyoLPoMLQYLoud07VlxewrfZdvQIDAQAB";
 
 function encrypt(txt: any): string {
   const encryptor = new JSEncrypt();
