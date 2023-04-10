@@ -9,7 +9,9 @@ const publicKey =
 // const userName = "17631807110";
 // const password = "Zhaoce@0206";
 // dev环境
-const userName = "10104801"; // 李俊宏
+// const userName = "10104801"; // 李俊宏
+// const password = "1a@12345";
+const userName = "15510293800";
 const password = "1a@12345";
 
 function encrypt(txt: any): string {
@@ -42,8 +44,7 @@ function getGrantCode() {
       password: passwordValue,
       time,
       md5: md5Value,
-      // type: "userCenter", // uat环境
-      type: "ldap", // dev环境
+      type: userName.length === 8 ? "ldap" : "userCenter", // 工号对应ldap类型 手机号对应userCenter类型
       appId: "e-business-service",
       terminalType: "APP",
       rememberMe: false,

@@ -36,20 +36,18 @@ const router = new Router({
 
 // // 权限校验
 router.beforeEach((to, from, next) => {
-  // #v-ifdef VITE_IFDEF=ICOME
-  // 若未查看过导航页 跳转去导航 或者从icome页进入 跳转导航
-  if (localStorage.getItem("guideShow") !== "1" || to.query.source === "icome") {
-    localStorage.setItem("guideShow", "1");
-    return next(`/guide?url=${encodeURIComponent(to.fullPath)}`);
-  }
-  // #v-endif
-
   if (from.meta.keepAlive) {
     const pageBox = document.querySelector(".page-box");
     const scrollTop = pageBox ? pageBox.scrollTop : 0;
     from.meta.scrollTop = scrollTop;
   }
 
+  // #v-ifdef VITE_IFDEF=ICOME
+  // 若未查看过导航页 跳转去导航 或者从icome页进入 跳转导航
+  if (localStorage.getItem("guideShow") !== "1" || to.query.source === "icome") {
+    localStorage.setItem("guideShow", "1");
+    return next(`/guide?url=${encodeURIComponent(to.fullPath)}`);
+  }
   // 所有路由跳转时添加icome参数
   const dd = "dd_full_screen";
   if (!to.query[dd]) {
@@ -64,6 +62,16 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+  // #v-endif
+
+  // #v-ifdef VITE_IFDEF=EMALL
+  if (!to.query["ticket"]) {
+    // @ts-ignore
+    next({ ...to, query: { ...to.query, ticket: "noticket" } });
+  } else {
+    next();
+  }
+  // #v-endif
 });
 
 export default router;

@@ -13,6 +13,7 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
   const lkProject = checkEnv(env);
   const loginQuery = await getLoginQuery(env.VITE_IFDEF);
   const ipAddress = getIPAddress();
+  const isHash = env.VITE_ENV.includes("emall") ? "#/" : "";
 
   printProjectURL(loginQuery, ipAddress, env.VITE_IFDEF);
 
@@ -69,7 +70,7 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
     server: {
       port: 9080, // 端口号
       // open: true, // 是否自动打开浏览器
-      open: `health?${loginQuery}`,
+      open: `${isHash}health?${loginQuery}`,
       cors: true // 允许跨域
       // 代理
       // proxy: {
