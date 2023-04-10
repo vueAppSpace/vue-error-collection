@@ -4,9 +4,13 @@ import axios from "axios";
 
 const publicKey =
   "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCidgwAP4UvGfZG2TAfS7ookIj/zltg0t3zwgq8qIws7veg8aN4kU8E4Xc+KKefeJ7zcFp5G9Y4s0V7uhgKaZCzotPbqwnNj24qoNQfLkUXfwZSIGEsRFEP1to5b8eFo5IQu8OEt8w4Tz4TgZaXyoLPoMLQYLoud07VlxewrfZdvQIDAQAB";
+// uat环境
 // 默认用户名：17631807110  密码：Zhaoce@0206
-const userName = "17631807110";
-const password = "Zhaoce@0206";
+// const userName = "17631807110";
+// const password = "Zhaoce@0206";
+// dev环境
+const userName = "10104801"; // 李俊宏
+const password = "1a@12345";
 
 function encrypt(txt: any): string {
   const encryptor = new JSEncrypt();
@@ -31,13 +35,15 @@ function getGrantCode() {
   const md5Value = md5(password + time);
 
   const reqConfig = {
-    url: "https://authentication-center-2.uat.ennew.com/userCenter/unify/auth/login",
+    // url: "https://authentication-center-2.uat.ennew.com/userCenter/unify/auth/login",
+    url: "https://authentication-center.dev.ennew.com/userCenter/unify/auth/login",
     data: {
       userName,
       password: passwordValue,
       time,
       md5: md5Value,
-      type: "userCenter",
+      // type: "userCenter", // uat环境
+      type: "ldap", // dev环境
       appId: "e-business-service",
       terminalType: "APP",
       rememberMe: false,
@@ -58,7 +64,8 @@ function getGrantCode() {
 
 function getTenantId(ennUnifiedGrantCode) {
   const reqConfig = {
-    url: "https://authentication-center-2.uat.ennew.com/userCenter/unify/auth/pageAppUserTenantIds",
+    // url: "https://authentication-center-2.uat.ennew.com/userCenter/unify/auth/pageAppUserTenantIds",
+    url: "https://authentication-center.dev.ennew.com/userCenter/unify/auth/pageAppUserTenantIds",
     data: {
       appId: "e-business-service",
       tenantName: "",
