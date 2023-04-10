@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Router from "vue-router";
+import Router, { RouterMode } from "vue-router";
 
 import checkPermissions from "@/utils/permissions";
 import normalUser from "@/router/userType/normalUser";
@@ -23,9 +23,14 @@ console.log("用户权限: ", permission);
 
 Vue.use(Router);
 
+let mode: RouterMode = "history";
+// #v-ifdef VITE_IFDEF=EMALL
+mode = "hash";
+// #v-endif
+
 const router = new Router({
   base: "/report",
-  mode: "history",
+  mode,
   routes: [...accessRoutes]
 });
 
