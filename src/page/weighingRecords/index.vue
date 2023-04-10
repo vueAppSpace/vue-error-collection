@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-02-08 17:03:37
  * @LastEditors: YanivWang
- * @LastEditTime: 2023-03-29 17:41:22
+ * @LastEditTime: 2023-04-10 14:59:38
  * @FilePath: \lk-xinaohealth-h5\src\page\weighingRecords\index.vue
  * @Description: 历史称重记录
 -->
@@ -13,7 +13,6 @@
   import FullLoading from "@/components/Loading";
   import { getWeightPageList } from "@/service/classReservations";
   import _get from "lodash.get";
-  import useNavigate from "@/hooks/useNavigate";
   import { jsBridge } from "@/utils/native/jsBridge";
 
   export default defineComponent({
@@ -113,8 +112,7 @@
       function handleItemCardClick(url) {
         jsBridge.invoke("openWebView", {
           targetUrl: url,
-          refreshTicket: false,
-          extraParame: "&icome-webview=v2"
+          refreshTicket: false
         });
       }
 

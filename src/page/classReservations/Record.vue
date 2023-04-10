@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-02-08 17:03:37
  * @LastEditors: YanivWang
- * @LastEditTime: 2023-03-29 17:22:46
+ * @LastEditTime: 2023-04-10 14:57:17
  * @FilePath: \lk-xinaohealth-h5\src\page\classReservations\Record.vue
  * @Description: 动感团操 - 约课记录
 -->
@@ -174,8 +174,7 @@
         } else if (state.activeTabIndex == RecordState.finished) {
           jsBridge.invoke("openWebView", {
             targetUrl: reportUrl,
-            refreshTicket: false,
-            extraParame: "&icome-webview=v2"
+            refreshTicket: false
           });
         }
       }
