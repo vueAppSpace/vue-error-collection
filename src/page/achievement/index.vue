@@ -165,7 +165,7 @@
         }
 
         ::v-deep .van-badge--fixed {
-          transform: translate(24%, 8%);
+          transform: translate(-4%, 4%);
         }
 
         img {

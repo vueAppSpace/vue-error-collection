@@ -108,8 +108,7 @@
 
   import { orderLunchUrl, dianCanUrl } from "@/config/env";
 
-  import { useLocationStore, storeToRefs } from "@/pinia";
-  import { mapState, useUserStore } from "@/pinia";
+  import { useLocationStore, useUserStore, mapState } from "@/pinia";
 
   const cityCode = useLocationStore().cityCode;
 
@@ -119,7 +118,6 @@
 
   import { jsBridge } from "@/utils/native/jsBridge";
   import { isIOS, isUniApp, isIcomeMobile, isIcomePC } from "@/utils/native/deviceEnv";
-  import { useUserStore, mapState } from "@/pinia";
 
   export default {
     directives: {},
