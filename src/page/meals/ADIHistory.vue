@@ -444,7 +444,7 @@
               this.exp = data.healthPoints;
               this.saveSuccess = true;
             }
-            this.zgStatistics("健康新奥-点击保存", { 页面种类: "摄入量记录", 页面名称: "完成打卡" });
+            // this.zgStatistics("健康新奥-点击保存", { 页面种类: "摄入量记录", 页面名称: "完成打卡" });
             this.getUserDietRecordFn(this.idx, this.paramDate);
             this.zgStatistics("健康新奥-摄入量记录-点击完成打卡", {
               餐次类别: this.tab_content[this.idx].tab_menu
