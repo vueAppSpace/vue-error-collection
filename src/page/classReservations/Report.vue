@@ -2,7 +2,7 @@
  * @Author: YanivWang YanivWang@outlook.com
  * @Date: 2023-02-08 17:03:37
  * @LastEditors: YanivWang
- * @LastEditTime: 2023-03-29 17:23:53
+ * @LastEditTime: 2023-04-10 14:59:43
  * @FilePath: \lk-xinaohealth-h5\src\page\classReservations\Report.vue
  * @Description: 动感团操 - 运动报告
 -->
@@ -14,7 +14,6 @@
   import FullLoading from "@/components/Loading";
   import { getSportPageList, getSportReportSummary } from "@/service/classReservations/index";
   import _get from "lodash.get";
-  import useNavigate from "@/hooks/useNavigate";
   import { jsBridge } from "@/utils/native/jsBridge";
 
   export default defineComponent({
@@ -129,8 +128,7 @@
       function handleItemCardClick(url) {
         jsBridge.invoke("openWebView", {
           targetUrl: url,
-          refreshTicket: false,
-          extraParame: "&icome-webview=v2"
+          refreshTicket: false
         });
       }
 
