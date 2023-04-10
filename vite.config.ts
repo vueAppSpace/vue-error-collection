@@ -64,7 +64,8 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
       // 忽略后缀名的配置选项, 添加 .vue 选项时要记得原本默认忽略的选项也要手动写入
       extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"]
     },
-    base: "/report/", // 设置打包路径
+    // base: "/report/", // 设置打包路径
+    base: "/", // 设置打包路径
     server: {
       port: 9080, // 端口号
       // open: true, // 是否自动打开浏览器
