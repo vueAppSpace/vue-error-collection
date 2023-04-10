@@ -65,7 +65,7 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
       extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"]
     },
     // base: "/report/", // 设置打包路径
-    base: "/", // 设置打包路径
+    base: env.VITE_BASE_URL, // 设置打包路径
     server: {
       port: 9080, // 端口号
       // open: true, // 是否自动打开浏览器
