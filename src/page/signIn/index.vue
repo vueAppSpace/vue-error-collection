@@ -1,5 +1,5 @@
 <script>
-  import { defineComponent, ref, reactive } from "@vue/composition-api";
+  import { defineComponent, ref, reactive, computed } from "@vue/composition-api";
   import Banner from "@/components/banner.vue";
   import Popup from "./compoents/popup.vue";
 
@@ -30,6 +30,13 @@
       const lastDay = weekData.slice(-1)[0];
       const currentDay = weekData.find(item => item.isCurrent === 1);
 
+      const isDisableSignIn = computed(
+        () =>
+          currentDay.isSigned === 1 ||
+          (activeData.sundaySignType && lastDay.isCurrent === 1 && activeData.isSignedNum < activeData.sundayLimitDays)
+      );
+      const signText = computed(() => (activeData.signType === 1 ? "连续" : "累计"));
+
       /* 获取接口数据 */
       getSignInData();
       function getSignInData() {
@@ -50,14 +57,8 @@
 
       /* 立即签到弹窗 */
       const popupShow = ref(false);
-      function isDisableSignIn() {
-        return (
-          currentDay.isSigned === 1 ||
-          (activeData.sundaySignType && lastDay.isCurrent === 1 && activeData.isSignedNum < activeData.sundayLimitDays)
-        );
-      }
       function signIn() {
-        if (isDisableSignIn()) return;
+        if (isDisableSignIn.value) return;
         console.log("签到");
         // TODO 调接口，然后更新数据
         popupShow.value = true;
@@ -66,14 +67,15 @@
       return {
         type,
         weekData,
-        lastDay,
         activeData,
-        isSigned,
-        toggleRemind,
+        lastDay,
         currentDay,
+        isSigned,
         popupShow,
-        isActiveDayLine,
+        signText,
         isDisableSignIn,
+        toggleRemind,
+        isActiveDayLine,
         signIn
       };
     }
@@ -88,7 +90,7 @@
       <div class="top">
         <!-- TODO 连续规则 -->
         <div class="title font-medium">
-          本周已{{ activeData.signType === 1 ? "连续" : "累计" }}签到 <span>{{ activeData.isSignedNum }}</span> 天
+          本周已{{ signText }}签到 <span>{{ activeData.isSignedNum }}</span> 天
         </div>
         <div class="remind-btn">
           <div class="text font-regular">签到提醒</div>
@@ -96,9 +98,7 @@
         </div>
       </div>
       <div v-if="activeData.sundaySignType === 1" class="desc font-regular">
-        {{ activeData.signType === 1 ? "连续" : "累计" }}签到{{ activeData.sundayLimitDays }}天，周日可领<span
-          >{{ lastDay.point }}个积分</span
-        >哦～
+        {{ signText }}签到{{ activeData.sundayLimitDays }}天，周日可领<span>{{ lastDay.point }}个积分</span>哦～
       </div>
       <div class="week-box">
         <div class="day-box" v-for="(item, index) in weekData" :key="index">
@@ -136,7 +136,7 @@
           <div class="day-text font-regular">{{ item.isSigned === 1 ? "已签" : item.text }}</div>
         </div>
       </div>
-      <div class="sign-btn font-medium" :class="{ 'inactive-sign-btn': isDisableSignIn() }" @click="signIn">
+      <div class="sign-btn font-medium" :class="{ 'inactive-sign-btn': isDisableSignIn }" @click="signIn">
         {{ currentDay.isSigned === 1 ? "已签到" : "立即签到" }}
       </div>
     </div>
@@ -145,6 +145,7 @@
       :modelValue="popupShow"
       @update:modelValue="popupShow = $event"
       :getPoint="currentDay.point"
+      :signText="signText"
       :activeData="activeData"
       :lastDay="lastDay"
     />

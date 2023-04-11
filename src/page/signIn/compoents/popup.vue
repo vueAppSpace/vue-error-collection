@@ -11,6 +11,10 @@
         type: Number,
         required: true
       },
+      signText: {
+        type: String,
+        required: true
+      },
       activeData: {
         type: Object,
         required: true
@@ -53,9 +57,7 @@
       </div>
       <div class="desc font-regular">
         <p v-if="activeData.sundaySignType === 1 && lastDay.isCurrent === 0">
-          {{ activeData.signType === 1 ? "连续" : "累计" }}签到{{ activeData.sundayLimitDays }}天，周日可领取{{
-            lastDay.point
-          }}积分，
+          {{ signText }}签到{{ activeData.sundayLimitDays }}天，周日可领取{{ lastDay.point }}积分，
         </p>
         <p>每天都要关注健康哦~</p>
       </div>
