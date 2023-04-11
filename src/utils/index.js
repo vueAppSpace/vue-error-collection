@@ -15,7 +15,7 @@ export { default as validator } from "./validator";
 // 最多保留两位小数
 export function mostKeepTwoDecimal(num) {
   if (isNaN(num)) {
-    console.log(`${num} 类型错误，需要传入 Number 类型数据`);
+    //console.log(`${num} 类型错误，需要传入 Number 类型数据`);
     return false;
   } else {
     return parseFloat(num.toFixed(2));

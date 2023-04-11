@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2020-09-09 10:38:03
- * @LastEditTime: 2023-03-31 16:23:38
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-04-11 15:03:23
+ * @LastEditors: wangcheng357
  * @Description: In User Settings Edit
- * @FilePath: \lk-xinaohealth-h5\src\App.vue
+ * @FilePath: \lk-vite-error-collection\src\App.vue
 -->
 <template>
   <div v-if="fixTopArea" id="app" :class="{ role3: role == 3 }" :style="`height: calc(100vh - ${safeAreaInsetTop})`">
@@ -78,7 +78,7 @@
         // ios设备开启的webview有概率获取不到状态栏高度
         if (isIcomeIOS) {
           if (parseInt(val) == 0 || !val) {
-            console.log("重新查询状态栏高度", val);
+            //console.log("重新查询状态栏高度", val);
             setTimeout(() => {
               // v-if重置为false 为了渲染重新渲染视图
               this.fixTopArea = false;
@@ -86,7 +86,7 @@
               this.querySafeArea();
             }, 100);
           } else {
-            console.log("最终状态栏高度", val);
+            //console.log("最终状态栏高度", val);
             this.safeAreaInsetTop = parseInt(val) + 46 + "px";
             this.fixTopArea = true;
           }
@@ -104,7 +104,7 @@
           () => {
             const currentClientHeight = this.queryClientHeight();
             if (this.clientHeight !== currentClientHeight) {
-              console.log("键盘变化了");
+              //console.log("键盘变化了");
               this.fixPadding = false;
             }
           },

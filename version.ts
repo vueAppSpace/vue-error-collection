@@ -32,7 +32,7 @@ const checkEnv = (env: Partial<ImportMetaEnv>) => {
         timeStamp
       }
     };
-    console.log("LK_PROJECT", lkProject);
+    //console.log("LK_PROJECT", lkProject);
     return lkProject;
   } catch {
     // if there is no git repository will be cause error

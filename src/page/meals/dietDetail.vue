@@ -398,7 +398,7 @@
               }
               for (let item of this.chartData) {
                 item.ratio = Number(((Number(item.value) / sum).toFixed(3) * 100).toFixed(1));
-                console.log("item.ratio", item.ratio);
+                //console.log("item.ratio", item.ratio);
               }
               for (let item of this.chartData) {
                 if (item.name == "脂肪") {
@@ -474,14 +474,14 @@
           data["营养特点"] = dealWithColor(color, data["营养特点"]);
           let arr = [...data.nutritiousIngredients];
 
-          console.log("arr.length", arr.length);
+          //console.log("arr.length", arr.length);
           // 切割前三条 图表使用
           // const chartData = arr.slice(0, 3).map(i => {
           //     i.ratio *= 100
           //     return i
           // })
 
-          // console.log('chartDatazzz', chartData)
+          // //console.log('chartDatazzz', chartData)
           // this.chartData = chartData
 
           // data.nutritiousIngredients = arr.slice(3, arr.length)

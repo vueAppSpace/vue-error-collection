@@ -545,7 +545,7 @@
       },
       riskWarningFn() {
         riskWarning().then(() => {
-          // // console.log(11)
+          // // //console.log(11)
         });
       },
       getUserDietRecordFn(type, date) {
@@ -706,7 +706,7 @@
       },
       getSlideMax(intake, weight) {
         if (intake && intake > weight * 2) {
-          // console.log('Math.round(intake / weight * 100)', Math.round(intake / weight * 100))
+          // //console.log('Math.round(intake / weight * 100)', Math.round(intake / weight * 100))
           return Math.round((intake / weight) * 100);
         } else {
           return 200;
@@ -789,7 +789,7 @@
         this.zaocanValueArr[this.idx] = null;
         // this.zaocanValueArr[this.idx] = arr;引起的问题
         this.zaocanValueArr.splice(this.idx, 1, arr); // 数组变化
-        // console.log('this.zaocanValueArr', this.zaocanValueArr)
+        // //console.log('this.zaocanValueArr', this.zaocanValueArr)
       },
       getUserMealsFn(eventCode) {
         getUserMeals({

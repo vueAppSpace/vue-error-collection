@@ -193,7 +193,7 @@
     },
     watch: {
       isScroll(value) {
-        console.log("走:", value);
+        //console.log("走:", value);
         if (value) {
           // this.loading = true;
           if (this.isHealth) {
@@ -204,7 +204,7 @@
     },
     mounted() {
       this.date = dayjs().format("YYYY/MM/DD");
-      console.log("this.date", this.date);
+      //console.log("this.date", this.date);
       this.getCommonRecommend();
       this.queryExerciseWorkJobListFn();
       this.getUserDietPrinciples(); // 饮食原则一句话
@@ -221,7 +221,7 @@
             refresh: isRefresh
           };
           const { code, data, message } = await getUserEmotion2(param);
-          console.log("情志推荐:哄睡专家", code, data, message);
+          //console.log("情志推荐:哄睡专家", code, data, message);
           if (code === 0) {
             if (data) {
               if (data.prescriptionDTOs && data.prescriptionDTOs.length) {
@@ -241,10 +241,10 @@
               }
             }
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       queryExerciseWorkJobListFn() {
@@ -252,7 +252,7 @@
           if (code === 0) {
             this.exerciseWorkList = data;
           } else {
-            console.log("queryExerciseWorkJobList", message);
+            //console.log("queryExerciseWorkJobList", message);
             // Toast(message);
           }
         });
@@ -260,7 +260,7 @@
       async searchSuggestGongfaFn() {
         try {
           const { code, data, message } = await searchSuggestGongfa();
-          console.log("功法推荐", code, data, message);
+          //console.log("功法推荐", code, data, message);
           if (code === 0) {
             if (data && data.length > 0) {
               this.gongFaArr = data;
@@ -268,16 +268,16 @@
               this.gongFaArr = [];
             }
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       async getExerciseCourseFn() {
         try {
           const { code, data, message } = await getExerciseCourse();
-          console.log("运动课程推荐", code, data, message);
+          //console.log("运动课程推荐", code, data, message);
           if (code === 0) {
             if (data) {
               this.exerciseCourse = data;
@@ -285,10 +285,10 @@
               this.exerciseCourse = null;
             }
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       toggleLoading(val) {
@@ -318,23 +318,23 @@
         try {
           const { code, message, data } = await getDietPrinciples();
           if (code === 0) {
-            console.log("饮食原则一句话：", data);
+            //console.log("饮食原则一句话：", data);
             // this.principlesQuota = data.principles_quota;
             this.principlesQuota = data;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       // 换菜
       async refresh(foodInfo) {
-        console.log("这里写的难受：", foodInfo);
+        //console.log("这里写的难受：", foodInfo);
         if (this.lock) return;
         this.lock = true;
         let { name, cls, meal_time, recipeType } = foodInfo;
-        console.log("meal_time", meal_time);
+        //console.log("meal_time", meal_time);
         if (meal_time == "早餐") {
           meal_time = "zaocan";
         } else if (meal_time == "晚餐") {
@@ -364,13 +364,13 @@
       // 智能推荐
       async getCommonRecommend() {
         const { code, data, message } = await commonRecommend({});
-        console.log("智能推荐xx：", code, data, message);
+        //console.log("智能推荐xx：", code, data, message);
         // const { food_time_morning, food_time_noon, food_time_night } = data;
         const { zaocan, zhongcan, wancan, jiacan } = data;
 
         this.morningData = this.formatData(zaocan);
 
-        console.log("this.morningDatazzz", this.morningData);
+        //console.log("this.morningDatazzz", this.morningData);
         this.noonData = this.formatData(zhongcan);
         this.nightData = this.formatData(wancan);
       },
@@ -408,7 +408,7 @@
         //     data.push({ ...code.recipe_type_sc[0] });
         // }
 
-        console.log("dataaaadccc", data);
+        //console.log("dataaaadccc", data);
         return data;
       },
       // 健康计划
@@ -423,10 +423,10 @@
               this.userPlan = plans;
             }
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       formatDate(date) {
@@ -437,12 +437,12 @@
           await this.getUserPlanFn();
           this.isScroll && this.scrollView();
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       scrollView() {
         const currentPlan = this.judgeTimeLine();
-        // console.log(currentPlan);
+        // //console.log(currentPlan);
         if (currentPlan.event_code === "gongjiancao") {
           this.scrollToView(currentPlan.event_code + currentPlan.num);
         } else {
@@ -451,7 +451,7 @@
       },
       // 滚动到指定元素位置
       scrollToView(id) {
-        // console.log(id, document.querySelector(`#${id}`));
+        // //console.log(id, document.querySelector(`#${id}`));
         setTimeout(() => {
           if (this.isHealth) {
             document.querySelector(`#${id}`).scrollIntoView({
@@ -482,7 +482,7 @@
           if (index != 0) {
             // 上一个计划的时间
             overTimeStamp = new Date(`${this.date} ${plans[index - 1].time}`).valueOf();
-            // console.log("当前时间:", `${this.date} ${item.time}`, `${this.date} ${plans[index - 1].time}`);
+            // //console.log("当前时间:", `${this.date} ${item.time}`, `${this.date} ${plans[index - 1].time}`);
           }
 
           if (currentTimeStamp > overTimeStamp && currentTimeStamp <= timeStamp) {
@@ -526,10 +526,10 @@
     activated() {
       if (this.isHealth) {
         if (!this.userPlan) {
-          console.log("无计划");
+          //console.log("无计划");
           this.fetchData();
         } else {
-          // console.log("有计划");
+          // //console.log("有计划");
           // this.scrollView();
         }
         this.searchSuggestGongfaFn();

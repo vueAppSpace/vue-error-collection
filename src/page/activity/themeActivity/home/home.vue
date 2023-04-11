@@ -151,7 +151,7 @@
           if (code === 0) {
             state.rotationChart = data;
           } else {
-            console.log("activityinfo", message);
+            //console.log("activityinfo", message);
             // Toast(message);
           }
         });
@@ -173,7 +173,7 @@
             } else {
               state.topStatus = false;
             }
-            console.log(data, "话题");
+            //console.log(data, "话题");
           } else {
           }
         });
@@ -255,7 +255,7 @@
       });
       const init = () => {
         // 轮播图
-        console.log("zhixing");
+        //console.log("zhixing");
         state.loaded = false;
         activityinfoFn();
         // 热门话题

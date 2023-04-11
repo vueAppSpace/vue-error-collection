@@ -31,7 +31,7 @@
       }
     },
     setup(_, context) {
-      console.log("healthEncyclopedia index...");
+      //console.log("healthEncyclopedia index...");
 
       const { zgStatistics, $router } = context.root;
       const router = useRouter($router);
@@ -88,7 +88,7 @@
           const catalogue = data0.find(item => item.dictValue === "健康百科");
           if (!catalogue) {
             toast.clear();
-            console.log(msg || "查询栏目类型失败!");
+            //console.log(msg || "查询栏目类型失败!");
           } else {
             //2.查询该栏目类型下的分类
             const { code, message, data } = await queryCategoryList({
@@ -104,12 +104,12 @@
               //3.查询文章和课程
               await refreshPageListFn();
             } else {
-              console.log(message || "查询分类数据失败!");
+              //console.log(message || "查询分类数据失败!");
             }
           }
         } else {
           toast.clear();
-          console.log(msg || "查询栏目类型失败!");
+          //console.log(msg || "查询栏目类型失败!");
         }
       }
 
@@ -133,13 +133,13 @@
             return idValueMap.get(item.id) || item;
           });
         } else {
-          console.log("获取指定文章数据失败!", message);
+          //console.log("获取指定文章数据失败!", message);
         }
       }
 
       //分页查询该分类下的文章
       async function queryUnionArticlePageFn(switchCategory) {
-        console.log("switchCategory", switchCategory);
+        //console.log("switchCategory", switchCategory);
 
         if (switchCategory) {
           state.unionPageParams.pageIndex = 1;
@@ -165,7 +165,7 @@
         } else {
           if (switchCategory) {
             state.unionArticleList = [];
-            console.log(message || "未获取到该分类下的文章数据!");
+            //console.log(message || "未获取到该分类下的文章数据!");
           } else {
             //数据加载完成
             state.loading = false;

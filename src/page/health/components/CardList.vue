@@ -23,7 +23,7 @@
           if (code === 0) {
             state.exerciseWorkList = data;
           } else {
-            console.log("queryExerciseWorkJobList", message);
+            //console.log("queryExerciseWorkJobList", message);
             // Toast(message)
           }
         });

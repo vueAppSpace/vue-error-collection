@@ -11,7 +11,7 @@
       const list = ref([]);
 
       function onLoad() {
-        console.log("loading");
+        //console.log("loading");
         healthEverydayStudy(pageData)
           .then(({ code, data, message }) => {
             if (code === 0) {
@@ -24,13 +24,13 @@
             } else {
               loading.value = false;
               finished.value = true;
-              console.log("healthEverydayStudy: ", message);
+              //console.log("healthEverydayStudy: ", message);
             }
           })
           .catch(err => {
             loading.value = false;
             finished.value = true;
-            console.log(err);
+            //console.log(err);
           });
       }
 

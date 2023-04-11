@@ -317,7 +317,7 @@
         }, 1000);
       },
       handleSelectImage(value) {
-        console.log(value, "value");
+        //console.log(value, "value");
         this.fileType = "image";
         if (this.dynamicImgs.length + value.length > 9) {
           this.$toast("图片最多发9个");
@@ -328,7 +328,7 @@
           formdata.append("file", item);
           uploadPic(formdata).then(({ code, data, msg }) => {
             if (code == 1000) {
-              console.log(data);
+              //console.log(data);
               const url = data.keyList[0][Object.keys(data.info)[0]];
               const name = Object.keys(data.info)[0];
               this.dynamicImgs.push({ url, flag: "img" });
@@ -338,7 +338,7 @@
       },
 
       handleChangeInput(value) {
-        console.log(value, "value");
+        //console.log(value, "value");
       },
       handleRemoveVideo(value) {
         this.fileType = "";
@@ -351,7 +351,7 @@
         }
       },
       handlePublish() {
-        console.log("tet", this.bakStr, "000");
+        //console.log("tet", this.bakStr, "000");
         if (!this.bakStr) {
           this.$toast({
             message: "发布内容不能为空"
@@ -421,16 +421,16 @@
           zone: "beijing"
         };
         getVideoUrl(params).then(res => {
-          console.log("查询视频", this.timer);
+          //console.log("查询视频", this.timer);
           if (res.code == 1000) {
             if (!res.data) {
-              console.log("视频正在转码中，稍等后点击");
+              //console.log("视频正在转码中，稍等后点击");
             } else {
               clearInterval(this.timer);
 
               this.show = false;
               this.fileType = "video";
-              console.log(res.data, "data");
+              //console.log(res.data, "data");
               this.videoObj = res.data.VideoBase;
               let url = res.data.PlayInfoList.PlayInfo[0].PlayURL;
               let cover = res.data.VideoBase.CoverURL;
@@ -464,7 +464,7 @@
       },
       getVideoId(videoInfo, cover) {
         this.videoId = videoInfo.videoId;
-        console.log(cover, "cover");
+        //console.log(cover, "cover");
         this.waitTitle = "转码中...";
         this.timer = setInterval(() => {
           this.getVideoUrl(cover);
@@ -519,13 +519,13 @@
           let url = sessionStorage.getItem("creatImgUrl");
           this.fileType = "image";
           this.dynamicImgs.push({ url: url, flag: "img" });
-          console.log("this.dynamicImgs", this.dynamicImgs);
-          console.log("this.fileType", this.fileType);
+          //console.log("this.dynamicImgs", this.dynamicImgs);
+          //console.log("this.fileType", this.fileType);
         }
       }
     },
     activated() {
-      console.log("zou");
+      //console.log("zou");
       this.publishSuccess = false;
       if (!this.init) {
         this.pageInit();

@@ -256,7 +256,7 @@
                 state.finished = true;
               }
             } else {
-              console.log("getDynamicList", message);
+              //console.log("getDynamicList", message);
               // Toast(message);
             }
           })
@@ -309,7 +309,7 @@
             dynamicData.splice(updateIndex, 1, newItemArr);
             state.dynamicData = dynamicData;
           } else {
-            console.log("getDynamicList", message);
+            //console.log("getDynamicList", message);
             // Toast(message);
           }
         });

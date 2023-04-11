@@ -70,7 +70,7 @@
         this.audio.addEventListener(
           "timeupdate",
           () => {
-            // console.log('开始')
+            // //console.log('开始')
             this.updateProgress();
           },
           false
@@ -78,7 +78,7 @@
         this.audio.addEventListener(
           "ended",
           () => {
-            // console.log('结束')
+            // //console.log('结束')
             this.audioEnded();
           },
           false

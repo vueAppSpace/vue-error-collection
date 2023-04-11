@@ -37,17 +37,17 @@
                 if (code === 0) {
                   tabData.value = data;
                 } else {
-                  console.log("videoCategoryList", message);
+                  //console.log("videoCategoryList", message);
                 }
               })
               .catch(err => {
-                console.log(err);
+                //console.log(err);
               });
           } else {
-            console.log("getSelectListByType", msg);
+            //console.log("getSelectListByType", msg);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       }
 

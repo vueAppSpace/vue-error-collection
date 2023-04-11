@@ -59,7 +59,7 @@
               }
             }, 1000);
           } else {
-            console.log("queryQRCode", message);
+            //console.log("queryQRCode", message);
           }
         });
       };

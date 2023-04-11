@@ -35,7 +35,7 @@
       type: String
     },
     setup(_, context) {
-      console.log("classReservations fillinfo...");
+      //console.log("classReservations fillinfo...");
 
       const { zgStatistics, $router: router } = context.root;
 
@@ -125,7 +125,7 @@
                 });
               }
             } else {
-              console.log("queryUserPortrait", message);
+              //console.log("queryUserPortrait", message);
             }
 
             state.loading = false;
@@ -178,7 +178,7 @@
           height: Number(formatHeight),
           pulse: currentPulseItem.value
         };
-        console.log("commit param:", param);
+        //console.log("commit param:", param);
 
         const { code, message, data } = await submitUserRequireInfo(param);
         if (code === 0) {

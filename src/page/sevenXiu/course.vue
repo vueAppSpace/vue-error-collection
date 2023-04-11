@@ -12,11 +12,11 @@
           if (code === 0) {
             list.value = list.value.concat(data);
           } else {
-            console.log("healthEverydayStudy: ", message);
+            //console.log("healthEverydayStudy: ", message);
           }
         })
         .catch(err => {
-          console.log(err);
+          //console.log(err);
         });
 
       // 视频播放器

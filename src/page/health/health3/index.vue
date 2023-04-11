@@ -120,7 +120,7 @@
         jsBridge
           .invoke("queryLocation")
           .then(data => {
-            console.log("初始化位置>>>>>>>>>>", data);
+            //console.log("初始化位置>>>>>>>>>>", data);
 
             if (data.city) {
               state.city = data.city;
@@ -146,19 +146,19 @@
                 setCityCode("0471");
               }
               // setTimeout(() => {
-              console.log("去除定时器");
+              //console.log("去除定时器");
               getCanteenList();
               // }, 500);
             }
           })
           .catch(err => {
-            console.log("扫码异常:", err);
+            //console.log("扫码异常:", err);
           });
       };
 
       // 点击地图
       const openMap = () => {
-        console.log("state.city", state.city);
+        //console.log("state.city", state.city);
         if (isUniApp) {
           router.push({
             path: "/address",
@@ -172,7 +172,7 @@
             ic.run({
               action: "amap.openMap",
               success: ({ data }) => {
-                console.log("地址data", data);
+                //console.log("地址data", data);
                 state.address = data.city + data.district;
                 setCityCode(data.citycode);
                 getCanteenList();
@@ -194,11 +194,11 @@
                 setCanteenList("noData");
               }
             } else {
-              // console.log(res.message);
+              // //console.log(res.message);
             }
           })
           .catch(error => {
-            // console.log(error.message);
+            // //console.log(error.message);
           });
       };
 
@@ -210,7 +210,7 @@
               state.introVisible = true;
             }
           } else {
-            // console.log("queryAgreement", message);
+            // //console.log("queryAgreement", message);
             // Toast(message)
           }
         } catch (err) {
@@ -304,7 +304,7 @@
           state.address = route.value.query.city;
           getCanteenList();
         }
-        console.log("route", route.value.query.city);
+        //console.log("route", route.value.query.city);
       });
 
       onDeactivated(() => {

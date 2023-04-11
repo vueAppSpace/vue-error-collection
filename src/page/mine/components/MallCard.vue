@@ -37,7 +37,7 @@
             if (code === 0 && data) {
               state.topAchievement = data || {};
             } else {
-              console.log("queryTopAchievement", message);
+              //console.log("queryTopAchievement", message);
             }
           });
         }
@@ -53,7 +53,7 @@
             state.percent = percent;
             state.taskInfo = data;
           } else {
-            console.log("queryTodayData", message);
+            //console.log("queryTodayData", message);
           }
         });
       };
@@ -86,7 +86,7 @@
       onMounted(() => {
         document.addEventListener("resume", () => {
           parent.queryMineData();
-          console.log("resume:页面刷新了");
+          //console.log("resume:页面刷新了");
         });
       });
 

@@ -38,11 +38,11 @@
           if (code === 0) {
             targetBallList[0].value = data.nutr_target.heat;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         })
         .catch(err => {
-          console.log(err);
+          //console.log(err);
         });
 
       exerciseTarget()
@@ -50,11 +50,11 @@
           if (code === 0) {
             targetBallList[1].value = data.targetHeat;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         })
         .catch(err => {
-          console.log(err);
+          //console.log(err);
         });
 
       return {

@@ -95,7 +95,7 @@
                 state.cardList.push(obj);
                 resolve();
               } else {
-                console.log("queryAndSaveAnswer", message);
+                //console.log("queryAndSaveAnswer", message);
                 // Toast(message)
               }
               state.loading = false;
@@ -149,7 +149,7 @@
               return errorTips();
             }
             answer = dataType === "date" ? formatTimeForBirth(active) : active;
-            console.log("answer");
+            //console.log("answer");
           } else {
             console.warn("问题type类型未知:", type);
             return false;

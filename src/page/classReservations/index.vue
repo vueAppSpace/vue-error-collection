@@ -52,7 +52,7 @@
     },
 
     setup(_, context) {
-      console.log("classReservations index...");
+      //console.log("classReservations index...");
 
       const { zgStatistics, $router: router } = context.root;
       const state = reactive({
@@ -108,7 +108,7 @@
           state.coverLoading = false;
         } catch (e) {
           state.coverLoading = false;
-          console.log(e);
+          //console.log(e);
         }
       }
 

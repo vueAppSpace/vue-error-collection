@@ -57,7 +57,7 @@
           if (code === 0) {
             state.personData = data;
           } else {
-            console.log("getPersonCount", message);
+            //console.log("getPersonCount", message);
             // Toast(message);
           }
         });

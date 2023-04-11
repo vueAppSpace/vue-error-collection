@@ -63,9 +63,9 @@
             if (state.activityList.length == page.total) {
               state.finished = true;
             }
-            // console.log(data, "活动列表");
+            // //console.log(data, "活动列表");
           } else {
-            console.log("activityinfo", message);
+            //console.log("activityinfo", message);
             // Toast(message);
           }
         });
@@ -95,7 +95,7 @@
       };
       // 去详情页面
       const toDetail = ({ id }) => {
-        console.log(route.value.query);
+        //console.log(route.value.query);
         router.push({
           path: "/activityDetail",
           query: Object.assign(route.value.query, { id })

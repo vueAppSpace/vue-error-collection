@@ -128,7 +128,7 @@
             if (res.code == 0) {
               this.myObj = res.data;
             } else {
-              console.log(res.message);
+              //console.log(res.message);
             }
           })
           .catch(ex => {});

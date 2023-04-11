@@ -220,7 +220,7 @@
       },
       // 新增二级评论
       activitysecondcommentInsertFn() {
-        console.log(this.replayObj, "发表二级评论");
+        //console.log(this.replayObj, "发表二级评论");
         let params = {
           content: this.inputValue, //评论内容
           dynamicId: this.dynamicId, //动态id
@@ -241,7 +241,7 @@
             }
           })
           .catch(res => {
-            console.log("评论失败");
+            //console.log("评论失败");
           });
       },
       // 点击一级页面二级回复的按钮
@@ -258,7 +258,7 @@
         });
       },
       handleOnload() {
-        console.log("加载更改xx");
+        //console.log("加载更改xx");
         this.commentParams.pageIndex += 1;
         this.activitysecondcommentPageFn();
       },

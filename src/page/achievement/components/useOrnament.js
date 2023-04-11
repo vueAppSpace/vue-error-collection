@@ -37,7 +37,7 @@ export function useOrnament(emit) {
               showTips.value = false;
             }, 300);
           } else {
-            console.log("ornamentUserAll:" + message);
+            //console.log("ornamentUserAll:" + message);
           }
         })
         .catch(err => console.log("ornamentUserAll:" + err));

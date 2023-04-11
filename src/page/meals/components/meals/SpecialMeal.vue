@@ -49,7 +49,7 @@
         employeeId: this.userInfo.empNo ? this.userInfo.empNo : 10104970
       })
         .then(({ code, data, message }) => {
-          console.log("特色餐：", code, data, message);
+          //console.log("特色餐：", code, data, message);
           if (code === 0) {
             if (data && data.length > 0) {
               const temp = data[0];
@@ -66,14 +66,14 @@
               this.isSpecialMeal = false;
             }
           } else {
-            console.log(message);
+            //console.log(message);
             this.$emit("special", false);
             this.noData = "服务开小差了，请稍候重试！";
             this.isSpecialMeal = false;
           }
         })
         .catch(error => {
-          console.log(error.message);
+          //console.log(error.message);
         });
     },
     methods: {
@@ -89,13 +89,13 @@
                 item.dishName = item.recipe_name;
                 return item;
               });
-            console.log(arr);
+            //console.log(arr);
             this.recommendSnack = arr;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       }
     }

@@ -19,8 +19,8 @@
 
       const route = useRoute($router);
 
-      console.log('route', route);
-      
+      //console.log('route', route);
+
       const state = reactive({
         locationCityName: "天津",
         cityList: [
@@ -46,14 +46,14 @@
       state.locationCityName = route.value.query.city;
 
       const selectCityHandle = item => {
-        console.log("item", item);
+        //console.log("item", item);
         router.push({
-          path: '/health',
+          path: "/health",
           query: {
             city: item.name,
             cityCode: item.cityCode
           }
-        })
+        });
       };
 
       const locationAgainFn = () => {
@@ -66,30 +66,29 @@
         jsBridge
           .invoke("queryLocation")
           .then(data => {
-            console.log("初始化位置>>>>>>>>>>", data);
+            //console.log("初始化位置>>>>>>>>>>", data);
 
-            
             if (data.city) {
-              const cityArr = state.cityList.filter( item => {
-                console.log('item.name', item.name);
-                console.log('data.city', data.city)
+              const cityArr = state.cityList.filter(item => {
+                //console.log('item.name', item.name);
+                //console.log('data.city', data.city)
                 return item.name == data.city;
-              } )
+              });
 
-              console.log('cityArr', cityArr)
+              //console.log('cityArr', cityArr)
               // return false;
               router.push({
-                path: '/health',
+                path: "/health",
                 query: {
                   city: data.city,
                   cityCode: cityArr[0].cityCode
                 }
-              })
+              });
             }
             // 这一块如何获取cityCode
           })
           .catch(err => {
-            console.log("扫码异常:", err);
+            //console.log("扫码异常:", err);
           });
       };
       return {

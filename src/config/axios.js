@@ -78,7 +78,7 @@ service.interceptors.request.use(
         const accessToken = userStore.userInfo.accessToken;
         config.headers.Authorization = "Bearer " + accessToken;
       } catch (err) {
-        console.log("userInfoErr", err);
+        //console.log("userInfoErr", err);
       }
     }
 
@@ -127,7 +127,7 @@ service.interceptors.response.use(
       // this.$toast({
       //     message: '登录失效'
       // });
-      console.log("登录失效");
+      //console.log("登录失效");
     }
 
     let res = response.data;
@@ -153,7 +153,7 @@ service.interceptors.response.use(
       // Toast(`服务器异常, 错误码: ${error.response.status}`)
     }
     if (error.response) {
-      //  console.log('http status code', error.response.status)
+      //  //console.log('http status code', error.response.status)
       switch (error.response.status) {
         case 400:
           // 400 页面不存在
@@ -162,7 +162,7 @@ service.interceptors.response.use(
           // 401 需要授权或者令牌过期。清除usercode信息并跳转到登录页面
           // store.commit(authType.CLEAR_USERCODE);
           // alert('权限失效')
-          console.log("token失效重新登陆");
+          //console.log("token失效重新登陆");
 
           break;
         case 500:

@@ -15,7 +15,7 @@ const DateNameIndexMap = {
 
 //生成一个默认的dateList
 export function getDefaultDateList() {
-  console.log("getDefaultDateList====>");
+  //console.log("getDefaultDateList====>");
 
   const currentDayZeroDateMillSecords = new Date().setHours(0, 0, 0, 0);
   const onDayTotalMillSecords = 24 * 60 * 60 * 1000;

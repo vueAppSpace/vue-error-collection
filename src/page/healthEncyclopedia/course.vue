@@ -39,7 +39,7 @@
     },
 
     setup(props, context) {
-      console.log("healthEncyclopedia course...");
+      //console.log("healthEncyclopedia course...");
 
       const { $router } = context.root;
       const router = useRouter($router);
@@ -89,7 +89,7 @@
       }
 
       async function queryCategoryArticlesPageFn(byHand) {
-        console.log("byHand", byHand);
+        //console.log("byHand", byHand);
 
         if (byHand) {
           state.pageParams.pageIndex = 1;
@@ -116,7 +116,7 @@
         } else {
           if (byHand) {
             state.articlesList = [];
-            console.log(message || "未获取到该课程下的文章数据!");
+            //console.log(message || "未获取到该课程下的文章数据!");
           } else {
             //数据加载完成
             state.loading = false;
@@ -146,7 +146,7 @@
             return idValueMap.get(item.id) || item;
           });
         } else {
-          console.log("获取指定文章数据失败!", message);
+          //console.log("获取指定文章数据失败!", message);
         }
       }
 

@@ -159,14 +159,14 @@
       async getUserMealsFn(eventCode) {
         try {
           const { code, data, message } = await getUserMeals({ eventCode });
-          console.log("饮食推荐:", code, data);
+          //console.log("饮食推荐:", code, data);
           if (code === 0) {
             this.zaocanRecommend = data;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       // 获取点餐的订单数据
@@ -183,7 +183,7 @@
               this.orderList = data;
             }
           } else {
-            console.log(message);
+            //console.log(message);
           }
         });
       },

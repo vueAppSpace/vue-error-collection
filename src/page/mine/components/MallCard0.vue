@@ -41,7 +41,7 @@
             state.percent = percent;
             state.taskInfo = data;
           } else {
-            console.log("queryTodayData", message);
+            //console.log("queryTodayData", message);
           }
         });
       };
@@ -67,7 +67,7 @@
       onMounted(() => {
         document.addEventListener("resume", () => {
           parent.queryMineData();
-          console.log("resume:页面刷新了");
+          //console.log("resume:页面刷新了");
         });
       });
 

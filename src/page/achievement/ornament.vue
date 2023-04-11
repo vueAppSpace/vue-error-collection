@@ -39,7 +39,7 @@
                 }
               });
             } else {
-              console.log("ornamentUserAll:" + message);
+              //console.log("ornamentUserAll:" + message);
             }
           })
           .catch(err => console.log("ornamentUserAll:" + err));

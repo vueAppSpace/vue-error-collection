@@ -85,7 +85,7 @@
               setData(dt);
             }
           } else {
-            console.log("queryReport", message);
+            //console.log("queryReport", message);
             // Toast(message)
           }
         });

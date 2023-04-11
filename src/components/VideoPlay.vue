@@ -56,7 +56,7 @@
             }
           } else {
             // Toast(message)
-            console.log("queryHealthPlan", message);
+            //console.log("queryHealthPlan", message);
             state.showCard = false;
           }
         });

@@ -150,7 +150,7 @@
           if (code === 0) {
             state.rotationChart = data;
           } else {
-            console.log("activityinfo", message);
+            //console.log("activityinfo", message);
             // Toast(message);
           }
         });
@@ -164,7 +164,7 @@
         activitytopicinfoDetail(params).then(({ code, data, message }) => {
           if (code === 0) {
             state.topicDetail = data;
-            console.log(data, "话题详情");
+            //console.log(data, "话题详情");
           } else {
             // Toast(message);
           }
@@ -232,7 +232,7 @@
         getListByHot(params).then(({ code, data, message }) => {
           if (code === 0) {
             state.hotTopic = data;
-            console.log(data, "话题");
+            //console.log(data, "话题");
           } else {
           }
         });
@@ -305,7 +305,7 @@
       // })
       const init = () => {
         // 轮播图
-        console.log("zhixing");
+        //console.log("zhixing");
         state.loaded = false;
         state.topicId = route.value.query.topicId;
         state.source = route.value.query.source;

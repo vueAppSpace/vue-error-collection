@@ -83,7 +83,7 @@
         });
       },
       toDetail(foodInfo, type) {
-        console.log(foodInfo);
+        //console.log(foodInfo);
         if (!foodInfo.rname) return;
         if (this.$route.path !== "/health") {
           this.zgStatistics("健康新奥-我的-点击卡片", { 按钮名称: foodInfo.rname, 位置: "餐食" });

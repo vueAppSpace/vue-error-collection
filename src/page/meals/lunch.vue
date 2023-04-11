@@ -112,7 +112,7 @@
 
   const cityCode = useLocationStore().cityCode;
 
-  console.log("cityCode", cityCode);
+  //console.log("cityCode", cityCode);
 
   const host = window.location.href;
 
@@ -159,7 +159,7 @@
         });
       },
       submit() {
-        // console.log(this.$refs.canteen.getValues());
+        // //console.log(this.$refs.canteen.getValues());
         const changeValue = this.$refs.canteen.getValues();
         if (changeValue[0].canteenName != this.canteenName) {
           this.canteen = changeValue[0];
@@ -171,7 +171,7 @@
         this.show = false;
       },
       toDetail(item) {
-        console.log("name", item);
+        //console.log("name", item);
         // return false
         this.$router.push({
           path: "/foodDetail",
@@ -187,13 +187,13 @@
           if (code === 0) {
             this.dishesInfo = data.dataList;
           } else {
-            console.log("getDishesInfo", message);
+            //console.log("getDishesInfo", message);
             // Toast(message)
           }
         });
       },
       toLunch(item) {
-        console.log("item", item);
+        //console.log("item", item);
 
         let nameArr = [];
         nameArr.push(item.lkcode);
@@ -207,7 +207,7 @@
             tagName += name;
           }
         }
-        console.log("item.detail.score[0].value", item.detail.score[0].value);
+        //console.log("item.detail.score[0].value", item.detail.score[0].value);
         this.zgStatistics("健康新奥-明日点餐-点击点餐", {
           食物名称: item.rname,
           推荐指数: item.detail.score[0].value,
@@ -223,7 +223,7 @@
         getBizField(data)
           .then(res => {
             if (res.data) {
-              console.log("id", res.data);
+              //console.log("id", res.data);
               let dishId = res.data[0].id;
               // return false
               // let ticket = localStorage.getItem('ticket');
@@ -256,7 +256,7 @@
               if (isIcomeMobile) {
                 jsBridge.invoke("openWebView", { targetUrl: url });
               } else if (isIcomePC) {
-                console.log("url2", url2);
+                //console.log("url2", url2);
                 window.location.href = url2;
               } else if (isUniApp) {
                 jsBridge.invoke("openWebView", { targetUrl: emallUrl });
@@ -286,7 +286,7 @@
               this.getComponentListFn();
             }
           } else {
-            console.log("canteenList", message);
+            //console.log("canteenList", message);
             // Toast(message)
           }
         });
@@ -306,15 +306,15 @@
 
               let recipe_type_fw = data.recipe_rec_detail.food_time_noon.recipe_type_fw;
 
-              console.log("recipe_type_fw", recipe_type_fw);
+              //console.log("recipe_type_fw", recipe_type_fw);
               for (let i = 0; i < recipe_type_fw.length; i++) {
                 if (recipe_type_fw[i].detail.score && recipe_type_fw[i].detail.score.length) {
                   let arr = [];
                   let arr2 = [];
-                  console.log(
-                    "recipe_type_fw[i].detail.score[0].value",
-                    Math.round(recipe_type_fw[i].detail.score[0].value)
-                  );
+                  // console.log(
+                  //   "recipe_type_fw[i].detail.score[0].value",
+                  //   Math.round(recipe_type_fw[i].detail.score[0].value)
+                  // );
                   if (Math.round(recipe_type_fw[i].detail.score[0].value) < 0) {
                     arr.length = 0;
                   } else {
@@ -327,7 +327,7 @@
                 this.componentListData.push(recipe_type_fw[i]);
               }
 
-              console.log("this.componentListDataxx", this.componentListData);
+              //console.log("this.componentListDataxx", this.componentListData);
 
               let nameArr = [];
               for (let i = 0; i < recipe_type_fw.length; i++) {
@@ -335,7 +335,7 @@
               }
             }
           } else {
-            console.log("getComponentList", message);
+            //console.log("getComponentList", message);
             // Toast(message)
           }
         });

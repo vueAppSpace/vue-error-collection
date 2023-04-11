@@ -40,7 +40,7 @@
             }
           })
           .catch(err => {
-            console.log("queryHealthLevelDetail:", err);
+            //console.log("queryHealthLevelDetail:", err);
           });
       });
 

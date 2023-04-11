@@ -19,7 +19,7 @@ export default function useNavigate(router) {
       if (params.includes("http")) {
         //来康内部链接，使用 push导航
         if (isLaiKangLink(params)) {
-          console.log("isLaiKangLink>>>");
+          //console.log("isLaiKangLink>>>");
 
           params = paramsPreHandle(params);
           vuePush(router, params);

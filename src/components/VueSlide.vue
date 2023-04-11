@@ -57,7 +57,7 @@
 
         this.pointBox = document.querySelector(".pointBox");
 
-        console.log("this.pointBox", this.pointBox);
+        //console.log("this.pointBox", this.pointBox);
         this.pointWidth = parseInt(window.getComputedStyle(this.point, null).width);
         this.bar = document.querySelector(".bar"); //进度条颜色层
         this.mask = document.querySelector(".mask"); //进度条底层

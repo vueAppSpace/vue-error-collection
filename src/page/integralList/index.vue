@@ -256,12 +256,12 @@
       onLoad() {
         if (this.refreshing) {
           // this.refreshAticlelist(this.categorylist[this.active].nodeId, 1);
-          // console.log('this.rankingList', this.rankingList[0].rownum);
+          // //console.log('this.rankingList', this.rankingList[0].rownum);
           let rowNum = this.rankingList[0].rownum - 5;
           this.refreshRankingListFn(rowNum);
         } else {
           let rowNum = this.rankingList[this.rankingList.length - 1].rownum + 6;
-          // console.log('rowNum', rowNum);
+          // //console.log('rowNum', rowNum);
           this.rankingListFn(rowNum);
         }
       },
@@ -287,11 +287,11 @@
 
               this.totalTaskPoints = data.totalTaskPoints;
             } else {
-              console.log("querydialyTask", message);
+              //console.log("querydialyTask", message);
             }
           })
           .catch(err => {
-            console.log("querydialyTask", err);
+            //console.log("querydialyTask", err);
           });
       },
 
@@ -307,7 +307,7 @@
           .then(res => {
             if (res.code == 0) {
               if (res.data && res.data.length) {
-                console.log("res.data", res.data);
+                //console.log("res.data", res.data);
                 this.isAim = true;
               }
             }
@@ -338,7 +338,7 @@
               if (res.data) {
                 this.ownerHealthPoint = res.data.totalHealthPoints;
                 this.rowNum = res.data.rownum;
-                console.log("this.rowNum", this.rowNum);
+                //console.log("this.rowNum", this.rowNum);
                 let num = this.rowNum;
                 if (this.leaderboardByCount > 10) {
                   if (num <= 5) {
@@ -347,7 +347,7 @@
                     if (this.leaderboardByCount - num < 5) {
                       num = this.leaderboardByCount - 4;
                     } else {
-                      console.log("什么也不做");
+                      //console.log("什么也不做");
                     }
                   }
                 } else {
@@ -370,7 +370,7 @@
           .then(res => {
             if (res.code == 0) {
               setTimeout(() => {
-                console.log("close");
+                //console.log("close");
                 this.refreshing = false;
                 if (res.data && res.data.length) {
                   this.loading = false;
@@ -450,7 +450,7 @@
               this.isAim = true;
               // this.aimFn(this.rankingList);
             } else {
-              console.log("surpassplanInsert", res.message);
+              //console.log("surpassplanInsert", res.message);
               // Toast(res.message);
               this.dialogVisible = false;
               this.isAim = true;
@@ -504,7 +504,7 @@
               this.noticeBar = str + (data.length > 1 ? "等" : "") + "想要超越你";
             }
           } else {
-            console.log("queryExercisePlan", message);
+            //console.log("queryExercisePlan", message);
             // Toast(message);
           }
         });

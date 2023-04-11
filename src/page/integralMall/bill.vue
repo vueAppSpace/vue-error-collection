@@ -36,7 +36,7 @@
           if (code === 0) {
             state.userData = data || {};
           } else {
-            console.log("queryMineData", message);
+            //console.log("queryMineData", message);
             // Toast(message);
           }
         });
@@ -62,7 +62,7 @@
               state.finished = true;
             }
           } else {
-            console.log("queryPointList", message);
+            //console.log("queryPointList", message);
           }
         });
       };

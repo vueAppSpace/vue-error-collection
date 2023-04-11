@@ -91,11 +91,11 @@
                 }
               });
             } else {
-              console.log("ornamentUserCurrent", message);
+              //console.log("ornamentUserCurrent", message);
             }
           })
           .catch(error => {
-            console.log(`ornamentUserCurrent: ${error}`);
+            //console.log(`ornamentUserCurrent: ${error}`);
           });
       };
 
@@ -107,7 +107,7 @@
               state.userInfo = data || {};
               resolve();
             } else {
-              console.log("queryMineData", message);
+              //console.log("queryMineData", message);
               // Toast(message);
               reject();
             }
@@ -127,7 +127,7 @@
           if (code === 0) {
             state.aimd = data.length !== 0;
           } else {
-            console.log("queryTarget", message);
+            //console.log("queryTarget", message);
             // Toast(message);
           }
           state.rankLoading = false;
@@ -175,7 +175,7 @@
             }
             queryTarget();
           } else {
-            console.log("queryExercisePlan", message);
+            //console.log("queryExercisePlan", message);
             // Toast(message);
           }
         });
@@ -215,7 +215,7 @@
       //                 state.noticeBar = str + (data.length > 1 ? '等' : '') + '想要超越你'
       //             }
       //         } else {
-      //             console.log('queryExercisePlan', message)
+      //             //console.log('queryExercisePlan', message)
       //             // Toast(message);
       //         }
       //     })

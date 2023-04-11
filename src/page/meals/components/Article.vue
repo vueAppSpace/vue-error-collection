@@ -60,36 +60,36 @@
       async getUserMissionFn() {
         try {
           const { code, data, message } = await getUserMission();
-          // console.log("文章:", code, data, message);
+          // //console.log("文章:", code, data, message);
           if (code === 0) {
             this.userMission = data;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       // 获取用户是否已经看过该文章
       getUserMissionRecordFn() {
         getUserMissionRecord({ dateStr: formatTimeForBirth(new Date()) })
           .then(({ code, data, message }) => {
-            console.log("获取文章是否是已经查看状态:", code, data);
+            //console.log("获取文章是否是已经查看状态:", code, data);
             if (code === 0) {
               if (data) {
                 this.checked = this.lockCheck = true;
               }
             } else {
-              console.log(message);
+              //console.log(message);
             }
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
           });
       },
       // 文章详情
       toArticleDetail() {
-        // console.log('this.userMission', this.userMission);
+        // //console.log('this.userMission', this.userMission);
         this.zgStatistics("健康新奥-健康-点击其他具体内容", {
           频道: "文章",
           按钮名称: this.userMission.title ? this.userMission.title : "",
@@ -111,7 +111,7 @@
           if (code === 0) {
             this.lockCheck = true;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         });
 

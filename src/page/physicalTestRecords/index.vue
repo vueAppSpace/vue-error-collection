@@ -18,7 +18,7 @@
 
   export default defineComponent({
     setup(_, context) {
-      console.log("physicalTestRecords...");
+      //console.log("physicalTestRecords...");
 
       const { zgStatistics, $router: router, $route: route } = context.root;
       const state = reactive({
@@ -53,10 +53,10 @@
               state.quickTime = dayjs(weightPageList[0].createTime).format("YYYY-MM-DD HH:mm:ss");
             }
           } else {
-            console.log(message || "查询称重记录失败!");
+            //console.log(message || "查询称重记录失败!");
           }
         } catch (err) {
-          console.log("physicalTestRecords index queryPageDataFn err: " + err);
+          //console.log("physicalTestRecords index queryPageDataFn err: " + err);
         }
       }
 

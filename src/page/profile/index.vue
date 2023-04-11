@@ -110,7 +110,7 @@
                 state.userInfo["lk1589863312232"] = pastHistoryStr;
               }
             } else {
-              console.log("queryUserPortrait", message);
+              //console.log("queryUserPortrait", message);
               // Toast(message)
             }
             state.loading = false;

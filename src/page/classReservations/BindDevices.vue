@@ -40,7 +40,7 @@
     },
 
     setup(_, context) {
-      console.log("classReservations bindDevices...");
+      //console.log("classReservations bindDevices...");
 
       const { zgStatistics, $router: router, $route: route } = context.root;
       const isPc = !isMobile;
@@ -84,8 +84,8 @@
         return text;
       });
 
-      console.log("classId", state.classId);
-      console.log("qrcode", state.qrcode);
+      //console.log("classId", state.classId);
+      //console.log("qrcode", state.qrcode);
 
       onMounted(async () => {
         if (state.classId) {
@@ -186,9 +186,9 @@
         if (!isPc) {
           let { qrcode } = await jsBridge.invoke("scanQRCode");
 
-          console.log("========== qrcode ==========");
-          console.log(qrcode);
-          console.log("========== qrcode ==========");
+          //console.log("========== qrcode ==========");
+          //console.log(qrcode);
+          //console.log("========== qrcode ==========");
 
           //1. 快快二维码
 
@@ -244,7 +244,7 @@
           state.qrcode = "";
           Toast(Status_msg_map[status] || bindMsg || Status_msg_map[999]);
         } catch (e) {
-          console.log("handleBindBiDai", e);
+          //console.log("handleBindBiDai", e);
           Toast(getErrorMessage(e) || "系统异常!");
         }
       }
@@ -266,7 +266,7 @@
           state.qrcode = "";
           Toast(bindMsg || Status_msg_map[999]);
         } catch (e) {
-          console.log("handleBindWeight", e);
+          //console.log("handleBindWeight", e);
           Toast(getErrorMessage(e) || "系统异常!");
         }
       }
@@ -291,7 +291,7 @@
 
           Toast(Status_msg_map[status] || bindMsg || Status_msg_map[999]);
         } catch (e) {
-          console.log("handleChooseXiDai", e);
+          //console.log("handleChooseXiDai", e);
           Toast(getErrorMessage(e) || "系统异常!");
         }
       }

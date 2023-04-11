@@ -124,7 +124,7 @@
           .then(res => {
             if (res.code == 0) {
               if (res.data) {
-                console.log("res.data", res.data);
+                //console.log("res.data", res.data);
                 this.rowNum = res.data.rownum;
               }
             }
@@ -200,7 +200,7 @@
             if (res.code == 0) {
               if (res.data) {
                 this.surpassNum = res.page.total;
-                console.log("this.surpassNum", this.surpassNum);
+                //console.log("this.surpassNum", this.surpassNum);
               }
             }
           })
@@ -219,7 +219,7 @@
 
       this.surpassplanPageUnderwayFn();
       let a = "123";
-      console.log(a);
+      //console.log(a);
     }
   };
 </script>

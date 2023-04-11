@@ -19,14 +19,14 @@ export default async function (afterDate = "") {
         status = 200;
       } else {
         status = lifeData.status;
-        console.log("生命熵数据不完整: ", lifeData.msg);
+        //console.log("生命熵数据不完整: ", lifeData.msg);
       }
     } else {
-      console.log("getCurrentEntropyMessage", message);
+      //console.log("getCurrentEntropyMessage", message);
     }
   } catch (err) {
     isResponded = true;
-    console.log("getCurrentEntropyErr", err);
+    //console.log("getCurrentEntropyErr", err);
   }
 
   return { entropyData, isResponded, status };

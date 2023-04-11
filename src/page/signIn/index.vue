@@ -40,7 +40,7 @@
       /* 获取接口数据 */
       getSignInData();
       function getSignInData() {
-        console.log("接口获取签到数据");
+        //console.log("接口获取签到数据");
       }
 
       /* 控制签到线条样式 */
@@ -51,7 +51,7 @@
       /* 签到提醒 */
       const isSigned = ref(currentDay.isRemind === 1);
       function toggleRemind(value) {
-        console.log("签到提醒" + value);
+        //console.log("签到提醒" + value);
         currentDay.isRemind = Number(value);
       }
 
@@ -59,7 +59,7 @@
       const popupShow = ref(false);
       function signIn() {
         if (isDisableSignIn.value) return;
-        console.log("签到");
+        //console.log("签到");
         // TODO 调接口，然后更新数据
         popupShow.value = true;
       }

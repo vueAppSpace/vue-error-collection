@@ -40,7 +40,7 @@
       }
     },
     mounted() {
-      console.log("prop", this.prop);
+      //console.log("prop", this.prop);
       this.onWatchScroll();
       // 这里首次进入页面当前选中项为第一个
       document.querySelectorAll(".tab__item")[0].style = this.prop.attr.cur_tab_style
@@ -62,8 +62,8 @@
         for (let i = 0; i < tablist.length; i++) {
           tablist[i].style = "";
         }
-        console.log("val", val);
-        console.log("document.querySelector.offsetWidth", document.querySelector(".active__line").offsetWidth);
+        //console.log("val", val);
+        //console.log("document.querySelector.offsetWidth", document.querySelector(".active__line").offsetWidth);
         let wX = document.querySelector(".active__line").offsetWidth + val * 90;
         document.querySelector(".active__line").style.transform = `translateX(${wX}px)`; //改动
         // 当前选中的tab_item的状态

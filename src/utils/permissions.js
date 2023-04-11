@@ -8,7 +8,7 @@ import { Toast } from "vant";
 
 function throwError(userStore) {
   if (userStore) {
-    console.log({ userStore });
+    //console.log({ userStore });
   }
   Toast("服务即将开启，敬请期待~");
   throw new Error("用户权限异常");

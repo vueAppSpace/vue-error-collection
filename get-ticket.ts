@@ -64,7 +64,7 @@ async function getTicket(loginName: LoginNameType = defaultLoginName) {
       });
     });
   } catch (error) {
-    console.log(`get ${loginName} ticket error:`, error);
+    //console.log(`get ${loginName} ticket error:`, error);
   }
 
   return `ticket=${ticket}`;
@@ -112,7 +112,7 @@ async function getToken(loginName: LoginNameType) {
       });
     });
   } catch (error) {
-    console.log(`get ${loginName} token error:`, error);
+    //console.log(`get ${loginName} token error:`, error);
   }
 
   return token;
@@ -142,7 +142,7 @@ async function pasteTicketToClipboard() {
   } else {
     exec("clip").stdin.end(ticket); // windows
   }
-  console.log("\x1B[36mticket已复制到剪切板\x1B[0m");
+  //console.log("\x1B[36mticket已复制到剪切板\x1B[0m");
 }
 
 !isWebpack && pasteTicketToClipboard();

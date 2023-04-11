@@ -44,7 +44,7 @@ export default function (router) {
             }
           } else {
             // Toast(message);
-            console.log("queryAndSaveAnswer", message);
+            //console.log("queryAndSaveAnswer", message);
             reject({ status: -1, msg: "问卷查询失败" });
           }
         })

@@ -34,7 +34,7 @@
         const userAgent = navigator.userAgent.toLowerCase();
         let version = userAgent.match(/cpu iphone os (.*?) like mac os/);
         version = parseInt(version[1], 10);
-        console.log("version", version);
+        //console.log("version", version);
         if (version <= 11) {
           this.fixOldDevice = true;
         }

@@ -77,7 +77,7 @@
             ctx.drawImage(oVideo, 0, 0, width, height);
             // 这里是把已经绘制好的 canvas 转成base64
             var dataURL = canvas.toDataURL("image/png");
-            console.log(dataURL, "dataUrl------");
+            //console.log(dataURL, "dataUrl------");
             // 视频总长度，秒为单位
             resolve({ duration: oVideo.duration, cover: dataURL });
             // oVideo.get(0).play();
@@ -92,7 +92,7 @@
       fileChange(e) {
         this.file = e.target.files[0];
         let tempFiles = e.target.files;
-        console.log(tempFiles, "tempFiles");
+        //console.log(tempFiles, "tempFiles");
         let arrayLikeFiles = Array.from(tempFiles);
         let allImage = arrayLikeFiles.every(item => {
           return item.type.indexOf("image") != -1;
@@ -152,7 +152,7 @@
           }
 
           var file = document.getElementById("fileUpload");
-          console.log(file, "file----");
+          //console.log(file, "file----");
           file.value = "";
         }
 
@@ -176,10 +176,10 @@
           cateId: localStorage.getItem("cateId"),
           zone: "beijing"
         };
-        console.log(params);
+        //console.log(params);
         createUploadVideo(params).then(res => {
-          console.log(res, "上传凭证");
-          console.log(uploader, "uploader");
+          //console.log(res, "上传凭证");
+          //console.log(uploader, "uploader");
           if (res.code == 1000) {
             let uploadAuth = res.data.UploadAuth;
             let uploadAddress = res.data.UploadAddress;
@@ -196,7 +196,7 @@
           videoId: uploadInfo.videoId
         };
         refreshUploadVideo(params).then(res => {
-          console.log(res, "刷新上传凭证");
+          //console.log(res, "刷新上传凭证");
           if (res.code == 1000) {
             let uploadAuth = res.data.UploadAuth;
             let uploadAddress = res.data.UploadAddress;
@@ -213,7 +213,7 @@
           videoId: uploadInfo.videoId
         };
         refreshUploadVideo(params).then(res => {
-          console.log(res, "刷新上传凭证");
+          //console.log(res, "刷新上传凭证");
           if (res.code == 1000) {
             let uploadAuth = res.data.UploadAuth;
             uploader.resumeUploadWithAuth(uploadAuth);
@@ -226,9 +226,9 @@
       //     videoId: this.videoId
       //   };
       //   getVideoUrl(params).then(res => {
-      //     console.log(res, "获取视频地址和时长");
+      //     //console.log(res, "获取视频地址和时长");
       //     if (res.code == 1000) {
-      //       console.log(res);
+      //       //console.log(res);
       //     }
       //   });
       // },
@@ -247,11 +247,11 @@
           addFileSuccess: function (uploadInfo) {
             self.uploadDisabled = false;
             self.statusText = "添加文件成功, 等待上传...";
-            console.log("addFileSuccess: " + uploadInfo.file.name);
+            //console.log("addFileSuccess: " + uploadInfo.file.name);
           },
           // 开始上传
           onUploadstarted: function (uploadInfo) {
-            console.log(uploadInfo, "uploadInfo之前");
+            //console.log(uploadInfo, "uploadInfo之前");
             // 如果是 UploadAuth 上传方式, 需要调用 uploader.setUploadAuthAndAddress 方法
             // 如果是 UploadAuth 上传方式, 需要根据 uploadInfo.videoId是否有值，调用点播的不同接口获取uploadauth和uploadAddress
             // 如果 uploadInfo.videoId 有值，调用刷新视频上传凭证接口，否则调用创建视频上传凭证接口
@@ -282,7 +282,7 @@
           // 文件上传进度，单位：字节, 可以在这个函数中拿到上传进度并显示在页面上
           onUploadProgress: function (uploadInfo, totalSize, progress) {
             let progressPercent = Math.ceil(progress * 100);
-            console.log("progress", progressPercent);
+            //console.log("progress", progressPercent);
             self.$emit("progress", progressPercent);
           },
           // 上传凭证超时
@@ -296,7 +296,7 @@
             // axios.get(refreshUrl).then(({ data }) => {
             //   let uploadAuth = data.UploadAuth;
             //   uploader.resumeUploadWithAuth(uploadAuth);
-            //   console.log(
+            //   //console.log(
             //     "upload expired and resume upload with uploadauth " + uploadAuth
             //   );
             // });
@@ -306,7 +306,7 @@
           },
           // 全部文件上传结束
           onUploadEnd: function (uploadInfo) {
-            console.log("onUploadEnd: uploaded all the files");
+            //console.log("onUploadEnd: uploaded all the files");
             self.statusText = "文件上传完毕";
           }
         });

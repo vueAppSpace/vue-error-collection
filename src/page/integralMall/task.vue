@@ -44,7 +44,7 @@
           if (code === 0) {
             state.taskInfo = data;
           } else {
-            console.log("queryTodayData", message);
+            //console.log("queryTodayData", message);
           }
         });
       };
@@ -55,7 +55,7 @@
           if (code === 0) {
             state.taskList = data.list || [];
           } else {
-            console.log("querydialyTask", message);
+            //console.log("querydialyTask", message);
           }
         });
       };

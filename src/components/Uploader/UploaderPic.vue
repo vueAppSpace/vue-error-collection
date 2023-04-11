@@ -58,7 +58,7 @@
               resolve(newFile);
             },
             error(err) {
-              console.log("图片转换失败", err.message);
+              //console.log("图片转换失败", err.message);
             }
           });
         });

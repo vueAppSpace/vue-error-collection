@@ -30,7 +30,7 @@
             if (code === 0) {
               state.userInfo = data;
             } else {
-              console.log("mineInfo", message);
+              //console.log("mineInfo", message);
               // Toast(message);
             }
             state.rankLoading = false;

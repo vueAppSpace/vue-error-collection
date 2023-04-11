@@ -175,7 +175,7 @@
           };
           const { code, msg, data } = await Api[type](name);
           this.loading = false;
-          if (code !== 1000) return console.log(msg);
+          if (code !== 1000) return; //console.log(msg);
           data["营养特点"] = dealWithColor(color, data["营养特点"]);
           let arr = [...data.nutritiousIngredients];
           // 切割前三条 图表使用
@@ -194,7 +194,7 @@
           Promise.all([this.queryTagContent(effect, "1"), this.queryTagContent(feat, "2")]);
         } catch (err) {
           this.loading = false;
-          console.log(err.data.error || "网络异常");
+          //console.log(err.data.error || "网络异常");
         }
       },
       /**
@@ -210,10 +210,10 @@
         };
         try {
           const { code, msg, data } = await queryTagDetail(tagName);
-          if (code !== 1000) return console.log(msg);
+          if (code !== 1000) return; //console.log(msg);
           this[T[type]] = data;
         } catch (err) {
-          console.log(err.data.error || "网络异常");
+          //console.log(err.data.error || "网络异常");
         }
       },
       /**

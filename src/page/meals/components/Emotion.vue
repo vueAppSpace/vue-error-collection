@@ -136,7 +136,7 @@
           if (code === 0) {
             this.lockCheck = true;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         });
 
@@ -177,7 +177,7 @@
             refresh: isRefresh
           };
           const { code, data, message } = await getUserEmotion2(param);
-          console.log("情志推荐:哄睡专家", code, data, message);
+          //console.log("情志推荐:哄睡专家", code, data, message);
           if (code === 0) {
             if (data) {
               if (this.eventCode == "yinpin") {
@@ -205,10 +205,10 @@
               // }
             }
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       queryInterestByUserIdFn() {
@@ -216,13 +216,13 @@
           date: formatTimeForBirth(new Date()),
           timePoint: this.userPlan.time
         }).then(({ code, data, message }) => {
-          // console.log("情志是否已标记：", code, data, message);
+          // //console.log("情志是否已标记：", code, data, message);
           if (code === 0) {
             if (data && data.length) {
               this.checked = this.lockCheck = true;
             }
           } else {
-            console.log(message);
+            //console.log(message);
           }
         });
       }

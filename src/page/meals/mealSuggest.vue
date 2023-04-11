@@ -332,7 +332,7 @@
         this.show = false;
         this.time = this.formatDate(date);
         this.getMealsProposeAndNutrientsFn();
-        console.log("this.date", this.date);
+        //console.log("this.date", this.date);
       },
       /**
        * 列表展开按钮
@@ -380,8 +380,8 @@
               obj.ratioValue = 100;
               obj.surpassFlag = true;
             }
-            // console.log('nutritionName', item.nutritionName)
-            // console.log('obj.ratioValue', obj.ratioValue)
+            // //console.log('nutritionName', item.nutritionName)
+            // //console.log('obj.ratioValue', obj.ratioValue)
           } else {
             obj.ratioValue = 0;
           }
@@ -450,7 +450,7 @@
                 this.dietRemark.push(str.substring(str.lastIndexOf("$") + 1, str.length));
               }
             } else {
-              console.log("getDishesInfo", message);
+              //console.log("getDishesInfo", message);
             }
           })
           .catch(ex => {
@@ -471,7 +471,7 @@
         let myChart = echarts.init(document.getElementById("myChart"));
         var option;
         let imgUrl = this.questionMarkUrl;
-        // console.log('this.pieDataxx', this.pieData)
+        // //console.log('this.pieDataxx', this.pieData)
         option = {
           series: [
             {
@@ -568,7 +568,7 @@
         let _this = this;
         myChart.on("click", "series.pie.label", function (param) {
           //添加点击事件
-          console.log("param", param);
+          //console.log("param", param);
           _this.dancanExplain(param.name);
         });
         // myChart.on('click', 'series.pie.label', function(param) { //添加点击事件
@@ -579,7 +579,7 @@
           if (code === 0) {
             this.dishesInfo = data.dataList;
           } else {
-            console.log("getDishesInfo", message);
+            //console.log("getDishesInfo", message);
           }
         });
       }
@@ -601,7 +601,7 @@
       //         }
       //       })
       //       .catch(err => {
-      //         console.log(err);
+      //         //console.log(err);
       //       });
       //   }
       // },
@@ -642,22 +642,22 @@
       let year = Number(dayjs(this.time).year());
       let month = Number(dayjs(this.time).month());
       let day = Number(dayjs(this.time).date());
-      // console.log('year', year, 'month', month, 'day', day)
+      // //console.log('year', year, 'month', month, 'day', day)
       this.defaultDate = new Date(year, month, day);
       // this.defaultDate = new Date(2022, 8, 26);
-      // console.log('this.defaultDate', this.defaultDate);
-      // console.log('this.minDate', this.minDate);
+      // //console.log('this.defaultDate', this.defaultDate);
+      // //console.log('this.minDate', this.minDate);
 
       // 本次就餐摄入$碳水不足、蛋白质不足、脂肪较多$，长期可导致情绪焦虑
 
       // var str = "aaabbbfff";
       // var str = "本次就餐摄入$碳水不足、蛋白质不足、脂肪较多$，长期可导致情绪焦虑";
-      // console.log('strxxxx', str.indexOf('$'));
+      // //console.log('strxxxx', str.indexOf('$'));
 
-      // console.log('string.substring(start,stop)', str.substring( str.lastIndexOf('$') + 1, str.length ))
-      // console.log('stryyyy', str.lastIndexOf('$') );
+      // //console.log('string.substring(start,stop)', str.substring( str.lastIndexOf('$') + 1, str.length ))
+      // //console.log('stryyyy', str.lastIndexOf('$') );
       // str.lastIndexOf(
-      // console.log('xxxafadf', this.subStringMulti(str))
+      // //console.log('xxxafadf', this.subStringMulti(str))
     }
   };
 </script>

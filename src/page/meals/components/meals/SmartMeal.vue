@@ -50,7 +50,7 @@
       FoodItem
     },
     mounted() {
-      console.log("this.recommendDatazzz", this.recommendData);
+      //console.log("this.recommendDatazzz", this.recommendData);
     }
   };
 </script>

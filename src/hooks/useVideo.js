@@ -62,7 +62,7 @@ export function useVideo(recordFlag = false) {
     }).then(data => {
       const { isHeight, dom } = data;
       if (dom) dom.remove();
-      console.log(`长视频：${isHeight}`);
+      //console.log(`长视频：${isHeight}`);
       if (isHeight) {
         const domVideo = document.getElementsByClassName("vjs-fluid");
         domVideo[0].style.height = "100vh";
@@ -119,7 +119,7 @@ function getVideoSize(videoUrl, cb) {
 
   domVideo.oncanplay = e => {
     const { videoWidth, videoHeight } = e.target;
-    console.log("宽:高", videoWidth, videoHeight);
+    //console.log("宽:高", videoWidth, videoHeight);
     if (videoHeight > videoWidth) {
       cb({ isHeight: true, dom: domVideo });
     } else {
@@ -129,7 +129,7 @@ function getVideoSize(videoUrl, cb) {
 
   // domVideo.onloadedmetadata = (e) => {
   //     const { videoWidth, videoHeight } = e.target;
-  //     console.log("宽:高", videoWidth, videoHeight);
+  //     //console.log("宽:高", videoWidth, videoHeight);
   //     if (videoHeight > videoWidth) {
   //         cb({ isHeight: true, dom: domVideo });
   //     } else {
@@ -191,9 +191,9 @@ export function videoPlayDuration(zgStatistics, data) {
     视频名称: name,
     视频播放时长: duration / 1000
   });
-  console.log({
-    视频类别: type,
-    视频名称: name,
-    视频播放时长: duration / 1000
-  });
+  // console.log({
+  //   视频类别: type,
+  //   视频名称: name,
+  //   视频播放时长: duration / 1000
+  // });
 }

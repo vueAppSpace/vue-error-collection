@@ -59,13 +59,13 @@
                 showRetirementCard();
               }
             } else {
-              console.log("queryEmployeeListData", data);
+              //console.log("queryEmployeeListData", data);
             }
           } else {
-            console.log("queryEmployeeListCode", message);
+            //console.log("queryEmployeeListCode", message);
           }
         } catch (err) {
-          console.log("queryEmployeeListErr", err);
+          //console.log("queryEmployeeListErr", err);
         }
       };
 

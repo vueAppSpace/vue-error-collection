@@ -23,7 +23,7 @@
     },
 
     setup(_, context) {
-      console.log("venueStatus...");
+      //console.log("venueStatus...");
 
       const { zgStatistics } = context.root;
       const state = reactive({

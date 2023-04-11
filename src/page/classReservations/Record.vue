@@ -39,7 +39,7 @@
     },
 
     setup(_, context) {
-      console.log("classReservations record...");
+      //console.log("classReservations record...");
 
       const { zgStatistics, $router: router } = context.root;
       const state = reactive({
@@ -108,7 +108,7 @@
           state.coverLoading = false;
         } catch (e) {
           state.coverLoading = false;
-          console.log("queryPageDataFn", e);
+          //console.log("queryPageDataFn", e);
         }
       }
 
@@ -158,7 +158,7 @@
           }
         } catch (err) {
           state.loading = false;
-          console.log("queryListFn: ", err);
+          //console.log("queryListFn: ", err);
         }
       }
 

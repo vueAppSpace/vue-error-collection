@@ -282,7 +282,7 @@
       },
       // 新增二级评论
       activitysecondcommentInsertFn() {
-        console.log(this.replayObj, "发表二级评论");
+        //console.log(this.replayObj, "发表二级评论");
         let params = {
           content: this.inputValue, //评论内容
           dynamicId: this.dynamicId, //动态id
@@ -308,7 +308,7 @@
             }
           })
           .catch(res => {
-            console.log("评论失败");
+            //console.log("评论失败");
           });
       },
       // 点击一级页面二级回复的按钮
@@ -320,7 +320,7 @@
         this.placeHolder = "输入你想说的话";
       },
       handleReplayNum(e) {
-        console.log(this.dynamicObj, "11111");
+        //console.log(this.dynamicObj, "11111");
         this.replayObj = e;
         this.showReplay = true;
         // 查询二级评论数据
@@ -362,7 +362,7 @@
         }, 1000);
       },
       handleOnload() {
-        console.log("加载更改xx");
+        //console.log("加载更改xx");
 
         this.commentsParams.pageIndex += 1;
         this.getUserComments();
@@ -402,7 +402,7 @@
             }
           })
           .catch(res => {
-            console.log("评论失败");
+            //console.log("评论失败");
           });
       },
       handleScroll() {
@@ -442,7 +442,7 @@
             // this.zgStatistics('健康新奥-健康活动-进入活动详情', { 活动名称: this.dynamicObj.activityTitle, 来源: checkSource(this.$route.query.source) })
           })
           .catch(err => {
-            console.log(err, "err,");
+            //console.log(err, "err,");
           });
       },
 

@@ -51,7 +51,7 @@
             }
           } else {
             state.reportEmpty = true;
-            console.log("queryLastHealthInfo", message);
+            //console.log("queryLastHealthInfo", message);
             // Toast(message)
           }
         });

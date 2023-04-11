@@ -20,7 +20,7 @@ class Rem {
       }
       gg.style.fontSize = width / DEFINENUMBER + "px";
       rem = gg.style.fontSize;
-      console.log("1rem", rem);
+      //console.log("1rem", rem);
       return setView;
     }
 

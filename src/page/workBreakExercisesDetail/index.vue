@@ -547,7 +547,7 @@
             useCORS: true,
             backgroundColor: "transparent"
           }).then(canvas => {
-            // console.log('canvas', canvas)
+            // //console.log('canvas', canvas)
             a.style.display = "none";
             let dom = document.body.appendChild(canvas);
             dom.style.display = "none";
@@ -560,7 +560,7 @@
             uploadPic(formdata)
               .then(({ code, data, msg }) => {
                 if (code == 1000) {
-                  // console.log(data);
+                  // //console.log(data);
                   this.loading = false;
                   const url = data.keyList[0][Object.keys(data.info)[0]];
                   this.creatImgUrl = url;
@@ -587,12 +587,12 @@
           status: 1
         };
 
-        // console.log('index', index);
-        // console.log('--------------');
-        // console.log('fromMore', fromMore);
-        // console.log('--------------');
-        // console.log('type', type);
-        // console.log('--------------');
+        // //console.log('index', index);
+        // //console.log('--------------');
+        // //console.log('fromMore', fromMore);
+        // //console.log('--------------');
+        // //console.log('type', type);
+        // //console.log('--------------');
 
         relatedExerciseworkjoblink(data)
           .then(res => {
@@ -603,11 +603,11 @@
                 let arrs = res.data;
                 if (type == "jiankangchuandi") {
                   arrs.forEach((item, idx, arrs) => {
-                    // console.log('item', item.exerciseWorkId)
+                    // //console.log('item', item.exerciseWorkId)
                     if (item.exerciseWorkId == this.$route.query.workBreakExercisesId) {
                       index = idx;
                       this.index = idx;
-                      // console.log('index', index)
+                      // //console.log('index', index)
                     }
                   });
                 }
@@ -660,10 +660,10 @@
         }
         this.repeatClick = true;
 
-        // console.log('this.repeatClick', this.repeatClick);
+        // //console.log('this.repeatClick', this.repeatClick);
         // 健康传递
 
-        // console.log('this.workBreakExercisesDetail', this.workBreakExercisesDetail)
+        // //console.log('this.workBreakExercisesDetail', this.workBreakExercisesDetail)
         let data = {
           memberCode: this.userInfo.memberCode,
           exerciseWorkId: this.workBreakExercisesDetail.id,
@@ -671,7 +671,7 @@
         };
         healthDelivery(data).then(({ code, message, data }) => {
           if (code === 0) {
-            // console.log('data', data);
+            // //console.log('data', data);
             this.exp = data.healthPoints;
             this.chuantiVisible = true;
             setTimeout(() => {
@@ -765,13 +765,13 @@
       //         .catch((ex) => {});
       // },
       changMore(fromMore) {
-        // console.log('fromeMore', fromMore);
+        // //console.log('fromeMore', fromMore);
         this.index += 1;
         if (this.index == this.workBreakExercisesLength) {
           this.index = 0;
         }
         this.showPlayBtn = true;
-        // console.log('this.localAudioIdIndex', this.localAudioIdIndex)
+        // //console.log('this.localAudioIdIndex', this.localAudioIdIndex)
         this.loading = true;
         this.relatedExerciseworkjoblinkFn(this.index, fromMore);
         this.posterVisible = true;
@@ -788,7 +788,7 @@
         return min;
       },
       tabClick(index) {
-        // console.log("index", index);
+        // //console.log("index", index);
         this.active = index;
         this.commentList = [
           {
@@ -871,7 +871,7 @@
             视频ID: this.workBreakExercisesDetail.id
           });
         }
-        // console.log("点击播放");
+        // //console.log("点击播放");
       },
       //记录播放时间的函数（视频）
       onPlayerTimeupdate(player) {
@@ -902,7 +902,7 @@
       playerReadied(player) {
         // this.showPlayBtn = true;
 
-        // console.log("player", player);
+        // //console.log("player", player);
         let _this = this;
         player.on("error", function () {
           // player.errorDisplay.close();   //将错误信息不显示
@@ -915,7 +915,7 @@
       //正在播放回调函数（视频）
       onPlayerPlay(player) {
         this.showPlayBtn = false;
-        // console.log("11");
+        // //console.log("11");
         this.watchingVideoFn();
         this.getWatchingVideoUsersFn();
 
@@ -926,7 +926,7 @@
       },
       // 暂停回调(视频)
       onPlayerPause(player) {
-        // console.log("视频暂停");
+        // //console.log("视频暂停");
         this.showPlayBtn = true;
         this.paused = true;
         videoRecordEnd();
@@ -950,14 +950,14 @@
         }
 
         if (!this.isIOS && !this.isAndroid) {
-          // console.log("什么都不做");
+          // //console.log("什么都不做");
         } else {
           this.posterVisible = true;
           document.getElementById("container").style.overflow = "hidden";
         }
         this.playAudio();
         this.finishedVideoFn();
-        // console.log("播放完成");
+        // //console.log("播放完成");
         // 调用埋点函数
         // this.zgStatistics('播放完成')
 
@@ -1015,7 +1015,7 @@
     },
     watch: {},
     mounted() {
-      console.log("href", window.location.href);
+      //console.log("href", window.location.href);
       // jiankangchuandi
       if (this.$route.query.workBreakExercisesId) {
         this.relatedExerciseworkjoblinkFn(this.index, false, "jiankangchuandi");
@@ -1042,7 +1042,7 @@
         }
       });
 
-      // console.log("this.posterVisible", this.posterVisible);
+      // //console.log("this.posterVisible", this.posterVisible);
     },
     beforeDestroy() {
       reportAllVideoDuration(this.zgStatistics);

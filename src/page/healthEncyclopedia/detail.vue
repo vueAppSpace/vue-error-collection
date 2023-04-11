@@ -18,7 +18,7 @@
     },
 
     setup({ id }, context) {
-      console.log("healthEncyclopedia detail...");
+      //console.log("healthEncyclopedia detail...");
       const { zgStatistics } = context.root;
       const state = reactive({
         articleInfo: {}
@@ -55,7 +55,7 @@
       async function addArticleReadNumFn() {
         const { code, message } = await addArticleReadNum({ id });
         if (code !== 0) {
-          console.log("message", message);
+          //console.log("message", message);
         }
       }
 

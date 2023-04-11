@@ -46,7 +46,7 @@
             }
           } else {
             isEmpty.value = true;
-            console.log("queryReportData", message);
+            //console.log("queryReportData", message);
             // Toast(message)
           }
         });

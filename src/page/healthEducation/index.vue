@@ -43,7 +43,7 @@
       });
 
       function queryUnionArticlePageFn(e) {
-        console.log(e);
+        //console.log(e);
       }
 
       function clickTag(e) {

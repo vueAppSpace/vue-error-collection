@@ -33,7 +33,7 @@
             await vm.getSportReportSummaryFn();
             vm.coverLoading = false;
           } catch (err) {
-            console.log("classReservations report beforeRouteEnter err: " + err);
+            //console.log("classReservations report beforeRouteEnter err: " + err);
             vm.coverLoading = false;
           }
         });
@@ -43,7 +43,7 @@
     },
 
     setup(_, context) {
-      console.log("report...");
+      //console.log("report...");
 
       const { zgStatistics, $router: router } = context.root;
       const state = reactive({
@@ -109,7 +109,7 @@
           }
         } catch (err) {
           state.loading = false;
-          console.log("classReservations report queryPageListFn: " + err);
+          //console.log("classReservations report queryPageListFn: " + err);
         }
       }
 

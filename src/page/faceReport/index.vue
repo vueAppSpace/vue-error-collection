@@ -266,7 +266,7 @@
       downloadHandle() {
         let reportUrl = this.medicalInfo.healthExam.reportUrl;
         let filename = this.getDay();
-        console.log("filename", reportUrl);
+        //console.log("filename", reportUrl);
 
         if (isIcomeIOS) {
           jsBridge.invoke("previewFile", { serverUrl: reportUrl, ext: { fileName: filename + ".pdf" } });
@@ -295,7 +295,7 @@
       },
       fileLinkToStreamDownload(url) {
         let fileName = this.getDay();
-        console.log("fileName", fileName);
+        //console.log("fileName", fileName);
         let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\/])+$/;
         if (!reg.test(url)) {
           throw new Error("传入参数不合法,不是标准的文件链接");
@@ -342,13 +342,13 @@
         return `${year}/${month}/${day}/${timeStem}.pdf`;
       },
       ConversionWords(code) {
-        console.log("、武术");
-        console.log("code", code);
+        //console.log("、武术");
+        //console.log("code", code);
         code = code.replace(/↵/g, "\n");
 
         // code = code.split(/[(\r\n)\r\n]+/); // 根据换行或者回车进行识别
         code = code.split(/\r/); // \r表示回车
-        console.log("code2", code);
+        //console.log("code2", code);
         code.forEach((item, index) => {
           // 删除空项
           if (!item) {
@@ -357,7 +357,7 @@
         });
         code = Array.from(new Set(code));
 
-        console.log("codeFinal", code);
+        //console.log("codeFinal", code);
         return code;
       },
       unfoldToggle(item, index) {
@@ -393,7 +393,7 @@
           .then(res => {
             if (res.code == 0) {
               if (res.data) {
-                console.log("res.data", res.data);
+                //console.log("res.data", res.data);
                 this.loading = false;
                 this.originTabData = res.data;
                 this.medicalInfo = res.data;
@@ -466,9 +466,9 @@
                   }
                 }
 
-                console.log("this.tab_content", this.tab_content);
+                //console.log("this.tab_content", this.tab_content);
 
-                console.log("marginIndex", this.marginIndex);
+                //console.log("marginIndex", this.marginIndex);
                 // this.tabClick();
               }
             }

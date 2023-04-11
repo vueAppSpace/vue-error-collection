@@ -213,7 +213,7 @@
           memberCode: userInfo.value.memberCode,
           userFlag: props.userFlag
         };
-        console.log(route, "route");
+        //console.log(route, "route");
         if (props.titleActive == "healthTrends") {
           params.isEventClocking = 0;
         } else {
@@ -288,9 +288,9 @@
                 state.finished = true;
               }
 
-              console.log(state.dynamicData, "dd");
+              //console.log(state.dynamicData, "dd");
             } else {
-              console.log("getDynamicList", message);
+              //console.log("getDynamicList", message);
               // Toast(message);
             }
           })
@@ -345,7 +345,7 @@
             dynamicData.splice(updateIndex, 1, newItemArr);
             state.dynamicData = dynamicData;
           } else {
-            console.log("getDynamicList", message);
+            //console.log("getDynamicList", message);
             // Toast(message);
           }
         });

@@ -28,18 +28,18 @@
             autoplay.value = duration * 1000;
             bannerList.value = imgList;
           } else {
-            console.log("getHealthShufflingFigure: ", message);
+            //console.log("getHealthShufflingFigure: ", message);
           }
         })
         .catch(err => {
-          console.log("getHealthShufflingFigure: ", err);
+          //console.log("getHealthShufflingFigure: ", err);
         });
 
       async function jumpTo(url, id) {
         try {
           await bannerAddClick({ id });
         } catch (err) {
-          console.log("bannerAddClick", err);
+          //console.log("bannerAddClick", err);
         }
 
         if (!url) return;

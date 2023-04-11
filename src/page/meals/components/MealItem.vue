@@ -108,7 +108,7 @@
       async getCanteenList() {
         // alert(22)
         const employeeId = this.userInfo.empNo;
-        console.log("useLocationStore().cityCode", useLocationStore().cityCode);
+        //console.log("useLocationStore().cityCode", useLocationStore().cityCode);
         getCanteenListByEmp({ employeeId, cityCode: useLocationStore().cityCode })
           .then(res => {
             if (res.code === 0) {
@@ -121,11 +121,11 @@
               localStorage.setItem("columns", JSON.stringify(res.data));
               this.getSelfRecommend();
             } else {
-              // console.log(res.message);
+              // //console.log(res.message);
             }
           })
           .catch(error => {
-            // console.log(error.message);
+            // //console.log(error.message);
           });
       },
       handleCanteen(value) {

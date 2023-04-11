@@ -127,13 +127,13 @@
         // 4、运动无数据的情况；
         // 5、运动有数据健康关怀没数据怎么显示
         this.swiperData = [];
-        // console.log("result：", resultArr);
+        // //console.log("result：", resultArr);
         const prefixUrl = "https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/meal/";
         if (resultArr[0]) {
           // 每日一修有数据
           const temp = resultArr[0][0];
 
-          // console.log('resultArr[1][0]', resultArr[1])
+          // //console.log('resultArr[1][0]', resultArr[1])
           this.swiperData.push({
             title: temp.info,
             headerUrl: `${prefixUrl}avatar.png`,
@@ -173,7 +173,7 @@
         }
 
         for (let item of resultArr[1]) {
-          // console.log('itemxxx', item)
+          // //console.log('itemxxx', item)
           if (item.type == 1) {
             this.swiperData[0].info = item.info;
           } else if (item.type == 2) {
@@ -187,7 +187,7 @@
           }
         }
 
-        console.log("this.swiperData真的数据：", this.swiperData);
+        //console.log("this.swiperData真的数据：", this.swiperData);
       },
       playVideo(url, extInfo, item) {
         this.zgStatistics("健康新奥-健康-点击banner", {
@@ -197,12 +197,12 @@
         if (!url) return;
         this.playerOptions.sources[0].src = url;
         this.showPlay = true;
-        // console.log("url", url);
-        // console.log("extInfo", extInfo);
+        // //console.log("url", url);
+        // //console.log("extInfo", extInfo);
         let domVideo = "";
         // 延迟1s留出组件加载及视频加载时间
         this.$nextTick().then(() => {
-          // console.log("this.refs", this.$refs);
+          // //console.log("this.refs", this.$refs);
           domVideo = document.getElementsByClassName("vjs-fluid");
           if (extInfo) {
             if (extInfo.height > extInfo.width) {
@@ -235,14 +235,14 @@
         };
         try {
           const { code, data, message } = await healtheverydaystudyList(params);
-          // console.log("每日一修data:", data);
+          // //console.log("每日一修data:", data);
           if (code === 0) {
             return data;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       // 健康关怀
@@ -256,14 +256,14 @@
         };
         try {
           const { code, data, message } = await healthcareList(params);
-          console.log("健康关怀data:", data);
+          //console.log("健康关怀data:", data);
           if (code === 0) {
             return data;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       // 饮食推荐的比率
@@ -271,13 +271,13 @@
         try {
           const { code, data, message } = await getUserNutrTargetRatio();
           if (code === 0) {
-            // console.log("吃多少适合你data:", data);
+            // //console.log("吃多少适合你data:", data);
             return data;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       // 运动推荐
@@ -287,10 +287,10 @@
           if (code === 0) {
             return data;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       },
       formatterData(str) {

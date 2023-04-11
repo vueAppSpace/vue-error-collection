@@ -14,10 +14,10 @@
           if (code === 0) {
             return data;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       }
       // 健康关怀
@@ -27,10 +27,10 @@
           if (code === 0) {
             return data;
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } catch (error) {
-          console.log(error.message);
+          //console.log(error.message);
         }
       }
       async function getSwiperData() {

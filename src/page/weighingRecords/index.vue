@@ -29,7 +29,7 @@
             await vm.queryPageListFn("refresh");
             vm.coverLoading = false;
           } catch (err) {
-            console.log("weighingRecords beforeRouteEnter err: " + err);
+            //console.log("weighingRecords beforeRouteEnter err: " + err);
             vm.coverLoading = false;
           }
         });
@@ -39,7 +39,7 @@
     },
 
     setup(_, context) {
-      console.log("weighingRecords...");
+      //console.log("weighingRecords...");
 
       const { zgStatistics, $router: router } = context.root;
       const state = reactive({
@@ -104,7 +104,7 @@
             Toast(message || "查询称重记录失败!");
           }
         } catch (err) {
-          console.log("weighingRecords index queryPageListFn err: " + err);
+          //console.log("weighingRecords index queryPageListFn err: " + err);
           state.loading = false;
         }
       }

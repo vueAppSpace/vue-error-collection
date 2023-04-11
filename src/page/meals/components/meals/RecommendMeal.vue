@@ -68,7 +68,7 @@
           phrId
         };
         const { code, data, message } = await selfRecommend(params);
-        // console.log("自助餐：", code, data, message);
+        // //console.log("自助餐：", code, data, message);
 
         let recipe_type_all = null;
         if (data.food_time_noon) {
@@ -83,7 +83,7 @@
 
       const confirmCanteen = (value, event) => {
         state.name = "";
-        console.log("value111", value);
+        //console.log("value111", value);
         state.name = value.canteenName;
         state.canteen = value;
         getSelfRecommend();
@@ -92,8 +92,8 @@
       watch(
         canteenList,
         (newVal, oldVal) => {
-          console.log("xx");
-          console.log("newValyyy", newVal);
+          //console.log("xx");
+          //console.log("newValyyy", newVal);
           if (newVal == "noData") {
             state.recommendFood = null;
           } else {

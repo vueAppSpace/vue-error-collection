@@ -80,7 +80,7 @@
               }
             }
           } else {
-            console.log("queryDiseaseProfile", message);
+            //console.log("queryDiseaseProfile", message);
             // Toast(message)
           }
         } catch (err) {

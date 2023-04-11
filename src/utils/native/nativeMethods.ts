@@ -131,7 +131,7 @@ export default {
 } as NativeMethods;
 
 function callPlusMethod<T extends Payload>(name: string, payload: T): void {
-  console.log("plus method");
+  //console.log("plus method");
   const plusMethod = (plusTools as Record<string, (params?: T) => void>)[name];
   if (window.plus) {
     plusMethod(payload);

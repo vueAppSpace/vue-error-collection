@@ -68,7 +68,7 @@
             jumpTo("/health");
           }
         } else {
-          console.log("queryUserRole", message);
+          //console.log("queryUserRole", message);
         }
       };
 

@@ -13,7 +13,7 @@
       const list = ref([]);
 
       function onLoad() {
-        console.log("loading");
+        //console.log("loading");
         videoCourseUnionList({ ...pageData, categoryId: props.id })
           .then(({ code, data, message }) => {
             if (code === 0) {
@@ -26,13 +26,13 @@
             } else {
               loading.value = false;
               finished.value = true;
-              console.log("videoCourseUnionList", message);
+              //console.log("videoCourseUnionList", message);
             }
           })
           .catch(err => {
             loading.value = false;
             finished.value = true;
-            console.log(err);
+            //console.log(err);
           });
       }
 

@@ -94,7 +94,7 @@
             this.zgStatistics("健康新奥-健康活动-活动点赞", { 来源: "动态打卡排行", 活动名称: this.activeObj.title });
             this.activeObj.clockInNum += 1;
             this.hasLike = true;
-            console.log(res, "res");
+            //console.log(res, "res");
           }
         });
       },
@@ -120,7 +120,7 @@
           pageSize: 10
         }).then(({ code, data }) => {
           if (code == 0 && data && data.length) {
-            // console.log(res, 'res')
+            // //console.log(res, 'res')
             this.hasLike = true;
           }
         });

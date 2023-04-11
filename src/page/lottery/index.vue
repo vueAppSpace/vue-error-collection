@@ -73,7 +73,7 @@
           if (code === 0) {
             state.costPoint = data.paramValue || 0;
           } else {
-            console.log("querySysConfig", message);
+            //console.log("querySysConfig", message);
           }
         });
       };
@@ -90,7 +90,7 @@
             if (code === 0) {
               state.healthPoint = data.healthPoints || 0;
             } else {
-              console.log("queryHealthPointByMemberCode", message);
+              //console.log("queryHealthPointByMemberCode", message);
             }
           });
         }
@@ -113,7 +113,7 @@
               };
             });
           } else {
-            console.log("queryLotteryList", message);
+            //console.log("queryLotteryList", message);
           }
         });
       };
@@ -132,7 +132,7 @@
               state.finished = true;
             }
           } else {
-            console.log("queryLotteryRecord", message);
+            //console.log("queryLotteryRecord", message);
           }
         });
       };
@@ -151,12 +151,12 @@
             if (code === 0) {
               resolve(data);
             } else {
-              console.log("luckyDraw", message);
+              //console.log("luckyDraw", message);
               failTips(message);
               reject();
             }
           } catch (err) {
-            console.log("luckyDraw-err", err);
+            //console.log("luckyDraw-err", err);
             failTips();
             reject();
           }
@@ -175,7 +175,7 @@
           const index = list.findIndex(val => val.id === result.id);
           refs["lottery"].go(index);
         } catch (err) {
-          console.log(err);
+          //console.log(err);
           state.running = false;
         }
       };
@@ -206,7 +206,7 @@
 
       // 中奖列表滚动完成事件
       const onScrollEnd = () => {
-        console.log("onScrollEnd");
+        //console.log("onScrollEnd");
         const req = { ...state.page };
         queryWinnerRecord(req);
       };

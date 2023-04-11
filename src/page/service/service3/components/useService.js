@@ -50,10 +50,10 @@ export function useService() {
         state.allServiceData = serviceData;
         state.myServiceData = myServiceData;
       } else {
-        console.log("getHealthService: ", message);
+        //console.log("getHealthService: ", message);
       }
     } catch (err) {
-      console.log("getHealthService: ", err);
+      //console.log("getHealthService: ", err);
     }
   }
 

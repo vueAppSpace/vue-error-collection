@@ -19,7 +19,7 @@ const getUserRouter = (type: any) => {
 
 const permission = checkPermissions();
 const accessRoutes = getUserRouter(permission);
-console.log("用户权限: ", permission);
+//console.log("用户权限: ", permission);
 
 Vue.use(Router);
 

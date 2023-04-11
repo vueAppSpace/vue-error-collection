@@ -53,7 +53,7 @@
 
       // 点赞回调
       const likeInsertCallBack = () => {
-        console.log("我点赞啦");
+        //console.log("我点赞啦");
         activityDetailFn();
         zgStatistics("健康新奥-健康活动-活动点赞", {
           来源: "活动详情",
@@ -63,7 +63,7 @@
       };
       // 取消点赞回调
       const realDeleteCallBack = () => {
-        console.log("取消点赞");
+        //console.log("取消点赞");
         activityDetailFn();
         activityLikePageFn();
       };
@@ -89,7 +89,7 @@
             data.content = data.content.replace(regex, '<img style="max-width: 100%; height: auto"');
             state.activityDetailData = data;
           } else {
-            console.log("activityDetail", message);
+            //console.log("activityDetail", message);
             // Toast(message);
           }
         });
@@ -111,7 +111,7 @@
               state.likeStatus = false;
             }
           } else {
-            console.log("activityLikePage", message);
+            //console.log("activityLikePage", message);
             // Toast(message);
           }
         });

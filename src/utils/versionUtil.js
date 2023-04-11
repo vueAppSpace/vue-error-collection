@@ -7,5 +7,5 @@
  * @Description: ****
  */
 export const printVersion = () => {
-  console.log("LK-PROJECT", window.LK_PROJECT);
+  //console.log("LK-PROJECT", window.LK_PROJECT);
 };

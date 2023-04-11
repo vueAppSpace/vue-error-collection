@@ -65,7 +65,7 @@
     },
     methods: {
       refresh(foodInfo) {
-        console.log("foodInfoxxxx", foodInfo);
+        //console.log("foodInfoxxxx", foodInfo);
         this.$emit("refresh", foodInfo);
 
         this.zgStatistics("健康新奥-健康-点击换一换", {
@@ -75,7 +75,7 @@
         });
       },
       toDetail(foodInfo, type) {
-        console.log(foodInfo);
+        //console.log(foodInfo);
         if (!foodInfo.name) return;
 
         this.$router.push({

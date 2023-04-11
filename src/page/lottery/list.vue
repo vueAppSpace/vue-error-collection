@@ -51,7 +51,7 @@
               state.finished = true;
             }
           } else {
-            console.log("mineWinnerRecord", message);
+            //console.log("mineWinnerRecord", message);
           }
         });
       };

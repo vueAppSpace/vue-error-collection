@@ -19,7 +19,7 @@ export default function ({ props, state, $nextTick, $el, context, likeInsertCall
     };
     likeInsert(params).then(({ code, data, message }) => {
       if (code === 0) {
-        console.log(context);
+        //console.log(context);
         likeInsertCallBack && likeInsertCallBack();
       } else {
         Toast(message);

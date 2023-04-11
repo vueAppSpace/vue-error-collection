@@ -15,7 +15,7 @@ import { eServicePdfPreview } from "@/config/env";
  * 关闭当前 webview
  */
 export const closeWebView = () => {
-  console.log("关闭webview>>>>>>>>>>");
+  //console.log("关闭webview>>>>>>>>>>");
   var ws = plus.webview.currentWebview();
   plus.webview.close(ws);
 };
@@ -24,7 +24,7 @@ export const closeWebView = () => {
  * 打开一个新的webview
  */
 export const openWebView = ({ params }) => {
-  console.log("打开新webview>>>>>>>>>>");
+  //console.log("打开新webview>>>>>>>>>>");
 
   const { targetUrl, title = "", refreshTicket = false, extraParame = "" } = params;
   let webview = plus.webview.create("", "custom-webview", {
@@ -103,13 +103,13 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
     true
   );
   barcodeInstance.onmarked = (type, reslut) => {
-    console.log("scanCode finish>>>>>>>>>>");
-    console.log("scaned type", type);
-    console.log("scaned reslut", reslut);
+    //console.log("scanCode finish>>>>>>>>>>");
+    //console.log("scaned type", type);
+    //console.log("scaned reslut", reslut);
 
     close();
     if (type === plus.barcode.QR) {
-      console.log("识别二位码成功>>>");
+      //console.log("识别二位码成功>>>");
       successCB &&
         successCB({
           qrcode: reslut
@@ -129,10 +129,10 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
   bitmap1.loadBase64Data(
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAASCAYAAABit09LAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACqADAAQAAAABAAAAEgAAAABr6GS2AAAAoklEQVQoFYWSvQ6CQBAGL3aEh5COkhJLabEgFtfz7HY2WliYGOM5SyDZYpclmVyy33A/e5dS8JVS6kBJCWmGL0yuTJhX6c54NEWCET7whM6TzoRveMHJk/pVEHHwpI7wAbLkxZNaQtm0nDB7UkV4gx/MpkTx4AVmnZnipbc/kePDKDluj5IHZt9vuJLjK1SyfhTNVjdH6SvIJVxNQReRlof7B/t01YxY86eAAAAAAElFTkSuQmCC",
     () => {
-      console.log("bmp1.png load success!");
+      //console.log("bmp1.png load success!");
 
       const viewRealTop = statusbarHeight + 20;
-      console.log("viewRealTop", viewRealTop);
+      //console.log("viewRealTop", viewRealTop);
 
       //创建原生容器控件
       view1 = new plus.nativeObj.View("view1", {
@@ -159,7 +159,7 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
       view1.addEventListener(
         "click",
         () => {
-          console.log("click return back btn!!!");
+          //console.log("click return back btn!!!");
           close();
 
           errorCB && errorCB("用户取消扫码!");
@@ -184,7 +184,7 @@ export const scanQRCode = ({ params, successCB, errorCB }) => {
  * 打开微信小程序(注意: 暂未支持)
  */
 export const openWXMiniProgram = ({ params }) => {
-  console.log("打开微信小程序>>>>");
+  //console.log("打开微信小程序>>>>");
   const { appletId, path } = params;
 };
 
@@ -192,7 +192,7 @@ export const openWXMiniProgram = ({ params }) => {
  * 预览文件
  */
 export const previewFile = ({ params }) => {
-  console.log("预览文件>>>>");
+  //console.log("预览文件>>>>");
 
   const { serverUrl, fileName } = params || {};
   loadBase64(scriptUrl.base64).then(() => {
@@ -207,16 +207,16 @@ export const previewFile = ({ params }) => {
  * 获取当前地理位置
  */
 export const queryLocation = ({ successCB, errorCB }) => {
-  console.log("start获取地理位置>>>>>>");
+  //console.log("start获取地理位置>>>>>>");
   plus.geolocation.getCurrentPosition(
     p => {
-      console.log("获取地理位置成功>>>", p);
+      //console.log("获取地理位置成功>>>", p);
       const { coords, address = {} } = p;
       const { country, province, city, district, street, postalCode, cityCode } = address;
       successCB && successCB({ country, province, city, district, street, postalCode, cityCode });
     },
     err => {
-      console.log("获取地理位置失败,", err);
+      //console.log("获取地理位置失败,", err);
       errorCB && errorCB("获取地理位置失败：", err);
     },
     {
@@ -235,14 +235,14 @@ export const audioPlay = ({ params, successCB, errorCB }) => {
   //const localAudioId = "https://lk-webfont.oss-cn-beijing.aliyuncs.com/web/xinao-health/audio/correct_sound.mp3";
 
   const { localAudioId } = params;
-  console.log("音频播放>>>", localAudioId);
+  //console.log("音频播放>>>", localAudioId);
   const audioPlayer = plus.audio.createPlayer(localAudioId);
   audioPlayer.play(
     ret => {
-      console.log("play audio success", ret);
+      //console.log("play audio success", ret);
     },
     err => {
-      console.log("play audio err", err);
+      //console.log("play audio err", err);
       errorCB && errorCB("play audio err" + err);
     }
   );
@@ -252,14 +252,14 @@ export const audioPlay = ({ params, successCB, errorCB }) => {
  *下载音频
  */
 export const audioDownload = ({ params, successCB, errorCB }) => {
-  console.log("audioDownload>>>>", params);
+  //console.log("audioDownload>>>>", params);
 
   downLoadFile({
     params: {
       path: params.mediaId
     },
     successCB: localAudioId => {
-      console.log("localAudioId>>>", localAudioId);
+      //console.log("localAudioId>>>", localAudioId);
       successCB && successCB({ localAudioId });
     },
     errorCB: err => {
@@ -273,21 +273,21 @@ export const audioDownload = ({ params, successCB, errorCB }) => {
  */
 export const downLoadFile = ({ params, successCB, errorCB }) => {
   const { path } = params;
-  console.log("下载文件网络地址>>>>", path);
+  //console.log("下载文件网络地址>>>>", path);
   var dtask = plus.downloader.createDownload(
     path,
     {},
     (d, status) => {
       if (status == 200) {
-        console.log("downLoadFile success, file path >>>: ", d.filename);
+        //console.log("downLoadFile success, file path >>>: ", d.filename);
         successCB && successCB(d.filename);
       } else {
-        console.log("downLoadFile failed: ", status);
+        //console.log("downLoadFile failed: ", status);
         errorCB && errorCB("downLoadFile failed: " + status);
       }
     },
     err => {
-      console.log("downLoadFile failed: ", err);
+      //console.log("downLoadFile failed: ", err);
       errorCB && errorCB("downLoadFile failed: " + err);
     }
   );

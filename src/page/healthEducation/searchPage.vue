@@ -32,7 +32,7 @@
       onMounted(() => {});
 
       function queryUnionArticlePageFn(e) {
-        console.log(e);
+        //console.log(e);
       }
 
       function handleToDetail({ educationAnswer }) {

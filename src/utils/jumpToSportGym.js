@@ -45,6 +45,6 @@ export function jumpToThirdParty({ type, token, sportName }) {
   if (type === SportType["venuestatus-motion_recording"]) {
     url = url.replace("$sportName", encodeURIComponent(sportName)); //所有得用户输入得链接参数，都得用该方法转义
   }
-  console.log(url);
+  //console.log(url);
   window.location.href = url;
 }

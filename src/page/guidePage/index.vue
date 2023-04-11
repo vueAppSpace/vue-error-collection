@@ -49,13 +49,13 @@
           }
           state.imageData = data;
         } else {
-          console.log("queryData", message);
+          //console.log("queryData", message);
           // Toast(message)
         }
       };
 
       onMounted(() => {
-        console.log("guidePage=========>");
+        //console.log("guidePage=========>");
         queryData().then(() => {
           const countDownTime = state.imageData.countDownTime * 1000;
           state.timer = setTimeout(routerPush, countDownTime);
@@ -76,7 +76,7 @@
       //url = "https://c-qa.op.laikang.com/report/service?dd_full_screen=true&ticket=ticket"
       //url = "/service";
       function jumpTo(url) {
-        console.log("guide...");
+        //console.log("guide...");
         const paramsObj = getURLParameters(url) || {};
         paramsObj["ticket"] = localStorage.getItem("ticket");
         url = getFullURLFromParameters(url, paramsObj);

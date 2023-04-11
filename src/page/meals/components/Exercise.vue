@@ -103,7 +103,7 @@
         const phrId = this.userInfo.phrId;
         const appKey = "6KRoN5rng";
         const url = `${exerciseCourseDetail}?userId=${phrId}&appKey=${appKey}&dd_full_screen=true&isNavBar=1`;
-        console.log("url", url);
+        //console.log("url", url);
         window.location.href = url;
       },
       onCheck() {

@@ -52,8 +52,8 @@
           来源: this.$route.path == "/health" ? "健康" : "我的"
         });
         // this.$router.push({ path: "/dietDetail", query: { type, name } });
-        console.log("this.foodInfo.lkcode", this.foodInfo);
-        console.log("this.foodInfo.lkcode", this.foodInfo.score);
+        //console.log("this.foodInfo.lkcode", this.foodInfo);
+        //console.log("this.foodInfo.lkcode", this.foodInfo.score);
         this.$router.push({
           path: "/foodDetail",
           query: { type, name: this.foodInfo.dishName, star: this.foodInfo.score }

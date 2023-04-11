@@ -107,11 +107,11 @@
                 Toast("暂无咨询师提供服务，请尝试拔打健康咨询电话！");
               }
             } else {
-              console.log("getCounselor", data);
+              //console.log("getCounselor", data);
               Toast("咨询师获取失败 请重试");
             }
           } catch (err) {
-            console.log("getCounselor-err", err);
+            //console.log("getCounselor-err", err);
             Toast("咨询师获取失败 请重试");
           }
         } else {

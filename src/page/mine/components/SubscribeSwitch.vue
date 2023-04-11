@@ -29,7 +29,7 @@
             state.subscribeSwitch = dt.isSubscribe === 1;
             state.subscribeId = dt.id;
           } else {
-            console.log("querySubscribe", message);
+            //console.log("querySubscribe", message);
             // Toast(message)
           }
         });

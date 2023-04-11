@@ -94,7 +94,7 @@
               await queryUserInfo();
             }
           } else {
-            console.log(message);
+            //console.log(message);
           }
         } else {
           await jumpToThirdPath();
@@ -118,7 +118,7 @@
               }
             });
           } else {
-            console.log(message);
+            //console.log(message);
           }
         }
       }

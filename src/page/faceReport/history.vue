@@ -115,7 +115,7 @@
             if (res.code == 0) {
               if (res.data) {
                 this.loading = false;
-                console.log("res.data", res.data);
+                //console.log("res.data", res.data);
                 this.list = res.data;
               }
             }
@@ -132,7 +132,7 @@
             this.selfList = data;
             this.loading = false;
           } else {
-            console.log("queryReport", message);
+            //console.log("queryReport", message);
             // Toast(message)
           }
         });

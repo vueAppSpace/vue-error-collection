@@ -57,7 +57,7 @@
         if (this.$route.path !== "/health") {
           this.zgStatistics("健康新奥-我的-点击卡片", { 按钮名称: item.jobName, 位置: "焕能工间操" });
         }
-        console.log("item", item);
+        //console.log("item", item);
         this.zgStatistics("健康新奥-健康-点击其他具体内容", {
           频道: "工间操",
           按钮名称: item.jobName,
@@ -76,7 +76,7 @@
           if (code === 0) {
             this.exerciseWorkList = data;
           } else {
-            console.log("queryExerciseWorkJobList", message);
+            //console.log("queryExerciseWorkJobList", message);
             // Toast(message);
           }
         });

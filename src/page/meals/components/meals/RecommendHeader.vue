@@ -56,7 +56,7 @@
       const canteen = ref("canteen");
 
       const init = () => {
-        // // console.log('初始化')
+        // // //console.log('初始化')
       };
 
       const selectCanteen = () => {
@@ -87,8 +87,8 @@
       watch(
         canteenList,
         newVal => {
-          // console.log('变化了')
-          // console.log('newVal食堂', newVal)
+          // //console.log('变化了')
+          // //console.log('newVal食堂', newVal)
           if (canteenList.value == "noData") {
             state.orderBtnIsvisible = false;
           }
@@ -110,7 +110,7 @@
         // cityCode,
         // (newVal) => {
         //     alert('监控')
-        //     // console.log(newVal, 'newVal')
+        //     // //console.log(newVal, 'newVal')
         // },
         () => state.show,
         newVal => {

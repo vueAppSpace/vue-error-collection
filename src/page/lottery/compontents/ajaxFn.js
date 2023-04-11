@@ -16,12 +16,12 @@ export const updateStatus = req => {
       if (code === 0) {
         resolve();
       } else {
-        console.log("updateLottery", message);
+        //console.log("updateLottery", message);
         Toast(message);
         reject(err);
       }
     } catch (err) {
-      console.log("updateLottery-err", err);
+      //console.log("updateLottery-err", err);
       Toast("操作异常, 请重试");
       reject(err);
     }
@@ -49,11 +49,11 @@ export const queryDetail = async (id, status, type) => {
 
         resolve([detailInfo, data]);
       } else {
-        console.log("lotteryDetail", message);
+        //console.log("lotteryDetail", message);
         reject(err);
       }
     } catch (err) {
-      console.log("lotteryDetail-err", err);
+      //console.log("lotteryDetail-err", err);
       reject(err);
     }
   });

@@ -61,7 +61,7 @@ export const useScanQRcodeStore = defineStore("scanQRcode", () => {
           await handleQRcodeCommon(qrcode);
         })
         .catch(err => {
-          console.log("扫码异常:", err);
+          //console.log("扫码异常:", err);
         });
     } else {
       Toast("请至移动端扫码");
@@ -71,9 +71,9 @@ export const useScanQRcodeStore = defineStore("scanQRcode", () => {
   //零: 二维码处理公共入口
   const handleQRcodeCommon = async qrcode => {
     try {
-      console.log("========== qrcode ==========");
-      console.log(qrcode);
-      console.log("========== qrcode ==========");
+      //console.log("========== qrcode ==========");
+      //console.log(qrcode);
+      //console.log("========== qrcode ==========");
       //1. 快快二维码
 
       //1.1 臂带
@@ -96,7 +96,7 @@ export const useScanQRcodeStore = defineStore("scanQRcode", () => {
         Toast(NOT_IDENTIFY_QRCODE_TIP);
       }
     } catch (e) {
-      console.log("handleQRcodeCommon...", e);
+      //console.log("handleQRcodeCommon...", e);
 
       Toast(getErrorMessage(e) || "系统异常!");
     }
@@ -104,7 +104,7 @@ export const useScanQRcodeStore = defineStore("scanQRcode", () => {
 
   //一: 快快逻辑
   const handleQucikQucik = async qrcode => {
-    console.log("isQucikQucik qrcode...");
+    //console.log("isQucikQucik qrcode...");
 
     let params;
     let retData;
@@ -145,7 +145,7 @@ export const useScanQRcodeStore = defineStore("scanQRcode", () => {
     const hasActiveRecord = userSubClassList.find(item => {
       return judgeHasActiveRecord(item);
     });
-    console.log("hasActiveRecord", hasActiveRecord);
+    //console.log("hasActiveRecord", hasActiveRecord);
 
     if (hasActiveRecord) {
       const { default: router } = await import("@/router");
@@ -189,7 +189,7 @@ export const useScanQRcodeStore = defineStore("scanQRcode", () => {
 
   //二: 统一扫码 (健检部门 || 聚合永健 || 更多...)
   const handleUnify = async qrcode => {
-    console.log("isUnifyQRCode qrcode...");
+    //console.log("isUnifyQRCode qrcode...");
 
     const { code, data, message } = (await icomeRestore({ shortUrl: qrcode })) || {};
     if (code == 0) {

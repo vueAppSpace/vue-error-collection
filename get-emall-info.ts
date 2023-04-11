@@ -27,7 +27,7 @@ export async function getEmallInfo(): Promise<string> {
 
     return `grantCode=${grantCode}&authTenantId=${authTenantId}`;
   } catch (err) {
-    console.log(`获取 e商服登录信息 失败: ${err}`);
+    //console.log(`获取 e商服登录信息 失败: ${err}`);
   }
 }
 

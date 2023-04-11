@@ -72,7 +72,7 @@
       const { emit } = context;
 
       function handleClick() {
-        console.log("ArticleCard handleClick:", type);
+        //console.log("ArticleCard handleClick:", type);
         emit("click", { type, id, name, index });
       }
 

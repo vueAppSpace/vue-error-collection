@@ -106,7 +106,7 @@ export function isUnifyQRCode(qrcode: string): boolean {
   let reg = /t\.ennew\.com/;
   const ret = qrcode.match(reg);
   const flag = reg.test(qrcode);
-  console.log(flag);
+  //console.log(flag);
   return flag;
 }
 
