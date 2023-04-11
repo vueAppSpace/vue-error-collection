@@ -2,10 +2,10 @@
  * @Description: 首页icon区
  * @Author: IFLS
  * @Date: 2022-11-03 10:07:31
- * @LastEditTime: 2023-03-28 09:57:49
+ * @LastEditTime: 2023-04-11 22:55:29
 -->
 <script>
-  import { defineComponent, ref, reactive, toRefs } from "@vue/composition-api";
+  import { defineComponent, ref, reactive, toRefs, onMounted } from "@vue/composition-api";
   import qrcodeDialog from "@/components/QRCodeDialog";
   import { jumpToDanaoPretreat } from "@/utils/lifeEntropyMethod";
   import { useScanQRcodeStore } from "@/pinia";
@@ -30,6 +30,16 @@
         scanCodeFn();
       };
 
+      onMounted(() => {
+        //try {
+        console.log(a);
+        // } catch (err) {
+        //   console.log("[try-catch]: 捕获到错误", err);
+
+        //   //throw err;
+        // }
+      });
+
       const state = reactive({
         iconData: [
           {
@@ -53,18 +63,148 @@
         QRCodeVisible,
         ...toRefs(state)
       };
+    },
+    methods: {
+      onScancode() {
+        //this.err1();
+        //this.err11();
+        this.err2();
+        //this.err3();
+        //this.err4();
+        //this.err5();
+        //this.err6(); //留给 全局 promise 异常捕获处理器
+        //this.err7();
+        //this.err8();
+      },
+
+      //err-collection ===>
+
+      //错误收集案例:
+      //案例一: 运行时错误 (✔)
+      err1() {
+        try {
+          let a = undefined;
+          console.log(a.b);
+        } catch (err) {
+          console.log("[try-catch]: err1捕获到错误>>>");
+
+          console.log("name:", err.name);
+          console.log("message:", err.message);
+          console.log("stack:", err.stack);
+          console.log("lineNumber:", err.lineNumber);
+          console.log("columnNumber:", err.columnNumber);
+          console.log("fileName:", err.fileName);
+
+          throw err;
+        }
+      },
+
+      err11() {
+        try {
+          console.log(abc);
+        } catch (e) {
+          console.log(e.name);
+          console.log(e.message);
+          console.error("try-catch: err2收集到错误,", err);
+        }
+      },
+
+      //案例二: 语法错误 （❌）
+      err2() {
+        try {
+            // let a = 123;
+            // let a = 456;
+        } catch (err) {
+          console.error("try-catch: err2收集到错误,", err);
+        }
+      },
+
+      //案例三: 异步错误 （❌）
+      err3() {
+        try {
+          setTimeout(() => {
+            let a = undefined;
+            console.log(a.b);
+          }, 1000);
+        } catch (err) {
+          console.error("try-catch: err3收集到错误,", err);
+        }
+      },
+
+      //案例四: Promise 错误
+      err4() {
+        try {
+          Promise.reject("网络错误>>>");
+        } catch (err) {
+          console.error("try-catch: err4收集到错误,", err);
+        }
+      },
+
+      //案例五: Promise 错误捕获
+      err5() {
+        try {
+          Promise.reject("网络错误>>>").catch(err => {
+            console.error("捕获到的promise错误 err5, ", err);
+          });
+        } catch (err) {
+          console.error("try-catch: err5收集到错误,", err);
+        }
+      },
+
+      async makeRequest() {
+        throw Error("请求接口错误>>>!!!");
+      },
+
+      //案例六: 捕获 async 错误
+      err6() {
+        try {
+          makeRequest();
+        } catch (err) {
+          console.error("try-catch: err6收集到错误,", err);
+        }
+      },
+
+      //案例七: 捕获 async 错误，加上 await
+      async err7() {
+        try {
+          await this.makeRequest();
+        } catch (err) {
+          console.error("try-catch: err7收集到错误,", err);
+        }
+      }
+
+      //案例八: 捕获 import chunk 的错误(导航到我的页面测试)
+      // async function err8() {
+      //   try {
+      //     // const data = await import("./IconBoxData.json");
+      //     const data = await import("./IconBoxData1.json");
+      //     console.log("动态 import chunk", data);
+      //   } catch (err) {
+      //     console.error("try-catch: err8收集到错误,", err);
+      //   }
+      // }
     }
   });
 </script>
 
 <template>
   <div>
+    <!-- 
+      err-collection ===>
+      处理资源加载错误:  图片，css，script 加载错误
+    -->
+    <!-- 这里尝试加载一个不存在的图片 -->
+    <img src="https://yun.tuia.cn/image/kkk.png" />
+
+    <!-- 这里尝试加载一个不存在的脚本文件 -->
+    <!-- <script src="https://lk-webfont.oss-accelerate.aliyuncs.com/xxx.min.1.8.21.js"></script> -->
+
     <van-sticky>
       <ul>
         <li
           v-for="item of iconData"
           :key="item.name"
-          @click="item.onClick"
+          @click="onScancode"
           v-track="{
             name: '健康新奥-健康-点击其他具体内容',
             data: `{&quot;频道&quot;: &quot;icon区&quot;, &quot;按钮名称&quot;: &quot;${item.name}&quot; }`
