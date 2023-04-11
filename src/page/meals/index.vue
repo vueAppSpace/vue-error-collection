@@ -2,10 +2,9 @@
   <div class="container">
     <full-loading :loading="loading" />
 
-    <LifeEntropy v-if="isEntropy" @toggleLoading="toggleLoading" />
-
-    <Banner v-else />
-
+    <!-- <LifeEntropy v-if="isEntropy" @toggleLoading="toggleLoading" />
+    <Banner v-else /> -->
+    <!-- <Banner /> -->
     <!-- 聚合永间 -->
     <IconBox v-if="isHealth" />
 

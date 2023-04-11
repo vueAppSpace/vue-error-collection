@@ -68,7 +68,7 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
     // base: "/report/", // 设置打包路径
     base: env.VITE_BASE_URL, // 设置打包路径
     server: {
-      port: 9080, // 端口号
+      port: 8080, // 端口号
       // open: true, // 是否自动打开浏览器
       open: `${isHash}health?${loginQuery}`,
       cors: true // 允许跨域
@@ -107,8 +107,8 @@ export default async ({ command, mode }: ConfigEnv): Promise<UserConfig> => {
 
 function printProjectURL(loginQuery: string, ipAddress: string, envType: string) {
   console.log(`\n==================== ${envType} 项目链接 start ====================`);
-  console.log(`本地开发: http://localhost:9080/report/health?${loginQuery}`);
-  console.log(`本地远程: http://${ipAddress}:9080/report/health?${loginQuery}`);
+  console.log(`本地开发: http://localhost:8080/report/health?${loginQuery}`);
+  console.log(`本地远程: http://${ipAddress}:8080/report/health?${loginQuery}`);
   console.log(`qa环境: https://c-qa.op.laikang.com/report/health?${loginQuery}`);
   console.log(`==================== ${envType} 项目链接 end ====================\n`);
 }

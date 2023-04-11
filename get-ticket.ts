@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2023-03-23 14:33:05
- * @LastEditTime: 2023-04-04 11:18:09
+ * @LastEditTime: 2023-04-11 15:28:47
  */
 
 import https from "https";
@@ -18,7 +18,7 @@ enum Env {
 
 const osEnv = os.type();
 const isWebpack = process.env.npm_package_version; // 是否为webpack打包环境
-const defaultLoginName = 10057859; //夏高飞 icome 工号
+const defaultLoginName = 10068482; //夏高飞 icome 工号
 
 export function getLoginQuery(env: Env): Promise<string> {
   if (env === Env.emall) {
