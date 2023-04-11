@@ -15,136 +15,74 @@
     <meta http-equiv="Expires" content="0" />
     <script type="text/javascript" src="https://oss-statics.icomecloud.com/jsbridge/1.5.9/x-bridge.umd.js"></script>
     <script src="https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/jssdk/dayjs.min.1.8.21.js"></script>
+
     <script>
-      (function () {
-        if (window.zhuge) return;
-        window.zhuge = [];
-        window.zhuge.methods =
-          "_init identify track trackRevenue getDid getSid getKey setSuperProperty setUserProperties setWxProperties setPlatform".split(
-            " "
-          );
-        window.zhuge.factory = function (b) {
-          return function () {
-            var a = Array.prototype.slice.call(arguments);
-            a.unshift(b);
-            window.zhuge.push(a);
-            return window.zhuge;
-          };
-        };
-        for (var i = 0; i < window.zhuge.methods.length; i++) {
-          var key = window.zhuge.methods[i];
-          window.zhuge[key] = window.zhuge.factory(key);
+      //image 对象可以跨域发送get请求(并且它不需要被添加到DOM上就能发送请求)
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = "https://wq.360buyimg.com/js/common/dest/wq.jshop.report.min.js";
+
+      //使用 post 请求发送埋点数据
+      document.addEventListener("visibilitychange", function logData() {
+        if (document.visibilityState === "hidden") {
+          navigator.sendBeacon("/log", { name: "wc" });
         }
-        window.zhuge.load = function (b, x) {
-          if (!document.getElementById("zhuge-js")) {
-            var a = document.createElement("script");
-            var verDate = new Date();
-            var verStr =
-              verDate.getFullYear().toString() + verDate.getMonth().toString() + verDate.getDate().toString();
-            a.type = "text/javascript";
-            a.id = "zhuge-js";
-            a.async = !0;
-            a.src = "https://sjsc.ennew.com/zhuge.js?v=" + verStr;
-            a.onerror = function () {
-              window.zhuge.identify = window.zhuge.track = function (ename, props, callback) {
-                if (callback && Object.prototype.toString.call(callback) === "[object Function]") {
-                  callback();
-                } else if (Object.prototype.toString.call(props) === "[object Function]") {
-                  props();
-                }
-              };
-            };
-            var c = document.getElementsByTagName("script")[0];
-            c.parentNode.insertBefore(a, c);
-            window.zhuge._init(b, x);
-          }
-        };
-        var appKey = "f18695ad248e41ad9e1d494c7889c137"; // 测试key
-        var debug = true;
-        var host = window.location.href;
-        // TODO: 需要替换或增加e商服域名
-        if (~host.indexOf("c.op.laikang.com/report")) {
-          appKey = "3577008d5b854267b18b650f0c375417"; // 生产key
-          debug = false;
+      });
+      //err-collection ===>
+      /*
+        只能收集纯 js 错误
+
+        可以捕获的错误类型:
+        1.运行时错误
+        2.异步错误
+        
+        不可捕获的错误类型:
+        1.语法错误
+        2.promise错误
+      */
+      function updateErrorCount() {
+        let errorCount = JSON.parse(sessionStorage.getItem("errorCount"));
+        if (!errorCount) {
+          errorCount = 1;
         }
-        // TODO: 区分e商服
-        var env = "PC";
-        if (window.ic) {
-          if (window.ic.isIOS || window.ic.isAndroid) {
-            env = "H5";
-          } else {
-            env = "PC";
-          }
-        }
-        window.zhuge.load(appKey, {
-          // 配置应用的AppKey
-          superProperty: {
-            // 全局的事件属性
-            当前页面名称: document.title,
-            来源页面名称: document.title,
-            产品名称: "健康新奥",
-            租户ID: 200,
-            租户名称: "来康生命",
-            JS环境: "新icome",
-            "PC-H5": env
-          },
-          duration: true, // 「页面停留时长」访问采集
-          debug, // 测试，开发环境开启，正式环境需关闭
-          autoTrack: true, // 启用全埋点采集
-          singlePage: true // 是否是单页面应用（SPA），启用autoTrack后生效
-        });
-      })();
+        errorCount++;
+        sessionStorage.setItem("errorCount", errorCount);
+        console.log("errorCount", errorCount);
+      }
+
+      //捕获的方式一：
+      //全局捕获js错误
+      window.onerror = function (message, source, lineno, colno, error) {
+        const empNo = localStorage.getItem("empNo");
+        console.log("当前员工", empNo);
+
+        const errObj = { message, source, lineno, colno, error };
+        console.log("[window.onerror]: 捕获到的异常,", errObj);
+
+        //记录捕获的错误的次数
+        updateErrorCount();
+      };
+
+      //捕获的方式二：
+      //用于捕获: 图片，script，css等资源文件加载错误
+      window.addEventListener(
+        "error",
+        error => {
+          console.log("[window.addEventListener error]: 捕获到的异常,", error);
+        },
+        true
+      );
+
+      //捕获的方式三：
+      //全局捕获 promise错误
+      window.addEventListener("unhandledrejection", error => {
+        console.log("[window.addEventListener unhandledrejection]: 捕获到的promise异常,", error);
+      });
     </script>
-    <style>
-      /*
-        隐藏vconsole 
-      */
-      #__vconsole {
-        width: 0;
-        height: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-
-      #__vconsole .vc-switch {
-        width: 0;
-        height: 0;
-        padding: 0;
-        overflow: hidden;
-        font-size: 0.3rem;
-      }
-
-      #__vconsole .vc-switch.active {
-        width: auto;
-        height: auto;
-        padding: 0.16rem 0.2rem;
-        overflow: hidden;
-        visibility: visible;
-      }
-
-      /*
-        scanQrCode 控件样式
-      */
-      #__qrCodeUUID {
-        background: rgba(0, 0, 0, 1);
-        height: 100vh;
-        width: 100vw;
-        position: fixed;
-        z-index: 999;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-      }
-    </style>
   </head>
 
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
-  <script type="application/javascript">
-    // 解决ios端:active伪类不生效问题
-    document.addEventListener("touchstart", function () {}, false);
-  </script>
 </html>

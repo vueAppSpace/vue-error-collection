@@ -96,6 +96,9 @@ service.interceptors.request.use(
     return config;
   },
   error => {
+    //err-collection ===>
+    //请求错误上报
+
     Promise.reject(error);
   }
 );
@@ -147,7 +150,9 @@ service.interceptors.response.use(
     return response.data;
   },
   error => {
-    console.error("interceptors response error", error);
+    //err-collection ===>
+    //请求错误上报
+
     // Toast('网络异常, 请稍后再试')
     if (error.response.status != 504) {
       // Toast(`服务器异常, 错误码: ${error.response.status}`)

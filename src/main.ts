@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2020-09-04 17:59:02
- * @LastEditTime: 2023-03-31 14:10:16
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-04-11 17:11:29
+ * @LastEditors: wangcheng357
  * @Description: In User Settings Edit
- * @FilePath: \c-mall-h5\src\main.js
+ * @FilePath: \lk-vite-error-collection\src\main.ts
  */
 import "@/style/root.css";
 import "amfe-flexible";
@@ -34,8 +34,20 @@ Vue.use(VueCompositionAPI);
 const pinia = createPinia();
 Vue.use(PiniaVuePlugin);
 pinia.use(piniaPluginPersistedstate);
-
 Vue.config.productionTip = false;
+
+//err-collection ===>
+//全局捕获vue组件错误(template 类型错误)
+//追踪运行时错误(指定组件的渲染和观察期间未捕获错误的处理函数)
+//生命周期钩子里的错误
+
+Vue.config.errorHandler = (err, vm, info) => {
+  console.log("[Vue.config.errorHandler] 捕获到错误");
+  console.log(err);
+  //直接扔给 onerror 处理
+  // throw err;
+};
+
 (async () => {
   const data = await getToken();
   setToken(data);
