@@ -30,6 +30,7 @@ import physicalTestRecords from "@/router/module/physicalTestRecords/physicalTes
 import weighingRecords from "@/router/module/weighingRecords/weighingRecords";
 import lottery from "@/router/module/lottery";
 import healthEducation from "@/router/module/healthEducation/healthEducation";
+import signIn from "@/router/module/signIn";
 
 export default [
   ...common,
@@ -53,5 +54,6 @@ export default [
   ...physicalTestRecords,
   ...weighingRecords,
   ...lottery,
-  ...healthEducation
+  ...healthEducation,
+  ...signIn
 ];

@@ -9,7 +9,18 @@
     <!-- 聚合永间 -->
     <IconBox v-if="isHealth" />
 
-    <h4 class="health-plan-title" v-if="isHealth">专属健康计划</h4>
+    <div v-if="isHealth" class="health-plan-box">
+      <h4 class="health-plan-title">专属健康计划</h4>
+      <!-- TODO 控制入口显隐 -->
+      <div v-if="true" class="health-sign-in" @click="goHealthSignIn">
+        <img
+          class="icon"
+          src="https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/images/health/sign_icon.png"
+          alt=""
+        />
+        <div class="name font-regular">健康签到</div>
+      </div>
+    </div>
 
     <!-- 健康计划 -->
     <div class="time-line">
@@ -507,6 +518,9 @@
         });
 
         return currentPlans[0];
+      },
+      goHealthSignIn() {
+        this.$router.push("/signIn");
       }
     },
     activated() {
@@ -531,13 +545,31 @@
   @import "../../style/meal.css";
 
   .container {
-    .health-plan-title {
+    .health-plan-box {
+      display: flex;
+      justify-content: space-between;
       padding: 40px 32px 0px;
-      font-size: 36px;
-      font-family: PingFangSC-Medium, PingFang SC;
-      font-weight: 500;
-      text-align: left;
-      color: #1c1c1e;
+      .health-plan-title {
+        font-size: 36px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        text-align: left;
+        color: #1c1c1e;
+      }
+      .health-sign-in {
+        display: flex;
+        align-items: center;
+        .icon {
+          display: block;
+          width: 28px;
+          height: 28px;
+          margin-right: 8px;
+        }
+        .name {
+          font-size: 26px;
+          color: #4b7aff;
+        }
+      }
     }
     .dishesvarietyBox {
       padding: 20px 0;
