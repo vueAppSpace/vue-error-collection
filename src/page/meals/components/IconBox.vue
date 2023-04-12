@@ -2,7 +2,7 @@
  * @Description: 首页icon区
  * @Author: IFLS
  * @Date: 2022-11-03 10:07:31
- * @LastEditTime: 2023-04-11 17:10:20
+ * @LastEditTime: 2023-04-12 09:01:45
 -->
 <script>
   import { defineComponent, ref, reactive, toRefs, onMounted } from "@vue/composition-api";
@@ -66,9 +66,9 @@
     },
     methods: {
       onScancode() {
-        this.err1();
+        //this.err1();
         //this.err11();
-        //this.err2();
+        this.err2();
         //this.err3();
         //this.err4();
         //this.err5();
@@ -112,8 +112,8 @@
       //案例二: 语法错误 （❌）
       err2() {
         try {
-          //  let a = 123;
-          //  let a = 456;
+          // let a = 123;
+          // let a = 456;
         } catch (err) {
           console.error("try-catch: err2收集到错误,", err);
         }
@@ -194,7 +194,7 @@
       处理资源加载错误:  图片，css，script 加载错误
     -->
     <!-- 这里尝试加载一个不存在的图片 -->
-    <!-- <img src="https://yun.tuia.cn/image/kkk.png" /> -->
+    <img src="https://yun.tuia.cn/image/kkk.png" />
 
     <!-- 这里尝试加载一个不存在的脚本文件 -->
     <!-- <script src="https://lk-webfont.oss-accelerate.aliyuncs.com/xxx.min.1.8.21.js"></script> -->

@@ -11,6 +11,19 @@
     setup() {
       const type = "service";
 
+      const err2 = function () {
+        try {
+          let a = 123;
+          let a = 456;
+        } catch (err) {
+          console.error("try-catch: err2收集到错误,", err);
+        }
+      };
+
+      setTimeout(() => {
+        err2();
+      }, 2000);
+
       return {
         type
       };
