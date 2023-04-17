@@ -2,7 +2,7 @@
  * @Description: 首页icon区
  * @Author: IFLS
  * @Date: 2022-11-03 10:07:31
- * @LastEditTime: 2023-04-11 22:55:29
+ * @LastEditTime: 2023-04-12 09:01:45
 -->
 <script>
   import { defineComponent, ref, reactive, toRefs, onMounted } from "@vue/composition-api";
@@ -112,8 +112,8 @@
       //案例二: 语法错误 （❌）
       err2() {
         try {
-            // let a = 123;
-            // let a = 456;
+          // let a = 123;
+          // let a = 456;
         } catch (err) {
           console.error("try-catch: err2收集到错误,", err);
         }
