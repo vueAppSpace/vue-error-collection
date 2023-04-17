@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <custom-header1></custom-header1>
+
+      <!-- Uncaught RangeError: Maximum call stack size exceeded -->
+      <custom-header2></custom-header2>
+    </div>
+
+    <script>
+      //全局注册一个组件
+      Vue.component("custom-header1", {
+        template: `
+        <div>
+          <div>{{title}}</div>
+        </div>`,
+        data() {
+          return {
+            title: "你好1"
+          };
+        }
+      });
+
+      Vue.component("custom-header2", {
+        template: `
+        <div>
+          <div>{{title}}</div>
+          <custom-header2></custom-header2>
+        </div>`,
+        data() {
+          return {
+            title: "你好2"
+          };
+        }
+      });
+
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            msg: "Hello World!"
+          };
+        }
+      });
+    </script>
+  </body>
+</html>
