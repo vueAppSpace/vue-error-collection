@@ -1,7 +1,7 @@
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 import { Toast } from "vant";
-
 import { platform } from "./env";
 
 // import store from '../store'
@@ -10,6 +10,26 @@ import { platform } from "./env";
 // import qs from 'qs';
 
 let _this = this;
+
+//判断是否收集接口请求
+function judgeNeedCollect(resp) {
+  console.log(11111111111111, resp);
+  const { config, data = {}, status } = resp || {};
+  if (true || !(status >= 200 && status < 300) || (typeof data.isOk !== "undefined" && !data.isOk)) {
+    const statsData = {
+      type: "promise",
+      traceId: config.headers.traceId || "",
+      uid: ((JSON.parse(sessionStorage.getItem("userStore")) || {}).userInfo || {}).empNo,
+      src: config.url,
+      reqParams: JSON.parse(config.data),
+      respData: data
+    };
+
+    console.log(statsData);
+
+    //MtaStats.clickStats(statsData);
+  }
+}
 
 // 创建axios实例
 const service = axios.create({
@@ -60,6 +80,8 @@ service.interceptors.request.use(
         "Content-Type": "application/json; charset=UTF-8"
       });
     }
+
+    config.headers.traceId = uuidv4();
     // #v-ifdef VITE_IFDEF=ICOME
     config.headers.AppId = "1562734232";
     config.headers.PlaceCompanyId = 240;
@@ -96,9 +118,6 @@ service.interceptors.request.use(
     return config;
   },
   error => {
-    //err-collection ===>
-    //请求错误上报
-
     Promise.reject(error);
   }
 );
@@ -106,6 +125,8 @@ service.interceptors.request.use(
 // response 响应拦截器, 主要是对错误统一处理
 service.interceptors.response.use(
   response => {
+    judgeNeedCollect(response);
+
     // 构造blob返回结构
     if (response.config.responseType === "blob") {
       let resData = {};
@@ -150,9 +171,6 @@ service.interceptors.response.use(
     return response.data;
   },
   error => {
-    //err-collection ===>
-    //请求错误上报
-
     // Toast('网络异常, 请稍后再试')
     if (error.response.status != 504) {
       // Toast(`服务器异常, 错误码: ${error.response.status}`)

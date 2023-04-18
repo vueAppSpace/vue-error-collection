@@ -13,76 +13,36 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <script type="text/javascript" src="https://oss-statics.icomecloud.com/jsbridge/1.5.9/x-bridge.umd.js"></script>
     <script src="https://lk-webfont.oss-accelerate.aliyuncs.com/web/xinao-health/jssdk/dayjs.min.1.8.21.js"></script>
-
-    <script>
-      //image 对象可以跨域发送get请求(并且它不需要被添加到DOM上就能发送请求)
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.src = "https://wq.360buyimg.com/js/common/dest/wq.jshop.report.min.js";
-
-      //使用 post 请求发送埋点数据
-      document.addEventListener("visibilitychange", function logData() {
-        if (document.visibilityState === "hidden") {
-          navigator.sendBeacon("/log", { name: "wc" });
-        }
-      });
-      //err-collection ===>
-      /*
-        只能收集纯 js 错误
-
-        可以捕获的错误类型:
-        1.运行时错误
-        2.异步错误
-        
-        不可捕获的错误类型:
-        1.语法错误
-        2.promise错误
-      */
-      function updateErrorCount() {
-        let errorCount = JSON.parse(sessionStorage.getItem("errorCount"));
-        if (!errorCount) {
-          errorCount = 1;
-        }
-        errorCount++;
-        sessionStorage.setItem("errorCount", errorCount);
-        console.log("errorCount", errorCount);
-      }
-
-      //捕获的方式一：
-      //全局捕获js错误
-      window.onerror = function (message, source, lineno, colno, error) {
-        const empNo = localStorage.getItem("empNo");
-        console.log("当前员工", empNo);
-
-        const errObj = { message, source, lineno, colno, error };
-        console.log("[window.onerror]: 捕获到的异常,", errObj);
-
-        //记录捕获的错误的次数
-        updateErrorCount();
-      };
-
-      //捕获的方式二：
-      //用于捕获: 图片，script，css等资源文件加载错误
-      window.addEventListener(
-        "error",
-        error => {
-          console.log("[window.addEventListener error]: 捕获到的异常,", error);
-        },
-        true
-      );
-
-      //捕获的方式三：
-      //全局捕获 promise错误
-      window.addEventListener("unhandledrejection", error => {
-        console.log("[window.addEventListener unhandledrejection]: 捕获到的promise异常,", error);
-      });
-    </script>
+    <!-- 引入错误收集客户端sdk -->
+    <script src="/stats-sdk.js"></script>
   </head>
-
   <body>
+    <script>
+      if (window.Stats) {
+        const stats = new Stats({
+          appid: "200",
+          appKey: "3577008d5b854267b18b650f0c375417",
+          reportUrl: "localhost:8000/reportError"
+        });
+        stats.startListen();
+        window.MtaStats = stats; //错误收集实例挂在到全局，方便用户在页面进行手动错误收集
+      }
+    </script>
+
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+
+    <!-- err-collection ===>
+      处理资源加载错误:  图片，css，script 加载错误
+    -->
+    <!-- 这里尝试加载一个不存在的图片 -->
+    <!-- <img src="https://yun.tuia.cn/image/kkk.png" /> -->
+
+    <!-- 这里尝试加载一个不存在的脚本文件 -->
+    <!-- <script src="https://lk-webfont.oss-accelerate.aliyuncs.com/xxx.min.1.8.21.js"></script> -->
+
+    <!-- 这里尝试加载一个不存在的css 文件 -->
+    <!-- <link rel="stylesheet" href="https://lk-webfont.oss-accelerate.aliyuncs.com/xxx.min.2.12.49.css" /> -->
   </body>
 </html>

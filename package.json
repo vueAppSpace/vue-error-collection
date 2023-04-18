@@ -32,6 +32,7 @@
     "pinia": "^2.0.30",
     "pinia-plugin-persistedstate": "^3.0.2",
     "url-parse": "^1.5.10",
+    "uuid": "^9.0.0",
     "vant": "^2.12.52",
     "video.js": "^8.0.4",
     "vue": "2.6.14",

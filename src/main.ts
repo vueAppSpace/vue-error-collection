@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-09-04 17:59:02
- * @LastEditTime: 2023-04-11 17:11:29
+ * @LastEditTime: 2023-04-18 14:20:25
  * @LastEditors: wangcheng357
  * @Description: In User Settings Edit
  * @FilePath: \lk-vite-error-collection\src\main.ts
@@ -41,12 +41,14 @@ Vue.config.productionTip = false;
 //追踪运行时错误(指定组件的渲染和观察期间未捕获错误的处理函数)
 //生命周期钩子里的错误
 
-Vue.config.errorHandler = (err, vm, info) => {
-  console.log("[Vue.config.errorHandler] 捕获到错误");
-  console.log(err);
-  //直接扔给 onerror 处理
-  // throw err;
-};
+// Vue.config.errorHandler = (err, vm, info) => {
+//   console.log("[Vue.config.errorHandler] 捕获到错误");
+//   console.log(err);
+//   console.log(info);
+//   console.log(vm);
+//   //直接扔给 onerror 处理
+//   // throw err;
+// };
 
 (async () => {
   const data = await getToken();

@@ -2,7 +2,7 @@
  * @Description: 我的
  * @Author: IFLS
  * @Date: 2022-05-12 15:09:29
- * @LastEditTime: 2023-04-11 16:08:40
+ * @LastEditTime: 2023-04-18 11:15:46
 -->
 <script>
   import { defineComponent, reactive, onMounted, toRefs, onActivated } from "@vue/composition-api";
@@ -261,9 +261,11 @@
       //导入模块出错(是promise错误)
       async function err8() {
         try {
-          const data = await import("./IconBoxData.json");
-          //const data = await import("./IconBoxData1.json");
-          console.log("动态 import chunk", data);
+          // const data = await import("./IconBoxData.json");
+          // //const data = await import("./IconBoxData1.json");
+          // console.log("动态 import chunk", data);
+
+          Promise.reject("失败!");
         } catch (err) {
           console.error("try-catch: err8收集到错误,", err);
         }
