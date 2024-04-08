@@ -31,8 +31,8 @@
   // },
   "editor.formatOnSave": true, // 保存时格式化
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.eslint": true
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode", // 默认格式化工具
   "npm.packageManager": "pnpm",
